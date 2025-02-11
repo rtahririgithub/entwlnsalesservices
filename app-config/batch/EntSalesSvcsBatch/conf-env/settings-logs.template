@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group [
+    <!ELEMENT group (group|list|prop)*>
+        <!ATTLIST group name CDATA #REQUIRED>
+    <!ELEMENT list (string|group|list)*>
+        <!ATTLIST list name CDATA #REQUIRED>
+    <!ELEMENT string (#PCDATA)>
+    <!ELEMENT prop (#PCDATA)>
+        <!ATTLIST prop name CDATA #REQUIRED>
+]>
+<group name="config">
+	<group name="logging">
+		<prop name="log4j.rootCategory">ERROR, CONSOLE</prop>
+		<prop name="log4j.debug">true</prop>			
+		<prop name="log4j.appender.FILE">org.apache.log4j.DailyRollingFileAppender</prop>
+		<prop name="log4j.appender.FILE.Append">true</prop>
+		<prop name="log4j.appender.FILE.Threshold">@LOGGING_LEVEL@</prop>
+		<prop name="log4j.appender.FILE.MaxFileSize">1000MB</prop>
+		<prop name="log4j.appender.FILE.MaxBackupIndex">30</prop>
+
+		<prop name="log4j.appender.FILE.layout">org.apache.log4j.PatternLayout</prop>
+		<prop name="log4j.appender.FILE.layout.ConversionPattern">%d[%-5p] [%t] %c - %m %n</prop>
+		<prop name="log4j.appender.FILE.file">${logs}/${jobname}-BEC.log</prop>
+		<prop name="log4j.appender.CONSOLE">org.apache.log4j.ConsoleAppender</prop>
+		<prop name="log4j.appender.CONSOLE.Threshold">ERROR</prop>
+		<prop name="log4j.appender.CONSOLE.layout">org.apache.log4j.PatternLayout</prop>
+		<prop name="log4j.appender.CONSOLE.layout.ConversionPattern">[%d{dd MMM yyyy HH:mm:ss}][%-5p] %c{3} - %m %n</prop>
+		
+		<!--  SqlMap logging configuration... --> 
+
+<!-- Uncomment during if you need to see the SQL output in PRODUCTION
+     Only if you are processing very little records
+    	<prop name="log4j.logger.java.sql.Connection">@LOGGING_LEVEL@, FILE</prop> 
+    	<prop name="log4j.logger.java.sql.Statement">@LOGGING_LEVEL@, FILE</prop> 
+    	<prop name="log4j.logger.java.sql.PreparedStatement">@LOGGING_LEVEL@, FILE</prop> 
+    	<prop name="log4j.logger.java.sql.ResultSet">@LOGGING_LEVEL@, FILE</prop>
+-->    	
+    	<prop name="log4j.appender.SFTX.file">${logs}/${jobname}-SFTX.log</prop>
+    	<prop name="log4j.appender.SFTX">org.apache.log4j.DailyRollingFileAppender</prop>
+    	<prop name="log4j.appender.SFTX.Append">true</prop>
+    	<prop name="log4j.appender.SFTX.Threshold">TRACE</prop>
+    	<prop name="log4j.appender.SFTX.MaxFileSize">1000MB</prop>
+		<prop name="log4j.appender.SFTX.MaxBackupIndex">30</prop>
+    	<prop name="log4j.appender.SFTX.layout">org.apache.log4j.PatternLayout</prop>
+    	<prop name="log4j.appender.SFTX.layout.ConversionPattern">%-16.16X{entity}=%-9.9X{id}:%-6.6X{requestid},%-6.6X{recipientid},%-6.6X{fileitemid},%-6.6X{transmissionid};%-25d %-5p %c{3} - %m%n</prop>
+    	
+        <prop name="log4j.logger.com.telus.framework.config.spring.PlaceholderConfigurer">ERROR, FILE</prop>
+        <prop name="log4j.logger.com.telus.framework.batch">INFO, FILE</prop>
+   		<prop name="log4j.logger.com.telus.framework.filetransfer">INFO, SFTX</prop>
+
+ 		<!-- console messages for the operator -->
+    	<prop name="log4j.logger.sftx-operator">INFO, CONSOLE</prop>
+
+<!-- Change this to point to your application package name. Use DEBUG or TRACE for development
+     For production, your java points to INFO and make sure you use minimum loggings at INFO level,
+     when you are processing a lot of records.
+     Especially on the looping methods like hasNext(), execute()
+-->
+        <prop name="log4j.logger.com.telus.csm.ewlnsc">@LOGGING_LEVEL@, FILE</prop>       
+    	
+	</group>
+</group>

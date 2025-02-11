@@ -1,0 +1,90 @@
+# JDBC Creation and Update Properties File
+# Please refer the Weblogic MBEAN Reference from:
+# http://download-llnw.oracle.com/docs/cd/E13222_01/wls/docs90/wlsmbeanref/core/index.html
+# Note: Deprecated attributes or child MBeans may not be supported.
+
+# Required Properties
+JDBCDataSource.Name=ESDG_Data_Source
+JDBCConnectionPoolParam.Name=ESDG_ConnectionPool
+JDBCDataSourceParam.JNDIName=com.telus.csm.ess.jdbc.esdg
+JDBCDriverParam.Password=
+JDBCDriverParam.URL=jdbc:oracle:thin:@//ESDBPR-scan.corp.ads:41521/ESDBPRsv1.WORLD
+JDBCDriverParam.DriverName=oracle.jdbc.OracleDriver
+JDBCDriverParam.Property.user=ESS_APP
+
+# Data Source Information
+# JDBCDataSource.Name=String
+
+# Data Source Params
+# JDBCDataSourceParam.JNDIName=String
+# JDBCDataSourceParam.AlgorithmType=Failover|Load-Balancing
+# JDBCDataSourceParam.ConnectionPoolFailoverCallbackHandler=String
+# JDBCDataSourceParam.DataSourceList=String
+# JDBCDataSourceParam.FailoverRequestIfBusy=true|false
+# JDBCDataSourceParam.GlobalTransactionsProtocol=TwoPhaseCommit|LoggingLastResource|EmulateTwoPhaseCommit|OnePhaseCommit|None
+# JDBCDataSourceParam.RowPrefetch=true|false
+# JDBCDataSourceParam.RowPrefetchSize=int(2-65536)
+# JDBCDataSourceParam.Scope=Global|Application
+# JDBCDataSourceParam.StreamChunkSize=int(1-65536)
+
+# Connection Params
+# Common attributes and default value
+# JDBCConnectionPoolParam.Name=Strring
+# JDBCConnectionPoolParam.InitialCapacity=int(1-2147483647)[1]
+# JDBCConnectionPoolParam.MaxCapacity=int(1-2147483647)[15]
+# JDBCConnectionPoolParam.TestConnectionsOnReserve=true|false[true]
+# JDBCConnectionPoolParam.TestTableName=String[SQL SELECT 1 FROM DUAL]
+# JDBCConnectionPoolParam.JDBCConnectionPoolParam.CapacityIncrement=int(1-2147483647)[1]
+# None-common
+# JDBCConnectionPoolParam.ConnectionCreationRetryFrequencySeconds=int(0-2147483647)
+# JDBCConnectionPoolParam.ConnectionReserveTimeoutSeconds=int(-1-2147483647)
+# JDBCConnectionPoolParam.CredentialMappingEnabled=true|false
+# JDBCConnectionPoolParam.DriverInterceptor=String
+# JDBCConnectionPoolParam.HighestNumWaiters=int(0-2147483647)
+# JDBCConnectionPoolParam.IgnoreInUseConnectionsEnabled=true|false
+# JDBCConnectionPoolParam.InactiveConnectionTimeoutSeconds=int(0-2147483647)
+# JDBCConnectionPoolParam.InitSql=String
+# JDBCConnectionPoolParam.JDBCXADebugLevel=int
+# JDBCConnectionPoolParam.LoginDelaySeconds=int(0-2147483647)
+# JDBCConnectionPoolParam.PinnedToThread=true|false
+# JDBCConnectionPoolParam.ProfileHarvestFrequencySeconds=int(0-2147483647)
+# JDBCConnectionPoolParam.ProfileType=int
+# JDBCConnectionPoolParam.RemoveInfectedConnections=true|false
+# JDBCConnectionPoolParam.SecondsToTrustAnIdlePoolConnection=int(0-2147483647)
+# JDBCConnectionPoolParam.ShrinkFrequencySeconds=int(0-2147483647)
+# JDBCConnectionPoolParam.StatementCacheSize=int(0-1024)
+# JDBCConnectionPoolParam.StatementCacheType=LRU|FIXED
+# JDBCConnectionPoolParam.StatementTimeout=int(-1-2147483647)
+# JDBCConnectionPoolParam.TestFrequencySeconds=int(0-2147483647)
+# JDBCConnectionPoolParam.JDBCConnectionPoolParam.ShrinkPeriodMinutes=int
+
+# Driver Params
+# JDBCDriverParam.Password=String
+# JDBCDriverParam.URL=String
+# JDBCDriverParam.DriverName=String
+# ### Note: user part of JDBCDriverParams.
+# JDBCDriverParam.Property.user=String
+# JDBCDriverParam.Property.name=value
+# JDBCDriverParam.UseXaDataSourceInterface=true|false
+
+# XA Params
+# XAParam.KeepLogicalConnOpenOnRelease=true|false
+# XAParam.KeepXaConnTillTxComplete=true|false
+# XAParam.NeedTxCtxOnClose=true|false
+# XAParam.NewXaConnForCommit=true|false
+# XAParam.RecoverOnlyOnce=true|false
+# XAParam.ResourceHealthMonitoring=true|false
+# XAParam.RollbackLocalTxUponConnClose=true|false
+# XAParam.XaEndOnlyOnce=true|false
+# XAParam.XaRetryDurationSeconds=true|false
+# XAParam.XaRetryIntervalSeconds=true|false
+# XAParam.XaSetTransactionTimeout=true|false
+# XAParam.XaTransactionTimeout=int
+
+# JDBCOracleParams for gridlin
+# JDBCOracleParams.FanEnabled=true|false
+# JDBCOracleParams.OnsNodeList=String
+# JDBCOracleParams.OnsWalletFile=String
+# JDBCOracleParams.OnsWalletPassword=String
+# JDBCOracleParams.OracleEnableJavaNetFastPath=true|false
+# JDBCOracleParams.OracleOptimizeUtf8Conversion=true|false

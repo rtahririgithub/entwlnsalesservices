@@ -1,0 +1,20 @@
+<coherence>
+	<cluster-config>
+		<cluster-name system-property="tangosol.coherence.cluster">SalesHomeBusSvcCoherence-prB</cluster-name>
+		<member-identity>
+			<cluster-name>SalesHomeBusSvcCoherence-prB</cluster-name>
+		</member-identity>
+		<unicast-listener>
+			<well-known-addresses>
+				<socket-address id="SHBSvcCohSrv1">
+					<address>lp99551.corp.ads</address>
+					<port>53560</port>
+				</socket-address>
+				<socket-address id="SHBSvcCohSrv2">
+					<address>lp99552.corp.ads</address>
+					<port>53560</port>
+				</socket-address>
+			</well-known-addresses>
+		</unicast-listener>
+	</cluster-config>
+</coherence>

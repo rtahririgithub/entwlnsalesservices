@@ -1,0 +1,146 @@
+<project name="frameworks" default="default" basedir=".">
+
+	<property name="version" value="v1"/>
+
+	<!-- This ant task creates the ldif files from xml -->
+	
+
+	<target name="default">
+		<!-- env-ess and env-qidc-ess -->
+
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/PT140"/>
+			<property name="targetEnv" value="pt140"/>
+			<property name="ou" value="env-ewlnss_${version}"/>
+			<property name="cn" value="qa2_81"/>
+		</ant>
+
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/PT148"/>
+			<property name="targetEnv" value="pt148"/>
+			<property name="ou" value="env-ewlnss_${version}"/>
+			<property name="cn" value="qa_81"/>
+		</ant>
+		
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/ST101"/>
+			<property name="targetEnv" value="st101"/>
+			<property name="ou" value="env-ewlnss_${version}"/>
+			<property name="cn" value="s_81"/>
+		</ant>
+		
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/PR"/>
+			<property name="targetEnv" value="pr"/>
+			<property name="ou" value="env-ewlnss_${version}"/>
+			<property name="cn" value="prod_81"/>
+		</ant>
+		
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/PT168"/>
+			<property name="targetEnv" value="pt168"/>
+			<property name="ou" value="env-ewlnss_${version}"/>
+			<property name="cn" value="pt168_81"/>
+		</ant>
+
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/PT140"/>
+			<property name="targetEnv" value="pt140"/>
+			<property name="ou" value="env-ewlnss_laird_${version}"/>
+			<property name="cn" value="qa2_81"/>
+		</ant>
+
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/PT148"/>
+			<property name="targetEnv" value="pt148"/>
+			<property name="ou" value="env-ewlnss_laird_${version}"/>
+			<property name="cn" value="qa_81"/>
+		</ant>
+		
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/ST101"/>
+			<property name="targetEnv" value="st101"/>
+			<property name="ou" value="env-ewlnss_laird_${version}"/>
+			<property name="cn" value="s_81"/>
+		</ant>
+		
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/PR"/>
+			<property name="targetEnv" value="pr"/>
+			<property name="ou" value="env-ewlnss_laird_${version}"/>
+			<property name="cn" value="prod_81"/>
+		</ant>
+		
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/PT168"/>
+			<property name="targetEnv" value="pt168"/>
+			<property name="ou" value="env-ewlnss_laird_${version}"/>
+			<property name="cn" value="pt168_81"/>
+		</ant>
+
+		<!-- ess-logging -->
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/log4j/PT140"/>
+			<property name="targetEnv" value="pt140"/>
+			<property name="ou" value="ewlnss-logging"/>
+			<property name="cn" value="qa2_81"/>
+		</ant>
+
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/log4j/PT148"/>
+			<property name="targetEnv" value="pt148"/>
+			<property name="ou" value="ewlnss-logging"/>
+			<property name="cn" value="qa_81"/>
+		</ant>
+		
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/log4j/ST101"/>
+			<property name="targetEnv" value="st101"/>
+			<property name="ou" value="ewlnss-logging"/>
+			<property name="cn" value="s_81"/>
+		</ant>
+		
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/log4j/PR"/>
+			<property name="targetEnv" value="pr"/>
+			<property name="ou" value="ewlnss-logging"/>
+			<property name="cn" value="prod_81"/>
+		</ant>
+		
+		<ant antfile="createLdifTemplate.xml">
+			<property name="inputDir" value="../envxml/log4j/PT168"/>
+			<property name="targetEnv" value="pt168"/>
+			<property name="ou" value="ewlnss-logging"/>
+			<property name="cn" value="pt168_81"/>
+		</ant>
+		
+		<!-- logging-override-esis -->
+		<!-- 
+		<copy file="log4j/DV/logging-override-esis.ldif"    tofile="logging-override-esis_dv103.ldif"/>
+		<copy file="log4j/PR/logging-override-esis.ldif"    tofile="logging-override-esis_pr.ldif"/>
+		<copy file="log4j/PT140/logging-override-esis.ldif" tofile="logging-override-esis_pt140.ldif"/>
+		<copy file="log4j/PT148/logging-override-esis.ldif" tofile="logging-override-esis_pt148.ldif"/>
+		<copy file="log4j/PT168/logging-override-esis.ldif" tofile="logging-override-esis_pt168.ldif"/>
+		<copy file="log4j/ST101/logging-override-esis.ldif" tofile="logging-override-esis_st101.ldif"/>
+		-->
+				<!-- logging-override-post task -->
+		<!--
+		<copy file="log4j/DV/logging-override-posttask.ldif"    tofile="logging-override-posttask_dv103.ldif"/>
+		<copy file="log4j/PR/logging-override-posttask.ldif"    tofile="logging-override-posttask_pr.ldif"/>
+		<copy file="log4j/PT140/logging-override-posttask.ldif" tofile="logging-override-posttask_pt140.ldif"/>
+		<copy file="log4j/PT148/logging-override-posttask.ldif" tofile="logging-override-posttask_pt148.ldif"/>
+		<copy file="log4j/PT168/logging-override-posttask.ldif" tofile="logging-override-posttask_pt168.ldif"/>
+		<copy file="log4j/ST101/logging-override-posttask.ldif" tofile="logging-override-posttask_st101.ldif"/>
+		-->
+				<!-- logging-override-post task rest -->
+		<!-- 
+		<copy file="log4j/DV/logging-override-posttask.ldif"    tofile="logging-override-posttask_dv103.ldif"/>
+		<copy file="log4j/PR/logging-override-posttask.ldif"    tofile="logging-override-posttask_pr.ldif"/>
+		<copy file="log4j/PT140/logging-override-posttask-rest.ldif" tofile="logging-override-posttask-rest_pt140.ldif"/>
+		<copy file="log4j/PT148/logging-override-posttask-rest.ldif" tofile="logging-override-posttask-rest_pt148.ldif"/>
+		<copy file="log4j/PT168/logging-override-posttask-rest.ldif" tofile="logging-override-posttask-rest_pt168.ldif"/>
+		<copy file="log4j/ST101/logging-override-posttask-rest.ldif" tofile="logging-override-posttask-rest_st101.ldif"/>
+		-->
+	</target>
+
+</project>

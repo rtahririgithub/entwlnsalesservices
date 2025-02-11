@@ -1,0 +1,28 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <groupId>telus.csm.ewlnss</groupId>
+    <artifactId>pom-ewlnss-all</artifactId>
+    <version>v1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>pom-ewlnss-all</name> 
+
+
+    <modules>
+        <module>../../entwlnsalesservices</module>
+		<!-- <module>../ewlnss-coherence</module>-->
+        <module>../ewlnss-yaml</module>
+        <module>../ewlnss-wsdl</module>
+		<module>../ewlnss-adapter-wsdl</module>
+        <module>../ewlnss-shared</module>
+		<module>../ewlnss-common-shared</module>
+        <module>../ewlnss-common</module>
+        <module>../ewlnss-ws-deploy</module>
+        <module>../ewlnss-qidc-deploy</module>
+        <module>../ewlnss-laird-deploy</module>
+        <!-- <module>../app-config</module> -->
+    </modules>
+
+</project>

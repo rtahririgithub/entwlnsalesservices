@@ -1,0 +1,65 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Application.Complete -->
+
+	<parent>
+		<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+	    <artifactId>pom-ewlnss-common-shared-adapter</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>pom-ewlnss-common-shared-adapter-impl</artifactId>
+	<name>pom-ewlnss-common-shared-adapter-impl</name>
+	<packaging>pom</packaging>
+
+	<dependencies>
+		<dependency>
+		<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+		<artifactId>ewlnss-adapter-shared</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+        <dependency>
+			<groupId>telus.csm.ewlnss.common.shared</groupId>
+		    <artifactId>ewlnss-shared-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>		
+	</dependencies>
+
+	<modules>
+		<module>BoltOnOfferSvc</module>
+		<module>CBAMService</module>
+		<module>ConsumerCustomerMgmtSvc</module>
+		<module>ConsumerDiarySvc</module>
+		<module>ConsumerIdentityProfileMgmtSvc</module>
+		<module>ECPMService</module>
+		<module>ECPRSvc</module>
+		<module>RestServiceAddressManagementService</module>
+		<module>ServiceAddressManagementSvc</module>
+		<module>WLNCEProxyService</module>
+		<module>WLNCPMProxyService</module>
+		<module>WLNCPMService</module>
+		<module>FeasibilityService</module>
+		<module>WLNBookingRESTSvc</module>
+		<module>ReferencePDSDataService</module>
+		<module>MarketOfferService</module>
+		<module>OfferInformationService</module>
+		<module>DepositMgmtSvc</module>
+		<module>OrderQueryRESTSvc</module>
+		<module>WLNOrderChargingRESTSvc</module>
+		<module>WLNOrderShoppingCartRESTSvc</module>
+		<module>ExchangeForborneStatusSvc</module>
+		<module>SalesCustomerInfoRESTSvc</module>
+		<module>WirelineOrderManagerEJBSvc</module>
+		<module>OrderDepositCalculatorProxySvc</module>
+		<module>CorporateStoresPOSService</module>
+		<module>InventoryService</module>
+		<module>EnterpriseSalesFulfillmentSvc</module>
+		<module>PromotionQualificationRestSvc</module>
+		<module>FIFAProductOfferingRestSvc</module>
+		<module>CommerceShoppingCartMgmtRestSvc</module>
+		<module>FifaShoppingCartMgmtRestSvc</module>
+		<module>FieldWorkAppointmentSvc</module>
+	</modules>
+</project>
+

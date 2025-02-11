@@ -1,0 +1,2 @@
+#ignore all classes generated from wsdl gen
+*.java

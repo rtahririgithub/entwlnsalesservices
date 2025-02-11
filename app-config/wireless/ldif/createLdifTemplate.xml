@@ -1,0 +1,43 @@
+<project name="frameworks" default="createLdif" basedir=".">
+
+	<target name="createLdif">
+
+		<copy overwrite="true" file="${inputDir}/${ou}.xml" tofile="temp.txt"/>
+
+		<!-- remove trailing spaces -->
+		<replaceregexp file="temp.txt" byline="true">
+			<regexp pattern="\s*$" />
+			<substitution expression="" />
+		</replaceregexp>		
+
+		<!-- insert a space to every line as ldif continuation -->
+		<replaceregexp file="temp.txt" byline="true">
+			<regexp pattern="^" />
+			<substitution expression=" " />
+		</replaceregexp>
+		
+		<!-- prepend the ldap names -->
+		<concat destfile="temp2.txt">
+			<path path="temp.txt"/>
+	      <header filtering="no" trimleading="yes">dn: ou=${ou}, ou=common, cn=${cn}, o=telusconfiguration
+	      	ou: ${ou}
+	      	description:</header>
+		  <footer filtering="no" trimleading="yes">
+			objectClass: top
+			objectClass: organizationalUnit
+		  </footer>
+		</concat>
+
+		<!-- remove blank lines -->
+		<copy file="temp2.txt" toFile="${ou}_${targetEnv}.ldif">
+		  <filterchain>
+		    <ignoreblank/>
+		  </filterchain>
+		</copy>
+
+	   	<delete file="temp.txt"/>
+		<delete file="temp2.txt"/>
+
+	</target>
+
+</project>

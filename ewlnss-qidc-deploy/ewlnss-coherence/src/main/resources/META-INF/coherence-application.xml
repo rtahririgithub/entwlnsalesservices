@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<coherence-application xmlns="http://xmlns.oracle.com/weblogic/coherence-application">
+
+	<cache-configuration-ref>META-INF/ewlnss-coherence-cache-config.xml</cache-configuration-ref>
+	
+	<application-lifecycle-listener>
+		<class-name>com.telus.csm.ewlnss.coherence.EssGridAppLifecycleListener</class-name>
+	</application-lifecycle-listener>
+	
+</coherence-application>

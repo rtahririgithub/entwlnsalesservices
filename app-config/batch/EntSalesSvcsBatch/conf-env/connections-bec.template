@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" 
+          "http://DummyURLGetviaClassPath/PropertyNode.dtd">
+
+<group name="commonConfig">
+
+    <!-- ================================================================ -->
+    <!--        Default Datasource connection to the BEC tables           -->
+    <!-- ================================================================ -->
+    <group name="jdbc">
+       <prop name="url">@JDBC_BEC@</prop>
+        <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+        <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+    </group>
+
+    <!-- =============================================================== -->
+    <!--      Datasource connection to the Smart File Transfer tables    -->
+    <!-- =============================================================== -->
+
+    <group name="sftx">
+        <prop name="url">@JDBC_BEC@</prop>
+        <prop name="username">@ORACLE_BATCH_ACCOUNT@</prop>
+        <prop name="password">@ORACLE_BATCH_PASSWORD@</prop>
+    </group>    
+
+    <!-- =============================================================== -->
+    <!--      Datasource connection to Informatica PowerCenter 9.1 East  -->
+    <!-- =============================================================== -->
+
+    <group name="powercenter">
+        <prop name="server">@act-essb:POWER_CENTER_SERVER@</prop>
+        <prop name="port">@act-essb:POWER_CENTER_PORT@</prop>
+        <prop name="int_svc">@act-essb:POWER_CENTER_HOME@</prop>
+        <prop name="root">@act-essb:POWER_CENTER_ROOT@</prop>
+        <prop name="nodeid">@act-essb:POWER_CENTER_SUBDIR@</prop>
+        <prop name="repo">@act-essb:POWER_CENTER_REPOSITORY@</prop>
+        <prop name="repo_port">@act-essb:REPOSITORY_PORT@</prop>
+        <prop name="user">@act-essb:POWER_CENTER_USERNAME@</prop>
+        <prop name="pass">@act-essb:POWER_CENTER_PASSWORD@</prop>
+        <prop name="ftag">@act-essb:POWER_CENTER_FTAG@</prop>
+        <prop name="verify">@act-essb:POWER_CENTER_VERIFY@</prop>
+        <prop name="pmrootdir">@act-essb:PC_PMROOTDIR@</prop>
+        <prop name="parmfile">${confenv}/settings-pcParamFile.xml</prop>
+    </group>
+</group>

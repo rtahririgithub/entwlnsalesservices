@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+	<bean
+		class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer"
+		p:ignoreUnresolvablePlaceholders="false" />
+	<context:component-scan base-package="com.telus.csm" />
+
+	<bean id="OrderManager" class="com.telus.csm.ewlnss.adapter.common.EjbClientFactory">
+		<property name="businessInterface"
+			value="com.telus.ucss.wirelinesales.ejb.OrderManager" />
+		<property name="jndiName"
+			value="om#com.telus.ucss.wirelinesales.ejb.OrderManager" />
+		<property name="url"
+			value="${connections/webServices/wirelineSalesEjbSvr/url}"/>
+	</bean>
+	
+	
+
+
+</beans>

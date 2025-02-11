@@ -1,0 +1,30 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>telus.csm.ewlnss</groupId>
+		<artifactId>EnterpriseWLNSalesServices</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>pom-ewlnss-qidc-deploy</artifactId>
+	<packaging>pom</packaging>
+	<name>pom-ewlnss-qidc-deploy</name>
+
+	<modules>
+		<module>ewlnss-coherence</module>
+		<module>ewlnsis-soap-qidc</module>
+		<module>ewlnsis-soap-qidc-ent</module>
+		<module>ewlnsis-rest-qidc-ent</module>
+		<module>ewlnsms-soap-qidc</module>
+		<module>ewlnsms-soap-qidc-ent</module>
+		<module>ewlnsms-rest-qidc-ent</module>
+		<module>ewlnsvs-soap-qidc</module>
+		<module>ewlnsvs-soap-qidc-ent</module>
+		<module>ess-rest-qidc-ent</module>
+		<module>ewlnsos-rest-qidc-ent</module>
+		<module>ewlnssproxy-rest-qidc-ent</module>
+	</modules>
+
+</project>

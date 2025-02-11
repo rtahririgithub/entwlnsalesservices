@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:tns="http://xmlschema.tmi.telus.com/srv/TRN/Sample/DemoServiceRequestResponse_v1"
+	targetNamespace="http://xmlschema.tmi.telus.com/srv/TRN/Sample/DemoServiceRequestResponse_v1"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:complexType name="Customer">
+        <xs:sequence>
+            <xs:element name="customerId" type="xs:long" minOccurs="0"/>
+            <xs:element name="age" type="xs:long" />
+            <xs:element name="type" type="xs:string"/>
+            <xs:element name="firstName" type="xs:string"/>
+            <xs:element name="lastName" type="xs:string"/>
+            <xs:element name="sinNumber" type="xs:long" minOccurs="0"/>
+            <xs:element name="email" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+
+	<xs:element name="getCustomer">
+		<xs:complexType>
+	        <xs:sequence>
+	            <xs:element name="customerId" type="xs:long" minOccurs="0"/>
+	        </xs:sequence>		
+        </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="getCustomerResponse">
+		<xs:complexType>
+	        <xs:sequence>
+	            <xs:element minOccurs="0" name="customer" type="tns:Customer"/>
+	        </xs:sequence>		
+        </xs:complexType>
+	</xs:element>
+
+	<xs:element name="findCustomer">
+		<xs:complexType>
+	        <xs:sequence/>
+        </xs:complexType>
+	</xs:element>
+
+	<xs:element name="findCustomerResponse">
+		<xs:complexType>
+	        <xs:sequence>
+	            <xs:element name="customer" type="tns:Customer" minOccurs="0" maxOccurs="unbounded"/>
+	        </xs:sequence>		
+        </xs:complexType>
+	</xs:element>
+
+	<xs:element name="createCustomer">
+		<xs:complexType>
+	        <xs:sequence>
+	            <xs:element name="customer" type="tns:Customer"/>
+	        </xs:sequence>		
+        </xs:complexType>
+	</xs:element>
+
+	<xs:element name="createCustomerResponse">
+		<xs:complexType>
+	        <xs:sequence>
+	            <xs:element minOccurs="0" name="customerId" type="xs:long"/>
+	        </xs:sequence>		
+        </xs:complexType>
+	</xs:element>
+
+	<xs:element name="updateCustomer">
+		<xs:complexType>
+	        <xs:sequence>
+	            <xs:element name="customer" type="tns:Customer"/>
+	        </xs:sequence>		
+        </xs:complexType>
+	</xs:element>
+
+	<xs:element name="updateCustomerResponse">
+		<xs:complexType>
+	        <xs:sequence/>
+        </xs:complexType>
+	</xs:element>
+
+	<xs:element name="deleteCustomer">
+		<xs:complexType>
+	        <xs:sequence>
+	            <xs:element name="customerId" type="xs:long" minOccurs="0"/>
+	        </xs:sequence>		
+        </xs:complexType>
+	</xs:element>
+	
+	<xs:element name="deleteCustomerResponse">
+		<xs:complexType>
+	        <xs:sequence/>
+        </xs:complexType>
+	</xs:element>
+
+</xs:schema>

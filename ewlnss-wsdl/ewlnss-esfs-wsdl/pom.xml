@@ -1,0 +1,66 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Application.Complete -->
+	<parent>
+		<groupId>telus.csm.ewlnss-wsdl</groupId>
+		<artifactId>pom-ewlnss-wsdl</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>ewlnsfs-wsdl</artifactId>
+	<name>ewlnsfs-wsdl</name>
+
+	<properties>
+		<genwsdl.local.wsdl.file>EnterpriseSalesFulfillmentService_v5_0.wsdl</genwsdl.local.wsdl.file>
+	</properties>
+
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.jvnet.jax-ws-commons</groupId>
+				<artifactId>jaxws-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>GenService</id>
+						<!-- JAX-WS Maven plugin parameters: http://jax-ws-commons.java.net/jaxws-maven-plugin/wsimport-mojo.html -->
+						<configuration>
+							<!-- The generated impl class will be located in src/main/impl -->
+							<target>2.1</target>
+							<!-- List of files to use for bindings. If not specified, all .xml 
+								files in the bindingDirectory will be used. -->
+							<bindingFiles>
+								<bindingFile>binding_wsdl.xjb</bindingFile>
+								<bindingFile>binding_schema.xjb</bindingFile>
+							</bindingFiles>
+							<wsdlFiles>
+								<wsdlFile>${genwsdl.local.wsdl.file}</wsdlFile>
+							</wsdlFiles>
+							<wsdlLocation>/wsdls/${genwsdl.local.wsdl.file}</wsdlLocation>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<resources>
+			<!-- include the handler xmls from the generated-sources directory to 
+				enable the request/response logging -->
+			<resource>
+				<directory>src/main/generated-sources</directory>
+				<includes>
+					<include>**/*.xml</include>
+				</includes>
+			</resource>
+			<!-- include binding and wsdl from the resources directory -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.wsdl</include>
+					<include>**/*.xjb</include>
+					<include>**/*.xsd</include>
+				</includes>
+			</resource>
+		</resources>
+	</build>
+</project>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>telus.csm.ewlnsfs-ws-deploy</groupId>
+		<artifactId>pom-ewlnsfs-ws-deploy</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ewlnsfs-soap</artifactId>
+	<name>ewlnsfs-soap</name>
+	<packaging>war</packaging>
+	<build>
+		<finalName>EnterpriseWLNSalesFulfillmentSvcSOAP_${target.version}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<packagingExcludes>WEB-INF/lib/ojdbc*.jar</packagingExcludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>telus.csm.ewlnss-common</groupId>
+			<artifactId>ewlnss-common-domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>ewlnsfs-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.soap</groupId>
+			<artifactId>ewlnss-common-soap</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>

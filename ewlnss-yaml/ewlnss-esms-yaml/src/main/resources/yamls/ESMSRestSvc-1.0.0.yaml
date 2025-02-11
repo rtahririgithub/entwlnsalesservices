@@ -1,0 +1,626 @@
+---
+swagger: "2.0"
+info:
+  description: "This service provides the interface for getting information required\
+    \ to build the ESS shopping cart, and submit the sales"
+  version: "1.0"
+  title: "EnterpriseSalesManagementRESTSvc"
+  contact:
+    name: "dlchocolatemousse@telus.com"
+    email: "dlchocolatemousse@telus.com"
+  host: shome2bussvc-channelsales-dv103.tsl.telus.com
+  basePath: /v1/mso/channelsalesmgmt/enterprise-sales-management-service
+tags:
+- name: "EnterpriseSalesManagementRESTSvc"
+  description: "Service provides operations to work upon the resources of ESS."
+schemes:
+- "https"
+- "http"
+paths:
+  /shopping-cart/{shopping-cart-id}/price:
+    get:
+      tags:
+      - "ESMS"
+      summary: "Get price for the cart items in the shopping cart. Returns pricing\
+        \ based on teh context of the shopping cart."
+      description: "Returns the total price of the shopping cart, price of each cart\
+        \ item, price of each product in the cart item. Provides upfront price as\
+        \ well as thereafter price."
+      operationId: "getPrice"
+      parameters:
+      - name: "sales-transaction-id"
+        in: "query"
+        description: "Consumer identifier for the transaction. Acts like a corelation\
+          \ id."
+        required: true
+        type: "string"
+      - name: "shopping-cart-id"
+        in: "path"
+        description: "Resource id of the Shopping cart. Returned as a response to\
+          \ Post Shopping Cart"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/PriceResponse"
+        400:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/GetPriceErrorResponse"
+        500:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/GetPriceErrorResponse"
+  /book-appointment:
+    post:
+      tags:
+      - "ESMS"
+      summary: "Books the appointment based on the products selected"
+      description: "Operation supports booking an appointment for the selected products\
+        \ and based on the work required. Is a task operation."
+      operationId: "bookAppointment"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Request for booking an appointment for the specific dates and\
+          \ times for each of the product instances."
+        required: true
+        schema:
+          $ref: "#/definitions/BookAppointmentRequest"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/BookAppointmentResponse"
+        400:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/BookAppointmentErrorResponse"
+        500:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/BookAppointmentErrorResponse"
+definitions:
+  AssociatedProductItemPrice:
+    allOf:
+    - $ref: "#/definitions/ProductItemPriceBase"
+    - {}
+  ProductItemPrice:
+    allOf:
+    - $ref: "#/definitions/ProductItemPriceBase"
+    - properties:
+        associatedProductItemPrice:
+          type: "array"
+          items:
+            $ref: "#/definitions/AssociatedProductItemPrice"
+  ProductItemPriceBase:
+    type: "object"
+    properties:
+      productItemIdentifier:
+        $ref: "#/definitions/ProductItemIdentifier"
+      productItemNameList:
+        type: "array"
+        items:
+          $ref: "#/definitions/MultilingualText"
+      priceSummary:
+        $ref: "#/definitions/CombinedPrice"
+  ProductItemGroupCategoryPrice:
+    type: "object"
+    properties:
+      groupCategory:
+        $ref: "#/definitions/GroupCategory"
+      priceSummary:
+        $ref: "#/definitions/CombinedPrice"
+      productItemPriceList:
+        type: "array"
+        items:
+          $ref: "#/definitions/ProductItemPrice"
+  Deposit:
+    type: "object"
+    properties:
+      depositTypeCd:
+        type: "string"
+        description: "One of SECURITY_DEPOSIT"
+      depositAmt:
+        type: "number"
+      estimatedDepositInd:
+        type: "boolean"
+    example:
+      depositTypeCd: "depositTypeCd"
+      depositAmt: 0.80082819046101150206595775671303272247314453125
+      estimatedDepositInd: true
+  EquipmentAcquisitionType:
+    type: "object"
+    properties:
+      buyIndicator:
+        type: "boolean"
+      customerOwnedIndicator:
+        type: "boolean"
+      rentalEquipmentIndicator:
+        type: "boolean"
+    description: "One of the three indicators can be marked as true at a given time."
+  WirelineEquipmentPrice:
+    type: "object"
+    properties:
+      materialItemCode:
+        type: "string"
+      acquisitionType:
+        $ref: "#/definitions/EquipmentAcquisitionType"
+      equipmentPrice:
+        $ref: "#/definitions/ProductItemPrice"
+  ProductPriceBase:
+    type: "object"
+    properties:
+      productItemGroupCategoryPrice:
+        type: "array"
+        items:
+          $ref: "#/definitions/ProductItemGroupCategoryPrice"
+      equipmentPrice:
+        type: "array"
+        items:
+          $ref: "#/definitions/WirelineEquipmentPrice"
+      installationCredit:
+        $ref: "#/definitions/Price"
+      priceSummary:
+        $ref: "#/definitions/CombinedPrice"
+  InternetProductPrice:
+    allOf:
+    - $ref: "#/definitions/ProductPriceBase"
+    - properties:
+        estimatedPriceInd:
+          type: "boolean"
+  TelevisionProductPrice:
+    allOf:
+    - $ref: "#/definitions/ProductPriceBase"
+    - properties:
+        estimatedPriceInd:
+          type: "boolean"
+  HomePhoneProductPrice:
+    allOf:
+    - $ref: "#/definitions/ProductPriceBase"
+    - properties:
+        estimatedPriceInd:
+          type: "boolean"
+  ProductPrice:
+    type: "object"
+    properties:
+      internetProductPrice:
+        $ref: "#/definitions/InternetProductPrice"
+      televisionProductPrice:
+        $ref: "#/definitions/TelevisionProductPrice"
+      homePhoneProductPrice:
+        $ref: "#/definitions/HomePhoneProductPrice"
+    example:
+      internetProductPrice: ""
+      televisionProductPrice: ""
+      homePhoneProductPrice: ""
+  CartItemPrice:
+    type: "object"
+    properties:
+      cartItemId:
+        type: "string"
+      productPriceList:
+        type: "array"
+        items:
+          $ref: "#/definitions/ProductPrice"
+    example:
+      productPriceList:
+      - internetProductPrice: ""
+        televisionProductPrice: ""
+        homePhoneProductPrice: ""
+      - internetProductPrice: ""
+        televisionProductPrice: ""
+        homePhoneProductPrice: ""
+      cartItemId: "cartItemId"
+  PriceResponse:
+    type: "object"
+    properties:
+      cartItemPrice:
+        type: "array"
+        items:
+          $ref: "#/definitions/CartItemPrice"
+      deposit:
+        type: "array"
+        items:
+          $ref: "#/definitions/Deposit"
+      totalPrice:
+        $ref: "#/definitions/CombinedPrice"
+    example:
+      totalPrice:
+        billPrice:
+        - duration:
+            startMonthCnt: 5
+            endMonthCnt: 5
+          priceCharge:
+            basePriceAmount:
+              valueAmt: 6.0274563
+            pricingTypeCd: "pricingTypeCd"
+            recurrenceCount: 1
+          totalPrice: ""
+          priceDiscount: ""
+        - duration:
+            startMonthCnt: 5
+            endMonthCnt: 5
+          priceCharge:
+            basePriceAmount:
+              valueAmt: 6.0274563
+            pricingTypeCd: "pricingTypeCd"
+            recurrenceCount: 1
+          totalPrice: ""
+          priceDiscount: ""
+      deposit:
+      - depositTypeCd: "depositTypeCd"
+        depositAmt: 0.80082819046101150206595775671303272247314453125
+        estimatedDepositInd: true
+      - depositTypeCd: "depositTypeCd"
+        depositAmt: 0.80082819046101150206595775671303272247314453125
+        estimatedDepositInd: true
+      cartItemPrice:
+      - productPriceList:
+        - internetProductPrice: ""
+          televisionProductPrice: ""
+          homePhoneProductPrice: ""
+        - internetProductPrice: ""
+          televisionProductPrice: ""
+          homePhoneProductPrice: ""
+        cartItemId: "cartItemId"
+      - productPriceList:
+        - internetProductPrice: ""
+          televisionProductPrice: ""
+          homePhoneProductPrice: ""
+        - internetProductPrice: ""
+          televisionProductPrice: ""
+          homePhoneProductPrice: ""
+        cartItemId: "cartItemId"
+  ProductAppointmentRequest:
+    type: "object"
+    properties:
+      productServiceTypeList:
+        type: "array"
+        description: "One of HSIC, TTV, SING"
+        items:
+          type: "string"
+      requestedAppointment:
+        $ref: "#/definitions/AppointmentTypeBase"
+    example:
+      requestedAppointment:
+        timeZoneCd: "timeZoneCd"
+        appointmentTimeSlot:
+          startTime: "startTime"
+          endTime: "endTime"
+        appointmentDate: "2000-01-23"
+      productServiceTypeList:
+      - "productServiceTypeList"
+      - "productServiceTypeList"
+  BookAppointmentRequest:
+    type: "object"
+    required:
+    - "operationHeader"
+    - "productAppointmentRequest"
+    - "shoppingCartId"
+    properties:
+      operationHeader:
+        $ref: "#/definitions/OperationHeader"
+      shoppingCartId:
+        type: "string"
+        description: "Identifier for the ESS Shopping cart ID. This is a mandatory\
+          \ in the request body."
+      canBeReachedPhoneNumber:
+        type: "string"
+        description: "Contact number for booking / WFM"
+      productAppointmentRequest:
+        type: "array"
+        items:
+          $ref: "#/definitions/ProductAppointmentRequest"
+    example:
+      operationHeader:
+        salesTransactionId: "salesTransactionId"
+      productAppointmentRequest:
+      - requestedAppointment:
+          timeZoneCd: "timeZoneCd"
+          appointmentTimeSlot:
+            startTime: "startTime"
+            endTime: "endTime"
+          appointmentDate: "2000-01-23"
+        productServiceTypeList:
+        - "productServiceTypeList"
+        - "productServiceTypeList"
+      - requestedAppointment:
+          timeZoneCd: "timeZoneCd"
+          appointmentTimeSlot:
+            startTime: "startTime"
+            endTime: "endTime"
+          appointmentDate: "2000-01-23"
+        productServiceTypeList:
+        - "productServiceTypeList"
+        - "productServiceTypeList"
+      canBeReachedPhoneNumber: "canBeReachedPhoneNumber"
+      shoppingCartId: "shoppingCartId"
+  ProductAppointmentResponse:
+    type: "object"
+    properties:
+      productServiceTypeList:
+        type: "array"
+        description: "One of HSIC, TTV, SL"
+        items:
+          type: "string"
+      appointmentInfo:
+        $ref: "#/definitions/AppointmentType"
+    example:
+      productServiceTypeList:
+      - "productServiceTypeList"
+      - "productServiceTypeList"
+      appointmentInfo: ""
+  BookAppointmentResponse:
+    type: "object"
+    properties:
+      softBookingInd:
+        type: "boolean"
+        description: "True if soft booked. False if hard booking done"
+      productAppointmentList:
+        type: "array"
+        items:
+          $ref: "#/definitions/ProductAppointmentResponse"
+    example:
+      productAppointmentList:
+      - productServiceTypeList:
+        - "productServiceTypeList"
+        - "productServiceTypeList"
+        appointmentInfo: ""
+      - productServiceTypeList:
+        - "productServiceTypeList"
+        - "productServiceTypeList"
+        appointmentInfo: ""
+      softBookingInd: true
+  BookAppointmentErrorResponse:
+    allOf:
+    - $ref: "#/definitions/ResponseBase"
+    - {}
+  GetPriceErrorResponse:
+    allOf:
+    - $ref: "#/definitions/ResponseBase"
+    - {}
+  ProductItemIdentifier:
+    type: "object"
+    properties:
+      productCatalogueId:
+        type: "string"
+      parentProductCatalogueId:
+        type: "string"
+  MultilingualText:
+    type: "object"
+    properties:
+      localeTxt:
+        type: "string"
+        description: "EN, FR"
+      valueTxt:
+        type: "string"
+  CombinedPrice:
+    type: "object"
+    properties:
+      billPrice:
+        type: "array"
+        items:
+          $ref: "#/definitions/PriceDuration"
+    example:
+      billPrice:
+      - duration:
+          startMonthCnt: 5
+          endMonthCnt: 5
+        priceCharge:
+          basePriceAmount:
+            valueAmt: 6.0274563
+          pricingTypeCd: "pricingTypeCd"
+          recurrenceCount: 1
+        totalPrice: ""
+        priceDiscount: ""
+      - duration:
+          startMonthCnt: 5
+          endMonthCnt: 5
+        priceCharge:
+          basePriceAmount:
+            valueAmt: 6.0274563
+          pricingTypeCd: "pricingTypeCd"
+          recurrenceCount: 1
+        totalPrice: ""
+        priceDiscount: ""
+  PriceDuration:
+    type: "object"
+    properties:
+      priceCharge:
+        $ref: "#/definitions/Price"
+      priceDiscount:
+        $ref: "#/definitions/PriceDiscount"
+      totalPrice:
+        $ref: "#/definitions/PriceWithTax"
+      duration:
+        $ref: "#/definitions/Duration"
+    example:
+      duration:
+        startMonthCnt: 5
+        endMonthCnt: 5
+      priceCharge:
+        basePriceAmount:
+          valueAmt: 6.0274563
+        pricingTypeCd: "pricingTypeCd"
+        recurrenceCount: 1
+      totalPrice: ""
+      priceDiscount: ""
+  Price:
+    type: "object"
+    properties:
+      pricingTypeCd:
+        type: "string"
+        description: "One of DUE_NOW, RECURRING, ONE_TIME"
+      basePriceAmount:
+        $ref: "#/definitions/Money"
+      recurrenceCount:
+        type: "integer"
+        description: "optional"
+    description: "Provides all amounts (tax included, duty free, tax rate)"
+    example:
+      basePriceAmount:
+        valueAmt: 6.0274563
+      pricingTypeCd: "pricingTypeCd"
+      recurrenceCount: 1
+  Money:
+    type: "object"
+    properties:
+      valueAmt:
+        type: "number"
+        format: "float"
+        description: "A positive floating point number"
+    description: "A base / value business entity used to represent money"
+    example:
+      valueAmt: 6.0274563
+  PriceDiscount:
+    allOf:
+    - $ref: "#/definitions/Price"
+    - properties:
+        priceAlterationTypeCd:
+          type: "string"
+          description: "One of DISCOUNT"
+  PriceWithTax:
+    allOf:
+    - $ref: "#/definitions/Price"
+    - properties:
+        taxPrice:
+          $ref: "#/definitions/TotalTax"
+        taxIncludedPrice:
+          $ref: "#/definitions/Money"
+  TotalTax:
+    type: "object"
+    properties:
+      totalTaxAmount:
+        type: "number"
+        format: "float"
+      taxesApplied:
+        type: "array"
+        items:
+          $ref: "#/definitions/TaxAmount"
+  TaxAmount:
+    type: "object"
+    properties:
+      amount:
+        $ref: "#/definitions/Money"
+      taxTypeCd:
+        type: "string"
+        description: "HST, GST"
+      taxRateAmt:
+        type: "number"
+        format: "float"
+        description: "Tax rate"
+  Duration:
+    type: "object"
+    properties:
+      startMonthCnt:
+        type: "integer"
+        description: "starting month"
+      endMonthCnt:
+        type: "integer"
+        description: "end month count"
+    example:
+      startMonthCnt: 5
+      endMonthCnt: 5
+  GroupCategory:
+    type: "object"
+    properties:
+      groupTypeCd:
+        type: "string"
+      groupSubTypeCd:
+        type: "string"
+  AppointmentTypeBase:
+    type: "object"
+    properties:
+      timeZoneCd:
+        type: "string"
+      appointmentDate:
+        type: "string"
+        format: "date"
+        description: "The date selected by the customer to book installation appointment."
+      appointmentTimeSlot:
+        $ref: "#/definitions/AppointmentTimeSlot"
+    example:
+      timeZoneCd: "timeZoneCd"
+      appointmentTimeSlot:
+        startTime: "startTime"
+        endTime: "endTime"
+      appointmentDate: "2000-01-23"
+  AppointmentTimeSlot:
+    type: "object"
+    properties:
+      startTime:
+        type: "string"
+      endTime:
+        type: "string"
+    example:
+      startTime: "startTime"
+      endTime: "endTime"
+  OperationHeader:
+    type: "object"
+    properties:
+      salesTransactionId:
+        type: "string"
+    example:
+      salesTransactionId: "salesTransactionId"
+  AppointmentType:
+    allOf:
+    - $ref: "#/definitions/AppointmentTypeBase"
+    - properties:
+        appointmentId:
+          type: "string"
+  ResponseBase:
+    type: "object"
+    properties:
+      responseMessages:
+        type: "array"
+        items:
+          $ref: "#/definitions/ResponseMessage"
+  ResponseMessage:
+    type: "object"
+    properties:
+      errorCode:
+        type: "string"
+      messageTypeCd:
+        type: "string"
+      messages:
+        type: "array"
+        items:
+          $ref: "#/definitions/MessageType"
+      contextDataAttributes:
+        type: "array"
+        items:
+          $ref: "#/definitions/ContextAttribute"
+      shoppingCartIdentifier:
+        $ref: "#/definitions/CartItemIdentifier"
+  MessageType:
+    type: "object"
+    properties:
+      messageTxt:
+        type: "string"
+      localeCd:
+        type: "string"
+  ContextAttribute:
+    type: "object"
+    properties:
+      attributeTypeTxt:
+        type: "string"
+      attributeValueTxt:
+        type: "string"
+  CartItemIdentifier:
+    type: "object"
+    properties:
+      shoppingCartId:
+        type: "string"
+      cartItemId:
+        type: "string"
+      cartItemRelationId:
+        type: "string"
+      cartItemIdentifier:
+        $ref: "#/definitions/CartItemIdentifier"

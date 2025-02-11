@@ -1,0 +1,13 @@
+<bindings xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+  wsdlLocation="ReferencePDSDataService.wsdl"
+  xmlns="http://java.sun.com/xml/ns/jaxws">
+	<enableWrapperStyle>false</enableWrapperStyle>	
+	<bindings node="wsdl:definitions/wsdl:portType[@name='ReferencePDSDataServicePortType']">
+	        <class name="ReferencePDSDataServicePortType"/> 
+	</bindings>
+	<bindings node="wsdl:definitions/wsdl:service[@name='ReferencePDSDataService']">
+		    <class name="ReferencePDSDataServiceStub"/> 
+	</bindings>
+</bindings>

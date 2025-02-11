@@ -1,0 +1,120 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Application.Complete -->
+    <parent>
+        <groupId>telus.csm.ewlnss</groupId>
+        <artifactId>EnterpriseWLNSalesServices</artifactId>
+        <version>v1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>telus.csm.ewlnss-ws-deploy</groupId>
+    <artifactId>pom-ewlnss-ws-deploy</artifactId>
+    <packaging>pom</packaging>
+    <name>pom-ewlnss-ws-deploy</name>
+	
+      <modules>
+			<module>ess-ws-deploy</module>
+			<module>ewlnsis-ws-deploy</module>
+            <module>ewlnsms-ws-deploy</module> 
+			<module>ewlnsvs-ws-deploy</module>
+			<module>ewlnsfs-ws-deploy</module>
+			<module>ewlnsos-ws-deploy</module>
+			<module>ewlnssproxy-ws-deploy</module>
+     </modules> 
+
+	<dependencies>
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-core</artifactId>
+		</dependency>
+		<!-- internal project dependencies -->
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared</groupId>
+		    <artifactId>ewlnss-shared-util</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>ewlnss-adapter-factory</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss-common</groupId>
+			<artifactId>ewlnss-common-config</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+				<dependency>
+            <groupId>telus.csm.ewlnss-common</groupId>
+            <artifactId>ewlnss-common-domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+		<dependency>
+            <groupId>telus.csm.ewlnss-common</groupId>
+            <artifactId>ewlnss-common-manager</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+			
+		<dependency>
+			<groupId>telus-maven.plugins-support</groupId>
+			<artifactId>telus-core</artifactId>
+		</dependency>					
+		
+		<dependency>
+			<groupId>xalan</groupId>
+			<artifactId>serializer</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>xml-apis</groupId>
+					<artifactId>xml-apis</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+        	<groupId>com.thoughtworks.xstream</groupId>
+        	<artifactId>xstream</artifactId>
+        	<version>1.4.3</version>
+        </dependency>
+        <dependency>
+        	<groupId>commons-codec</groupId>
+        	<artifactId>commons-codec</artifactId>
+        </dependency>
+        <dependency>
+        	<groupId>jfree</groupId>
+        	<artifactId>jcommon</artifactId>
+        	<version>1.0.12</version>
+        </dependency>
+        <dependency>
+        	<groupId>jfree</groupId>
+        	<artifactId>jfreechart</artifactId>
+        	<version>1.0.9</version>
+        </dependency>
+		<dependency>
+			<groupId>commons-collections</groupId>
+			<artifactId>commons-collections</artifactId>
+		</dependency>
+		<dependency>
+	      <groupId>org.codehaus.jackson</groupId>
+	      <artifactId>jackson-core-asl</artifactId>
+	      <version>1.9.13</version><!--$NO-MVN-MAN-VER$-->
+<!-- 	      <scope>provided</scope> -->
+	    </dependency>              
+	    <dependency>
+	      <groupId>org.codehaus.jackson</groupId>
+	      <artifactId>jackson-mapper-asl</artifactId>
+	      <version>1.9.13</version><!--$NO-MVN-MAN-VER$-->
+<!-- 	      <scope>provided</scope> -->
+	    </dependency>
+	    <dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0.1</version>
+			<!-- <scope>provided</scope> -->
+		</dependency>
+	    <dependency>
+			<groupId>weblogic.1035</groupId>
+			<artifactId>weblogic</artifactId>
+			<scope>provided</scope>
+		</dependency>
+   	</dependencies>
+
+</project>

@@ -1,0 +1,24 @@
+<project name="frameworks" default="test" basedir=".">
+
+	<target name="test">
+
+		<replaceregexp byline="true">
+			<regexp pattern="&lt;wsp:Policy&gt;" />
+			<substitution expression="&lt;!-- wsp:Policy&gt;" />
+			<fileset dir=".">
+				<include name="*.wsdl" />
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp byline="true">
+			<regexp pattern="&lt;/wsp:Policy&gt;" />
+			<substitution expression="&lt;/wsp:Policy --&gt;" />
+			<fileset dir=".">
+				<include name="*.wsdl" />
+			</fileset>
+		</replaceregexp>
+		
+	</target>
+
+
+</project>

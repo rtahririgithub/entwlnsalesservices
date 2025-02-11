@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+<!-- Override File for QIDC -->
+<group name="irrelevant">
+	<group name="connections">
+		<group name="services">
+			<group name="workManagerSvc">
+				<prop name="url">t3://localhost:7001</prop>
+				<prop name="jndiName">java:comp/env/WorkManager-Online-Priority</prop>
+				<prop name="maxTimeout">300000</prop>
+			</group>
+		</group>
+	</group>
+</group>

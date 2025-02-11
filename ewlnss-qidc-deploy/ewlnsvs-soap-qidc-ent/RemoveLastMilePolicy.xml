@@ -1,0 +1,54 @@
+<project name="frameworks" default="test" basedir="target">
+
+	<property name="sourceFileEar" value="EntWLNSalesValidationSvcSOAP_ENT_v1.ear" />
+	<property name="sourceFile" value="ewlnsvs-soap-qidc-v1.war" />	
+	<property name="wsdlJarFile" value="WEB-INF/lib/ewlnsvs-wsdl-v1.jar" />
+
+	<target name="test">
+
+		<delete dir="temp" />
+
+		<unzip src="${sourceFileEar}" dest="temp/ear">
+		</unzip>			
+		
+		<unzip src="temp/ear/${sourceFile}" dest="temp/war">
+		</unzip>
+
+		<unzip src="temp/war/${wsdlJarFile}" dest="temp/wsdlJar">
+		</unzip>
+
+
+		<replaceregexp byline="true">
+			<regexp pattern="&lt;wsp:Policy&gt;" />
+			<substitution expression="&lt;!-- wsp:Policy&gt;" />
+			<fileset dir="temp/wsdlJar">
+				<include name="**/*.wsdl" />
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp byline="true">
+			<regexp pattern="&lt;/wsp:Policy&gt;" />
+			<substitution expression="&lt;/wsp:Policy --&gt;" />
+			<fileset dir="temp/wsdlJar">
+				<include name="**/*.wsdl" />
+			</fileset>
+		</replaceregexp>
+		
+		<delete file="temp/war/${wsdlJarFile}" />
+
+		<zip destfile="temp/war/${wsdlJarFile}" basedir="temp/wsdlJar" />
+		
+		<delete file="temp/ear/${sourceFile}" />
+
+		<zip destfile="temp/ear/${sourceFile}" basedir="temp/war" />
+		
+		<delete file="$NoLastMile-{sourceFileEar}"/>
+		
+		<zip destfile="NoLastMile-${sourceFileEar}" basedir="temp/ear" />
+
+		<delete dir="temp" />
+
+	</target>
+
+
+</project>

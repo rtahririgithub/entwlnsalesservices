@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+
+<group name="irrelevant">
+	<group name="logging">
+		<prop name="log4j.rootLogger">DEBUG, CONSOLE</prop>
+
+		<prop name="log4j.debug">true</prop>
+
+		<prop name="log4j.logger.com.telus.csm.ewlnss.adapter.util.LogSOAPHandler">, CONSOLE, FILE1</prop>
+		<prop name="log4j.additivity.com.telus.csm.ewlnss.adapter.util.LogSOAPHandler">false</prop>
+		<prop name="log4j.logger.com.telus.csm.ewlnss.adapter.util.LoggingClientHttpRequestInterceptor">, CONSOLE, FILE1</prop>
+		<prop name="log4j.additivity.com.telus.csm.ewlnss.adapter.util.LoggingClientHttpRequestInterceptor">false</prop>
+
+		<prop name="log4j.logger.com.telus.csm.esdg.domain.EsdgOrderDO_1">, CONSOLE, FILE2</prop>
+		<prop name="log4j.additivity.com.telus.csm.esdg.domain.EsdgOrderDO_1">false</prop>
+
+		<prop name="log4j.appender.CONSOLE">org.apache.log4j.ConsoleAppender</prop>
+		<prop name="log4j.appender.CONSOLE.Threshold">TRACE</prop>
+		<prop name="log4j.appender.CONSOLE.layout">org.apache.log4j.PatternLayout</prop>
+		<prop name="log4j.appender.CONSOLE.layout.ConversionPattern">[%d %-5p %X{threadState}%X{threadId} %X{operation} %X{transactionId} %c{1}.%M]- %m%n%n</prop>
+
+		<prop name="log4j.appender.FILE">org.apache.log4j.DailyRollingFileAppender</prop>
+		<prop name="log4j.appender.FILE.Append">true</prop>
+		<prop name="log4j.appender.FILE.Threshold">DEBUG</prop>
+		<prop name="log4j.appender.FILE.layout">org.apache.log4j.PatternLayout</prop>
+		<prop name="log4j.appender.FILE.layout.ConversionPattern">[%d %-5p %X{threadState}%X{threadId} %X{operation} %X{transactionId} %c{1}.%M]- %m%n%n</prop>
+		<prop name="log4j.appender.FILE.file">${dirs/log4j/EnterpriseWLNSalesSvc}/${fw_appId}-${fw_appVersion}.log</prop>
+		<prop name="log4j.appender.FILE.immediateFlush">true</prop>
+		<prop name="log4j.appender.FILE.bufferedIO">false</prop>
+		<prop name="log4j.appender.FILE.bufferSize">8192</prop>
+
+		<prop name="log4j.appender.FILE1">org.apache.log4j.DailyRollingFileAppender</prop>
+		<prop name="log4j.appender.FILE1.DatePattern">'.'yyyy-MM-dd</prop>
+		<prop name="log4j.appender.FILE1.Append">true</prop>
+		<prop name="log4j.appender.FILE1.Threshold">DEBUG</prop>
+		<prop name="log4j.appender.FILE1.layout">org.apache.log4j.PatternLayout</prop>
+		<prop name="log4j.appender.FILE1.layout.ConversionPattern">[%d %-5p %X{threadState}%X{threadId} %X{operation} %X{transactionId} %c{1}.%M]- %m%n%n</prop>
+		<prop name="log4j.appender.FILE1.file">${dirs/log4j/EnterpriseWLNSalesSvc}/${fw_appId}-WS-${fw_appVersion}.log</prop>
+		<prop name="log4j.appender.FILE1.immediateFlush">true</prop>
+		<prop name="log4j.appender.FILE1.bufferedIO">false</prop>
+		<prop name="log4j.appender.FILE1.bufferSize">8192</prop>
+
+ 		<!--SqlMap logging configuration...-->
+		<prop name="log4j.appender.FILE2">org.apache.log4j.DailyRollingFileAppender</prop>
+		<prop name="log4j.appender.FILE2.DatePattern">'.'yyyy-MM-dd</prop>
+		<prop name="log4j.appender.FILE2.Append">true</prop>
+		<prop name="log4j.appender.FILE2.Threshold">DEBUG</prop>
+		<prop name="log4j.appender.FILE2.layout">org.apache.log4j.PatternLayout</prop>
+		<prop name="log4j.appender.FILE2.layout.ConversionPattern">[%d %-5p %X{threadState}%X{threadId} %X{operation} %X{transactionId} %c{1}.%M]- %m%n%n</prop>
+		<prop name="log4j.appender.FILE2.file">${dirs/log4j/EnterpriseWLNSalesSvc}/${fw_appId}-Order-${fw_appVersion}.log</prop>
+		<prop name="log4j.appender.FILE2.immediateFlush">true</prop>
+		<prop name="log4j.appender.FILE2.bufferedIO">false</prop>
+		<prop name="log4j.appender.FILE2.bufferSize">8192</prop>
+
+		<prop name="log4j.appender.MONITOR">com.telus.csm.ewlnsc.monitor.ESSMonitorAppender</prop>
+		<prop name="log4j.appender.MONITOR.Threshold">ERROR</prop>
+		<prop name="log4j.appender.MONITOR.layout">org.apache.log4j.PatternLayout</prop>
+		<prop name="log4j.appender.MONITOR.layout.ConversionPattern">[%d %-5p %X{threadState}%X{threadId} %X{operation} %X{transactionId} %c{1}.%M]- %m</prop>
+
+		<prop name="log4j.logger.com.telus">, FILE, MONITOR</prop>
+
+		<!-- SqlMap logging configuration... -->
+		<prop name="log4j.logger.com.ibatis">, FILE</prop>
+		<prop name="log4j.logger.com.ibatis.common.jdbc.SimpleDataSource">, FILE</prop>
+		<prop name="log4j.logger.com.ibatis.common.jdbc.ScriptRunner">, FILE</prop>
+		<prop name="log4j.logger.com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate">, FILE</prop>
+		<prop name="log4j.logger.java.sql.Connection">INFO, FILE</prop>
+		<prop name="log4j.logger.java.sql.Statement">, FILE</prop>
+		<prop name="log4j.logger.java.sql.PreparedStatement">, FILE </prop>
+		<prop name="log4j.logger.java.sql.ResultSet">, FILE</prop>
+
+		<prop name="log4j.logger.org.apache.commons">INFO, FILE</prop>
+	</group>
+</group>

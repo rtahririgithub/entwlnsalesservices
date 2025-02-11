@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Application.Complete -->
+    <parent>
+	    <groupId>telus.csm.ewlnss-ws-deploy</groupId>
+    	<artifactId>pom-ewlnss-ws-deploy</artifactId>
+        <version>v1-SNAPSHOT</version>
+    </parent>
+
+	<groupId>telus.csm.ess-ws-deploy</groupId>
+	<artifactId>pom-ess-ws-deploy</artifactId>
+	<packaging>pom</packaging>
+	<name>pom-ess-ws-deploy</name>
+	<properties>
+		<application.common.version>v1-SNAPSHOT</application.common.version>
+	</properties>
+
+	<modules>
+		<module>ess-core</module>
+		<module>ess-rest</module>
+	</modules>
+	
+	<dependencies>
+		<dependency>
+			<groupId>telus.csm.ewlnss-yaml</groupId>
+			<artifactId>ess-yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	
+</project>

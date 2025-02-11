@@ -1,0 +1,2082 @@
+---
+swagger: "2.0"
+info:
+  description: "This service provides the interface for creation, updates, submission\
+    \ of sales related shopping cart resources. Consumers can create a shopping cart,\
+    \ and attach cart items as they shopp for products. The resources work in the\
+    \ context of a n activation / renewal / exchanges of products with Telus."
+  version: "2.0.1"
+  title: "EnterpriseSalesRESTSvc"
+  contact:
+    name: "dlchocolatemousse@telus.com"
+    email: "dlchocolatemousse@telus.com"
+host: "virtserver.swaggerhub.com"
+basePath: "/meet.aman.singh/temp/1.0.0"
+tags:
+- name: "EnterpriseSalesRESTSvc"
+  description: "Provides resources to create, update sales resources."
+- name: "Shopping Cart"
+  description: "Provides resources to create, update shopping cart resources."
+- name: "Product Ordering"
+  description: "Provides resources for order submission"
+schemes:
+- "https"
+- "http"
+paths:
+  /shopping-cart:
+    post:
+      tags:
+      - "EnterpriseSalesRESTSvc"
+      - "ShoppingCart"
+      summary: "Creates a shopping cart for the customer and the sales profile."
+      description: "Consumer need to pass the utlet and sales rep information to create\
+        \ a shopping cart. Customer information is optional to create the shopping\
+        \ cart."
+      operationId: "createShoppingCart"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "shoppingCart"
+        description: "Shopping Cart defines the primary resource that the user shall\
+          \ create when starting an interaction with the sales services."
+        required: true
+        schema:
+          $ref: "#/definitions/CreateShoppingCart"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ShoppingCartResponse"
+        400:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/ShoppingCartErrorResponse"
+        500:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/ShoppingCartErrorResponse"
+  /shopping-cart/{shopping-cart-id}:
+    get:
+      tags:
+      - "EnterpriseSalesRESTSvc"
+      - "ShoppingCart"
+      summary: "Retrieves a 'ShoppingCart' by Id"
+      description: "Get operation to return the shopping cart. Consumer shall know\
+        \ the shopping cart id to retrieve the cart."
+      operationId: "getShoppingCart"
+      parameters:
+      - name: "sales-transaction-id"
+        in: "query"
+        description: "Unique transaction id passed by the consumer. Shall be the same\
+          \ across all operations for this sales transaction"
+        required: true
+        type: "string"
+      - name: "shopping-cart-id"
+        in: "path"
+        description: "Identifier of the Shopping Cart. Shall be the one returned by\
+          \ ESS when Post shopping-cart was called."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ShoppingCart"
+        400:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/GetShoppingCartErrorResponse"
+        500:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/GetShoppingCartErrorResponse"
+    put:
+      tags:
+      - "EnterpriseSalesRESTSvc"
+      - "ShoppingCart"
+      summary: "Update shopping cart for the customer and the sales profile."
+      description: "Can be used to add / modify / remove cartItems from the shopping\
+        \ cart."
+      operationId: "updateShoppingCart"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "shopping-cart-id"
+        in: "path"
+        description: "Identifier of the Shopping Cart. Returned by Post shoppingc-cart."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "shoppingCart"
+        description: "Shopping Cart defines the primary resource that the user shall\
+          \ create when starting an interaction with the sales services."
+        required: true
+        schema:
+          $ref: "#/definitions/UpdateShoppingCart"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ShoppingCartResponse"
+        400:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/ShoppingCartErrorResponse"
+        500:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/ShoppingCartErrorResponse"
+    delete:
+      tags:
+      - "EnterpriseSalesRESTSvc"
+      - "ShoppingCart"
+      summary: "Cancel the shopping cart by Id."
+      description: "Cancel the shopping cart. Releives all resources when shopping\
+        \ cart is cancelled. Cancels any cart items attached to the shopping cart\
+        \ as well."
+      operationId: "cancelShoppingCart"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sales-transaction-id"
+        in: "query"
+        description: "Unique transaction id passed by the consumer. Shall be the same\
+          \ across all operations for this sales transaction"
+        required: true
+        type: "string"
+      - name: "shopping-cart-id"
+        in: "path"
+        description: "Identifier of the Shopping Cart. Returned when Post shopping-cart\
+          \ was called."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+        400:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/CancelShoppingCartErrorResponse"
+        500:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/CancelShoppingCartErrorResponse"
+  /shopping-cart/{shopping-cart-id}/cart-item:
+    post:
+      tags:
+      - "EnterpriseSalesRESTSvc"
+      summary: "Create a cart item within the context of the shopping cart."
+      description: "Cart Item can be created independently of the shopping cart. Consumer\
+        \ to pass the shopping cart id as the path paremeter to create the cart item."
+      operationId: "createCartItem"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "cartItem"
+        description: "Cart Item is any item that needs to be attached to the shopping\
+          \ cart. A cart item can be related to a product offer or be without an offer."
+        required: true
+        schema:
+          $ref: "#/definitions/CreateCartItem"
+      - name: "shopping-cart-id"
+        in: "path"
+        description: "Pass the Shopping Cart Id generated when creating a shopping\
+          \ cart resource. Shopping Cart Id has to exist to create a cart item."
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/CartItemResponse"
+        400:
+          description: "UnSuccessful operation"
+          schema:
+            $ref: "#/definitions/CartItemResponse"
+        500:
+          description: "UnSuccessful operation"
+          schema:
+            $ref: "#/definitions/CartItemResponse"
+  /sale:
+    post:
+      tags:
+      - "Product Ordering"
+      summary: "Submit a finalized shopping cart."
+      description: "Request Shopping Cart Id. Operation Header Sales Transaction Id.\
+        \ Response -  HTTP 200 with SUCCESS message type."
+      operationId: "submitSales"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Request object for submit sale operation. Supports reserve,\
+          \ fulfillment of the sale."
+        required: true
+        schema:
+          $ref: "#/definitions/SubmitSalesRequest"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/SubmitSalesResponse"
+        400:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/SubmitSalesErrorResponse"
+        500:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/SubmitSalesErrorResponse"
+  /sale/{sale-id}:
+    put:
+      tags:
+      - "Product Ordering"
+      summary: "Update sale with fulfillment parameters."
+      description: " \nRequest:  \n1. Shopping Cart Id.    \n2. Operation Header>Sales\
+        \         Transaction Id.\n3 fulfillmentAction  \n\nResponse:  HTTP 200 with\
+        \ SUCCESS message type. "
+      operationId: "updateSales"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "sale-id"
+        in: "path"
+        description: "Identifier of the sale. This is the id return when createSale\
+          \ was called."
+        required: true
+        type: "string"
+      - in: "body"
+        name: "body"
+        description: "Request for updating the sale with fulfillment information.\
+          \ Results in events to complete the sales orders with the fulfillment information."
+        required: true
+        schema:
+          $ref: "#/definitions/UpdateSaleRequest"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/UpdateSaleResponse"
+        400:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/UpdateSaleErrorResponse"
+        500:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/UpdateSaleErrorResponse"
+  /pos-order:
+    post:
+      tags:
+      - "Product Ordering"
+      summary: "Submit order to POS."
+      description: " \\nRequest:  \\n1. Shopping Cart Id.    \\n2. Operation Header>Sales\\\
+        \        \\ Transaction Id.\\n\\nResponse:  HTTP 200 with SUCCESS message\
+        \ type."
+      operationId: "submitSalesToPOS"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Request object for submitting the order to POS. Results in the\
+          \ injection into the POS based on the transaction carried out."
+        required: true
+        schema:
+          $ref: "#/definitions/SubmitSalesToPOSRequest"
+      responses:
+        200:
+          description: "Ok"
+          schema:
+            $ref: "#/definitions/SubmitSalesToPOSResponse"
+        400:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/SubmitSalesToPOSErrorResponse"
+        500:
+          description: "Unsuccessful operation"
+          schema:
+            $ref: "#/definitions/SubmitSalesToPOSErrorResponse"
+definitions:
+  ApplicationProfile:
+    type: "object"
+    properties:
+      originatorApplicationId:
+        type: "string"
+    example:
+      originatorApplicationId: "originatorApplicationId"
+  SalesRepAssociatedOutlet:
+    type: "object"
+    properties:
+      outletInternalId:
+        type: "string"
+      channelOutletId:
+        type: "string"
+    example:
+      outletInternalId: "outletInternalId"
+      channelOutletId: "channelOutletId"
+  UserProfile:
+    type: "object"
+    properties:
+      channelOrganizationTypeCd:
+        type: "string"
+      channelOrganizationInternalId:
+        type: "string"
+      channelOrganizationNumber:
+        type: "string"
+      outletAssociatedProvinces:
+        type: "array"
+        items:
+          type: "string"
+      loginId:
+        type: "string"
+      salesPersonRoleCd:
+        type: "string"
+        description: "sales person role code  used for the flow. D2C_PARTNER"
+      salesRepId:
+        type: "string"
+      salesRepInternalId:
+        type: "string"
+      salesRepAssociatedOutlet:
+        type: "array"
+        items:
+          $ref: "#/definitions/SalesRepAssociatedOutlet"
+    example:
+      salesRepInternalId: "salesRepInternalId"
+      salesRepAssociatedOutlet:
+      - outletInternalId: "outletInternalId"
+        channelOutletId: "channelOutletId"
+      - outletInternalId: "outletInternalId"
+        channelOutletId: "channelOutletId"
+      loginId: "loginId"
+      salesPersonRoleCd: "salesPersonRoleCd"
+      channelOrganizationInternalId: "channelOrganizationInternalId"
+      outletAssociatedProvinces:
+      - "outletAssociatedProvinces"
+      - "outletAssociatedProvinces"
+      channelOrganizationTypeCd: "channelOrganizationTypeCd"
+      channelOrganizationNumber: "channelOrganizationNumber"
+      salesRepId: "salesRepId"
+  AgentProfile:
+    allOf:
+    - $ref: "#/definitions/UserProfile"
+    - properties:
+        employeeId:
+          type: "string"
+        userPrivilegeRoleCodes:
+          type: "array"
+          items:
+            type: "string"
+  ShoppingProfile:
+    type: "object"
+    properties:
+      applicationProfile:
+        $ref: "#/definitions/ApplicationProfile"
+      userProfile:
+        $ref: "#/definitions/UserProfile"
+      agentProfile:
+        $ref: "#/definitions/AgentProfile"
+    example:
+      agentProfile: ""
+      applicationProfile:
+        originatorApplicationId: "originatorApplicationId"
+      userProfile:
+        salesRepInternalId: "salesRepInternalId"
+        salesRepAssociatedOutlet:
+        - outletInternalId: "outletInternalId"
+          channelOutletId: "channelOutletId"
+        - outletInternalId: "outletInternalId"
+          channelOutletId: "channelOutletId"
+        loginId: "loginId"
+        salesPersonRoleCd: "salesPersonRoleCd"
+        channelOrganizationInternalId: "channelOrganizationInternalId"
+        outletAssociatedProvinces:
+        - "outletAssociatedProvinces"
+        - "outletAssociatedProvinces"
+        channelOrganizationTypeCd: "channelOrganizationTypeCd"
+        channelOrganizationNumber: "channelOrganizationNumber"
+        salesRepId: "salesRepId"
+  ProductCharacteristic:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "Name of the characteristic"
+      value:
+        type: "string"
+        description: "Value of the characteristic"
+    description: "Characteristics of the product to instantiate or to modify"
+  MediumCharacteristic:
+    type: "object"
+    properties:
+      cityName:
+        type: "string"
+        description: "The city"
+      countryName:
+        type: "string"
+        description: "The country"
+      emailAddressId:
+        type: "string"
+        description: "Full email address in standard format"
+      faxNumber:
+        type: "string"
+        description: "The fax number of the contact"
+      phoneNumber:
+        type: "string"
+        description: "The primary phone number of the contact"
+      postCode:
+        type: "string"
+        description: "Postcode"
+      stateOrProvinceCd:
+        type: "string"
+        description: "State or province"
+      streetLineOneTxt:
+        type: "string"
+        description: "Describes the street"
+      streetLineTwoTxt:
+        type: "string"
+        description: "Complementary street description"
+      typeCd:
+        type: "string"
+        description: "Type of medium (fax, mobile phone...)"
+    description: "Describes the contact medium characteristics that could be used\
+      \ to contact a party (an individual or an organization)"
+    example:
+      streetLineOneTxt: "streetLineOneTxt"
+      phoneNumber: "phoneNumber"
+      cityName: "cityName"
+      typeCd: "typeCd"
+      emailAddressId: "emailAddressId"
+      streetLineTwoTxt: "streetLineTwoTxt"
+      stateOrProvinceCd: "stateOrProvinceCd"
+      faxNumber: "faxNumber"
+      postCode: "postCode"
+      countryName: "countryName"
+  Note:
+    type: "object"
+    properties:
+      authorName:
+        type: "string"
+        description: "Author of the note"
+      createDate:
+        type: "string"
+        format: "date-time"
+        description: "Date of the note"
+      typeCd:
+        type: "string"
+        description: "Type of note. One of ORDER_COMMENTS, JOIN_SALES_OFFER, EXTERNAL_ORDER_ID"
+      noteTxt:
+        type: "string"
+        description: "Text of the note"
+    description: "Extra information about the ticket or a product order"
+    example:
+      typeCd: "typeCd"
+      authorName: "authorName"
+      noteTxt: "noteTxt"
+      createDate: "2000-01-23T04:56:07.000+00:00"
+  ContactMedium:
+    type: "object"
+    properties:
+      preferredInd:
+        type: "boolean"
+        description: "If true, indicates that is the preferred contact medium"
+      contactTypeCd:
+        type: "string"
+        description: "Type of the contact medium, such as: email address, telephone\
+          \ number, postal address. Can be shipping address as well. One of CAN_BE_REACHED_NUMBER,\
+          \ CSAG_EMAIL"
+      characteristic:
+        $ref: "#/definitions/MediumCharacteristic"
+    description: "Indicates the contact medium that could be used to contact the party."
+    example:
+      contactTypeCd: "contactTypeCd"
+      characteristic:
+        streetLineOneTxt: "streetLineOneTxt"
+        phoneNumber: "phoneNumber"
+        cityName: "cityName"
+        typeCd: "typeCd"
+        emailAddressId: "emailAddressId"
+        streetLineTwoTxt: "streetLineTwoTxt"
+        stateOrProvinceCd: "stateOrProvinceCd"
+        faxNumber: "faxNumber"
+        postCode: "postCode"
+        countryName: "countryName"
+      preferredInd: true
+  GetShoppingCartErrorResponse:
+    allOf:
+    - $ref: "#/definitions/ResponseBase"
+    - {}
+  CancelShoppingCartErrorResponse:
+    allOf:
+    - $ref: "#/definitions/ResponseBase"
+    - {}
+  OrderResponseMessage:
+    allOf:
+    - $ref: "#/definitions/ResponseMessage"
+    - properties:
+        shoppingCartIdentifier:
+          $ref: "#/definitions/CartItemIdentifier"
+        validationContextTypeCd:
+          type: "string"
+        validationContextSubTypeCd:
+          type: "string"
+  Customer:
+    type: "object"
+    properties:
+      customerId:
+        type: "string"
+    example:
+      customerId: "customerId"
+  ServiceAddress:
+    type: "object"
+    properties:
+      serviceAddressId:
+        type: "string"
+      provinceCode:
+        type: "string"
+      cityCode:
+        type: "string"
+    example:
+      serviceAddressId: "serviceAddressId"
+      provinceCode: "provinceCode"
+      cityCode: "cityCode"
+  SubscribedService:
+    type: "object"
+    properties:
+      serviceId:
+        type: "integer"
+        format: "int64"
+      serviceReferenceId:
+        type: "integer"
+        format: "int64"
+  RelatedPartyRef:
+    type: "object"
+    properties:
+      partyId:
+        type: "string"
+        description: "Unique identifier of a related party"
+      partyName:
+        type: "string"
+        description: "Name of the related party"
+      roleCd:
+        type: "string"
+        description: "Role of the related party."
+    description: "RelatedParty reference. A related party defines party or party role\
+      \ linked to a specific entity."
+    example:
+      roleCd: "roleCd"
+      partyName: "partyName"
+      partyId: "partyId"
+  FulfillmentOptionType:
+    type: "object"
+    properties:
+      fulfillmentOptionTypeTxt:
+        type: "string"
+        description: "MANUAL_FULFILMENT"
+    example:
+      fulfillmentOptionTypeTxt: "fulfillmentOptionTypeTxt"
+  DepositAssessedType:
+    type: "object"
+    properties:
+      depositAmt:
+        type: "number"
+        format: "double"
+      invoiceNumber:
+        type: "string"
+    example:
+      invoiceNumber: "invoiceNumber"
+      depositAmt: 0.80082819046101150206595775671303272247314453125
+  DisconnectServiceAddressType:
+    type: "object"
+    properties:
+      serviceAddressId:
+        type: "string"
+      fullAddress:
+        $ref: "#/definitions/Address"
+  OriginalCarrierInfoType:
+    type: "object"
+    properties:
+      providerId:
+        type: "string"
+      accountNumber:
+        type: "string"
+        description: "Account number of the original carrier"
+      telephoneNumber:
+        $ref: "#/definitions/TelephoneNumberType"
+      resellerName:
+        type: "string"
+      customerName:
+        $ref: "#/definitions/ClientName"
+      disconnectServiceAddress:
+        $ref: "#/definitions/DisconnectServiceAddressType"
+  DisconnectRequestType:
+    type: "object"
+    properties:
+      productServiceType:
+        type: "array"
+        description: "HSIC, TTV, SING"
+        items:
+          type: "string"
+      originalCarrierInfo:
+        $ref: "#/definitions/OriginalCarrierInfoType"
+      requestedDisconnectDate:
+        type: "string"
+        format: "date"
+  ShoppingCart:
+    type: "object"
+    properties:
+      shoppingProfile:
+        $ref: "#/definitions/ShoppingProfile"
+      note:
+        type: "array"
+        items:
+          $ref: "#/definitions/Note"
+      contactMedium:
+        type: "array"
+        items:
+          $ref: "#/definitions/ContactMedium"
+      customer:
+        $ref: "#/definitions/Customer"
+      billingAccount:
+        $ref: "#/definitions/BillingAccount"
+      serviceAddress:
+        $ref: "#/definitions/ServiceAddress"
+      cartItemList:
+        type: "array"
+        items:
+          $ref: "#/definitions/CartItem"
+      relatedParty:
+        $ref: "#/definitions/RelatedPartyRef"
+      depositAssessed:
+        $ref: "#/definitions/DepositAssessedType"
+      fulfillmentOption:
+        $ref: "#/definitions/FulfillmentOptionType"
+      cartContextTypeList:
+        type: "array"
+        description: "One of NEW, UPDATE, ALL"
+        items:
+          type: "string"
+    example:
+      note:
+      - typeCd: "typeCd"
+        authorName: "authorName"
+        noteTxt: "noteTxt"
+        createDate: "2000-01-23T04:56:07.000+00:00"
+      - typeCd: "typeCd"
+        authorName: "authorName"
+        noteTxt: "noteTxt"
+        createDate: "2000-01-23T04:56:07.000+00:00"
+      contactMedium:
+      - contactTypeCd: "contactTypeCd"
+        characteristic:
+          streetLineOneTxt: "streetLineOneTxt"
+          phoneNumber: "phoneNumber"
+          cityName: "cityName"
+          typeCd: "typeCd"
+          emailAddressId: "emailAddressId"
+          streetLineTwoTxt: "streetLineTwoTxt"
+          stateOrProvinceCd: "stateOrProvinceCd"
+          faxNumber: "faxNumber"
+          postCode: "postCode"
+          countryName: "countryName"
+        preferredInd: true
+      - contactTypeCd: "contactTypeCd"
+        characteristic:
+          streetLineOneTxt: "streetLineOneTxt"
+          phoneNumber: "phoneNumber"
+          cityName: "cityName"
+          typeCd: "typeCd"
+          emailAddressId: "emailAddressId"
+          streetLineTwoTxt: "streetLineTwoTxt"
+          stateOrProvinceCd: "stateOrProvinceCd"
+          faxNumber: "faxNumber"
+          postCode: "postCode"
+          countryName: "countryName"
+        preferredInd: true
+      cartItemList:
+      - cartItemDisconnectOrder: ""
+        cartItemGiftWithPurchase: ""
+        cartItemSalesOrder: ""
+      - cartItemDisconnectOrder: ""
+        cartItemGiftWithPurchase: ""
+        cartItemSalesOrder: ""
+      depositAssessed:
+        invoiceNumber: "invoiceNumber"
+        depositAmt: 0.80082819046101150206595775671303272247314453125
+      fulfillmentOption:
+        fulfillmentOptionTypeTxt: "fulfillmentOptionTypeTxt"
+      shoppingProfile:
+        agentProfile: ""
+        applicationProfile:
+          originatorApplicationId: "originatorApplicationId"
+        userProfile:
+          salesRepInternalId: "salesRepInternalId"
+          salesRepAssociatedOutlet:
+          - outletInternalId: "outletInternalId"
+            channelOutletId: "channelOutletId"
+          - outletInternalId: "outletInternalId"
+            channelOutletId: "channelOutletId"
+          loginId: "loginId"
+          salesPersonRoleCd: "salesPersonRoleCd"
+          channelOrganizationInternalId: "channelOrganizationInternalId"
+          outletAssociatedProvinces:
+          - "outletAssociatedProvinces"
+          - "outletAssociatedProvinces"
+          channelOrganizationTypeCd: "channelOrganizationTypeCd"
+          channelOrganizationNumber: "channelOrganizationNumber"
+          salesRepId: "salesRepId"
+      serviceAddress:
+        serviceAddressId: "serviceAddressId"
+        provinceCode: "provinceCode"
+        cityCode: "cityCode"
+      billingAccount:
+        billingAccountNumber: "billingAccountNumber"
+        accountMasterSourceTypeCd: "accountMasterSourceTypeCd"
+        accountTypeCd: "accountTypeCd"
+        accountSubTypeCd: "accountSubTypeCd"
+      relatedParty:
+        roleCd: "roleCd"
+        partyName: "partyName"
+        partyId: "partyId"
+      cartContextTypeList:
+      - "cartContextTypeList"
+      - "cartContextTypeList"
+      customer:
+        customerId: "customerId"
+  CreateShoppingCart:
+    type: "object"
+    required:
+    - "operationHeader"
+    properties:
+      operationHeader:
+        $ref: "#/definitions/OperationHeader"
+      shoppingCart:
+        $ref: "#/definitions/ShoppingCart"
+    example:
+      operationHeader:
+        salesTransactionId: "salesTransactionId"
+      shoppingCart:
+        note:
+        - typeCd: "typeCd"
+          authorName: "authorName"
+          noteTxt: "noteTxt"
+          createDate: "2000-01-23T04:56:07.000+00:00"
+        - typeCd: "typeCd"
+          authorName: "authorName"
+          noteTxt: "noteTxt"
+          createDate: "2000-01-23T04:56:07.000+00:00"
+        contactMedium:
+        - contactTypeCd: "contactTypeCd"
+          characteristic:
+            streetLineOneTxt: "streetLineOneTxt"
+            phoneNumber: "phoneNumber"
+            cityName: "cityName"
+            typeCd: "typeCd"
+            emailAddressId: "emailAddressId"
+            streetLineTwoTxt: "streetLineTwoTxt"
+            stateOrProvinceCd: "stateOrProvinceCd"
+            faxNumber: "faxNumber"
+            postCode: "postCode"
+            countryName: "countryName"
+          preferredInd: true
+        - contactTypeCd: "contactTypeCd"
+          characteristic:
+            streetLineOneTxt: "streetLineOneTxt"
+            phoneNumber: "phoneNumber"
+            cityName: "cityName"
+            typeCd: "typeCd"
+            emailAddressId: "emailAddressId"
+            streetLineTwoTxt: "streetLineTwoTxt"
+            stateOrProvinceCd: "stateOrProvinceCd"
+            faxNumber: "faxNumber"
+            postCode: "postCode"
+            countryName: "countryName"
+          preferredInd: true
+        cartItemList:
+        - cartItemDisconnectOrder: ""
+          cartItemGiftWithPurchase: ""
+          cartItemSalesOrder: ""
+        - cartItemDisconnectOrder: ""
+          cartItemGiftWithPurchase: ""
+          cartItemSalesOrder: ""
+        depositAssessed:
+          invoiceNumber: "invoiceNumber"
+          depositAmt: 0.80082819046101150206595775671303272247314453125
+        fulfillmentOption:
+          fulfillmentOptionTypeTxt: "fulfillmentOptionTypeTxt"
+        shoppingProfile:
+          agentProfile: ""
+          applicationProfile:
+            originatorApplicationId: "originatorApplicationId"
+          userProfile:
+            salesRepInternalId: "salesRepInternalId"
+            salesRepAssociatedOutlet:
+            - outletInternalId: "outletInternalId"
+              channelOutletId: "channelOutletId"
+            - outletInternalId: "outletInternalId"
+              channelOutletId: "channelOutletId"
+            loginId: "loginId"
+            salesPersonRoleCd: "salesPersonRoleCd"
+            channelOrganizationInternalId: "channelOrganizationInternalId"
+            outletAssociatedProvinces:
+            - "outletAssociatedProvinces"
+            - "outletAssociatedProvinces"
+            channelOrganizationTypeCd: "channelOrganizationTypeCd"
+            channelOrganizationNumber: "channelOrganizationNumber"
+            salesRepId: "salesRepId"
+        serviceAddress:
+          serviceAddressId: "serviceAddressId"
+          provinceCode: "provinceCode"
+          cityCode: "cityCode"
+        billingAccount:
+          billingAccountNumber: "billingAccountNumber"
+          accountMasterSourceTypeCd: "accountMasterSourceTypeCd"
+          accountTypeCd: "accountTypeCd"
+          accountSubTypeCd: "accountSubTypeCd"
+        relatedParty:
+          roleCd: "roleCd"
+          partyName: "partyName"
+          partyId: "partyId"
+        cartContextTypeList:
+        - "cartContextTypeList"
+        - "cartContextTypeList"
+        customer:
+          customerId: "customerId"
+  UpdateShoppingCart:
+    allOf:
+    - $ref: "#/definitions/CreateShoppingCart"
+    - {}
+  AccessoryOfferHeader:
+    allOf:
+    - $ref: "#/definitions/OfferHeader"
+    - properties:
+        offerTypeCd:
+          type: "string"
+  AccessoryOffer:
+    type: "object"
+    properties:
+      offerHeader:
+        $ref: "#/definitions/AccessoryOfferHeader"
+  WirelineProductWithDiscount:
+    type: "object"
+    properties:
+      productOrderType:
+        $ref: "#/definitions/ProductOrderType"
+      productTypeCode:
+        type: "string"
+      productComponents:
+        type: "array"
+        items:
+          $ref: "#/definitions/ProductItemIdentifier"
+      recontractIndicator:
+        type: "boolean"
+      contractTermCd:
+        type: "string"
+      discountProductCatalogueList:
+        type: "array"
+        items:
+          type: "string"
+  ProductOrderType:
+    type: "object"
+    properties:
+      orderTypeCd:
+        type: "string"
+      orderSubTypeCd:
+        type: "string"
+  WirelineSalesSummary:
+    type: "object"
+    properties:
+      productList:
+        type: "array"
+        items:
+          $ref: "#/definitions/WirelineProductWithDiscount"
+  AccessoryOfferFilter:
+    type: "object"
+    properties:
+      wirelineSalesSummaryList:
+        type: "array"
+        items:
+          $ref: "#/definitions/WirelineSalesSummary"
+  AccessoryOfferItem:
+    type: "object"
+    properties:
+      subscribedServices:
+        type: "array"
+        items:
+          $ref: "#/definitions/SubscribedService"
+      selectedAccessoryOffers:
+        type: "array"
+        items:
+          $ref: "#/definitions/AccessoryOffer"
+      accessoryOfferFilter:
+        type: "array"
+        items:
+          $ref: "#/definitions/AccessoryOfferFilter"
+  WirelineEquipmentType:
+    allOf:
+    - $ref: "#/definitions/SelectedProductItemBase"
+    - properties:
+        materialItemCode:
+          type: "string"
+        deliveryMethodTypeCd:
+          type: "string"
+          description: "One of INSTALLER/INSTORE/SHIPPED"
+        acquisitionType:
+          $ref: "#/definitions/EquipmentAcquisitionType"
+  AppointmentDetailType:
+    type: "object"
+    properties:
+      bookedAppointment:
+        $ref: "#/definitions/AppointmentType"
+      preferredAppointmentDates:
+        type: "array"
+        items:
+          $ref: "#/definitions/AppointmentType"
+    description: "Consumer to populate one of the two bookedAppointment or preferredAppointmentDates."
+  ProductBaseType:
+    type: "object"
+    properties:
+      productOrderType:
+        $ref: "#/definitions/ProductOrderType"
+      selectedContractTermCd:
+        type: "string"
+  DirectoryListingType:
+    type: "object"
+    properties:
+      listedInd:
+        type: "boolean"
+      nameListedInd:
+        type: "boolean"
+      addressListedInd:
+        type: "boolean"
+  PortRequestType:
+    type: "object"
+    properties:
+      portinInd:
+        type: "boolean"
+      temporaryPhoneNumberRequiredInd:
+        type: "boolean"
+  HomePhoneNumberDetailType:
+    type: "object"
+    properties:
+      telephoneNumber:
+        $ref: "#/definitions/TelephoneNumberType"
+      directoryListing:
+        $ref: "#/definitions/DirectoryListingType"
+      portRequestType:
+        $ref: "#/definitions/PortRequestType"
+  SmartRingType:
+    type: "object"
+    properties:
+      phoneNumber:
+        $ref: "#/definitions/HomePhoneNumberDetailType"
+  ProductOfferingRef:
+    type: "object"
+    properties:
+      offerHeader:
+        $ref: "#/definitions/WirelineOfferHeader"
+  ProductType:
+    allOf:
+    - $ref: "#/definitions/ProductBaseType"
+    - properties:
+        productTypeCd:
+          type: "string"
+          description: "One of HSIC, TTV, SL"
+        productCharacteristic:
+          type: "array"
+          description: "One or more of \\n CLEC_INDICATOR (Value - TRUE/ FALSE, \\\
+            n CLEC_ID (Value - Identifier of the CLEC), \\n CLEC_PHONE_NUMBER - Value\
+            \ - Phone number of the CLEC )"
+          items:
+            $ref: "#/definitions/ProductCharacteristic"
+        productCatalogItems:
+          type: "array"
+          items:
+            $ref: "#/definitions/ProductCatalogItemRef"
+        sweeteners:
+          type: "array"
+          items:
+            $ref: "#/definitions/SelectedSweetenerType"
+        appointmentDetail:
+          $ref: "#/definitions/AppointmentDetailType"
+        winbackInd:
+          type: "boolean"
+        equipments:
+          type: "array"
+          items:
+            $ref: "#/definitions/WirelineEquipmentType"
+        phoneNumber:
+          $ref: "#/definitions/HomePhoneNumberDetailType"
+        smartRingPhoneList:
+          type: "array"
+          items:
+            $ref: "#/definitions/SmartRingType"
+  CartItemRef:
+    type: "object"
+    properties:
+      cartItemId:
+        type: "string"
+        description: "Unique identifier of the channel"
+    description: "CartIIem reference. A CartItem is an identified part of the shopping\
+      \ cart."
+  CartItemRelationship:
+    type: "object"
+    properties:
+      cartItemId:
+        type: "string"
+      type:
+        type: "string"
+        description: "Type of the order item relationship"
+      cartItem:
+        type: "array"
+        items:
+          $ref: "#/definitions/CartItemRef"
+    description: "Relationship among cart items mainly other than hierarchical relationships\
+      \ such as \"RelyOn\", \"DependentOn\", \"Shipping\" etc."
+  CartItemBase:
+    type: "object"
+    properties:
+      actionCd:
+        type: "string"
+        description: "One of ADD, MODIFY."
+      cartItemId:
+        type: "string"
+        description: "Assigned when created. Consumer shall pass the identifier generated\
+          \ to update the cart item, once the cart item is created."
+      cartItemRelationId:
+        type: "string"
+        description: "Consumer to pass a relation id. This can be a sequence of the\
+          \ cart items created under a cart. Shall be unique for each cart item in\
+          \ the cart. Consumer can drop this relation id, once the cartItemId is generated,\
+          \ and consumer has access to it."
+      existingServiceIdentifier:
+        type: "array"
+        items:
+          $ref: "#/definitions/SubscribedService"
+      cartItemContextTypeList:
+        type: "array"
+        description: "One or more or EQUIPMENT, OFFER, ADDON, PROMOTION, SWEETENER"
+        items:
+          type: "string"
+      cartItemRelationship:
+        type: "array"
+        items:
+          $ref: "#/definitions/CartItemRelationship"
+  ShipmentDetailType:
+    type: "object"
+    properties:
+      shipmentAddress:
+        $ref: "#/definitions/ShipmentAddressType"
+  PerkProductType:
+    type: "object"
+    properties:
+      mobilityProductPerk:
+        $ref: "#/definitions/MobilityProductPerk"
+  SalesOrderItemPerk:
+    allOf:
+    - $ref: "#/definitions/CartItemSalesOrderItemBase"
+    - properties:
+        linkedAccountSummary:
+          $ref: "#/definitions/LinkedAccountSummary"
+        perkOffer:
+          $ref: "#/definitions/PerkOfferHeader"
+        perkProductType:
+          $ref: "#/definitions/PerkProductType"
+  CartItemSalesOrderItemBase:
+    type: "object"
+    properties:
+      itemTypeCd:
+        type: "string"
+        description: "One of EW, ACCESSORY, SALES_PERK"
+  CartItemSalesOrderItem:
+    type: "object"
+    properties:
+      salesOrderItemPerk:
+        $ref: "#/definitions/SalesOrderItemPerk"
+  CartItemSalesOrder:
+    allOf:
+    - $ref: "#/definitions/CartItemBase"
+    - properties:
+        productMarketOffering:
+          $ref: "#/definitions/ProductOfferingRef"
+        product:
+          type: "array"
+          items:
+            $ref: "#/definitions/ProductType"
+        shipmentDetail:
+          $ref: "#/definitions/ShipmentDetailType"
+        relatedPromotionList:
+          type: "array"
+          items:
+            $ref: "#/definitions/RelatedImmediatePromotion"
+  CartItemDisconnectOrder:
+    allOf:
+    - $ref: "#/definitions/CartItemBase"
+    - properties:
+        disconnectRequestList:
+          type: "array"
+          items:
+            $ref: "#/definitions/DisconnectRequestType"
+  CartItemGiftWithPurchase:
+    allOf:
+    - $ref: "#/definitions/CartItemBase"
+    - properties:
+        selectedAccessoryOffers:
+          type: "array"
+          items:
+            $ref: "#/definitions/AccessoryOffer"
+        shipmentDetail:
+          $ref: "#/definitions/ShipmentDetailType"
+        relatedPromotionList:
+          type: "array"
+          items:
+            $ref: "#/definitions/RelatedImmediatePromotion"
+  LinkedAccountSummary:
+    type: "object"
+    properties:
+      linkedBillingAccount:
+        $ref: "#/definitions/BillingAccount"
+      accountStatusCd:
+        type: "string"
+        description: "One of T - Tentative, O - Open,,C - Cancelled,1 - First Closing,2\
+          \ - Second Closing,3 - Third Closing,4 - Fourth Closing,I - Inactive,L -\
+          \ Closed,U - Unknown.,B - Unknown - NULL in source system,A - Active,S -\
+          \ Suspended"
+      billingAccountAuthenticatedInd:
+        type: "boolean"
+        description: "TRUE: linked account which receives perk is authenticated FALSE:\
+          \ linked account which receives perk is NOT authenticated"
+      newAccountAssociationInd:
+        type: "boolean"
+        description: "TRUE:  this is new account to be associated FALSE: this is existing\
+          \ account. not to be (re)associated during perk fulfillment"
+      wirelineProductTypeList:
+        type: "array"
+        items:
+          type: "string"
+          description: "Existing FFH product type list"
+  CartItem:
+    type: "object"
+    properties:
+      cartItemSalesOrder:
+        $ref: "#/definitions/CartItemSalesOrder"
+      cartItemDisconnectOrder:
+        $ref: "#/definitions/CartItemDisconnectOrder"
+      cartItemGiftWithPurchase:
+        $ref: "#/definitions/CartItemGiftWithPurchase"
+    description: "One of the objects at any given time. Is a choice."
+    example:
+      cartItemDisconnectOrder: ""
+      cartItemGiftWithPurchase: ""
+      cartItemSalesOrder: ""
+  CreateCartItem:
+    type: "object"
+    properties:
+      operationHeader:
+        $ref: "#/definitions/OperationHeader"
+      cartItem:
+        $ref: "#/definitions/CartItem"
+    example:
+      operationHeader:
+        salesTransactionId: "salesTransactionId"
+      cartItem:
+        cartItemDisconnectOrder: ""
+        cartItemGiftWithPurchase: ""
+        cartItemSalesOrder: ""
+  CartValidationResult:
+    type: "object"
+    properties:
+      validIndicator:
+        type: "boolean"
+      validationResponseMessages:
+        type: "array"
+        items:
+          $ref: "#/definitions/OrderResponseMessage"
+  ShoppingCartResponse:
+    type: "object"
+    properties:
+      shoppingCartId:
+        type: "string"
+      schemaTypeCd:
+        type: "string"
+      shoppingCart:
+        $ref: "#/definitions/ShoppingCart"
+      responseMessages:
+        type: "array"
+        items:
+          $ref: "#/definitions/ResponseMessage"
+    example:
+      shoppingCart:
+        note:
+        - typeCd: "typeCd"
+          authorName: "authorName"
+          noteTxt: "noteTxt"
+          createDate: "2000-01-23T04:56:07.000+00:00"
+        - typeCd: "typeCd"
+          authorName: "authorName"
+          noteTxt: "noteTxt"
+          createDate: "2000-01-23T04:56:07.000+00:00"
+        contactMedium:
+        - contactTypeCd: "contactTypeCd"
+          characteristic:
+            streetLineOneTxt: "streetLineOneTxt"
+            phoneNumber: "phoneNumber"
+            cityName: "cityName"
+            typeCd: "typeCd"
+            emailAddressId: "emailAddressId"
+            streetLineTwoTxt: "streetLineTwoTxt"
+            stateOrProvinceCd: "stateOrProvinceCd"
+            faxNumber: "faxNumber"
+            postCode: "postCode"
+            countryName: "countryName"
+          preferredInd: true
+        - contactTypeCd: "contactTypeCd"
+          characteristic:
+            streetLineOneTxt: "streetLineOneTxt"
+            phoneNumber: "phoneNumber"
+            cityName: "cityName"
+            typeCd: "typeCd"
+            emailAddressId: "emailAddressId"
+            streetLineTwoTxt: "streetLineTwoTxt"
+            stateOrProvinceCd: "stateOrProvinceCd"
+            faxNumber: "faxNumber"
+            postCode: "postCode"
+            countryName: "countryName"
+          preferredInd: true
+        cartItemList:
+        - cartItemDisconnectOrder: ""
+          cartItemGiftWithPurchase: ""
+          cartItemSalesOrder: ""
+        - cartItemDisconnectOrder: ""
+          cartItemGiftWithPurchase: ""
+          cartItemSalesOrder: ""
+        depositAssessed:
+          invoiceNumber: "invoiceNumber"
+          depositAmt: 0.80082819046101150206595775671303272247314453125
+        fulfillmentOption:
+          fulfillmentOptionTypeTxt: "fulfillmentOptionTypeTxt"
+        shoppingProfile:
+          agentProfile: ""
+          applicationProfile:
+            originatorApplicationId: "originatorApplicationId"
+          userProfile:
+            salesRepInternalId: "salesRepInternalId"
+            salesRepAssociatedOutlet:
+            - outletInternalId: "outletInternalId"
+              channelOutletId: "channelOutletId"
+            - outletInternalId: "outletInternalId"
+              channelOutletId: "channelOutletId"
+            loginId: "loginId"
+            salesPersonRoleCd: "salesPersonRoleCd"
+            channelOrganizationInternalId: "channelOrganizationInternalId"
+            outletAssociatedProvinces:
+            - "outletAssociatedProvinces"
+            - "outletAssociatedProvinces"
+            channelOrganizationTypeCd: "channelOrganizationTypeCd"
+            channelOrganizationNumber: "channelOrganizationNumber"
+            salesRepId: "salesRepId"
+        serviceAddress:
+          serviceAddressId: "serviceAddressId"
+          provinceCode: "provinceCode"
+          cityCode: "cityCode"
+        billingAccount:
+          billingAccountNumber: "billingAccountNumber"
+          accountMasterSourceTypeCd: "accountMasterSourceTypeCd"
+          accountTypeCd: "accountTypeCd"
+          accountSubTypeCd: "accountSubTypeCd"
+        relatedParty:
+          roleCd: "roleCd"
+          partyName: "partyName"
+          partyId: "partyId"
+        cartContextTypeList:
+        - "cartContextTypeList"
+        - "cartContextTypeList"
+        customer:
+          customerId: "customerId"
+      schemaTypeCd: "schemaTypeCd"
+      shoppingCartId: "shoppingCartId"
+      responseMessages:
+      - shoppingCartIdentifier:
+          cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        errorCode: "errorCode"
+        messageTypeCd: "messageTypeCd"
+        messages:
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        contextDataAttributes:
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+      - shoppingCartIdentifier:
+          cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        errorCode: "errorCode"
+        messageTypeCd: "messageTypeCd"
+        messages:
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        contextDataAttributes:
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+  ShoppingCartErrorResponse:
+    type: "object"
+    properties:
+      shoppingCartIdentifier:
+        $ref: "#/definitions/ShoppingCartIdentifier"
+      responseMessages:
+        type: "array"
+        items:
+          $ref: "#/definitions/ResponseMessage"
+  CartItemResponse:
+    type: "object"
+    properties:
+      cartItemId:
+        type: "string"
+      schemaTypeCd:
+        type: "string"
+      salesIdentifier:
+        $ref: "#/definitions/ShoppingCartIdentifier"
+      responseMessages:
+        type: "array"
+        items:
+          $ref: "#/definitions/ResponseMessage"
+    example:
+      salesIdentifier:
+        salesTransactionId: "salesTransactionId"
+        cartItemIdentifier:
+        - cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        - cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        shoppingCartId: "shoppingCartId"
+      schemaTypeCd: "schemaTypeCd"
+      cartItemId: "cartItemId"
+      responseMessages:
+      - shoppingCartIdentifier:
+          cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        errorCode: "errorCode"
+        messageTypeCd: "messageTypeCd"
+        messages:
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        contextDataAttributes:
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+      - shoppingCartIdentifier:
+          cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        errorCode: "errorCode"
+        messageTypeCd: "messageTypeCd"
+        messages:
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        contextDataAttributes:
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+  SubmitSalesToPOSRequest:
+    type: "object"
+    required:
+    - "operationHeader"
+    - "shoppingCartId"
+    properties:
+      operationHeader:
+        $ref: "#/definitions/OperationHeader"
+      shoppingCartId:
+        type: "string"
+        description: "Identifier for the ESS Shopping cart ID. This is a mandatory\
+          \ in the request body."
+      pointOfSaleIdentifier:
+        $ref: "#/definitions/PointOfSaleIdentifier"
+    description: "Submit Sale To Point of sale"
+    example:
+      pointOfSaleIdentifier:
+        tokenCd: "tokenCd"
+      operationHeader:
+        salesTransactionId: "salesTransactionId"
+      shoppingCartId: "shoppingCartId"
+  FulfillmentActionType:
+    type: "object"
+    properties:
+      completeSaleInd:
+        type: "boolean"
+    example:
+      completeSaleInd: true
+  UpdateSaleRequest:
+    type: "object"
+    required:
+    - "operationHeader"
+    properties:
+      operationHeader:
+        $ref: "#/definitions/OperationHeader"
+      fulfillmentAction:
+        $ref: "#/definitions/FulfillmentActionType"
+    example:
+      fulfillmentAction:
+        completeSaleInd: true
+      operationHeader:
+        salesTransactionId: "salesTransactionId"
+  SubmitSalesRequest:
+    type: "object"
+    required:
+    - "operationHeader"
+    - "shoppingCartId"
+    properties:
+      operationHeader:
+        $ref: "#/definitions/OperationHeader"
+      shoppingCartId:
+        type: "string"
+        description: "Identifier for the ESS Shopping cart ID. This is a mandatory\
+          \ in the request body."
+    example:
+      operationHeader:
+        salesTransactionId: "salesTransactionId"
+      shoppingCartId: "shoppingCartId"
+  SubmitSalesToPOSResponse:
+    type: "object"
+    properties:
+      shoppingCartIdentifier:
+        $ref: "#/definitions/ShoppingCartIdentifier"
+      responseMessages:
+        type: "array"
+        items:
+          $ref: "#/definitions/ResponseMessage"
+    example:
+      shoppingCartIdentifier:
+        salesTransactionId: "salesTransactionId"
+        cartItemIdentifier:
+        - cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        - cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        shoppingCartId: "shoppingCartId"
+      responseMessages:
+      - shoppingCartIdentifier:
+          cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        errorCode: "errorCode"
+        messageTypeCd: "messageTypeCd"
+        messages:
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        contextDataAttributes:
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+      - shoppingCartIdentifier:
+          cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        errorCode: "errorCode"
+        messageTypeCd: "messageTypeCd"
+        messages:
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        - messageTxt: "messageTxt"
+          localeCd: "localeCd"
+        contextDataAttributes:
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+        - attributeTypeTxt: "attributeTypeTxt"
+          attributeValueTxt: "attributeValueTxt"
+  UpdateSaleResponse:
+    type: "object"
+    properties:
+      saleIdentifier:
+        $ref: "#/definitions/ShoppingCartIdentifier"
+      status:
+        $ref: "#/definitions/SaleStatus"
+    example:
+      saleIdentifier:
+        salesTransactionId: "salesTransactionId"
+        cartItemIdentifier:
+        - cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        - cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        shoppingCartId: "shoppingCartId"
+      status:
+        statusCd: "statusCd"
+  SubmitSalesResponse:
+    type: "object"
+    properties:
+      shoppingCartIdentifier:
+        $ref: "#/definitions/ShoppingCartIdentifier"
+      status:
+        $ref: "#/definitions/SaleStatus"
+    example:
+      shoppingCartIdentifier:
+        salesTransactionId: "salesTransactionId"
+        cartItemIdentifier:
+        - cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        - cartItemRelationId: "cartItemRelationId"
+          shoppingCartId: "shoppingCartId"
+          cartItemId: "cartItemId"
+        shoppingCartId: "shoppingCartId"
+      status:
+        statusCd: "statusCd"
+  SubmitSalesToPOSErrorResponse:
+    allOf:
+    - $ref: "#/definitions/ResponseBase"
+    - properties:
+        shoppingCartIdentifier:
+          $ref: "#/definitions/ShoppingCartIdentifier"
+  SubmitSalesErrorResponse:
+    allOf:
+    - $ref: "#/definitions/ResponseBase"
+    - properties:
+        shoppingCartIdentifier:
+          $ref: "#/definitions/ShoppingCartIdentifier"
+        status:
+          $ref: "#/definitions/SaleStatus"
+  UpdateSaleErrorResponse:
+    allOf:
+    - $ref: "#/definitions/ResponseBase"
+    - properties:
+        shoppingCartIdentifier:
+          $ref: "#/definitions/ShoppingCartIdentifier"
+        status:
+          $ref: "#/definitions/SaleStatus"
+  SaleStatus:
+    type: "object"
+    properties:
+      statusCd:
+        type: "string"
+        description: "Overall cart status"
+    example:
+      statusCd: "statusCd"
+  ProductCatalogItemRef:
+    type: "object"
+    properties:
+      productCatalogueIdentifier:
+        $ref: "#/definitions/ProductItemIdentifier"
+      productItemCharacteristic:
+        type: "array"
+        description: "One or more of \\n ACTION_CD (Value: One of ADD, REMOVE, NO_CHANGE.\
+          \ Default value is NO_CHANGE if product item not passed \\n MARKET_OFFER_CLASSIFICATION,\
+          \ valud (One of PRODUCT_COMPONENT, ADD_ON, DISCOUNT, SWEETENER, CALLING_FEATURE)\
+          \ \\n DISCOUNT_CODE (Value - Discount code of the discount, if the item\
+          \ type is a discount. One or more can have the same discount code)"
+        items:
+          $ref: "#/definitions/ProductCharacteristic"
+  SelectedSweetenerType:
+    type: "object"
+    properties:
+      productOffering:
+        $ref: "#/definitions/WirelineOfferHeader"
+      productCatalogItems:
+        type: "array"
+        description: "Discount associated with the product offering. One discount\
+          \ code could have multiple product catalog item associated"
+        items:
+          $ref: "#/definitions/ProductCatalogItemRef"
+      relatedPromotionList:
+        type: "array"
+        items:
+          $ref: "#/definitions/RelatedImmediatePromotion"
+    description: "Sweeterner with product offering and the associated discount product\
+      \ catalogue item"
+  ResponseBase:
+    type: "object"
+    properties:
+      responseMessages:
+        type: "array"
+        items:
+          $ref: "#/definitions/ResponseMessage"
+  ResponseMessage:
+    type: "object"
+    properties:
+      errorCode:
+        type: "string"
+      messageTypeCd:
+        type: "string"
+      messages:
+        type: "array"
+        items:
+          $ref: "#/definitions/MessageType"
+      contextDataAttributes:
+        type: "array"
+        items:
+          $ref: "#/definitions/ContextAttribute"
+      shoppingCartIdentifier:
+        $ref: "#/definitions/CartItemIdentifier"
+    example:
+      shoppingCartIdentifier:
+        cartItemRelationId: "cartItemRelationId"
+        shoppingCartId: "shoppingCartId"
+        cartItemId: "cartItemId"
+      errorCode: "errorCode"
+      messageTypeCd: "messageTypeCd"
+      messages:
+      - messageTxt: "messageTxt"
+        localeCd: "localeCd"
+      - messageTxt: "messageTxt"
+        localeCd: "localeCd"
+      contextDataAttributes:
+      - attributeTypeTxt: "attributeTypeTxt"
+        attributeValueTxt: "attributeValueTxt"
+      - attributeTypeTxt: "attributeTypeTxt"
+        attributeValueTxt: "attributeValueTxt"
+  MessageType:
+    type: "object"
+    properties:
+      messageTxt:
+        type: "string"
+      localeCd:
+        type: "string"
+    example:
+      messageTxt: "messageTxt"
+      localeCd: "localeCd"
+  ContextAttribute:
+    type: "object"
+    properties:
+      attributeTypeTxt:
+        type: "string"
+      attributeValueTxt:
+        type: "string"
+    example:
+      attributeTypeTxt: "attributeTypeTxt"
+      attributeValueTxt: "attributeValueTxt"
+  CartItemIdentifier:
+    type: "object"
+    properties:
+      shoppingCartId:
+        type: "string"
+      cartItemId:
+        type: "string"
+      cartItemRelationId:
+        type: "string"
+      cartItemIdentifier:
+        $ref: "#/definitions/CartItemIdentifier"
+    example:
+      cartItemRelationId: "cartItemRelationId"
+      shoppingCartId: "shoppingCartId"
+      cartItemId: "cartItemId"
+  Address:
+    allOf:
+    - $ref: "#/definitions/GeoSpatialType"
+    - properties:
+        addressId:
+          type: "string"
+        addressTypeCode:
+          type: "string"
+        additionalAddressInformationList:
+          type: "array"
+          items:
+            type: "string"
+        renderedAddressList:
+          type: "array"
+          items:
+            type: "string"
+        addressAssignmentId:
+          type: "string"
+        addressNumberPrefixTxt:
+          type: "string"
+        addressAssignmentTypeCd:
+          type: "string"
+        addressAssignmentSubTypeCd:
+          type: "string"
+        addressMatchingStatusCd:
+          type: "string"
+        addressSearchTxt:
+          type: "string"
+        countryCode:
+          type: "string"
+        emailAddressTxt:
+          type: "string"
+        externalAddressId:
+          type: "string"
+        externalAddressSourceId:
+          type: "string"
+        externalServiceAddressId:
+          type: "string"
+        mailingTypeCode:
+          type: "string"
+        municipalityName:
+          type: "string"
+        postalZipCode:
+          type: "string"
+        provinceStateCode:
+          type: "string"
+        relatedAddressAssignmentId:
+          type: "string"
+        streetDirectionSuffixCd:
+          type: "string"
+        streetDirectionPrefixCd:
+          type: "string"
+        streetNumber:
+          type: "string"
+        streetName:
+          type: "string"
+        streetNamePreModifierText:
+          type: "string"
+        streetNamePostModifierText:
+          type: "string"
+        streetTypeSuffixCd:
+          type: "string"
+        streetTypePrefixCd:
+          type: "string"
+        unitNumber:
+          type: "string"
+        unitName:
+          type: "string"
+        unitTypeCode:
+          type: "string"
+        buildingTypeCd:
+          type: "string"
+        buildingName:
+          type: "string"
+        validateAddressIndicator:
+          type: "boolean"
+        canadaPostBuildName:
+          type: "string"
+        canadaPostLocationnName:
+          type: "string"
+        canadaPostRecordTypeCode:
+          type: "string"
+        careOfTxt:
+          type: "string"
+        civicNumber:
+          type: "string"
+        civicNumberSuffixTxt:
+          type: "string"
+        postOfficeBoxNumber:
+          type: "string"
+        ruralRouteNumber:
+          type: "string"
+        ruralRouteTypeCode:
+          type: "string"
+        stationAreaName:
+          type: "string"
+        stationQualifierCd:
+          type: "string"
+        stationTypeCode:
+          type: "string"
+        floorTypeCd:
+          type: "string"
+        floorName:
+          type: "string"
+        landmarkName:
+          type: "string"
+        placeName:
+          type: "string"
+        lastUpdateTimestamp:
+          type: "string"
+          format: "date-time"
+  GeoSpatialType:
+    type: "object"
+    properties:
+      xCoordinateId:
+        type: "string"
+      yCoordinateId:
+        type: "string"
+      geocodingcalculationMethodCode:
+        type: "string"
+      geocodingMatchTypeCode:
+        type: "string"
+      confidenceLevelCode:
+        type: "string"
+  ClientName:
+    type: "object"
+    properties:
+      firstName:
+        type: "string"
+      lastName:
+        type: "string"
+  BillingAccount:
+    type: "object"
+    properties:
+      billingAccountNumber:
+        type: "string"
+      accountTypeCd:
+        type: "string"
+      accountSubTypeCd:
+        type: "string"
+      accountMasterSourceTypeCd:
+        type: "string"
+        description: "KB (130), ENABLER (1001)"
+    example:
+      billingAccountNumber: "billingAccountNumber"
+      accountMasterSourceTypeCd: "accountMasterSourceTypeCd"
+      accountTypeCd: "accountTypeCd"
+      accountSubTypeCd: "accountSubTypeCd"
+  OperationHeader:
+    type: "object"
+    properties:
+      salesTransactionId:
+        type: "string"
+    example:
+      salesTransactionId: "salesTransactionId"
+  OfferHeader:
+    type: "object"
+    properties:
+      offerId:
+        type: "string"
+        format: "int64"
+      offerCode:
+        type: "string"
+      offerPromotionCode:
+        type: "string"
+        description: "Promo code published for the offer"
+      offerProgramId:
+        type: "string"
+      systemId:
+        type: "string"
+      perspectiveDate:
+        type: "string"
+        format: "date-time"
+  ProductItemIdentifier:
+    type: "object"
+    properties:
+      productCatalogueId:
+        type: "string"
+      parentProductCatalogueId:
+        type: "string"
+  SelectedProductItemBase:
+    type: "object"
+    properties:
+      actionCd:
+        type: "string"
+        description: "One of ADD, REMOVE, NO_CHANGE. Default value is NO_CHANGE if\
+          \ product item not passed"
+      productCatalogueIdentifier:
+        $ref: "#/definitions/ProductItemIdentifier"
+  EquipmentAcquisitionType:
+    type: "object"
+    properties:
+      buyIndicator:
+        type: "boolean"
+      customerOwnedIndicator:
+        type: "boolean"
+      rentalEquipmentIndicator:
+        type: "boolean"
+    description: "One of the three indicators can be marked as true at a given time."
+  AppointmentType:
+    allOf:
+    - $ref: "#/definitions/AppointmentTypeBase"
+    - properties:
+        appointmentId:
+          type: "string"
+  AppointmentTypeBase:
+    type: "object"
+    properties:
+      timeZoneCd:
+        type: "string"
+      appointmentDate:
+        type: "string"
+        format: "date"
+        description: "The date selected by the customer to book installation appointment."
+      appointmentTimeSlot:
+        $ref: "#/definitions/AppointmentTimeSlot"
+  AppointmentTimeSlot:
+    type: "object"
+    properties:
+      startTime:
+        type: "string"
+      endTime:
+        type: "string"
+  TelephoneNumberType:
+    type: "object"
+    properties:
+      phoneNumberTypeCd:
+        type: "string"
+        description: "One of WLS, WLN, WLN_PRIMARY, WLN_SMART_RING"
+      phoneNumber:
+        type: "integer"
+        format: "int64"
+  WirelineOfferHeader:
+    allOf:
+    - $ref: "#/definitions/OfferHeader"
+  ShipmentAddressType:
+    allOf:
+    - $ref: "#/definitions/Address"
+  MobilityProductPerk:
+    type: "object"
+    properties:
+      billCreditList:
+        type: "array"
+        items:
+          $ref: "#/definitions/MobilityBillCreditType"
+      billDiscountPlan:
+        type: "array"
+        items:
+          $ref: "#/definitions/MobilityBillDiscountPlanType"
+      serviceList:
+        type: "array"
+        items:
+          $ref: "#/definitions/MobilityServiceType"
+  MobilityBillCreditType:
+    type: "object"
+    properties:
+      creditReasonCode:
+        type: "string"
+      creditReverseReasonCode:
+        type: "string"
+      creditAmt:
+        type: "number"
+        format: "double"
+      recurringCount:
+        type: "integer"
+        format: "int64"
+      immediateBalanceImpactInd:
+        type: "boolean"
+      deviceBalanceRelatedInd:
+        type: "boolean"
+      activationPortInInd:
+        type: "boolean"
+  MobilityBillDiscountPlanType:
+    type: "object"
+    properties:
+      discountCd:
+        type: "string"
+      discountDescription:
+        $ref: "#/definitions/DiscountDescriptionType"
+      discountTypeCd:
+        type: "string"
+      discountAmt:
+        type: "number"
+        format: "double"
+      discountMonthCount:
+        type: "integer"
+      discountGroupCdList:
+        type: "array"
+        items:
+          type: "string"
+  DiscountDescriptionType:
+    type: "object"
+    properties:
+      descriptionList:
+        type: "array"
+        items:
+          $ref: "#/definitions/MultilingualText"
+  MultilingualText:
+    type: "object"
+    properties:
+      localeTxt:
+        type: "string"
+        description: "EN, FR"
+      valueTxt:
+        type: "string"
+  MobilityServiceType:
+    type: "object"
+    properties:
+      serviceCd:
+        type: "string"
+      serviceDescriptionList:
+        type: "array"
+        items:
+          $ref: "#/definitions/MultilingualText"
+  PerkOfferHeader:
+    allOf:
+    - $ref: "#/definitions/OfferHeader"
+  ShoppingCartIdentifier:
+    type: "object"
+    properties:
+      salesTransactionId:
+        type: "string"
+      shoppingCartId:
+        type: "string"
+      cartItemIdentifier:
+        type: "array"
+        items:
+          $ref: "#/definitions/CartItemIdentifier"
+    example:
+      salesTransactionId: "salesTransactionId"
+      cartItemIdentifier:
+      - cartItemRelationId: "cartItemRelationId"
+        shoppingCartId: "shoppingCartId"
+        cartItemId: "cartItemId"
+      - cartItemRelationId: "cartItemRelationId"
+        shoppingCartId: "shoppingCartId"
+        cartItemId: "cartItemId"
+      shoppingCartId: "shoppingCartId"
+  PointOfSaleIdentifier:
+    type: "object"
+    properties:
+      tokenCd:
+        type: "string"
+    example:
+      tokenCd: "tokenCd"
+  RelatedImmediatePromotion:
+    type: "object"
+    properties:
+      id:
+        type: string
+        description: |
+          The instance ID of the related immediate promotion
+      itemQualificationType:
+        type: string
+        description: |
+          The type of the qualification result for the item - trigger or benefit
+      itemStatus:
+        type: string
+        description: |
+          status os the promotion can be add, revoke or keep
+      perspectiveDate:
+        type: string
+        format: date-time
+      selectedCoupon:
+        $ref: '#/definitions/SelectedCoupon'
+
+  SelectedCoupon:
+    type: object
+    properties:
+      id:
+        type: string
+      perspectiveDate:
+        type: string
+        format: date-time  
+      validationCode:
+        type: string
+        description: 'validation code to redeem the coupon'

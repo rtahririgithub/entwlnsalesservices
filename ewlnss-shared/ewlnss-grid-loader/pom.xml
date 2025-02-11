@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Application.Complete -->
+
+	<parent>
+		<groupId>telus.csm.ewlnss-shared</groupId>
+		<artifactId>pom-ewlnss-shared</artifactId>
+		<version>v1</version>
+	</parent>
+
+	<artifactId>ewlnss-grid-loader</artifactId>
+	<name>telus-csm-wirelineOffer-loader</name>
+	<version>2019.03-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<build>
+		<finalName>${project.name}-${target.version}</finalName>
+		<!--<pluginManagement>-->
+		<plugins>
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>maven-replacer-plugin</artifactId>
+				<version>1.4.1</version>
+				<executions>
+					<execution>
+						<id>inject build label and build date</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<file>target/classes/META-INF/wlnGridLoader.version</file>
+					<replacements>
+						<replacement>
+							<token>@@BUILDLABEL@@</token>
+							<value>${label}</value>
+						</replacement>
+						<replacement>
+							<token>@@BUILDDATE@@</token>
+							<value>${cctimestamp}</value>
+						</replacement>
+					</replacements>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>install</phase>
+						<configuration>
+							<target>
+								<copy file="target/${project.name}-v1.jar" tofile="../../app-config/wireless/jar/${project.name}-v1.jar"/>
+							</target>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<!--</pluginManagement>-->
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>weblogic.1035</groupId>
+			<artifactId>weblogic</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>thirdparty.coherence</groupId>
+			<artifactId>coherence</artifactId>
+			<version>3.7.1.6</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.sf.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>2.0</version>
+		</dependency>
+	</dependencies>
+</project>

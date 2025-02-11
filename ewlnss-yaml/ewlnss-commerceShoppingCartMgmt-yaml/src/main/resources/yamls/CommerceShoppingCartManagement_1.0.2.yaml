@@ -1,0 +1,3363 @@
+---
+swagger: "2.0"
+info:
+  description: |
+    This API manages shopping cart resources, enabling the retrieval of shopping carts with their items, prices, total price, related party, notes, channel, and configuration of those items. It also enables adding, deleting, and modifying items in the cart and deleting the shopping cart.
+     ###### TMF663_Shopping_Cart_API_REST_Specification_R18.0.2
+  version: 1.0.2
+  title: CommerceShoppingCartManagementRESTSvc
+host: shome2bussvc-channelsales-dv103.tsl.telus.com
+basePath: /v1/mso/channelsalesmgmt/commerce-shopping-cart-management-service
+tags:
+- name: shoppingCart
+- name: cartItem
+schemes:
+- https
+paths:
+  /shoppingCart:
+    post:
+      tags:
+      - shoppingCart
+      summary: Create shopping cart
+      description: "This service creates a shopping cart with one or more item.\n  ##### TMF Open API compliant\n  **Mandatory&#58;**\n  - productOffering (for add action)\n  - cartItem.action (if cartItems is added)\n  \n  **Readonly&#58;**\n  - cartItem.characteristicMetadata\n  \n  **Business rules&#58;**\n  - modifyReason (action must match cartItem.action)\n  - relatedParty (if exist than only 1 relatedRarty with role = Customer, and Customer status is Active)\n  - cartItem (if cartItem populated id and action should be populated if this != add action)\n\n  **Reference value&#58;**\n  - action (ProductOfferingConfiguration.allowedAction)\n  - modifyReason.name (ProductOfferingConfiguration.allowedAction.reason)\n  - channel (ApplicationContext)\n  - relatedParty.role = Customer (Configuration.relatedPartyCustomerRole)\n  - relatedParty status Active (Configuration.customerValidatorValidStatusValues)\n"
+      operationId: createShoppingCart
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: transactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      - name: mask
+        in: query
+        description: |
+          A mask is a set of flags that impact the returned fields.
+          The supported values are&#58;
+            - returnAttachments - Once set, the API returns additional attachment information for the product offering and product offering terms.
+            - returnStockInformation - Once set, the stock availability information is retrieved from the stock management system.
+          <i>Example&#58; mask=returnAttachments,returnStockInformation</i>
+        required: false
+        type: string
+      - in: body
+        name: ShoppingCart
+        description: |
+          This operation creates a shopping cart with one or more shopping cart items.
+        required: true
+        schema:
+          $ref: '#/definitions/ShoppingCart'
+      responses:
+        201:
+          description: |
+            *Created* - The shopping cart was created successfully.
+          schema:
+            $ref: '#/definitions/ShoppingCart'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: |
+            *Unprocessable Entity* - The server understands the content type of the request entity, and the syntax of the request entity is correct, but was unable to process the contained instructions.
+          schema:
+            $ref: '#/definitions/ValidationError'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+      x-dox-Microservice: ShoppingCartMS
+      x-amdocs:
+        public-roles:
+        - D1_ShoppingCart_create
+  /shoppingCart/{shoppingCartId}:
+    get:
+      tags:
+      - shoppingCart
+      summary: Retrieve a shopping cart
+      description: |
+        This service retrieves a shopping cart according to its ID.
+        ###### TMF Open API complaint
+      operationId: getShoppingCart
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: transactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: shoppingCartId
+        in: path
+        description: |
+          The ID of the shopping cart
+        required: true
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      - name: mask
+        in: query
+        description: |
+          A mask is a set of flags that impact the returned fields.
+          The supported values are&#58;
+            - returnAttachments - Once set, the API returns additional attachment information for the product offering and product offering terms.
+            - returnStockInformation - Once set, the stock availability information is retrieved from the stock management system.
+          <i>Example&#58; mask=returnAttachments,returnStockInformation</i>
+        required: false
+        type: string
+      responses:
+        200:
+          description: |
+            *OK* - The shopping cart was retrieved successfully.
+          schema:
+            $ref: '#/definitions/ShoppingCart'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+      x-dox-Microservice: ShoppingCartMS
+      x-amdocs:
+        public-roles:
+        - D1_ShoppingCart_retreive
+    delete:
+      tags:
+      - shoppingCart
+      summary: Delete a shopping cart
+      description: |
+        This operation deletes a product order entity.
+        ###### TMF Open API compliant
+      operationId: deleteProductOrder
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: transactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: shoppingCartId
+        in: path
+        description: |
+          The ID of the shopping cart
+        required: true
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      - name: If-Match
+        in: header
+        description: "The If-Match HTTP request header makes the request conditional. \nFor GET and HEAD methods, the server will send back the requested resource only if it matches one of the listed ETags. \nFor PUT and other non-safe methods, it will only upload the resource in this case\n"
+        required: true
+        type: string
+      responses:
+        200:
+          description: |
+            *OK* - The product order was deleted successfully.
+          schema:
+            $ref: '#/definitions/ShoppingCart'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: |
+            *Conflict* - The server cannot complete the request due to a conflict
+            with the current state of the resource.
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+      x-dox-Microservice: ShoppingCartMS
+      x-dox-NotImplemented: true
+      x-amdocs:
+        public-roles:
+        - D1_ShoppingCart_delete
+    patch:
+      tags:
+      - shoppingCart
+      summary: Patch a shopping cart
+      description: |
+        This operation allows partial updates of a shopping cart entity, including fields only at the shopping-cart level.
+        ###### TMF Open API compliant
+        **Patchable elements&#58;**
+        - cartItem without prices
+      operationId: patchShoppingCart
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: transactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: shoppingCartId
+        in: path
+        description: |
+          The ID of the shopping cart
+        required: true
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      - name: mask
+        in: query
+        description: |
+          A mask is a set of flags that impact the returned fields.
+          The supported values are&#58;
+            - returnAttachments - Once set, the API returns additional attachment information for the product offering and product offering terms.
+            - returnStockInformation - Once set, the stock availability information is retrieved from the stock management system.
+          <i>Example&#58; mask=returnAttachments,returnStockInformation</i>
+        required: false
+        type: string
+      - name: If-Match
+        in: header
+        description: "The If-Match HTTP request header makes the request conditional. \nFor GET and HEAD methods, the server will send back the requested resource only if it matches one of the listed ETags. \nFor PUT and other non-safe methods, it will only upload the resource in this case\n"
+        required: true
+        type: string
+      - name: nonPersistentOperation
+        in: header
+        description: |
+          Indicates on a non persistent operation.
+          The supported values are&#58;
+           - True
+           - False
+        required: false
+        type: string
+      - name: nonPersistentIdentifier
+        in: header
+        description: |
+          The unique identifier of the non persistent change in the cache
+        required: false
+        type: string
+      - in: body
+        name: ShoppingCartPatch
+        description: |
+          The patch requesting to update the shopping cart resource
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/PatchElement'
+      responses:
+        200:
+          description: |
+            *OK* - The shopping cart was updated successfully.
+          schema:
+            $ref: '#/definitions/ShoppingCart'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: |
+            *Conflict* - The server cannot complete the request due to a conflict
+            with the current state of the resource.
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: |
+            *Unprocessable Entity* - The server understands the content type of the request entity, and the syntax of the request entity is correct, but was unable to process the contained instructions.
+          schema:
+            $ref: '#/definitions/ValidationError'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        502:
+          description: |
+            *Bad Gateway* - The server encountered an unexpected condition when
+            calling another service.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+      x-dox-Microservice: ShoppingCartMS
+  /shoppingCart/{shoppingCartId}/cartItem:
+    post:
+      tags:
+      - cartItem
+      summary: Add a cart item
+      description: "This operation adds (top-most) cart items to the shopping cart entity. In case an cart item is set only with the *productOffering.id*, the created cart item will represent the default configuration for that product offering. Otherwise, the cart item will be created as-is.<p>\n**Mandatory&#58;**\n- orderItem.productOffering\n- product.id (unless orderItem represents a provide action)\n- cartItem.action\n\n\n**Readonly&#58;**\n- cartItem.characteristicMetadata\n  \n**Business rules&#58;**\n- modifyReason (action must match cartItem.action)\n\n\n**Reference value&#58;**\n- action (ProductOfferingConfiguration.allowedAction)\n- modifyReason.name (ProductOfferingConfiguration.allowedAction.reason)\n- channel (ApplicationContext)\n- relatedParty.role = Customer (Configuration.relatedPartyCustomerRole)\n- relatedParty status Active (Configuration.customerValidatorValidStatusValues)\n"
+      operationId: addCartItem
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: TransactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: shoppingCartId
+        in: path
+        description: |
+          The ID of the shopping cart
+        required: true
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      - name: If-Match
+        in: header
+        description: "The If-Match HTTP request header makes the request conditional. \nFor GET and HEAD methods, the server will send back the requested resource only if it matches one of the listed ETags. \nFor PUT and other non-safe methods, it will only upload the resource in this case\n"
+        required: true
+        type: string
+      - in: body
+        name: cartItem
+        description: |
+          Add shopping cart item subresource
+        required: true
+        schema:
+          type: array
+          items:
+            $ref: '#/definitions/CommerceCartItem'
+      responses:
+        200:
+          description: |
+            *OK* - The cart item was added successfully.
+          schema:
+            $ref: '#/definitions/ShoppingCart'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: |
+            *Conflict* - The server cannot complete the request due to a conflict
+            with the current state of the resource.
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        502:
+          description: |
+            *Bad Gateway* - The server encountered an unexpected condition when
+            calling another service.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+      x-amdocs:
+        public-roles:
+        - D1_ShoppingCart_update
+  /shoppingCart/{shoppingCartId}/cartItem/{cartItemId}:
+    get:
+      tags:
+      - cartItem
+      summary: Retrieve a shopping cart item
+      description: |
+        This service retrieves the shopping cart, with the response limited to a cart item (and its associated hierarchy), by the ID of the cart item.
+      operationId: retrieveCartItem
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: transactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: shoppingCartId
+        in: path
+        description: |
+          The ID of the shopping cart
+        required: true
+        type: string
+      - name: cartItemId
+        in: path
+        description: |
+          The ID of the cart item
+        required: true
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      - name: mask
+        in: query
+        description: |
+          A mask is a set of flags that impact the returned fields.
+          The supported values are&#58;
+            - returnAttachments - Once set, the API returns additional attachment information for the product offering and product offering terms.
+            - returnStockInformation - Once set, the stock availability information is retrieved from the stock management system.
+          <i>Example&#58; mask=returnAttachments,returnStockInformation</i>
+        required: false
+        type: string
+      responses:
+        200:
+          description: |
+            *OK* - The shopping cart, filtered by cart item, was retrieved successfully.
+          schema:
+            $ref: '#/definitions/ShoppingCart'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: |
+            *Conflict* - The server cannot complete the request due to a conflict
+            with the current state of the resource.
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        502:
+          description: |
+            *Bad Gateway* - The server encountered an unexpected condition when
+            calling another service.
+          schema:
+            $ref: '#/definitions/Error'
+        503:
+          description: |
+            *Internal Server Error* - The server cannot fulfill the request due to a temporary overloading or maintenance of the server. Retry later.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+      x-amdocs:
+        public-roles:
+        - D1_ShoppingCart_retrieve
+    delete:
+      tags:
+      - cartItem
+      summary: Delete a cart Item
+      description: |
+        This operation deletes an cart item from a shopping cart entity.<p>
+        **Business rules&#58;**
+        - cartItemId (unique identifier of a top-most cart item)
+      operationId: removeCartItem
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: transactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: shoppingCartId
+        in: path
+        description: |
+          The ID of the shopping cart
+        required: true
+        type: string
+      - name: cartItemId
+        in: path
+        description: |
+          The ID of the cart item
+        required: true
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      - name: If-Match
+        in: header
+        description: "The If-Match HTTP request header makes the request conditional. \nFor GET and HEAD methods, the server will send back the requested resource only if it matches one of the listed ETags. \nFor PUT and other non-safe methods, it will only upload the resource in this case\n"
+        required: true
+        type: string
+      responses:
+        200:
+          description: |
+            *OK* - The cart item was removed successfully.
+          schema:
+            $ref: '#/definitions/ShoppingCart'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: |
+            *Conflict* - The server cannot complete the request due to a conflict
+            with the current state of the resource.
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        502:
+          description: |
+            *Bad Gateway* - The server encountered an unexpected condition when
+            calling another service.
+          schema:
+            $ref: '#/definitions/Error'
+        503:
+          description: |
+            *Internal Server Error* - The server cannot fulfill the request due to a temporary overloading or maintenance of the server. Retry later.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+      x-amdocs:
+        public-roles:
+        - D1_ShoppingCart_update
+  /shoppingCart/{shoppingCartId}/calculatePrice:
+    post:
+      tags:
+      - shoppingCart
+      summary: Calculate price of a shopping cart
+      description: |
+        This task calculates the price of the shopping cart.
+      operationId: calculatePrice
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: transactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: shoppingCartId
+        in: path
+        description: |
+          The ID of the shopping cart
+        required: true
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      - in: body
+        name: priceShoppingCart
+        description: |
+          The shopping cart to be priced
+        required: true
+        schema:
+          $ref: '#/definitions/ShoppingCart'
+      responses:
+        200:
+          description: |
+            *Success* - The shopping cart price was calculated successfully.
+          schema:
+            $ref: '#/definitions/ShoppingCart'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: |
+            *Conflict* - The server cannot complete the request due to a conflict
+            with the current state of the resource.
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: |
+            *Unprocessable Entity* - The server understands the content type of the request entity, and the syntax of the request entity is correct, but was unable to process the contained instructions.
+          schema:
+            $ref: '#/definitions/ValidationError'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        502:
+          description: |
+            *Bad Gateway* - The server encountered an unexpected condition when
+            calling another service.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+      x-dox-Microservice: ShoppingCartPriceMS
+      x-dox-InternalAPI: true
+  /shoppingCart/{shoppingCartId}/validate:
+    post:
+      tags:
+      - shoppingCart
+      summary: Validate the shopping cart
+      description: |
+        This operation performs business validations on the shopping cart entity. The validations performed are dependent on the *stage* and *validationType* parameters.
+      operationId: validate
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: transactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: shoppingCartId
+        in: path
+        description: |
+          The ID of the shopping cart
+        required: true
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      - name: validationType
+        in: query
+        description: |
+          The type of validations to be performed. This parameter is optional. It can include a list of validation types
+          (one or multiple separated by comma) - configuration, customer validity, shopping cart, and port in.
+        required: false
+        type: string
+      - name: stage
+        in: query
+        description: |
+          The product configuration validation stage, e.g.:  cartValidation, cartCheckout, etc.
+        required: false
+        type: string
+      responses:
+        200:
+          description: |
+            *OK* - The shopping cart was validated successfully.
+          schema:
+            $ref: '#/definitions/Validation'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: |
+            *Conflict* - The server cannot complete the request due to a conflict
+            with the current state of the resource.
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: |
+            *Unprocessable Entity* - The server understands the content type of the request entity, and the syntax of the request entity is correct, but was unable to process the contained instructions.
+          schema:
+            $ref: '#/definitions/ValidationError'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        502:
+          description: |
+            *Bad Gateway* - The server encountered an unexpected condition when
+            calling another service.
+          schema:
+            $ref: '#/definitions/Error'
+      x-dox-Microservice: ValidateShoppingCartMS
+      x-amdocs:
+        public-roles:
+        - D1_ShoppingCart_validate
+  /shoppingCart/validate:
+    post:
+      tags:
+      - shoppingCart
+      summary: Validate non persisted shopping cart
+      description: |
+        This operation performs business validations on the non-persisted shopping cart entity. The validations performed are dependent on the stage and validationType parameters.<p>
+        **Mandatory&#58;**
+        - cartItem.productOffering
+        - product.id (unless cartItem represents a provide action)
+
+        **Readonly&#58;**
+        - ShoppingCart
+
+        **Business rules&#58;**
+        - modifyReason (reason must match cartItem.action)
+      operationId: validateNonPersistedShoppingCart
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: transactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      - name: validationType
+        in: query
+        description: |
+          The type of validations to be performed. This parameter is optional. It can include a list of validation types
+          (one or multiple separated by comma) - configuration, customer validity, shopping cart, and port in.
+        required: false
+        type: string
+      - name: stage
+        in: query
+        description: |
+          The product configuration validation stage, e.g.:  cartValidation, cartCheckout, etc.
+        required: false
+        type: string
+      - in: body
+        name: ShoppingCart
+        description: |
+          The shopping cart with one or more shopping cart items
+        required: true
+        schema:
+          $ref: '#/definitions/ShoppingCart'
+      responses:
+        200:
+          description: |
+            *Validated* - The validation was performed successfully.
+          schema:
+            $ref: '#/definitions/Validation'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: |
+            *Conflict* - The server cannot complete the request due to a conflict
+            with the current state of the resource.
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: |
+            *Unprocessable Entity* - The server understands the content type of the request entity, and the syntax of the request entity is correct, but was unable to process the contained instructions.
+          schema:
+            $ref: '#/definitions/ValidationError'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        502:
+          description: |
+            *Bad Gateway* - The server encountered an unexpected condition when
+            calling another service.
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+      x-dox-Microservice: ValidateShoppingCartMS
+  /shoppingCart/{shoppingCartId}/checkout:
+    post:
+      tags:
+      - shoppingCart
+      summary: Checkout the shopping cart
+      description: "This operation performs the checkout of the shopping cart entity. \n"
+      operationId: checkout
+      consumes:
+      - application/json;charset=utf-8
+      produces:
+      - application/json;charset=utf-8
+      parameters:
+      - name: transactionId
+        in: header
+        description: |
+          Transaction ID for tracing
+        required: false
+        type: string
+      - name: shoppingCartId
+        in: path
+        description: |
+          The ID of the shopping cart
+        required: true
+        type: string
+      - name: Accept-Language
+        in: header
+        description: |
+          The locale of the client
+        required: false
+        type: string
+      responses:
+        200:
+          description: |
+            *OK* - The shopping cart checkout was a success. Product Order has been created.
+          schema:
+            $ref: '#/definitions/ProductOrderRef'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          schema:
+            $ref: '#/definitions/Error'
+        409:
+          description: |
+            *Conflict* - The server cannot complete the request due to a conflict
+            with the current state of the resource.
+          schema:
+            $ref: '#/definitions/Error'
+        422:
+          description: |
+            *Unprocessable Entity* - The server understands the content type of the request entity, and the syntax of the request entity is correct, but was unable to process the contained instructions.
+          schema:
+            $ref: '#/definitions/ValidationError'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          schema:
+            $ref: '#/definitions/Error'
+        502:
+          description: |
+            *Bad Gateway* - The server encountered an unexpected condition when
+            calling another service.
+          schema:
+            $ref: '#/definitions/Error'
+      x-dox-Microservice: ShoppingCartMS
+      x-amdocs:
+        public-roles:
+        - D1_ShoppingCart_checkout
+definitions:
+  ShoppingCart:
+    type: object
+    discriminator: '@type'
+    properties:
+      id:
+        type: string
+        description: |
+          The ID of the shopping cart
+        readOnly: true
+      href:
+        type: string
+        description: |
+          Hyperlink to access the shopping cart
+        readOnly: true
+      validFor:
+        description: The period for which the shopping cart is valid (e.g. 90 if no activity or 7 days if cart is empty)
+        $ref: '#/definitions/TimePeriod'
+      contactMedium:
+        type: array
+        description: |
+          The related party that defines the party associated with the cart
+        items:
+          $ref: '#/definitions/ContactMedium'
+      relatedParty:
+        type: array
+        description: |
+          The related party that defines the party associated with the cart
+        items:
+          $ref: '#/definitions/RelatedPartyRef'
+      cartItem:
+        type: array
+        description: |
+          The list of the active cart items in the shopping cart
+        items:
+          $ref: '#/definitions/CommerceCartItem'
+      cartTotalPrice:
+        type: array
+        description: |
+          The amount of the cart, usually money, that represents the price to be paid
+        readOnly: true
+        items:
+          $ref: '#/definitions/CartPrice'
+      validation:
+        $ref: '#/definitions/Validation'
+      immediatePromotion:
+        type: array
+        description: |
+          The reference to the immediate promotions and their details
+        readOnly: true
+        items:
+          $ref: '#/definitions/ImmediatePromotion'
+      externalIdentifier:
+        type: array
+        description: |
+          The list of external identifiers related to the shopping cart
+        items:
+          $ref: '#/definitions/ExternalIdentifier'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ShoppingCartExtension
+    description: |
+      Shopping Cart resource is used for the temporarily selection and reservation of product offerings in e-commerce, call center and retail purchase. Shopping cart supports purchase of both physical and digital goods and service (e.g. handset, telecom network service). Shopping Cart contain list of cart items, a reference to customer (partyRole) or contact medium in case customer not exist, and the total items price including promotions
+  TimePeriod:
+    type: object
+    properties:
+      startDateTime:
+        type: string
+        format: date-time
+        description: |
+          The time period start date and time.
+      endDateTime:
+        type: string
+        format: date-time
+        description: |
+          The time period end date and time.
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+        x-amdocs:
+          refDefinition: TimePeriodExtension
+        x-dox-NotImplemented: true
+    description: |
+      Time period
+  ContactMedium:
+    type: object
+    properties:
+      preferred:
+        type: boolean
+        description: If true, indicates that is the preferred contact medium
+        x-dox-NotImplemented: true
+      type:
+        type: string
+        description: |
+          The contact medium type, such as email address, telephone number, or postal address
+      validFor:
+        description: The time period that the contact medium is valid for
+        $ref: '#/definitions/TimePeriod'
+      characteristic:
+        $ref: '#/definitions/MediumCharacteristic'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ContactMediumExtension
+        x-dox-NotImplemented: true
+    description: |
+      Indicates the contact medium that could be used to contact the party
+  MediumCharacteristic:
+    type: object
+    properties:
+      type:
+        type: string
+        description: |
+          The type of the medium (fax, mobile phone, and so on)
+      emailAddress:
+        type: string
+        description: |
+          For the email type of the medium, the contact email address
+      phoneNumber:
+        type: string
+        description: |
+          For the telephone number type of the medium, the contact phone number
+      city:
+        type: string
+        description: |
+          For the postal address type of the medium, the city name for the contact address
+      country:
+        type: string
+        description: |
+          For the postal address type of the medium, the country ISO code for the contact address
+      postCode:
+        type: string
+        description: |
+          For the postal address type of the medium, the postal code of the contact address
+      stateOrProvince:
+        type: string
+        description: |
+          For the postal address type of the medium, the state or province of the contact address
+      street1:
+        type: string
+        description: |
+          For the postal address type of the medium, the first street line for the contact address
+      street2:
+        type: string
+        description: |
+          For the postal address type of the medium, the second street line for the contact address
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: MediumCharacteristicExtension
+        x-dox-NotImplemented: true
+    description: |
+      The information of the medium by which the cart can be retrieved for anonymous customers (for example, email address, telephone number, and so on)
+  RelatedPartyRef:
+    type: object
+    required:
+    - id
+    discriminator: '@type'
+    properties:
+      id:
+        type: string
+        description: |
+          Unique identifier of the related party
+      href:
+        type: string
+        description: |
+          Reference of the related party, could be a party reference or a party role reference
+      name:
+        type: string
+        description: |
+          Name of the related party
+      role:
+        type: string
+        description: |
+          Role played by the related party. One of 'Customer, SalesChannel_UserProfile, SalesChannel_AgentProfile
+    description: |
+      A related party defines party or party role linked to a specific entity.
+  CommerceRelatedPartyRef:
+    allOf:
+    - $ref: '#/definitions/RelatedPartyRef'
+    - properties:
+        subRole:
+          type: string
+        partyName:
+          $ref: '#/definitions/CommerceNameType'
+        birthDate:
+          type: string
+          format: date
+  CustomerRef:
+    allOf:
+    - $ref: '#/definitions/RelatedPartyRef'
+    - properties:
+        characteristics:
+          type: array
+          items:
+            $ref: '#/definitions/Characteristic'
+  BillingAccountRef:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Id of the billing account
+      role:
+        type: string
+        description: Role of the billing Account. One of ExistingBillingAccount vs NewBillingAccount
+      characteristics:
+        type: array
+        description: One of accountType, accountSubType, masterSourceCd ()
+        items:
+          $ref: '#/definitions/Characteristic'
+  SalesChannel:
+    type: object
+    properties:
+      role:
+        type: string
+        description: "Role played by the related party. One of 'Customer, SalesChannel_UserProfile, SalesChannel_AgentProfile \n"
+      channelContributionCd:
+        type: string
+        description: One of STARTING_CHANNEL, MODIFYING_CHANNEL, SUBMITTING_CHANNEL
+      channelOrganizationTypeCd:
+        type: string
+      channelOrganizationInternalId:
+        type: string
+      channelOrganizationNumber:
+        type: string
+      outletAssociatedProvinces:
+        type: array
+        items:
+          type: string
+      loginId:
+        type: string
+      salesPersonRoleCd:
+        type: string
+        description: sales person role code  used for the flow. D2C_PARTNER
+      salesRepId:
+        type: string
+      salesRepInternalId:
+        type: string
+      salesRepAssociatedOutlet:
+        type: array
+        items:
+          $ref: '#/definitions/SalesRepAssociatedOutlet'
+      salesPersonRoleCode:
+        type: string
+      outletAssociatedBrands:
+        type: array
+        items:
+          type: string
+      salesRepPortalLanguage:
+        type: string
+      salesRepEmailAddress:
+        type: string
+      knowbilityUserId:
+        type: string
+      userPrivillegeRoleCd:
+        type: array
+        items:
+          type: string
+      channelToken:
+        type: string
+        description: POS Token to be passed into this field for TRL channel.
+  SalesRepAssociatedOutlet:
+    type: object
+    properties:
+      outletInternalId:
+        type: string
+      channelOutletId:
+        type: string
+  CartItem:
+    type: object
+    discriminator: '@type'
+    properties:
+      id:
+        type: string
+        description: |
+          The ID of cart item
+        readOnly: true
+      action:
+        type: string
+        description: |
+          The action performed on item: add, remove, or change
+      status:
+        type: string
+        description: |
+          The current status of the cart item (for example, active or saved for later)
+        readOnly: true
+      quantity:
+        type: integer
+        description: |
+          The quantity of the item
+      readOnly:
+        type: boolean
+        description: |
+          Indicates whether or not the cart item can be reconfigured
+      itemPrice:
+        type: array
+        description: |
+          The amount of the cart item, usually money, that represents the price to be paid
+        readOnly: true
+        items:
+          $ref: '#/definitions/CartPrice'
+      itemTotalPrice:
+        type: array
+        description: |
+          The amount of the cart item total prices, usually money, that represents the price to be paid
+        readOnly: true
+        items:
+          $ref: '#/definitions/CartPrice'
+      cartItemRelationship:
+        type: array
+        description: |
+          The relationship between the cart items
+        items:
+          $ref: '#/definitions/CartItemRelationship'
+      productOffering:
+        $ref: '#/definitions/CommerceProductOfferingRef'
+      product:
+        $ref: '#/definitions/Product'
+      cartItem:
+        type: array
+        description: |
+          The cart items
+        items:
+          $ref: '#/definitions/CartItem'
+      itemTerm:
+        type: array
+        description: |
+          The commitment term of the cart item
+        items:
+          $ref: '#/definitions/CartTerm'
+      modifyReason:
+        type: array
+        description: |
+          The reason for the cart item modification
+        items:
+          $ref: '#/definitions/ModifyReason'
+      metadata:
+        type: array
+        description: |
+          The channel characteristic for the cart item
+        items:
+          $ref: '#/definitions/Metadata'
+      characteristic:
+        type: array
+        description: |
+          The characteristics of the product offering
+        items:
+          $ref: '#/definitions/ProductCharacteristic'
+      externalIdentifier:
+        type: array
+        description: |
+          The list of external identifiers related to the order item
+        items:
+          $ref: '#/definitions/ExternalIdentifier'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: CartItemExtension
+    description: |
+      An identified part of the shopping cart. A shopping cart is decomposed into one or more shopping cart item. Cart item represents a product offering or bundled product offering that user wish to purchase, as well as the pricing of the product offering, reference to product in case of configured characteristic or installation address. Cart items can be related to other cart item to related bundled offerings or reference cart Items to a shipping options
+  OrderTypeRef:
+    type: object
+    properties:
+      orderType:
+        type: string
+        description: One of ACTIVATION, RENEWAL, EXCHANGE, MIGRATION
+      orderSubType:
+        type: string
+        description: One of NEW, ADDON
+  CommerceCartItem:
+    allOf:
+    - $ref: '#/definitions/CartItem'
+    - properties:
+        productOrderType:
+          $ref: '#/definitions/OrderTypeRef'
+        billingAccount:
+          type: array
+          items:
+            $ref: '#/definitions/BillingAccountRef'
+        relatedImmediatePromotion:
+          type: array
+          description: |
+            The reference to the immediate promotion entity
+          items:
+            $ref: '#/definitions/CommerceRelatedImmediatePromotion'
+        cartItemContext:
+          type: array
+          description: One or more of POS_INVENTORY, EQUIPMENT, OFFER, TERM, PRICEPLAN, SERVICE, PORTIN,RESERVE_PHONENUMBE, ALL
+          items:
+            type: string
+        relatedParty:
+          type: array
+          description: |
+            The related party that defines the party associated with the cart item
+          items:
+            $ref: '#/definitions/RelatedPartyRef'
+        salesChannel:
+          type: array
+          description: |
+            The SalesChannels associated with the cart item
+          items:
+            $ref: '#/definitions/SalesChannel'
+        brandCode:
+          type: string
+  CartPrice:
+    type: object
+    discriminator: '@type'
+    properties:
+      id:
+        type: string
+        description: |
+          The ID of the cart item price
+      name:
+        type: string
+        description: |
+          The short descriptive name, such as subscription price
+      description:
+        type: string
+        description: |
+          The narrative that explains in detail the semantics of this entity (cart/cart item) price
+      priceType:
+        type: string
+        description: |
+          The category that describes the price charged for a cart/cart item
+      unitOfMeasure:
+        type: string
+        description: |
+          The unit of measurement applicable for the price type allowance, for example, GB, minutes, and so on.
+      recurringChargePeriod:
+        type: string
+        description: |
+          The period to which to repeat the application of the recurring price (either 'days', 'weeks', 'months', or 'years'). This property is populated only if the price type is 'recurring'
+      recurringChargePeriodLength:
+        type: integer
+        description: |
+          The period length of the recurring charge.
+      price:
+        $ref: '#/definitions/Price'
+      finalPrice:
+        $ref: '#/definitions/Price'
+      standalonePrice:
+        $ref: '#/definitions/Price'
+      priceAlteration:
+        type: array
+        description: |
+          The record of the price alteration
+        items:
+          $ref: '#/definitions/PriceAlteration'
+      installmentOption:
+        $ref: '#/definitions/CommerceInstallmentOption'
+      cartPriceRelationship:
+        $ref: '#/definitions/CartPriceRelationship'
+      immediatePayOption:
+        $ref: '#/definitions/ImmediatePayOption'
+      taxIncluded:
+        type: string
+        description: Indicates if the price is defined in the catalog one as tax included or as tax excluded. Valid Values - Excluded, Included
+        x-dox-NotImplemented: true
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: CartPriceExtension
+        x-dox-NotImplemented: true
+    description: |
+      Total amount of the shopping cart, usually of money, that represents the actual price paid by the Customer for cart (considering only 'Active' cart items)
+  Price:
+    type: object
+    properties:
+      taxIncludedAmount:
+        $ref: '#/definitions/Money'
+      dutyFreeAmount:
+        $ref: '#/definitions/Money'
+      taxAmount:
+        $ref: '#/definitions/Money'
+      taxRate:
+        type: number
+        format: float
+      percentage:
+        type: number
+        format: float
+      priceReduction:
+        $ref: '#/definitions/Money'
+      priceOverride:
+        $ref: '#/definitions/Money'
+      priceRecordId:
+        type: string
+        description: |
+          The unique identifier of the price in the pricing domain.
+      impactingPriceParameter:
+        type: array
+        description: |
+          The parameters that impact the price
+        items:
+          $ref: '#/definitions/PriceParam'
+      appliedTax:
+        type: array
+        items:
+          $ref: '#/definitions/AppliedTax'
+        x-dox-NotImplemented: true
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PriceExtension
+        x-dox-NotImplemented: true
+    description: |
+      The price of current catalog item. It is set to null if the price record is
+      missing or if there is any exception.
+  Money:
+    type: object
+    properties:
+      unit:
+        type: string
+        description: |
+          The currency of the price
+      value:
+        type: number
+        format: double
+        description: |
+          The amount of the price
+    description: |
+      The price and currency of the catalog item
+  PriceParam:
+    type: object
+    properties:
+      type:
+        type: string
+        description: |
+          The type of the parameter
+      name:
+        type: string
+        description: |
+          The name of the parameter
+      value:
+        type: string
+        description: |
+          The value of the parameter
+    description: |
+      The parameters that may impact/impact the price
+  AppliedTax:
+    type: object
+    required:
+    - taxAmount
+    - taxDefinition
+    - taxableAmount
+    properties:
+      taxDefinition:
+        $ref: '#/definitions/TaxDefinition'
+      taxAmount:
+        $ref: '#/definitions/Money'
+      taxableAmount:
+        $ref: '#/definitions/Money'
+      periodCoverage:
+        $ref: '#/definitions/TimePeriod'
+      characteristic:
+        type: array
+        items:
+          $ref: '#/definitions/Characteristic'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: AppliedTaxExtension
+        x-dox-NotImplemented: true
+    description: Calculated tax response
+  TaxDefinition:
+    type: object
+    required:
+    - exemptionType
+    - taxJurisdiction
+    - taxRate
+    - taxType
+    - vaidFor
+    properties:
+      name:
+        type: string
+        description: The display name of tax type
+      taxRate:
+        type: number
+        format: double
+        description: Rate of tax
+      taxType:
+        type: string
+        description: VAT/GST etc
+      category:
+        type: string
+        description: Luxury/Standard etc
+      isExemption:
+        type: boolean
+        description: Where the tax definition has exemption defined on it
+      exemptionType:
+        type: string
+        description: Exemption type. Valid Values - Customer, Service, Jurisdiction, None.
+      vaidFor:
+        $ref: '#/definitions/TimePeriod'
+      taxJurisdiction:
+        $ref: '#/definitions/TaxJurisdiction'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: TaxDefinitionExtension
+        x-dox-NotImplemented: true
+    description: Tax definition
+  TaxJurisdiction:
+    type: object
+    required:
+    - level
+    - name
+    properties:
+      name:
+        type: string
+      level:
+        type: string
+      id:
+        type: string
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: TaxJurisdictionExtension
+        x-dox-NotImplemented: true
+  Characteristic:
+    type: object
+    properties:
+      name:
+        type: string
+      value:
+        type: string
+  PriceAlteration:
+    type: object
+    discriminator: '@type'
+    properties:
+      name:
+        type: string
+        description: |
+          The short descriptive name, such as subscription price
+      description:
+        type: string
+        description: |
+          The narrative that explains in detail the semantics of this entity (cart/cart item) price
+      unitOfMeasure:
+        type: string
+        description: |
+          The unit of measurement, applicable for the price type allowance, for example, GB, minutes, and so on
+      recurringChargePeriod:
+        type: string
+        description: |
+          The recurring charge period, applicable when the price type is recurring
+      priceType:
+        type: string
+        description: |
+          The category that describes the price charged for a cart/cart item
+      applicationDuration:
+        type: integer
+        description: |
+          The duration
+      priority:
+        type: integer
+        description: |
+          The priority
+      alterationType:
+        type: string
+        description: |
+          The type of the alteration, such as promotionPriceAlteration
+      alterationApplyOrder:
+        type: integer
+        description: "The the order of the alteration price applience on the price \n"
+      promotionActionId:
+        type: string
+        description: |
+          The ID of the promotion action triggering the price alteration
+      immediatePromotionId:
+        type: string
+        description: |
+          The ID of the promotion instance
+      alterationProductOfferingPriceId:
+        type: string
+        description: |
+          The identifier of the product offering price that the price alteration was given on its behalf
+      alterationBundleProductOfferingId:
+        type: string
+        description: |
+          The identifier of the bundle product offering that the price alteration was given on its behalf
+      chargeType:
+        type: string
+        description: "The charge type that the price alteration represents. The supported values are&#58;<ul><li>debit<li>discount<li>credit</ul> \n"
+      price:
+        $ref: '#/definitions/Price'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PriceAlterationExtension
+        x-dox-NotImplemented: true
+    description: |
+      The total altered price for the cart and cart items and the individual price of each cart item
+  InstallmentOption:
+    type: object
+    discriminator: '@type'
+    properties:
+      id:
+        type: string
+        description: |
+          The identifier of the installment option
+      installmentOption:
+        type: string
+        description: |
+          Indicates if installment options are optional / mandatory for the cart price
+        readOnly: true
+      numberOfInstallments:
+        type: integer
+        description: |
+          The number of installments
+      downPayment:
+        $ref: '#/definitions/PaymentAmount'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: InstallmentOptionExtension
+        x-dox-NotImplemented: true
+    description: |
+      Represents an installment option for an cart price
+  CommerceInstallmentOption:
+    allOf:
+    - $ref: '#/definitions/InstallmentOption'
+    - properties:
+        installmentAmount:
+          $ref: '#/definitions/Money'
+        totalInstallmentAmount:
+          $ref: '#/definitions/Money'
+  PaymentAmount:
+    type: object
+    properties:
+      amount:
+        $ref: '#/definitions/Money'
+      percentage:
+        type: number
+        format: float
+        description: |
+          Represents the percentage that the amount represents out of the price
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PaymentAmountExtension
+        x-dox-NotImplemented: true
+    description: |
+      Represents a payment amount
+  CartPriceRelationship:
+    type: object
+    required:
+    - id
+    - type
+    properties:
+      id:
+        type: string
+        description: |
+          The identifier of the related CartPrice entity
+      type:
+        type: string
+        description: |
+          The relationship type
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: CartPriceRelationshipExtension
+        x-dox-NotImplemented: true
+    description: |
+      The relationship between CartPrice entities
+  ImmediatePayOption:
+    type: object
+    properties:
+      payOption:
+        type: string
+        description: |
+          The immediate pay option that indicates whether the price must or might be paid immediately
+      payAmount:
+        $ref: '#/definitions/Money'
+      minPayAmount:
+        $ref: '#/definitions/Money'
+      payImmediately:
+        type: boolean
+        description: |
+          Indicates whether the price is included in the immediate payment.
+          The value depends on the payOption:
+          <ul>
+          <li>MUST - Set to true
+          <li>MAY - Set to true or false based on a customer decision
+          </ul>
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ImmediatePayOptionExtension
+        x-dox-NotImplemented: true
+    description: |
+      The immediate payment option for the product offering payment
+  StockItem:
+    type: object
+    properties:
+      stockAvailabilityStatus:
+        type: string
+        description: |
+          Stock availability levels for the product, will contain levels as inStock, outOfStock, lowStock and unavailable
+      stockAvailabilityQuantity:
+        type: integer
+        description: |
+          The actual number of items in stock for this product
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+        x-amdocs:
+          refDefinition: StockItemExtension
+        x-dox-NotImplemented: true
+    description: |
+      This resource is a representation of stock information in the for the product in the stock management system
+  CartItemRelationship:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the referenced cart item
+      type:
+        type: string
+        description: |
+          The type of relationship with the cart item to which it is related
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs: refDefinition:CartItemRelationshipExtension
+        x-dox-NotImplemented: true
+    description: |
+      The relationship between cart items
+  ProductOfferingRef:
+    type: object
+    discriminator: '@type'
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the product offering
+      name:
+        type: string
+        description: |
+          The name of the product offering
+      href:
+        type: string
+        description: |
+          The self-reference to the product offering
+      productOfferingType:
+        type: string
+        description: |
+          The type of the product offering
+      version:
+        type: string
+        description: |
+          The version of the product offering
+      serialized:
+        type: boolean
+        description: |
+          Indicates whether the product specification is maintained in the order/product inventory (assigned products)
+          instance by instance or whether a single product instance can represent a bulk quantity of the product specification.
+          Non-serialized products are typically simple hard goods such as phone covers, batteries, earphones, and so on.
+      attachment:
+        type: array
+        items:
+          $ref: '#/definitions/Attachment'
+      valueRank:
+        type: integer
+        description: |
+          The value rank of the product offering
+      primary:
+        type: boolean
+        description: |
+          Indicates whether the product offering has a business significance for the customer
+          It has the following implications&#58;
+          <ul><li>It is reflected as a product for the customer and it is actionable - the customer can perform ordering actions on it
+          <li>An action performed on a primary offer can impact the actions available for its bundled or dependent offers (for example, when ownership of a primary offer is changed some internal offers cannot be added or removed)</ul>
+      durationPolicy:
+        $ref: '#/definitions/DurationPolicy'
+    description: |
+      The reference to the product offering
+  CommerceProductOfferingRef:
+    allOf:
+    - $ref: '#/definitions/ProductOfferingRef'
+    - properties:
+        perspectiveDate:
+          type: string
+          format: date-time
+        selectedCoupon:
+          $ref: '#/definitions/SelectedCoupon'
+        characteristic:
+          type: array
+          items:
+            $ref: '#/definitions/Characteristic'
+  Attachment:
+    properties:
+      name:
+        type: string
+        description: |
+          The unique ID of the attachment in the element to which it is related
+      type:
+        type: string
+        description: |
+          The attachment type, such as a video or a picture
+      description:
+        type: string
+        description: |
+          The narrative text describing the content of the attachment
+      url:
+        type: string
+        description: |
+          The uniform resource locator, which is a web page address (a subset of the URI)
+      mimeType:
+        type: string
+        description: |
+          The attachment MIME type, such as an extension file for a video, a picture, or a document
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: AttachmentExtension
+        x-dox-NotImplemented: true
+    description: |
+      Complements the description of an element (for instance a product), through a video or a pictures
+  DurationPolicy:
+    type: object
+    properties:
+      duration:
+        $ref: '#/definitions/Quantity'
+      startDatePolicy:
+        type: string
+        description: |
+          The policy from which date to calculate the duration
+      endDatePolicy:
+        type: string
+        description: |
+          The policy to which date to calculate the duration
+      effectiveFor:
+        $ref: '#/definitions/TimePeriod'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: DurationPolicyExtension
+        x-dox-NotImplemented: true
+    description: |
+      The policy for calcultion limited duration for any entity
+  Quantity:
+    type: object
+    properties:
+      units:
+        type: string
+        description: |
+          The units associated with the quantity
+      amount:
+        type: number
+        description: |
+          The amount associated with the quantity
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+        x-amdocs:
+          refDefinition: QuantityExtension
+        x-dox-NotImplemented: true
+    description: |
+      The quantity of a resource
+  ProductOfferingGroupOption:
+    type: object
+    properties:
+      groupOptionId:
+        type: string
+        description: |
+          The ID of the product offering group option
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ProductOfferingGroupOptionExtension
+        x-dox-NotImplemented: true
+    description: |
+      The group option of the product offering
+  Product:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the product offering
+      href:
+        type: string
+        description: |
+          The self-reference to the product
+      name:
+        type: string
+        description: |
+          The name of the product
+      referenceId:
+        type: string
+        description: |
+          The unique ID of the product in the cart item hierarchy
+      version:
+        type: string
+        description: |
+          The version of the product
+      primaryProductId:
+        type: string
+        description: |
+          The unique ID of the product in the product inventory domain
+      status:
+        type: string
+        description: |
+          The state of the product in the product inventory domain
+      activationDate:
+        type: string
+        format: date-time
+        description: |
+          The date on which the cart item is set to active (set by inventory)
+      productOrder:
+        $ref: '#/definitions/ProductOrderRef'
+      relatedParty:
+        type: array
+        description: |
+          The related party that defines the party associated with the product
+        items:
+          $ref: '#/definitions/RelatedPartyRef'
+      productSpecification:
+        type: array
+        description: |
+          The specification of the product
+        items:
+          $ref: '#/definitions/ProductSpecificationRef'
+      characteristic:
+        type: array
+        description: |
+          The characteristics of the product
+        items:
+          $ref: '#/definitions/ProductCharacteristic'
+      productRelationship:
+        type: array
+        description: |
+          The product relation of the product
+        items:
+          $ref: '#/definitions/ProductRelationship'
+      place:
+        type: array
+        description: |
+          The place of the product
+        items:
+          $ref: '#/definitions/PlaceRef'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: Product
+        x-dox-NotImplemented: true
+    description: |
+      The reference to the product or the product values
+  CommerceNameType:
+    type: object
+    properties:
+      nameSalutationCd:
+        type: string
+        description: Salutation code
+      firstName:
+        type: string
+      lastName:
+        type: string
+      fullName:
+        type: string
+      legalBusinessName:
+        type: string
+      tradeName:
+        type: string
+  ProductOrderRef:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the existing product order
+      href:
+        type: string
+        description: |
+          Hyperlink to access the product order
+    description: |
+      The reference to the product order
+  ProductSpecificationRef:
+    type: object
+    discriminator: '@type'
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the product specification
+      href:
+        type: string
+        description: |
+          The self-reference to the product specification
+      name:
+        type: string
+        description: |
+          The name of the product specification
+      productSpecificationType:
+        type: string
+        description: |
+          The type of the product specification
+    description: |
+      A ProductSpecificationRef is a refernece to detailed description of a tangible or intangible object made available externally in the form of a ProductOffering to customers or other parties playing a party role.
+  ProductCharacteristic:
+    type: object
+    properties:
+      name:
+        type: string
+        description: |
+          The name of the product characteristic
+      value:
+        type: string
+        description: |
+          The value of the product characteristic
+      metadata:
+        type: array
+        description: |
+          The characteristic of the product
+        items:
+          $ref: '#/definitions/Metadata'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ProductCharacteristicExtension
+        x-dox-NotImplemented: true
+  Metadata:
+    type: object
+    properties:
+      name:
+        type: string
+        description: |
+          The name of the metadata
+      value:
+        type: string
+        description: |
+          The value of the metadata
+      metadataType:
+        type: string
+        description: |
+          The type of the metadata
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+        x-amdocs:
+          refDefinition: MetadataExtension
+        x-dox-NotImplemented: true
+    description: |
+      The catalog and operational metadata
+  ProductRelationship:
+    type: object
+    properties:
+      type:
+        type: string
+        description: |
+          Type of the product relationship. It can be :
+          <ul>
+          <li>"bundled" if the product is a bundle and you want to describe the "bundled" products inside this bundle</li>
+          <li> "reliesOn" if the product needs another already owned product to rely on (e.g. an option on an already owned mobile access product)</li>
+          </ul>
+      product:
+        $ref: '#/definitions/Product'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ProductRelationshipExtension
+        x-dox-NotImplemented: true
+    description: |
+      The product relationship
+  PlaceRef:
+    type: object
+    discriminator: '@type'
+    properties:
+      id:
+        type: string
+        description: |
+          The ID of the place
+      href:
+        type: string
+        description: |
+          The self-reference to the place
+      name:
+        type: string
+        description: |
+          A user-friendly name for the place, such as "Paris Store", "London Store", "Main Home"
+      role:
+        type: string
+        description: |
+          Role of the place (One of HOME_PROVINCE, MARKET_PROVINCE, SHIPPING_ADDRESS)
+      characteristics:
+        type: array
+        description: ""
+        items:
+          $ref: '#/definitions/Characteristic'
+    description: |
+      Place defines a location generically. Could be a geographic address a geographic address, a geographic location.
+  CartTerm:
+    type: object
+    discriminator: '@type'
+    properties:
+      name:
+        type: string
+        description: |
+          The name of the term
+      duration:
+        $ref: '#/definitions/Quantity'
+      attachment:
+        type: array
+        items:
+          $ref: '#/definitions/Attachment'
+      metadata:
+        type: array
+        description: |
+          The channel characteristic for the cart item term
+        items:
+          $ref: '#/definitions/Metadata'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: CartItemTermExtension
+        x-dox-NotImplemented: true
+    description: |
+      The terms of the shopping cart item
+  ModifyReason:
+    type: object
+    required:
+    - action
+    - name
+    properties:
+      name:
+        type: string
+        description: |
+          The name of the modify reason
+      reasonText:
+        type: string
+        description: |
+          The text of the modification reason. This property is populated if
+          the type of the modification reason requires an input of a free text.
+      action:
+        type: string
+        description: |
+          The action performed on the instance of the product offering
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ModifyReasonExtension
+        x-dox-NotImplemented: true
+    description: |
+      The modification reason associated to the action performed on the
+      product offering associated with the cart item
+  RelatedImmediatePromotion:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The instance ID of the related immediate promotion
+      itemQualificationType:
+        type: string
+        description: |
+          The type of the qualification result for the item - trigger or benefit
+      itemStatus:
+        type: string
+        description: |
+          status os the promotion can be add, revoke or keep
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: RelatedImmediatePromotionExtension
+        x-dox-NotImplemented: true
+    description: |
+      The reference to the related immediate promotion object
+  CommerceRelatedImmediatePromotion:
+    allOf:
+    - $ref: '#/definitions/RelatedImmediatePromotion'
+    - properties:
+        perspectiveDate:
+          type: string
+          format: date-time
+        selectedCoupon:
+          $ref: '#/definitions/SelectedCoupon'
+  SelectedCoupon:
+    allOf:
+    - $ref: '#/definitions/CouponRef'
+    - properties:
+        validationCode:
+          type: string
+          description: validation code to redeem the coupon
+  CouponRef:
+    type: object
+    discriminator: '@type'
+    properties:
+      id:
+        type: string
+      perspectiveDate:
+        type: string
+        format: date-time
+  ExternalIdentifier:
+    type: object
+    properties:
+      type:
+        type: string
+        description: |
+          The type of the external system
+      id:
+        type: string
+        description: |
+          The unique identifier in the external system
+      version:
+        type: string
+        description: |
+          The version of the related entity in the external system
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+        x-amdocs:
+          refDefinition: ExternalIdentifierExtension
+        x-dox-NotImplemented: true
+    description: |
+      The reference to an external system identifier
+  Validation:
+    type: object
+    properties:
+      status:
+        type: string
+        description: |
+          The status of the validation, either success or information
+      validationMessage:
+        type: array
+        description: |
+          The array of the validation messages
+        items:
+          $ref: '#/definitions/ValidationMessage'
+      configurationChange:
+        type: array
+        description: |
+          The array of the configuration changes
+        items:
+          $ref: '#/definitions/ConfigurationChange'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ValidationExtension
+        x-dox-NotImplemented: true
+    description: |
+      The successful validation and configuration change; might still contain the validation message and configuration change (information severity or lower)
+  ValidationMessage:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The non localized name identifier of the validation message
+      text:
+        type: string
+        description: |
+          The localized descriptive validation message
+      type:
+        type: string
+        description: |
+          The type of the validation message
+      parameter:
+        type: array
+        description: |
+          The name-value pair of the validation message
+        items:
+          $ref: '#/definitions/ValidationMessageParameter'
+      severity:
+        type: string
+        description: |
+          The severity of the validation message
+      path:
+        type: string
+        description: "The path to the resource part that the validation message is related to \n"
+      resource:
+        type: array
+        description: |
+          The resource which is associated with the message
+        items:
+          $ref: '#/definitions/RelatedResource'
+    description: |
+      The message associate with the validation failure
+  ValidationMessageParameter:
+    type: object
+    properties:
+      name:
+        type: string
+        description: |
+          The name of the parameter
+      value:
+        type: array
+        description: |
+          The value of the parameter
+        items:
+          type: string
+    description: |
+      The name-value pair of the validation message parameter
+  RelatedResource:
+    type: object
+    properties:
+      type:
+        type: string
+        description: |
+          The resource type
+      id:
+        type: string
+        description: |
+          The id of the related resource
+      variable:
+        type: array
+        description: |
+          The variables related to the resource
+        items:
+          $ref: '#/definitions/Variable'
+      containedResource:
+        type: array
+        description: |
+          Other resources, spes or offers which is linked to the message but did not trigger the message
+        items:
+          $ref: '#/definitions/ContainedResource'
+    description: |
+      Resource which is associated to the message (caused the message)
+  Variable:
+    type: object
+    properties:
+      type:
+        type: string
+        description: |
+          Variable type
+      id:
+        type: string
+        description: |
+          Variable identifier
+      value:
+        type: array
+        description: |
+          The value(s) of the parameter
+        items:
+          type: string
+    description: |
+      Variabloes which is associated to the resource
+  ContainedResource:
+    type: object
+    properties:
+      type:
+        type: string
+        description: |
+          Resource Type
+      id:
+        type: string
+        description: |
+          Resource Id
+      variable:
+        type: array
+        description: |
+          The variables related to the resource
+        items:
+          $ref: '#/definitions/Variable'
+    description: |
+      Resources which are contined in the message
+  ConfigurationChange:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The ID of the configuration change
+        readOnly: true
+        x-dox-DesignNote: |
+          A unique identifier of the validation rule or its message.
+      text:
+        type: string
+        description: |
+          The localized descriptive configuration change message
+        readOnly: true
+      type:
+        type: string
+        description: |
+          The implementation discriminator of the configuration change
+        readOnly: true
+      parameter:
+        type: array
+        readOnly: true
+        items:
+          $ref: '#/definitions/ConfigurationChangeParameter'
+      severity:
+        type: string
+        description: |
+          The configuration change severity
+        readOnly: true
+      path:
+        type: string
+        description: |
+          The path in the resource model to the change
+        readOnly: true
+      ruleId:
+        type: string
+        description: |
+          The ID of the associated rule that is used to group multiple configuration change entities for display purposes
+        readOnly: true
+      skipRevalidation:
+        type: boolean
+        description: |
+          Indicates whether revalidation of the configuration change is required
+        readOnly: true
+    description: |
+      The configuration change proposed for a validated resource
+  ConfigurationChangeParameter:
+    type: object
+    properties:
+      name:
+        type: string
+        description: |
+          The name of the parameter
+        readOnly: true
+      value:
+        type: array
+        description: |
+          The value(s) of the parameter
+        readOnly: true
+        items:
+          type: string
+    description: |
+      The key/value pair of the configuration change parameters
+  ImmediatePromotion:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The instance ID of the immediate promotion
+      status:
+        type: string
+        description: |
+          The status of the immediate promotion
+      promotion:
+        $ref: '#/definitions/PromotionRef'
+      productPromotion:
+        $ref: '#/definitions/ProductPromotionRef'
+      triggerItem:
+        type: array
+        items:
+          $ref: '#/definitions/TriggerItem'
+        x-dox-DesignNote: |
+          A reference to the TriggerItem  definition.
+      benefitItem:
+        type: array
+        items:
+          $ref: '#/definitions/BenefitItem'
+        x-dox-DesignNote: |
+          A reference to the Benefit definition.
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ImmediatePromotionExtension
+        x-dox-NotImplemented: true
+    description: |
+      The reference to the immediate promotion object
+  PromotionRef:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the promotion
+      name:
+        type: string
+        description: |
+          The name of the promotion
+      description:
+        type: string
+        description: |
+          The description of the promotion for the business user
+      validFor:
+        $ref: '#/definitions/TimePeriod'
+      href:
+        type: string
+        format: url
+        description: |
+          The self-reference to the promotion
+        readOnly: true
+    description: |
+      The reference to the promotion object
+    x-dox-DesignNote: |
+      Promotion description for Business user
+  ProductPromotionRef:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The unique identifier of the Product Promotion
+      href:
+        type: string
+        format: url
+        description: |
+          The hyperlink of the Product Promotion
+        readOnly: true
+    description: |
+      Reference to a ProductPromotionRef
+    x-dox-DesignNote: |
+      Product Promotion description for Business user
+  TriggerItem:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the trigger item
+      itemType:
+        type: string
+        description: |
+          The type of the trigger item
+      href:
+        type: string
+        format: url
+        description: |
+          The self-reference to the trigger item
+      promotionCriteriaGroupId:
+        type: string
+        description: |
+          The ID of the promotion criteria group (root or nested) as part of which the item is qualified as a trigger item
+      pathToRoot:
+        type: string
+        description: |
+          The path from the current item in the product offering structure to the root. This property is populated if the trigger item is a nested item.
+      itemStatus:
+        type: string
+        description: |
+          The status of the trigger item
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: TriggerItemExtension
+        x-dox-NotImplemented: true
+    description: |
+      The reference to the trigger item object
+  BenefitItem:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the benefit item
+      itemType:
+        type: string
+        description: |
+          The type of the benefit item
+      promotionCriteriaGroupId:
+        type: string
+        description: |
+          The ID of the promotion criteria group (root or nested) as part of which the item is qualified as a benefit item
+      pathToRoot:
+        type: string
+        description: |
+          The path from the current item in the oroduct offering structure to the root. This property is populated if the benefit item is a nested item.
+      href:
+        type: string
+        description: |
+          The self-reference to the benefit item
+      action:
+        type: array
+        items:
+          $ref: '#/definitions/PromotionAction'
+        x-dox-DesignNote: |
+          A reference to the Benefit definition.
+      itemStatus:
+        type: string
+        description: |
+          The status of the benifit item
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: BenefitItemExtension
+        x-dox-NotImplemented: true
+    description: |
+      The reference to the benefit item object
+  PromotionAction:
+    required:
+    - actionType
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the promotion action
+      name:
+        type: string
+        description: |
+          The name of the promotion action
+      description:
+        type: string
+        description: |
+          The description of the promotion action
+      actionType:
+        type: string
+        description: |
+          The type of the promotion action. The only possible value currently is "Price Alteration".
+      actionValue:
+        type: integer
+        description: |
+          The value of the promotion action. If actionType is "Price Alteration", the value is populated with '1'.
+      promotionPriceAlteration:
+        $ref: '#/definitions/ProductOfferingPriceRef'
+      durationPolicy:
+        $ref: '#/definitions/DurationPolicy'
+      validFor:
+        $ref: '#/definitions/TimePeriod'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PromotionActionExtension
+        x-dox-NotImplemented: true
+    description: |
+      The action of the promotion. When a customer meets the conditions in the 'promotion pattern', the benefits defined in the 'action' can be given to the customer.
+  ProductOfferingPriceRef:
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the promotion action discount
+    description: |
+      The reference to the promotion action discount. This object represents the pricing entity that defines the actual discount.
+  Error:
+    type: object
+    required:
+    - code
+    - reason
+    discriminator: '@type'
+    properties:
+      code:
+        type: string
+        description: |
+          Application relevant detail, defined in the API or a common list
+      reason:
+        type: string
+        description: |
+          Explanation of the reason for the error which can be shown to a client user
+      message:
+        type: string
+        description: |
+          More details and corrective actions related to the error which can be shown to a client user
+      status:
+        type: string
+        description: |
+          HTTP Error code extension
+      referenceError:
+        type: string
+        format: uri
+        description: |
+          URI of documentation describing the error
+      traceId:
+        type: string
+        description: |
+          The unique tracker ID used to facilitate troubleshooting
+      characteristic:
+        type: array
+        description: |
+          The relevant parameter that is associated with this error
+        items:
+          $ref: '#/definitions/ErrorCharacteristic'
+    description: |
+      "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)""
+  ErrorCharacteristic:
+    type: object
+    properties:
+      name:
+        type: string
+        description: |
+          The non localized name identifier of the characteristic
+      value:
+        type: string
+        description: |
+          The value of the characteristic
+    description: |
+      A parameter that is associated with this entity
+  ValidationError:
+    allOf:
+    - $ref: '#/definitions/Error'
+    - properties:
+        validationMessage:
+          type: array
+          description: |
+            The validation messages
+          items:
+            $ref: '#/definitions/ValidationMessage'
+    description: |
+      Used when an API throws an Error, typically with a HTTP error response-code (422)
+  PatchElement:
+    properties:
+      op:
+        type: string
+        description: |
+          The operation associated with this patched resource part. Valid values are 'add' or 'remove' or 'replace'.
+      path:
+        type: string
+        description: |
+          The path of this resource part within the patched resource. For  example '/shoppingCart/CartItem'.
+      value:
+        type: object
+        description: |
+          The value of the patched resource part
+        properties: {}
+    description: |
+      The patched resource part
+  PriceShoppingCart:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The ID of the shopping cart
+      externalId:
+        type: string
+        description: |
+          The external identifier that was assigned by consumers
+      validFor:
+        type: string
+        format: date-time
+        description: |
+          The validity of the shopping cart price
+        readOnly: true
+      priceCartItem:
+        type: array
+        items:
+          $ref: '#/definitions/PriceCartItem'
+      cartTotalPrice:
+        type: array
+        items:
+          $ref: '#/definitions/CartPrice'
+      immediatePromotion:
+        type: array
+        items:
+          $ref: '#/definitions/ImmediatePromotion'
+        x-dox-DesignNote: |
+          A reference to the Immediate Promotions with details
+      message:
+        type: array
+        items:
+          $ref: '#/definitions/PriceShoppingCartMessage'
+      relatedParty:
+        type: array
+        description: |
+          The party associated with the price product shopping cart
+        items:
+          $ref: '#/definitions/RelatedPartyRef'
+      priceProduct:
+        $ref: '#/definitions/PriceProduct'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PriceShoppingCartExtension
+        x-dox-NotImplemented: true
+    description: |
+      The price of the shopping cart
+  PriceCartItem:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The ID of the shopping cart item
+      action:
+        type: string
+        description: |
+          The action to be performed on the product (or product offering) associated with the shopping cart item
+      state:
+        type: string
+        description: |
+          The state of the shopping cart item
+      quantity:
+        type: integer
+        description: |
+          The quantity of the shopping cart item
+      productOffering:
+        $ref: '#/definitions/ProductOfferingRef'
+      product:
+        $ref: '#/definitions/ProductRef'
+      priceCartItem:
+        type: array
+        items:
+          $ref: '#/definitions/PriceCartItem'
+      characteristic:
+        type: array
+        items:
+          $ref: '#/definitions/PriceCharacteristic'
+      itemTotalPrice:
+        type: array
+        items:
+          $ref: '#/definitions/CartPrice'
+      itemPrice:
+        type: array
+        items:
+          $ref: '#/definitions/CartPrice'
+      priceItemTerm:
+        type: array
+        items:
+          $ref: '#/definitions/PriceCartTerm'
+      modifyReason:
+        type: array
+        items:
+          $ref: '#/definitions/ModifyReason'
+      metadata:
+        type: array
+        items:
+          $ref: '#/definitions/Metadata'
+      cartItemRelationship:
+        type: array
+        description: |
+          The relationship between the shopping cart items
+        items:
+          $ref: '#/definitions/CartItemRelationship'
+      relatedImmediatePromotion:
+        type: array
+        items:
+          $ref: '#/definitions/CommerceRelatedImmediatePromotion'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PriceShoppingCartExtension
+        x-dox-NotImplemented: true
+    description: |
+      The price of the shopping cart item
+  ProductRef:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The unique ID of the product
+      version:
+        type: string
+        description: |
+          The version of the product
+      status:
+        type: string
+        description: |
+          The state of the product in the product inventory domain
+    description: |
+      The reference to the product associated with the shopping cart item
+  PriceCharacteristic:
+    type: object
+    properties:
+      name:
+        type: string
+        description: |
+          The name (identifier) of the product characteristic
+      value:
+        type: string
+        description: |
+          The value of the product characteristic
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PriceCharacteristicExtension
+        x-dox-NotImplemented: true
+    description: |
+      The product characteristic
+  PriceCartTerm:
+    type: object
+    properties:
+      name:
+        type: string
+        description: |
+          The name of the term
+      type:
+        type: string
+        description: |
+          The type of the term
+      duration:
+        $ref: '#/definitions/Quantity'
+      policyId:
+        type: string
+        description: |
+          The ID of the term policy
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PriceCartTermExtension
+        x-dox-NotImplemented: true
+    description: |
+      The terms of the product offering that could impact the price
+  PriceShoppingCartMessage:
+    type: object
+    properties:
+      type:
+        type: string
+        description: |
+          The PriceShoppingCartMessage implementation discriminator
+        readOnly: true
+      path:
+        type: string
+        description: |
+          The path to the nested Price Product Cart
+        readOnly: true
+      severity:
+        type: string
+        description: |
+          The message severity
+        readOnly: true
+      parameter:
+        type: array
+        description: |
+          The message parameter
+        readOnly: true
+        items:
+          $ref: '#/definitions/PriceShoppingCartMessageParameter'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PriceShoppingCartMessageExtension
+        x-dox-NotImplemented: true
+    description: |
+      The message related to a Price Product Cart
+  PriceShoppingCartMessageParameter:
+    type: object
+    properties:
+      name:
+        type: string
+        description: |
+          The name of the parameter
+        readOnly: true
+      value:
+        type: array
+        description: |
+          The value(s) of the parameter
+        readOnly: true
+        items:
+          type: string
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PriceShoppingCartMessageParameterExtension
+        x-dox-NotImplemented: true
+    description: |
+      The name/value pair of the message parameter
+  PriceProduct:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The identifier of the product
+      status:
+        type: string
+        description: |
+          The status of the product in the Product Inventory domain
+      characteristic:
+        type: array
+        items:
+          $ref: '#/definitions/PriceCharacteristic'
+      productSpecification:
+        $ref: '#/definitions/ProductSpecificationRef'
+      priceProduct:
+        type: array
+        items:
+          $ref: '#/definitions/PriceProduct'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+        x-amdocs:
+          refDefinition: PriceProductExtension
+        x-dox-NotImplemented: true
+    description: |
+      The price of the product
+  ShoppingCartRef:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          The unique identifier of the shopping cart
+        readOnly: true
+      href:
+        type: string
+        format: url
+        description: |
+          Hyperlink to access the shopping cart
+        readOnly: true
+      validation:
+        $ref: '#/definitions/Validation'
+    description: |
+      The reference to the shopping cart
+  ModifyShoppingCart:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          Unique identifier of the shopping cart
+      description:
+        type: string
+        description: |
+          Description of the shopping cart
+      modifyCartItem:
+        type: array
+        description: |
+          The modify cart item definition
+        items:
+          $ref: '#/definitions/ModifyCartItem'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ModifyShoppingCartExtension
+        x-dox-NotImplemented: true
+    description: |
+      The shopping cart that includes cart items that captures data for modifying the customer-owned product
+  ModifyCartItem:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          Unique identifier of the cart item
+      modifyReason:
+        type: array
+        description: |
+          The modify reason associated to the action to be performed on the customer-owned product
+        items:
+          $ref: '#/definitions/ModifyReason'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: ModifyCartItemExtension
+        x-dox-NotImplemented: true
+    description: |
+      The cart item that captures data involved with modifying the customer-owned product
+  PhoneNumberProduct:
+    type: object
+    properties:
+      isPortIn:
+        type: string
+        description: |
+          Indicates whether the number is ported in
+      phoneNumber:
+        type: string
+        description: |
+          The phone number that is used if this property is populated.
+          If the number is ported in, this property can include the temporary number, or the number that is used permanently.
+      portedNumber:
+        type: string
+        description: |
+          The number the customer wishes to port in
+      previousProvider:
+        type: string
+        description: |
+          The former operator name/ID
+      resourceCategory:
+        type: string
+        description: |
+          The type of the phone number
+      modifyReason:
+        $ref: '#/definitions/ModifyReason'
+      characteristic:
+        type: array
+        items:
+          $ref: '#/definitions/ProductCharacteristic'
+      extension:
+        type: object
+        additionalProperties:
+          type: object
+          properties: {}
+          x-amdocs:
+            refDefinition: PhoneNumberProductExtension
+        x-dox-NotImplemented: true
+    description: |
+      The information about the phone number
+parameters:
+  query-relatedPartyID:
+    name: relatedPartyId
+    in: query
+    description: |
+      The ID of the related party
+    required: false
+    type: string
+  query-role:
+    name: role
+    in: query
+    description: |
+      The role of the related party
+    required: false
+    type: string
+  query-action:
+    name: action
+    in: query
+    description: |
+      The action to be performed: add, replace, or remove
+    required: true
+    type: string
+  query-nestedCartItemID:
+    name: nestedCartItemId
+    in: query
+    description: |
+      The ID of the nested cart item
+    required: false
+    type: array
+    items:
+      type: string
+      minLength: 1
+    collectionFormat: multi
+  query-rootProductId:
+    name: rootProductId
+    in: query
+    description: |
+      The root ID of the customer-owned product
+    required: false
+    type: string
+  query-shoppingCartId:
+    name: shoppingCartId
+    in: query
+    description: |
+      The id of the shopping cart
+    required: false
+    type: string
+  query-nestedPriceCartItemId:
+    name: nestedPriceCartItemId
+    in: query
+    description: |
+      The ID of the nested cart item
+    required: false
+    type: string
+  query-cartPriceId:
+    name: cartPriceId
+    in: query
+    description: |
+      The IDs of the relevant cart price
+      If not provided, all the cart prices are assumed to be relevant
+    required: false
+    type: array
+    items:
+      type: string
+    collectionFormat: multi

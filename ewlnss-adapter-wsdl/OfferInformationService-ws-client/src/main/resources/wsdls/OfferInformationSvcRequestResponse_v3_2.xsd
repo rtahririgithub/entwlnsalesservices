@@ -1,0 +1,539 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2016 rel. 2 (x64) (http://www.altova.com) by TELUS (TELUS) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:tns="http://xmlschema.tmi.telus.com/srv/MSO/MassMarketSalesMgmt/OfferInformationSvcRequestResponse_v3"
+           xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9"
+           xmlns:oi="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/OfferInformationTypes_v3"
+           xmlns:chnl="http://xmlschema.tmi.telus.com/xsd/Partner/Partner/ChannelPartnerCommon_v2"
+           targetNamespace="http://xmlschema.tmi.telus.com/srv/MSO/MassMarketSalesMgmt/OfferInformationSvcRequestResponse_v3"
+           elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.2">
+  <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9"
+             schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9_1.xsd"/>
+  <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Partner/Partner/ChannelPartnerCommon_v2"
+             schemaLocation="http://xmlschema.tmi.telus.com/xsd/Partner/Partner/ChannelPartnerCommon_v2_0.xsd"/>
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/OfferInformationTypes_v3"
+             schemaLocation="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/OfferInformationTypes_v3_2.xsd"/>
+
+  
+  <xs:element name="getOfferListForCustomer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customer" type="tns:Customer" minOccurs="1">
+          <xs:annotation>
+            <xs:documentation>If customer id is not populated, it is implied that customer is new to TELUS and does not have any wireline products</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="outlet" type="chnl:OutletInfo" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Outlet information</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="wirelineTransactionalContext" type="tns:WirelineTransactionalContext" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Context to filter offers</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getOfferListForCustomerResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ect:ResponseMessage">
+          <xs:sequence>
+            <xs:element name="offerList" type="oi:Offer" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>List of wireline Offers</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getOfferSummaryListForCustomer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customer" type="tns:Customer" minOccurs="1">
+          <xs:annotation>
+            <xs:documentation>If customer id is not populated, it implies customer is new to TELUS and does not have any wireline products</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="outlet" type="chnl:OutletInfo" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Outlet information</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="wirelineTransactionalContext" type="tns:WirelineTransactionalContext" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Context to filter offers</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getOfferSummaryListForCustomerResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ect:ResponseMessage">
+          <xs:sequence>
+            <xs:element name="offerList" type="oi:OfferSummary" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>List of summarized wireline Offers</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getOfferListByPromotionCodeForCustomer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customer" type="tns:Customer" minOccurs="1">
+          <xs:annotation>
+            <xs:documentation>If customer id is not populated, it implies customer is new to TELUS and does not have any wireline products</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="promotionCode" type="xs:string" minOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Alpha numeric string representing the promotion code for a code based offer.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="outlet" type="chnl:OutletInfo" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Outlet information</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="wirelineTransactionalContext" type="tns:WirelineTransactionalContext" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Context to filter offers</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getOfferListByPromotionCodeForCustomerResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ect:ResponseMessage">
+          <xs:sequence>
+            <xs:element name="promoCodeOfferListResponse" type="tns:PromotionCodeOfferListResponse" minOccurs="1">
+              <xs:annotation>
+                <xs:documentation>Response may contain:
+                                    1. List of offers related to promoCode program
+                                    2. Promotion information
+                                    3. List of error codes, if promoCode does not exist or subscriber not eligible
+                                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getSweetenerListByOfferSummaryListForCustomer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="customer" type="tns:Customer" minOccurs="1"/>
+        <xs:element name="offerHeaderList" type="oi:OfferHeader" minOccurs="1" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>Offer Summary List</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="outlet" type="chnl:OutletInfo" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Outlet information</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="wirelineTransactionalContext" type="tns:WirelineTransactionalContext" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Context to filter offers</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getSweetenerListByOfferSummaryListForCustomerResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ect:ResponseMessage">
+          <xs:sequence>
+            <xs:sequence>
+              <xs:element name="sweetenerList" type="oi:Sweetener" minOccurs="0" maxOccurs="unbounded">
+                <xs:annotation>
+                  <xs:documentation>List of eligible sweetener Offers</xs:documentation>
+                </xs:annotation>
+              </xs:element>
+            </xs:sequence>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getPerkListByOfferIdList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="lineOfBusinessCd" type="xs:string" minOccurs="1">
+          <xs:annotation>
+            <xs:documentation>WLS - wireless, WLN - wireline </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="existingLineInd" type="xs:boolean" minOccurs="1"/>
+        <xs:element name="brandId" type="xs:long" minOccurs="1"/>
+        <xs:element name="accountTypeCode" type="xs:string" minOccurs="1"/>
+        <xs:element name="accountSubTypeCode" type="xs:string" minOccurs="1"/>
+        <xs:element name="outlet" type="chnl:OutletInfo" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Optional outlet element</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="offerHeaderList" type="oi:OfferHeader" minOccurs="1" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>Entity id; combination of program id, program code and offer id
+                        </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getPerkListByOfferIdListResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ect:ResponseMessage">
+          <xs:sequence>
+            <xs:element name="perkList" type="oi:Sweetener" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>List of eligible perk Offers</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getPerkSummaryListByOfferIdList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="lineOfBusinessCd" type="xs:string" minOccurs="1">
+          <xs:annotation>
+            <xs:documentation>WLS - wireless, WLN - wireline</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="existingLineInd" type="xs:boolean" minOccurs="1"/>
+        <xs:element name="brandId" type="xs:long" minOccurs="1"/>
+        <xs:element name="accountTypeCode" type="xs:string" minOccurs="1"/>
+        <xs:element name="accountSubTypeCode" type="xs:string" minOccurs="1"/>
+        <xs:element name="outlet" type="chnl:OutletInfo" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Optional outlet element</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="offerHeaderList" type="oi:OfferHeader" minOccurs="1" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>Entity id; combination of program id, program code and offer id
+                        </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="existingServiceCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>Mobility, TTV, SING, HSIC</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getPerkSummaryListByOfferIdListResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ect:ResponseMessage">
+          <xs:sequence>
+            <xs:element name="perkSummaryList" type="oi:SweetenerSummary" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>List of eligible summarized perk offers</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAccessoryOfferSummaryList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="transactionalContext" type="tns:AccessoryTransactionalContext" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="productList" type="oi:AccessoryEquipmentProduct" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+          <xs:documentation>products that were scanned at POS
+                        </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="brandId" type="xs:long" minOccurs="1"/>
+        <xs:element name="outlet" type="chnl:OutletInfo" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>POS outlet element</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="lineOfBusinessCd" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>WLS - wireless, WLN - wireline </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="wirelineTransactionalContext" type="tns:WirelineTransactionalContext" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Wireline transaction context used to filter offers</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="customer" type="tns:Customer" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Passed for an existing customer. Contains customer basic information with existing wireline products</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAccessoryOfferSummaryListResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ect:ResponseMessage">
+          <xs:sequence>
+            <xs:element name="offerList" type="oi:OfferSummary" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>List of Accessory offers</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAccessoryOfferList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="transactionalContext" type="tns:AccessoryTransactionalContext" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="productList" type="oi:AccessoryEquipmentProduct" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>products that were scanned at POS</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="brandId" type="xs:long" minOccurs="1"/>
+        <xs:element name="outlet" type="chnl:OutletInfo" minOccurs="1">
+          <xs:annotation>
+            <xs:documentation>POS outlet element</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+       <xs:element name="lineOfBusinessCd" type="xs:string" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>WLS - wireless, WLN - wireline </xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="wirelineTransactionalContext" type="tns:WirelineTransactionalContext" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Wireline transaction context used to filter offers</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="customer" type="tns:Customer" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Passed for an existing customer. Contains customer basic information with existing wireline products</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getAccessoryOfferListResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ect:ResponseMessage">
+          <xs:sequence>
+            <xs:element name="offerList" type="oi:Offer" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>List of Accessory offers</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getOfferListByOfferIdentifierList">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="brandId" type="xs:long" minOccurs="1"/>
+        <xs:element name="outlet" type="chnl:OutletInfo" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Mandatory outlet element</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="offerIdentifierList" type="oi:OfferIdentifier" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>Offer Identifier List that was returned in Summary. Not to exceed 20 per call.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="wirelineTransactionalContext" type="tns:WirelineTransactionalContext" minOccurs="0" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>Context to filter offers</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getOfferListByOfferIdentifierListResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ect:ResponseMessage">
+          <xs:sequence>
+            <xs:element name="offerList" type="oi:Offer" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>List of offers</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="reloadOfferItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="offerTypeCode" type="xs:string" minOccurs="1" maxOccurs="1">
+          <xs:annotation>
+            <xs:documentation>WIRELESS, WIRELINE, ACCESSORY</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="programIdList" type="xs:long" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>List of program ids to be reloaded</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="componentCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+          <xs:annotation>
+            <xs:documentation>List of component codes to be reloaded</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="reloadOfferItemResponse">
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="ect:ResponseMessage">
+          <xs:sequence>
+            <xs:element name="offerItemReloadResultList" type="tns:OfferItemReloadResult" minOccurs="0" maxOccurs="unbounded"></xs:element>
+          </xs:sequence>
+        </xs:extension>
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <!--  ================================================================= -->
+  <!--  Types                                                             -->
+  <!--  ================================================================= -->
+  <xs:complexType name="PromotionCodeOfferListResponse">
+    <xs:sequence>
+      <xs:element name="offerList" type="oi:Offer" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="programPromotion" type="oi:ProgramPromotion" minOccurs="0"/>
+      <xs:element name="validationErrorList" type="ect:ResponseMessage" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element name="customerId" type="xs:long" minOccurs="0"/>
+      <xs:element name="customerBillingProvinceCd" type="xs:string" minOccurs="0"/>
+      <xs:element name="customerBillingCityCd" type="xs:string" minOccurs="0"/>
+      <xs:element name="accountTypeCode" type="xs:string" minOccurs="1"/>
+      <xs:element name="creditValueCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="brandId" type="xs:long" minOccurs="1"/>
+      <xs:element name="technologyTypeCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="forborneInd" type="xs:boolean" minOccurs="1"/>
+      <xs:element name="productInstanceList" type="tns:ProductInstance" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="serviceProvinceCd" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceCityCd" type="xs:string" minOccurs="0"/>
+      <xs:element name="boltOnInd" type="xs:boolean" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProductInstance">
+    <xs:sequence>
+      <xs:element name="productTypeCode" type="xs:string" minOccurs="1"/>
+      <xs:element name="statusCode" type="xs:string" minOccurs="0"/>
+      <xs:element name="componentList" type="tns:Component" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="contractTermCnt" type="xs:integer" minOccurs="0"/>
+      <xs:element name="reedemedGiftInd" type="xs:boolean" minOccurs="0" >
+         <xs:annotation>
+          <xs:documentation>True if there is a redeemed gift for this product instance, else false</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Component">
+    <xs:sequence>
+      <xs:element name="productCatalogId" type="xs:long" minOccurs="1"/>
+      <xs:element name="productName" type="xs:string" minOccurs="0"/>
+      <xs:element name="serviceTypeCode" type="xs:string" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AccessoryTransactionalContext">
+    <xs:sequence>
+      <xs:element name="transactionalOffer" type="oi:OfferHeader" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Activation or Renewal Offer Header</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="transactionTypeCd" type="xs:string" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Mandatory for offerEligibilityTypeCd = TRANSACTIONAL. Valid values are A - Activation, R- renewal, M - Migration</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="contractTermId" type="xs:integer" minOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Mandatory for offerEligibilityTypeCd = TRANSACTIONAL. Term in months: 0, 12, 24, 36</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="productCode" type="xs:string" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Transactional product code, such as activation handset SKU</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WirelineTransactionalContext">
+    <xs:sequence>
+       <xs:element name="transactionalProductList" type="tns:TransactionalProduct" minOccurs="1" maxOccurs="unbounded"/>
+       <xs:element name="fetchBundleOfferInd" type="xs:boolean" minOccurs="1"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransactionalProduct">
+    <xs:sequence>
+      <xs:element name="productCode" type="xs:string" minOccurs="1"/>
+      <xs:element name="transactionTypeCd" type="xs:string" minOccurs="1"/>
+      <xs:element name="contractTermCnt" type="xs:integer" minOccurs="0"/>
+      <xs:element name="productCatalogIdList" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="recontractInd" type="xs:boolean" minOccurs="0"/>
+      <xs:element name="redeemedDiscountIdList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+        <xs:annotation>
+          <xs:documentation>List of Discount Ids that customer is to redeem as part of this transaction</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OfferItemReloadResult">
+    <xs:annotation>
+      <xs:documentation>Reload result per offer item</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="offerTypeCode" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>WIRELESS, WIRELINE, ACCESSORY</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="offerItemName" type="xs:string" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Program, Offer, Component</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="offerItemReloadCount" type="xs:long" minOccurs="1" maxOccurs="1">
+        <xs:annotation>
+          <xs:documentation>Count of successfully completed reloads for the given offer item</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

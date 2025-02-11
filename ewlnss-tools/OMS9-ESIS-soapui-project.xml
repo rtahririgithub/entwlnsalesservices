@@ -1,0 +1,1555 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="96d2c52c-42f3-4d6e-ac40-6b284b673237" activeEnvironment="Default" name="OMS9_ESIS" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="4ec0271b-c7ac-46fa-95e6-bbfd7b7ecca9" wadlVersion="http://wadl.dev.java.net/2009/02" name="EnterpriseSalesInformationRESTSvc" type="rest" basePath="/v2/mso/channelsalesmgmt/enterprise-sales-information-service" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>This service provides the interface for operations to retrieve information required to build the ESS shopping cart, and submit the sales</con:description><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://142.63.230.63:7001/MSO_REST_EWLNSS_ESIS</con:endpoint><con:endpoint>http://L034805:8089/</con:endpoint><con:endpoint>http://localhost:7001/MSO_REST_EWLNSS_ESIS</con:endpoint><con:endpoint>http://virtserver.swaggerhub.com</con:endpoint><con:endpoint>https://virtserver.swaggerhub.com</con:endpoint></con:endpoints><con:resource name="/available-product-plan" path="/available-product-item" id="f5612111-06dc-4864-a61e-c20a2364615a"><con:settings/><con:parameters/><con:method name="getAvailableProductPlans" id="d3956b14-8819-46c6-a7ac-3a4828d5e880" method="GET"><con:description>
+Get available product plans for the sale.</con:description><con:settings/><con:parameters><con:parameter required="true"><con:name>salesTransactionId</con:name><con:value/><con:style>QUERY</con:style><con:default/><con:description>Identifier of the Shopping Cart</con:description></con:parameter><con:parameter required="true"><con:name>shopping-cart-id</con:name><con:style>QUERY</con:style><con:description>Identifier of the Shopping Cart</con:description></con:parameter></con:parameters><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>500</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:ava="http://L034805/v2/mss/channelsalesmgmt/enterprise-sales-InformationService/available-product-plan">ava:Fault</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=UTF-8</con:mediaType><con:status>404</con:status><con:params/><con:element>html</con:element></con:representation><con:request name="Request 1" id="ee4dcd99-023e-4ae5-8c30-7c01860fc07d" mediaType="application/json"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://142.63.230.63:7001/MSO_REST_EWLNSS_ESIS</con:endpoint><con:request/><con:originalUri>http://L034805/v2/mss/channelsalesmgmt/enterprise-sales-InformationService/available-product-plan</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="salesTransactionId" value="0007"/>
+  <con:entry key="shopping-cart-id" value="0002"/>
+</con:parameters><con:parameterOrder><con:entry>salesTransactionId</con:entry><con:entry>shopping-cart-id</con:entry></con:parameterOrder></con:request></con:method></con:resource><con:resource name="available-install-detail" path="/available-install-detail" id="70b0163f-f37e-4fa6-b625-cb1a40c89b78"><con:settings/><con:parameters/><con:method name="Method 1" id="72a63157-e944-4b15-bbda-d6737c93a295" method="POST"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:ava="http://L034805/v2/mso/channelsalesmgmt/enterprise-sales-information-service/available-install-detail">ava:Fault</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:ava="http://L034805/v2/mso/channelsalesmgmt/enterprise-sales-information-service/available-install-detail">ava:Response</con:element></con:representation><con:request name="Request 1" id="5d720ac5-36ed-4a38-b4db-1a54cbdc809c" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://142.63.230.63:7001/MSO_REST_EWLNSS_ESIS</con:endpoint><con:request>{
+  "operationHeader": {
+	"salesTransactionId": "0004"
+  },
+  "shoppingCartId": "1111",
+  "fromDate": "2018-08-20",
+  "toDate": "2018-08-30",
+  "combinationRequiredIndicator": false
+}
+</con:request><con:originalUri>http://L034805/v2/mso/channelsalesmgmt/enterprise-sales-information-service/available-install-detail</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:restMockService id="37f205bc-8653-4e28-8f2f-367954301637" port="8089" path="/" host="L034805" name="MOCK_ESIS"><con:settings/><con:properties/><con:restMockAction name="/AmanPS/ESISRestSvc/1.0.0/available-product-plan" method="GET" resourcePath="/v2/mso/channelsalesmgmt/enterprise-sales-information-service/available-product-item" id="c884182f-a59e-4657-9ac2-ef726945d663"><con:settings/><con:defaultResponse>9_error_system_exception</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>
+
+log.info "inside ESIS MOCK"
+
+def queryString = mockRequest.getRequest().getQueryString()
+log.info "QueryString: " + queryString
+
+
+String[] fields = queryString.split("&amp;")
+
+String salesTransactionId = "";
+String shoppingCartId = "";
+
+ 
+fields.each{  
+
+	def (value1, value2) = it.tokenize( '=' )
+ 	if (value1.equalsIgnoreCase("salestransactionid"))
+		salesTransactionId = value2
+		
+
+	if (value1.equalsIgnoreCase("shopping-cart-id"))
+		shoppingCartId = value2
+
+}
+
+
+log.info("salesTransactionid = " + salesTransactionId)
+log.info("shopping-cart-id = " + shoppingCartId)
+
+if (salesTransactionId == "0001")
+	return "1_ok_0001"
+else if (salesTransactionId == "0006")
+	return "2_ok_0006"
+else if (salesTransactionId == "0007")
+	return "3_ok_0007"	
+	
+return "9_error_system_exception"
+
+</con:dispatchPath><con:response name="1_ok_0001_old" id="42463af9-105f-4314-9867-6897e8a30b60" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>[  
+   {  
+      "internetProductItems":[  
+         {  
+            "productItemGroupCategories":[  
+               {  
+                  "groupCategory":{  
+                     "groupType":"Other"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1543254",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"HS 3 MO Discount - $26"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":true,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "discountCode":"HS-25-MTM-PM",
+                        "marketOfferClassification":{  
+                           "discountInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"RECURRING",
+                           "priceAmount":{  
+                              "value":26.0
+                           },
+                           "recurrenceCount":3,
+                           "priceAlterationType":"DISCOUNT"
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"700473",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Internet 25"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "includedInd":true,
+                        "preSelectedInd":true,
+                        "mandatoryInd":true,
+                        "discountCode":"string",
+                        "marketOfferClassification":{  
+                           "productComponentInd":true
+                        },
+                        "productItemPrice":{  
+                           "pricingType":"RECURRING",
+                           "priceAmount":{  
+                              "value":76.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1544479",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"HS 1 MO Student Discount - $40"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "discountCode":"HS-25-STUDENT-PM",
+                        "marketOfferClassification":{  
+                           "discountInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"ONE_TIME",
+                           "priceAmount":{  
+                              "value":40.0
+                           },
+                           "recurrenceCount":1,
+                           "priceAlterationType":"DISCOUNT"
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1544321",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"HS 8 MO Student Discount - $36"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "discountCode":"HS-25-STUDENT-PM",
+                        "marketOfferClassification":{  
+                           "discountInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"ONE_TIME",
+                           "priceAmount":{  
+                              "value":36.0
+                           },
+                           "recurrenceCount":8,
+                           "priceAlterationType":"DISCOUNT"
+                        }
+                     }
+                  ],
+                  "quantityAllowed":{  
+                     "minimumQty":0,
+                     "maximumQty":0
+                  }
+               }
+            ],
+            "equipments":[  
+               {  
+                  "quantityAllowed":{  
+                     "minimumQty":0,
+                     "maximumQty":1
+                  },
+                  "rentalEquipmentList":{  
+                     "productItemIdentifier":{  
+                        "productCatalogueId":"101104",
+                        "parentProductCatalogueId":"101102"
+                     },
+                     "equipmentType":"HIGH_SPEED_MODEM",
+                     "materialItemCode":"2368850",
+                     "includedInd":"true",
+                     "equipmentDescription":{  
+                        "localeTxt":"en",
+                        "valueTxt":"Advanced Wi-Fi Modem"
+                     },
+                     "deliveryMethods":[  
+                        "INSTALLER"
+                     ],
+                     "priceAmount":0
+                  }
+               }
+            ]
+         }
+      ]
+   }
+]</con:responseContent></con:response><con:response name="9_error_system_exception" id="2805a25d-9eb1-42c5-84b4-6aa205bae614" httpResponseStatus="400" mediaType="application/json"><con:settings/><con:responseContent>{
+  "responseMessages": [
+    {
+      "errorCode": "ESS-FFH-00009001",
+      "messageTypeCd": "ERROR",
+      "messages": [
+        {
+          "messageTxt": "System Exception",
+          "localeCd": "en"
+        }
+      ],
+      "contextDataAttributes": [
+        {
+          "attributeTypeTxt": "EXCEPTION",
+          "attributeValueTxt": "fail to get available product plans - system exception"
+        } 
+      ]
+    }
+  ]
+}
+</con:responseContent></con:response><con:response name="1_ok_0001" id="14b61892-677f-4926-be31-13074364b32e" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>[  
+   {  
+      "internetProductItems":[  
+         {  
+            "productItemGroupCategories":[  
+               {  
+                  "groupCategory":{  
+                     "groupType":"Other"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1543254",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"HS 3 MO Discount - $26"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":true,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "discountCode":"HS-25-MTM-PM",
+                        "marketOfferClassification":{  
+                           "discountInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"RECURRING",
+                           "priceAmount":{  
+                              "value":26.0
+                           },
+                           "recurrenceCount":3,
+                           "priceAlterationType":"DISCOUNT"
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"700473",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Internet 25"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "includedInd":true,
+                        "preSelectedInd":true,
+                        "mandatoryInd":true,
+                        "marketOfferClassification":{  
+                           "productComponentInd":true
+                        },
+                        "productItemPrice":{  
+                           "pricingType":"RECURRING",
+                           "priceAmount":{  
+                              "value":76.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1544479",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"HS 1 MO Student Discount - $40"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "discountCode":"HS-25-STUDENT-PM",
+                        "marketOfferClassification":{  
+                           "discountInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"ONE_TIME",
+                           "priceAmount":{  
+                              "value":40.0
+                           },
+                           "recurrenceCount":1,
+                           "priceAlterationType":"DISCOUNT"
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1544321",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"HS 8 MO Student Discount - $36"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "discountCode":"HS-25-STUDENT-PM",
+                        "marketOfferClassification":{  
+                           "discountInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"ONE_TIME",
+                           "priceAmount":{  
+                              "value":36.0
+                           },
+                           "recurrenceCount":8,
+                           "priceAlterationType":"DISCOUNT"
+                        }
+                     }
+                  ]
+               }
+            ],
+            "equipments":[  
+               {  
+                  "quantityAllowed":{  
+                     "minimumQty":0,
+                     "maximumQty":1
+                  },
+                  "rentalEquipmentList":{  
+                     "productItemIdentifier":{  
+                        "productCatalogueId":"101104",
+                        "parentProductCatalogueId":"101102"
+                     },
+                     "equipmentType":"HIGH_SPEED_MODEM",
+                     "materialItemCode":"2368850",
+                     "includedInd":"true",
+                     "equipmentDescription":{  
+                        "localeTxt":"en",
+                        "valueTxt":"Advanced Wi-Fi Modem"
+                     },
+                     "deliveryMethods":[  
+                        "INSTALLER"
+                     ],
+                     "priceAmount":0
+                  }
+               }
+            ]
+         }
+      ]
+   }
+]</con:responseContent></con:response><con:response name="2_ok_0006" id="e4e7b46c-79b4-40e3-aa6a-1e35bdc3e2f0" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>[  
+   {  
+      "internetProductItems":[  
+         {  
+            "productItemGroupCategories":[  
+               {  
+                  "groupCategory":{  
+                     "groupType":"Other"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"838000",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Internet 50"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "includedInd":true,
+                        "preSelectedInd":true,
+                        "mandatoryInd":true,
+                        "marketOfferClassification":{  
+                           "productComponentInd":true
+                        },
+                        "productItemPrice":{  
+                           "pricingType":"RECURRING",
+                           "priceAmount":{  
+                              "value":80.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1543611",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"HS 3 MO Discount - $30"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "discountCode":"HS-50-MTM-PM",
+                        "marketOfferClassification":{  
+                           "discountInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"RECURRING",
+                           "priceAmount":{  
+                              "value":30.0
+                           },
+                           "recurrenceCount":3,
+                           "priceAlterationType":"DISCOUNT"
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1544321",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productItemName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"HS 8 MO Student Discount - $36"
+                        },
+                        "productItemDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "discountCode":"HS-25-STUDENT-PM",
+                        "marketOfferClassification":{  
+                           "discountInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"ONE_TIME",
+                           "priceAmount":{  
+                              "value":36.0
+                           },
+                           "recurrenceCount":8,
+                           "priceAlterationType":"DISCOUNT"
+                        }
+                     }
+                  ]
+               }
+            ],
+            "equipments":[  
+               {  
+                  "quantityAllowed":{  
+                     "minimumQty":0,
+                     "maximumQty":1
+                  },
+                  "rentalEquipmentList":{  
+                     "productItemIdentifier":{  
+                        "productCatalogueId":"101104",
+                        "parentProductCatalogueId":"101102"
+                     },
+                     "equipmentType":"HIGH_SPEED_MODEM",
+                     "materialItemCode":"2368850",
+                     "includedInd":"true",
+                     "equipmentDescription":{  
+                        "localeTxt":"en",
+                        "valueTxt":"Advanced Wi-Fi Modem"
+                     },
+                     "deliveryMethods":[  
+                        "INSTALLER"
+                     ],
+                     "priceAmount":0
+                  }
+               },
+               {  
+                  "quantityAllowed":{  
+                     "minimumQty":2,
+                     "maximumQty":2
+                  },
+                  "buyEquipmentList":{  
+                     "productItemIdentifier":{  
+                        "productCatalogueId":"1543027",
+                        "parentProductCatalogueId":"1543026"
+                     },
+                     "equipmentType":"BOOST_WIFI",
+                     "equipmentSubType":"STARTER",
+                     "materialItemCode":"2379696",
+                     "includedInd":"true",
+                     "equipmentDescription":{  
+                        "localeTxt":"en",
+                        "valueTxt":"TELUS Boost Wi-Fi Starter Pack Equipment"
+                     },
+                     "deliveryMethods":[  
+                        "INSTALLER",
+                        "SHIPPED",
+                        "INSTORE"
+                     ],
+                     "priceAmount":240
+                  }
+               },
+               {  
+                  "quantityAllowed":{  
+                     "minimumQty":2,
+                     "maximumQty":2
+                  },
+                  "buyEquipmentList":{  
+                     "productItemIdentifier":{  
+                        "productCatalogueId":"1543028",
+                        "parentProductCatalogueId":"1543026"
+                     },
+                     "equipmentType":"BOOST_WIFI",
+                     "equipmentSubType":"EXPANSION",
+                     "materialItemCode":"2379700",
+                     "includedInd":"true",
+                     "equipmentDescription":{  
+                        "localeTxt":"en",
+                        "valueTxt":"TELUS Boost Wi-Fi Expansion Pack Equipment"
+                     },
+                     "deliveryMethods":[  
+                        "INSTALLER",
+                        "SHIPPED",
+                        "INSTORE"
+                     ],
+                     "priceAmount":120
+                  }
+               }
+            ]
+         }
+      ]
+   }
+]</con:responseContent></con:response><con:response name="3_ok_0007" id="067e1dcc-09e1-4920-9164-3932523f1fa1" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>[  
+   {  
+      "internetProductItems":[  
+         {  
+            "productItemGroupCategories":[  
+               {  
+                  "groupCategory":{  
+                     "groupType":"OTHER"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"700489",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Optik Internet 15"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":true,
+                        "mandatoryInd":true,
+                        "includedInd":true,
+                        "marketOfferClassification":{  
+                           "productComponentInd":true
+                        },
+                        "productItemPriceCharge":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":71.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1543610",
+                           "parentProductCatalogueId":"101082"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"HS 3 MO Discount - $21"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":true,
+                        "mandatoryInd":false,
+                        "discountCode":"MR-HS-15-MTM-PM",
+                        "includedInd":false,
+                        "marketOfferClassification":{  
+                           "discountInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":21.0
+                           },
+                           "recurrenceCount":3
+                        }
+                     }
+                  ]
+               }
+            ],
+            "equipments":[  
+               {  
+                  "quantityAllowed":{  
+                     "minimumQty":0,
+                     "maximumQty":1
+                  },
+                  "rentalEquipmentList":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"101104",
+                           "parentProductCatalogueId":"101102"
+                        },
+                        "equipmentType":"HIGH_SPEED_MODEM",
+                        "materialItemCode":"2368850",
+                        "includedInd":"true",
+                        "equipmentDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Advanced Wi-Fi Modem"
+                        },
+                        "deliveryMethods":[  
+                           "INSTALLER"
+                        ],
+                        "equipmentPrice":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":0.00
+                           }
+                        }
+                     }
+                  ]
+               }
+            ]
+         }
+      ],
+      "televisionProductItems":[  
+         {  
+            "productItemGroupCategories":[  
+               {  
+                  "groupCategory":{  
+                     "groupType":"Other"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1218038",
+                           "parentProductCatalogueId":"705787"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"You Pick 8 &amp;amp; Movies"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":true,
+                        "mandatoryInd":true,
+                        "includedInd":true,
+                        "marketOfferClassification":{  
+                           "productComponentInd":true
+                        },
+                        "productItemPrice":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":90.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1218031",
+                           "parentProductCatalogueId":"101108"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Essentials 2.0 Pack"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":true,
+                        "mandatoryInd":true,
+                        "includedInd":true,
+                        "marketOfferClassification":{  
+                           "productComponentInd":true
+                        },
+                        "productItemPrice":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":38.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1543262",
+                           "parentProductCatalogueId":"101108"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Optik TV 6 MO Combo Discount - $40"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":true,
+                        "mandatoryInd":false,
+                        "discountCode":"MR-TV-YP8&amp;amp;SPC-2YR-PM",
+                        "includedInd":false,
+                        "marketOfferClassification":{  
+                           "discountInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"RECURRING",
+                           "priceAmount":{  
+                              "value":40.0
+                           },
+                           "recurrenceCount":6,
+                           "priceAlterationType":"DISCOUNT"
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1191003",
+                           "parentProductCatalogueId":"101108"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Optik TV Dealer Purchase Credit $50"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":true,
+                        "mandatoryInd":false,
+                        "discountCode":"MR-TV-SIGNUP-50-PM",
+                        "includedInd":true,
+                        "marketOfferClassification":{  
+                           "sweetenerInd":true
+                        },
+                        "productItemPriceDiscount":{  
+                           "pricingType":"RECURRING",
+                           "priceAmount":{  
+                              "value":50.0
+                           },
+                           "priceAlterationType":"DISCOUNT"
+                        }
+                     }
+                  ]
+               },
+               {  
+                  "groupCategory":{  
+                     "groupType":"Theme Pack"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1218008",
+                           "parentProductCatalogueId":"101253"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"News International"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "marketOfferClassification":{  
+                           "addOnInd":true
+                        },
+                        "productItemPriceCharge":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":7.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1504100",
+                           "parentProductCatalogueId":"101253"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Mandarin Variety"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":true,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "marketOfferClassification":{  
+                           "addOnInd":true
+                        },
+                        "productItemPriceCharge":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":7.0
+                           }
+                        },
+                        "associatedProductItems":[  
+                           {  
+                              "productItemIdentifier":{  
+                                 "productCatalogueId":"1543728",
+                                 "parentProductCatalogueId":"1504100"
+                              },
+                              "productCatalogueName":{  
+                                 "localeTxt":"en",
+                                 "valueTxt":"Optik TV 24 MO Chinese Theme Pack Discount - 100%"
+                              },
+                              "productCatalogueDescription":{  
+                                 "localeTxt":"en",
+                                 "valueTxt":"."
+                              },
+                              "preSelectedInd":true,
+                              "mandatoryInd":false,
+                              "discountCode":"MR-TV-ADD-THEME3-PM",
+                              "includedInd":false,
+                              "marketOfferClassification":{  
+                                 "discountInd":true
+                              },
+                              "productItemPriceDiscount":{  
+                                 "pricingType":"RECURRING",
+                                 "basePriceAmount":{  
+                                    "value":7.0
+                                 },
+                                 "recurrenceCount":24
+                              }
+                           }
+                        ]
+                     }
+                  ]
+               },
+               {  
+                  "groupCategory":{  
+                     "groupType":"Premium"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1365105",
+                           "parentProductCatalogueId":"705785"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"4K Sports Pack"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "marketOfferClassification":{  
+                           "addOnInd":true
+                        },
+                        "productItemPriceCharge":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":0.0
+                           }
+                        }
+                     }
+                  ]
+               },
+               {  
+                  "groupCategory":{  
+                     "groupType":"A La Carte"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"101321",
+                           "parentProductCatalogueId":"101143"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"E!"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"The top global destination for all things pop culture, E! delivers unprecedented access and fascinating profiles of the world's biggest stars, hit reality series and breaking entertainment news."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "marketOfferClassification":{  
+                           "addOnInd":true
+                        },
+                        "productItemPriceCharge":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":4.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"101258",
+                           "parentProductCatalogueId":"101143"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Showcase"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Showcase is the destination for award-winning series and hit Blockbuster movies, where our audiences can escape the ordinary and explore an unconventional entertainment experience. SHOWCASE --Beyond Ordinary."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "marketOfferClassification":{  
+                           "addOnInd":true
+                        },
+                        "productItemPriceCharge":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":5.0
+                           }
+                        }
+                     }
+                  ]
+               },
+               {  
+                  "groupCategory":{  
+                     "groupType":"Add On Packs"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1432100",
+                           "parentProductCatalogueId":"101240"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Super Channel (V1)"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":true,
+                        "mandatoryInd":true,
+                        "includedInd":true,
+                        "marketOfferClassification":{  
+                           "addOnInd":true
+                        },
+                        "productItemPriceCharge":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":7.0
+                           }
+                        }
+                     }
+                  ]
+               },
+               {  
+                  "groupCategory":{  
+                     "groupType":"Worldview"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"702236",
+                           "parentProductCatalogueId":"101113"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"ATN SET Max"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"ATN SET MAX is a forerunner amongst Hindi movie channels offering not only Bollywood blockbusters, but also the latest from Hollywood dubbed in Hindi. SET Max provides its viewers with the biggest and best of Hindi movies and live events."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "marketOfferClassification":{  
+                           "addOnInd":true
+                        },
+                        "productItemPriceCharge":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":7.0
+                           }
+                        }
+                     }
+                  ]
+               },
+               {  
+                  "groupCategory":{  
+                     "groupType":"Movie Packs"
+                  },
+                  "productItems":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1442100",
+                           "parentProductCatalogueId":"101195"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"TMN Combo with CraveTV"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "marketOfferClassification":{  
+                           "addOnInd":true
+                        },
+                        "productItemPriceCharge":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":22.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"1438100",
+                           "parentProductCatalogueId":"101195"
+                        },
+                        "productCatalogueName":{  
+                           "localeTxt":"en",
+                           "valueTxt":"TMN &amp; HBO Canada with CraveTV"
+                        },
+                        "productCatalogueDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"."
+                        },
+                        "preSelectedInd":false,
+                        "mandatoryInd":false,
+                        "includedInd":false,
+                        "marketOfferClassification":{  
+                           "addOnInd":true
+                        },
+                        "productItemPriceCharge":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":20.0
+                           }
+                        }
+                     }
+                  ]
+               }
+            ],
+            "equipments":[  
+               {  
+                  "quantityAllowed":{  
+                     "minimumQty":1,
+                     "maximumQty":6
+                  },
+                  "buyEquipmentList":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"101111",
+                           "parentProductCatalogueId":"101110"
+                        },
+                        "equipmentType":"SET_TOP_BOX",
+                        "modelName":"IPN430",
+                        "materialItemCode":"1638336",
+                        "includedInd":"false",
+                        "equipmentDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Optik TV HD PVR"
+                        },
+                        "deliveryMethods":[  
+                           "INSTALLER"
+                        ],
+                        "equipmentPrice":{  
+                           "pricingType":"ONE_TIME",
+                           "basePriceAmount":{  
+                              "value":250.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"101111",
+                           "parentProductCatalogueId":"101110"
+                        },
+                        "equipmentType":"SET_TOP_BOX",
+                        "modelName":"4K PVR",
+                        "materialItemCode":"2314985",
+                        "includedInd":"false",
+                        "equipmentDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Optik TV 4K PVR"
+                        },
+                        "deliveryMethods":[  
+                           "INSTALLER"
+                        ],
+                        "equipmentPrice":{  
+                           "pricingType":"ONE_TIME",
+                           "basePriceAmount":{  
+                              "value":450.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"101111",
+                           "parentProductCatalogueId":"101110"
+                        },
+                        "equipmentType":"SET_TOP_BOX",
+                        "modelName":"4K Wireless box",
+                        "materialItemCode":"2314989",
+                        "includedInd":"false",
+                        "equipmentDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Optik TV 4K Wireless box"
+                        },
+                        "deliveryMethods":[  
+                           "INSTALLER"
+                        ],
+                        "equipmentPrice":{  
+                           "pricingType":"ONE_TIME",
+                           "basePriceAmount":{  
+                              "value":250.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"101111",
+                           "parentProductCatalogueId":"101110"
+                        },
+                        "equipmentType":"SET_TOP_BOX",
+                        "modelName":"Wireless HD digital box",
+                        "materialItemCode":"1726174",
+                        "includedInd":"false",
+                        "equipmentDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Optik TV Wireless HD digital box"
+                        },
+                        "deliveryMethods":[  
+                           "INSTALLER"
+                        ],
+                        "equipmentPrice":{  
+                           "pricingType":"ONE_TIME",
+                           "basePriceAmount":{  
+                              "value":150.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"101111",
+                           "parentProductCatalogueId":"101110"
+                        },
+                        "equipmentType":"SET_TOP_BOX",
+                        "modelName":"IPN330",
+                        "materialItemCode":"1638252",
+                        "includedInd":"false",
+                        "equipmentDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Optik TV HD digital box"
+                        },
+                        "deliveryMethods":[  
+                           "INSTALLER"
+                        ],
+                        "equipmentPrice":{  
+                           "pricingType":"ONE_TIME",
+                           "basePriceAmount":{  
+                              "value":150.0
+                           }
+                        }
+                     }
+                  ],
+                  "rentalEquipmentList":[  
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"101111",
+                           "parentProductCatalogueId":"101110"
+                        },
+                        "equipmentType":"SET_TOP_BOX",
+                        "modelName":"Wireless HD digital box",
+                        "materialItemCode":"1726175",
+                        "includedInd":"false",
+                        "equipmentDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Optik TV Wireless HD digital box"
+                        },
+                        "deliveryMethods":[  
+                           "INSTALLER"
+                        ],
+                        "equipmentPrice":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":5.0
+                           }
+                        }
+                     },
+                     {  
+                        "productItemIdentifier":{  
+                           "productCatalogueId":"101111",
+                           "parentProductCatalogueId":"101110"
+                        },
+                        "equipmentType":"SET_TOP_BOX",
+                        "modelName":"4K Wireless box",
+                        "materialItemCode":"2314990",
+                        "includedInd":"false",
+                        "equipmentDescription":{  
+                           "localeTxt":"en",
+                           "valueTxt":"Optik TV 4K Wireless box"
+                        },
+                        "deliveryMethods":[  
+                           "INSTALLER"
+                        ],
+                        "equipmentPrice":{  
+                           "pricingType":"RECURRING",
+                           "basePriceAmount":{  
+                              "value":5.0
+                           }
+                        }
+                     }
+                  ]
+               }
+            ]
+         }
+      ]
+   }
+]</con:responseContent></con:response></con:restMockAction><con:restMockAction name="available-install-detail" method="POST" resourcePath="/v2/mso/channelsalesmgmt/enterprise-sales-information-service/available-install-detail" id="e5127f02-d58b-4573-a38f-17bef611091b"><con:settings/><con:defaultResponse xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>def requestPath = mockRequest.getPath()
+log.info("Sales  ----> ")
+log.info "Path: "+ requestPath
+ 
+log.info(requestPath)
+ 
+def requestBody = mockRequest.getRequestContent()
+log.info "Request body: " + requestBody
+def String salesTransactionId = new groovy.json.JsonSlurper().parseText(requestBody).operationHeader.salesTransactionId;
+
+log.info "salesTransactionId is : ${salesTransactionId}" 
+requestContext.salesTransactionId = salesTransactionId
+
+if (salesTransactionId == "0001"  ){
+	return '1_ok_0001'
+} else if (salesTransactionId == "0002") {
+	return '2_ok_0002'
+} else if (salesTransactionId == "0003")  {
+	return '3_ok_0003'
+}  else {
+	return '9_error_system_exception'
+}
+
+</con:dispatchPath><con:response name="1_ok_0001" id="e9214849-53fa-45d3-90e2-4aee5ab51299" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>{  
+   "productServiceInstallInfo":[  
+      {  
+         "productServiceTypeCd":"TTV",
+         "installTypeCd":"FW",
+         "estimatedAppointmentHours":1.5
+      },
+      {  
+         "productServiceTypeCd":"HSIC",
+         "installTypeCd":"RW",
+         "estimatedAppointmentHours":1.0
+      },
+      {  
+         "productServiceTypeCd":"SING",
+         "installTypeCd":"SW",
+         "estimatedAppointmentHours":2.5
+      }
+   ],
+   "appointmentOptions":[  
+      {  
+         "appointmentDate":"2018-08-20",
+         "dayOfWeekTxt":"Monday",
+         "availableTimeSlots":[  
+            {  
+               "startTime":"08:00:00",
+               "endTime":"09:00:00"
+            },
+            {  
+               "startTime":"12:00:00",
+               "endTime":"13:00:00"
+            },
+            {  
+               "startTime":"16:00:00",
+               "endTime":"17:00:00"
+            }
+         ],
+         "timeZoneCd":"America/Edmonton",
+         "productServiceTypeCdList":[  
+            "TTV",
+            "HSIC",
+            "SING"
+         ],
+         "installationRequiredIndicator":true
+      },
+      {  
+         "appointmentDate":"2018-08-22",
+         "dayOfWeekTxt":"Wednesday",
+         "availableTimeSlots":[  
+            {  
+               "startTime":"08:00:00",
+               "endTime":"09:00:00"
+            },
+            {  
+               "startTime":"12:00:00",
+               "endTime":"13:00:00"
+            },
+            {  
+               "startTime":"16:00:00",
+               "endTime":"17:00:00"
+            }
+         ],
+         "timeZoneCd":"America/Edmonton",
+         "productServiceTypeCdList":[  
+            "TTV",
+            "HSIC",
+            "SING"
+         ],
+         "installationRequiredIndicator":true
+      }
+   ]
+}</con:responseContent></con:response><con:response name="2_ok_0002" id="4c9d2d4d-ecf8-44f4-889c-d6be9f6b35db" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>{  
+   "productServiceInstallInfo":[  
+      {  
+         "productServiceTypeCd":"TTV",
+         "installTypeCd":"FW",
+         "estimatedAppointmentHours":1.5
+      },
+      {  
+         "productServiceTypeCd":"HSIC",
+         "installTypeCd":"RW",
+         "estimatedAppointmentHours":1.5
+      }
+   ],
+   "appointmentOptions":[  
+      {  
+         "appointmentDate":"2018-08-20",
+         "dayOfWeekTxt":"Monday",
+         "availableTimeSlots":[  
+            {  
+               "startTime":"08:00:00",
+               "endTime":"09:00:00"
+            },
+            {  
+               "startTime":"12:00:00",
+               "endTime":"13:00:00"
+            },
+            {  
+               "startTime":"16:00:00",
+               "endTime":"17:00:00"
+            }
+         ],
+         "timeZoneCd":"America/Edmonton",
+         "productServiceTypeCdList":[  
+            "TTV"
+         ],
+         "installationRequiredIndicator":true
+      },
+      {  
+         "appointmentDate":"2018-08-22",
+         "dayOfWeekTxt":"Wednesday",
+         "availableTimeSlots":[  
+            {  
+               "startTime":"08:00:00",
+               "endTime":"09:00:00"
+            },
+            {  
+               "startTime":"12:00:00",
+               "endTime":"13:00:00"
+            },
+            {  
+               "startTime":"16:00:00",
+               "endTime":"17:00:00"
+            }
+         ],
+         "timeZoneCd":"America/Edmonton",
+         "productServiceTypeCdList":[  
+            "TTV"
+         ],
+         "installationRequiredIndicator":true
+      },
+      {  
+         "appointmentDate":"2018-08-20",
+         "dayOfWeekTxt":"Monday",
+         "availableTimeSlots":[  
+            {  
+               "startTime":"08:00:00",
+               "endTime":"09:00:00"
+            },
+            {  
+               "startTime":"12:00:00",
+               "endTime":"13:00:00"
+            },
+            {  
+               "startTime":"16:00:00",
+               "endTime":"17:00:00"
+            }
+         ],
+         "timeZoneCd":"America/Edmonton",
+         "productServiceTypeCdList":[  
+            "HSIC"
+         ],
+         "installationRequiredIndicator":true
+      },
+      {  
+         "appointmentDate":"2018-08-22",
+         "dayOfWeekTxt":"Wednesday",
+         "availableTimeSlots":[  
+            {  
+               "startTime":"08:00:00",
+               "endTime":"09:00:00"
+            },
+            {  
+               "startTime":"12:00:00",
+               "endTime":"13:00:00"
+            },
+            {  
+               "startTime":"16:00:00",
+               "endTime":"17:00:00"
+            }
+         ],
+         "timeZoneCd":"America/Edmonton",
+         "productServiceTypeCdList":[  
+            "HSIC"
+         ],
+         "installationRequiredIndicator":true
+      },
+      {  
+         "appointmentDate":"2018-08-20",
+         "dayOfWeekTxt":"Monday",
+         "availableTimeSlots":[  
+            {  
+               "startTime":"08:00:00",
+               "endTime":"09:00:00"
+            },
+            {  
+               "startTime":"12:00:00",
+               "endTime":"13:00:00"
+            },
+            {  
+               "startTime":"16:00:00",
+               "endTime":"17:00:00"
+            }
+         ],
+         "timeZoneCd":"America/Edmonton",
+         "productServiceTypeCdList":[  
+            "HSIC",
+            "TTV"
+         ],
+         "installationRequiredIndicator":true
+      },
+      {  
+         "appointmentDate":"2018-08-22",
+         "dayOfWeekTxt":"Wednesday",
+         "availableTimeSlots":[  
+            {  
+               "startTime":"08:00:00",
+               "endTime":"09:00:00"
+            },
+            {  
+               "startTime":"12:00:00",
+               "endTime":"13:00:00"
+            },
+            {  
+               "startTime":"16:00:00",
+               "endTime":"17:00:00"
+            }
+         ],
+         "timeZoneCd":"America/Edmonton",
+         "productServiceTypeCdList":[  
+            "HSIC",
+            "TTV"
+         ],
+         "installationRequiredIndicator":true
+      }
+   ]
+}</con:responseContent></con:response><con:response name="3_ok_0003" id="e89bf572-2e12-45dc-ba78-208a7fe44948" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>{  
+   "productServiceInstallInfo":[  
+      {  
+         "productServiceTypeCd":"TTV",
+         "installTypeCd":"FW",
+         "estimatedAppointmentHours":1.5
+      },
+      {  
+         "productServiceTypeCd":"HSIC",
+         "installTypeCd":"RW",
+         "estimatedAppointmentHours":1.5
+      },
+      {  
+         "productServiceTypeCd":"SING",
+         "installTypeCd":"FW"
+      }
+   ],
+   "appointmentOptions":[  
+
+   ]
+}</con:responseContent></con:response><con:response name="9_error_system_exception" id="e28d2d6a-0452-4f23-bf3a-10350c9ab557" httpResponseStatus="400" mediaType="application/json"><con:settings/><con:responseContent>{
+  "responseMessages": [
+    {
+      "errorCode": "ESS-FFH-00009001",
+      "messageTypeCd": "ERROR",
+      "messages": [
+        {
+          "messageTxt": "System Exception",
+          "localeCd": "en"
+        }
+      ],
+      "contextDataAttributes": [
+        {
+          "attributeTypeTxt": "EXCEPTION",
+          "attributeValueTxt": "fail - system exception"
+        } 
+      ]
+    }
+  ]
+}
+</con:responseContent></con:response></con:restMockAction></con:restMockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

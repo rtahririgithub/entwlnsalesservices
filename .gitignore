@@ -1,0 +1,27 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.jar
+
+#ignore the target directory and all children
+target/
+
+#ignore files generated directories during the build process
+#  target/ - default from a Maven build
+#  generated-sources/ - from plugins generating source code
+#  
+target/
+generated-sources/
+
+#ignore the eclipse configuration files
+#.settings/
+#.classpath
+#.project
+
+#ignore Frameworks appCtx.properties file from the EAR deployment
+#   this file will be generated into this location using the replacer-plugin when
+#   updating the build information.
+APP-INF/classes/appCtx.properties

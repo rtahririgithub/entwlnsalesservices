@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+   <modelVersion>4.0.0</modelVersion>
+   
+   <parent>
+      <groupId>telus.csm.act-batch-deploy</groupId>
+      <artifactId>pom-act-batch-deploy</artifactId>
+      <version>v1-SNAPSHOT</version>
+   </parent>
+
+   
+	<artifactId>act-essb-batch</artifactId>
+	<packaging>jar</packaging>
+	<name>act-essb-batch</name>
+
+   <properties>
+     <enforcer.skip>true</enforcer.skip>
+
+      <!--
+      You must exclude all TELUS application jar here plus any unwanted jars to libList.txt
+      
+      A comma-separated list of artifacts to filter from the serialized dependency tree, 
+      or null not to filter any artifacts from the dependency tree. The filter syntax is: 
+        [groupId]:[artifactId]:[type]:[version]
+      where each pattern segment is optional and supports full and partial * wildcards. 
+      An empty pattern segment is treated as an implicit wildcard. 
+      For example, org.apache.* will match all artifacts whose group id starts with 
+      org.apache., and :::*-SNAPSHOT will match all snapshot artifacts.
+
+      <telus-libtree-plugin.excludes>*-shared,*-common,*-deploy</telus-libtree-plugin.excludes> will exclude 
+      all TELUS application jars from the libList.txt provided you do one of the followings   
+       1. For shared transient dependencies (only those found in /apps/common/lib), must specify
+          as a direct dependencies in this pom.xml OR
+       2. Must exclude those non-shared transient dependencies in <telus-libtree-plugin.excludes>
+      
+      \- telus.billingmgmt.sample4-common:referencePDS-domain:jar:1.0.0-SNAPSHOT:compile
+         +- org.jvnet.jaxb2_commons:jaxb2-basics-runtime:jar:0.6.3:compile
+      
+       
+      -->        
+	  <telus-libtree-plugin.excludes>telus.csm.ewlnss*:,telus.csm.ess-common:*,*-shared,*-common,*-deploy,*:luna*,safenet:,:dfc,:telus-core,thirdparty.coherence:,net.sf.opencsv:,:telus-csm-ess*:,:ucss-common:,:csom-delegate-nostub:,:channel-partner-delegate-wl10:,:::*SNAPSHOT*,:ojdbc14*:,:oracle.ucp_11.2.0:,:commons-lang:,:commons-collections:,:TELUS-ConfigurationManager-*:,:sapjcopackClient_wl10:</telus-libtree-plugin.excludes>
+
+      <!-- "liblist" to generate libList.txt "text" to generate the tree -->
+      <telus-libtree-plugin.outputType>liblist</telus-libtree-plugin.outputType>
+
+      <!-- This is mandatory -->
+      <telus-libtree-plugin.skip>false</telus-libtree-plugin.skip>
+
+   </properties>
+   <dependencies>
+      <!-- Add other framework jars here ! -->
+
+      <!-- Leave frameworks6-batch here ! -->
+      <dependency>
+         <groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+		  <artifactId>frameworks-batch</artifactId>
+		  <version>6.7.1</version>
+         <exclusions>
+			<exclusion>
+				<groupId>wsdl4j</groupId>
+				<artifactId>wsdl4j</artifactId>
+			</exclusion>
+		  </exclusions>
+      </dependency>
+	  <dependency>
+       		<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-core</artifactId>
+			<version>6.7.1</version>
+   	  </dependency>
+
+      <dependency>
+		  <groupId>net.sf.opencsv</groupId>
+		  <artifactId>opencsv</artifactId>
+			<version>2.0</version>
+	  </dependency>  
+      <dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+ 	  </dependency>	
+	  
+<!-- NGSP Jan. 2017 addition starts -->	   
+	   <dependency>
+		<groupId>com.oracle.weblogic</groupId>
+		<artifactId>ojdbc6</artifactId>
+		<version>12.1.2-0-0</version>
+	   </dependency>	   
+<!-- NGSP Jan. 2017 addition ends -->   
+ 
+<!-- NGSP Aug 2017 addition starts -->
+ 		<dependency>
+	      	<groupId>org.codehaus.jackson</groupId>
+	      	<artifactId>jackson-core-asl</artifactId>
+	      	<version>1.9.13</version>
+		</dependency>              
+		<dependency>
+	      	<groupId>org.codehaus.jackson</groupId>
+	      	<artifactId>jackson-mapper-asl</artifactId>
+	      	<version>1.9.13</version>
+		</dependency>	
+		<dependency>
+			<groupId>telus.chnlsales.ucss</groupId>
+			<artifactId>ucss-common</artifactId>
+			<version>2.0</version>
+		</dependency>					
+<!-- NGSP Aug 2017 addition ends -->   
+   
+	  <dependency>
+        <groupId>telus.csm.ewlnss.shared</groupId>
+        <artifactId>ewlnss-grid-loader</artifactId>
+		<version>${project.version}</version>
+       </dependency>       
+
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis</artifactId>
+      </dependency>
+
+      <dependency>
+         <groupId>org.mybatis</groupId>
+         <artifactId>mybatis-spring</artifactId>
+      </dependency>      
+      <dependency>
+         <groupId>org.jvnet.jaxb2_commons</groupId>
+         <artifactId>jaxb2-basics-runtime</artifactId>
+				 <version>0.6.3</version>
+			<scope>runtime</scope>
+      </dependency>
+	 <dependency>
+		<groupId>org.jvnet.mimepull</groupId>
+		<artifactId>mimepull</artifactId>
+		<version>1.8</version>
+		<scope>runtime</scope>
+	</dependency>
+      
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>wlfullclient</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>ws.api</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>com.bea.core.xml.beaxmlbeans</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>com.bea.core.stax2</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>glassfish.jaxb</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>glassfish.jaxws.resolver</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>glassfish.jaxws.rt</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>glassfish.jaxws.tools</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>glassfish.xmlstreambuffer</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>glassfish.stax.ex</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>com.bea.core.woodstox</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>webserviceclient-ssl</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>webserviceclient</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>weblogic.1035</groupId>
+         <artifactId>cryptoj</artifactId>
+         <scope>runtime</scope>
+      </dependency>
+	  <dependency>
+		<groupId>com.oracle.weblogic</groupId>
+		<artifactId>oracle.ucp_11.2.0</artifactId>
+		<version>12.1.2-0-0</version>
+	  </dependency>
+
+   </dependencies>
+   <build>
+   
+   	  <finalName>${project.artifactId}-${ess.target.version}</finalName>
+   	  <!--finalName>${project.artifactId}-v1</finalName-->
+
+      <plugins>
+
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+
+            <executions>
+               <execution>
+                  <id>copy-dependencies</id>
+                  <configuration>
+                     <skip>false</skip>
+
+                     <!-- Copy the telus and non-shared jars to the lib folder -->
+                     <artifactItems>                  
+                        <artifactItem>
+                           <groupId>${project.groupId}</groupId>
+                           <artifactId>${project.artifactId}</artifactId>
+                           <version>${project.version}</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+
+                        <artifactItem>
+							 <groupId>telus.csm.ewlnss.shared</groupId>
+							 <artifactId>ewlnss-grid-loader</artifactId>
+							 <version>${project.version}</version>
+                             <type>jar</type>
+                             <overWrite>true</overWrite>
+                             <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+                         
+                        <artifactItem>
+                           <groupId>net.sf.opencsv</groupId>
+		                   <artifactId>opencsv</artifactId>
+		                   <version>${opencsv.version}</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+
+                        <artifactItem>
+                           <groupId>commons-collections</groupId>
+		                   <artifactId>commons-collections</artifactId>
+		                   <version>3.2.1</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+                        <artifactItem>
+                           <groupId>commons-lang</groupId>
+		                   <artifactId>commons-lang</artifactId>
+		                   <version>2.5</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+                        <artifactItem>
+                           <groupId>telus.frameworks.mobility</groupId>
+		                   <artifactId>TELUS-ConfigurationManager-api</artifactId>
+		                   <version>1.2</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+                        <artifactItem>
+                           <groupId>telus.frameworks.mobility</groupId>
+		                   <artifactId>TELUS-ConfigurationManager-provider</artifactId>
+		                   <version>1.2</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+                        <artifactItem>
+                           <groupId>telus.custequip.sap</groupId>
+		                   <artifactId>sapjcopackClient_wl10</artifactId>
+		                   <version>2013.10.1-SNAPSHOT</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+                        <artifactItem>
+					 	   <groupId>com.oracle.weblogic</groupId>
+						   <artifactId>oracle.ucp_11.2.0</artifactId>
+						   <version>12.1.2-0-0</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                        </artifactItem>
+                        <artifactItem>
+					 	   <groupId>telus.chnlsales.ucss</groupId>
+						   <artifactId>ucss-common</artifactId>
+						   <version>2.0</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>lib</outputDirectory>
+                         </artifactItem>
+                     </artifactItems>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-assembly-plugin</artifactId>
+
+            <executions>
+               <execution>
+                  <id>bundle-tar</id>
+                  <configuration>
+                     <skipAssembly>false</skipAssembly>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+      </plugins>
+
+   </build>
+
+</project>

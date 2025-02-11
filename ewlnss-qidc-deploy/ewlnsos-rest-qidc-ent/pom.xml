@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>telus.csm.ewlnss</groupId>
+		<artifactId>pom-ewlnss-qidc-deploy</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ewlnsos-rest-qidc-ent</artifactId>
+	<packaging>ear</packaging>
+	<name>EntWLNSalesOrderSvcREST_ENT</name>
+	<properties>
+		<applet.finalname>EntWLNSalesOrderSvcREST_ENT_v1</applet.finalname>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>telus.csm.ewlnsos-ws-deploy</groupId>
+			<artifactId>ewlnsos-rest</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.coherence</groupId>
+			<artifactId>ewlnss-coherence</artifactId>
+			<version>${project.version}</version>
+			<type>gar</type>
+		</dependency>
+		<dependency>
+			<groupId>com.oracle.coherence</groupId>
+			<artifactId>coherence</artifactId>
+			<version>12.1.2-0-0</version>
+			<scope>provided</scope>
+		</dependency>
+<!-- 		<dependency>
+			<groupId>thirdparty.coherence</groupId>
+			<artifactId>coherence</artifactId>
+			<version>3.7.1.6</version>
+		</dependency> -->
+	</dependencies>
+	<build>
+		<finalName>${applet.finalname}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-ear-plugin</artifactId>
+				<configuration>
+<!-- 					<defaultLibBundleDir>lib/</defaultLibBundleDir>
+					<skinnyWars>true</skinnyWars>
+					<packagingExcludes>lib/coherence-3.7.1.6.jar</packagingExcludes> -->
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+						</manifest>
+					</archive>
+					<artifactTypeMappings>
+						<artifactTypeMapping type="gar" mapping="jar"/>
+					</artifactTypeMappings>
+					<modules>
+						<webModule>
+							<groupId>telus.csm.ewlnsos-ws-deploy</groupId>
+							<artifactId>ewlnsos-rest</artifactId>
+							<contextRoot>${project.version}/mso/channelsalesmgmt/enterprise-sales-order-service</contextRoot>
+							<bundleFileName>ewlnsos-rest-v1.war</bundleFileName>
+						</webModule>
+						<jarModule>
+							<groupId>telus.csm.ewlnss.coherence</groupId>
+							<artifactId>ewlnss-coherence</artifactId>
+							<bundleFileName>ewlnss-coherence-v1.gar</bundleFileName>
+						</jarModule>
+					</modules>
+					<generateApplicationXml>true</generateApplicationXml>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

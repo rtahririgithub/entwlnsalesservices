@@ -1,0 +1,13 @@
+<bindings xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+  wsdlLocation="CorporateStoresPOSService_v1_6.wsdl"
+  xmlns="http://java.sun.com/xml/ns/jaxws">
+	<enableWrapperStyle>false</enableWrapperStyle>	
+	<bindings node="wsdl:definitions/wsdl:portType[@name='CorporateStoresPOSService_v1_6_PortType']">
+	        <class name="CorporateStoresPOSServicePortType"/> 
+	</bindings>
+	<bindings node="wsdl:definitions/wsdl:service[@name='CorporateStoresPOSService_v1_6']">
+		    <class name="CorporateStoresPOSServiceStub"/> 
+	</bindings>
+</bindings>

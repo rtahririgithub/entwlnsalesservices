@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>telus.csm.ewlnss</groupId>
+		<artifactId>pom-ewlnss-laird-deploy</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>ess-rest-laird</artifactId>
+	<packaging>war</packaging>
+	<name>ess-rest-laird</name>
+
+	<build>
+		<finalName>EnterpriseSalesSvcRESTLaird_${target.version}</finalName>
+	
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+				<webXml>../../ewlnss-ws-deploy/ess-ws-deploy/ess-rest/src/main/webapp/WEB-INF/web.xml</webXml>
+					<overlays>
+						<overlay>
+							<groupId>telus.csm.ess-ws-deploy</groupId>
+							<artifactId>ess-rest</artifactId>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>telus.csm.ess-ws-deploy</groupId>
+			<artifactId>ess-rest</artifactId>
+			<version>${project.version}</version>
+			<type>war</type>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+</project>

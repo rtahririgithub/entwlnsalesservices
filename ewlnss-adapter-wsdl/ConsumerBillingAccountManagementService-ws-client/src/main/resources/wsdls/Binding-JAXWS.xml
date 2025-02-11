@@ -1,0 +1,13 @@
+<bindings xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+  wsdlLocation="ConsumerBillingAccountManagementService_v1_2.wsdl"
+  xmlns="http://java.sun.com/xml/ns/jaxws">
+	<enableWrapperStyle>false</enableWrapperStyle>	
+	<bindings node="wsdl:definitions/wsdl:portType[@name='ConsumerBillingAccountManagementService_v1_2_PortType']">
+	        <class name="ConsumerBillingAccountManagementService_v1_2_PortType"/> 
+	</bindings>
+	<bindings node="wsdl:definitions/wsdl:service[@name='ConsumerBillingAccountManagementService_v1_2']">
+		    <class name="ConsumerBillingAccountManagementServiceStub"/> 
+	</bindings>
+</bindings>

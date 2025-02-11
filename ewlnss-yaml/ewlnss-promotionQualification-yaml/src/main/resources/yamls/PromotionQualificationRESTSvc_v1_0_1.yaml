@@ -1,0 +1,1306 @@
+openapi: 3.0.0
+info:
+  title: Promotion Qualification API
+  description: CommercePromotionQualificationAPI is an enterprise service used to find eligible promotions for a given sales transaction.
+  contact:
+    name: Promotion Qualification API.
+    email: dlMM@telus.com
+  version: "1.0.1"
+servers:
+  - description: it01
+    url: commercepromotionqualification-it01.paas-app-east-np.tsl.telus.com/v2/commercePromotionQualification
+  - description: it02
+    url: commercepromotionqualification-it02.paas-app-east-np.tsl.telus.com/v2/commercePromotionQualification
+  - description: it03
+    url: commercepromotionqualification-it03.paas-app-east-np.tsl.telus.com/v2/commercePromotionQualification
+  - description: it04 (staging)
+    url: commercepromotionqualification-it04.paas-app-east-np.tsl.telus.com/v2/commercePromotionQualification
+  - description: pr
+    url: commercepromotionqualification-pr.paas-app-east.tsl.telus.com/v2/commercePromotionQualification
+paths:
+  /promotionQualification:
+    post:
+      tags: 
+      - Promotion Qualification
+      summary: Create new promotion qualification based on given criteria.
+      operationId: promotionQualification
+      description: "This service creates the promotion qualification resource based on the given crietria"
+      parameters:
+        - name: transactionId
+          in: header
+          description: sales transaction id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: refreshCacheInd
+          in: query
+          description: refresh cache such as credit profile information after updated through other system
+          required: true
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: originatorApplicationId
+          in: query
+          description: originating application id in CMDB
+          required: true
+          style: form
+          explode: false
+          schema:
+            type: string
+        - name: consolidatedCustomerProfileInd
+          in: query
+          description: if empty or false then retrieve light-weight customer profile i.e. no pending products from VESTA
+          required: true
+          style: form
+          explode: false
+          schema:
+            type: boolean
+        - name: allowProductTierUpgradeOnlyInd
+          in: query
+          description: If set to true then only upgrade is allowed i.e. no downgrade.  If empty or false then product tier downgrade is allowed i.e. both downgrade and upgrade.
+          required: true
+          style: form
+          explode: false
+          schema:
+            type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PromotionQualification'
+              
+      responses:
+        201:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromotionQualification'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'                
+    get:
+      tags: 
+      - Promotion Qualification
+      summary: Find eligible promotions.
+      operationId: qualifyPromotion
+      parameters:
+      - name: qualificationTypeCd
+        in: query
+        description: qualificationType can be CATALOGUE, CART, ORDER etc.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: originalProductOrderId
+        in: query
+        description: This is required to be populated when transaction type is EXCHANGE.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string    
+      - name: salesTransactionId
+        in: query
+        description: Sales transaction for which qualification need to done.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesTransactionTypeCd
+        in: query
+        description: ACTIVATION, RENEWAL, EXCHANGE
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+ 
+      - name: shoppingCartId
+        in: query
+        description: ID of the shopping cart. shopping Cart ID is required is qualificationType=CART.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: lineOfBusinessCd
+        in: query
+        description: Line of Business - WLN or WLS or BUNDLE.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: brandId
+        in: query
+        description: Brand Id. 1- Telus, 3- Koodo.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      - name: channelOrgTypeCd
+        in: query
+        description: DL, RT, IDR etc.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: channelOrgId
+        in: query
+        description: Internal channel organization ID.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: outletId
+        in: query
+        description: Internal outlet ID.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: outletProvinceCd
+        in: query
+        description: Province of the outlet.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: agentRole
+        in: query
+        description: list of agent roles.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string    
+      - name: productTypeCd
+        in: query
+        description: Product - PREPAID, POSTPAID, TTV, HSIC, SING, STV.
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: accountNumber
+        in: query
+        description: Billing Account Number
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: accountTypeCd
+        in: query
+        description: Account Type.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: accountSubTypeCd
+        in: query
+        description: Account Sub Type.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string 
+      - name: newAccount.accountTypeCd
+        in: query
+        description: Target account type to be used when doing migration transaction.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: newAccount.accountSubTypeCd
+        in: query
+        description: Target account sub type to be used when doing migration transaction.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string    
+      - name: newAccount.accountNumber
+        in: query
+        description: New Billing Account Number for the migration transaction.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string    
+      - name: businessRecordedIndicator
+        in: query
+        description: Applicable to Business customer type.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: cbucid
+        in: query
+        description: Corporate hierarchy.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string   
+      - name: rcid
+        in: query
+        description: Corporate hierarchy.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string     
+      - name: subscriberPhoneNumber
+        in: query
+        description: Subscriber Phone Number.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: subscriberProvinceCd
+        in: query
+        description: Subscriber province.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string  
+      - name: subscriberSubMarketCd
+        in: query
+        description: Subscriber province.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string    
+      - name: promoCode
+        in: query
+        description: Promo code also referred as coupon code.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: validationCode
+        in: query
+        description: Promo code validation code.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: productOfferingId
+        in: query
+        description: Product offering id. A comma seperated product offering id is also accepted.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: promotionId
+        in: query
+        description: Promotion id. A comma seperated promotion id is also accepted.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: equipmentCode
+        in: query
+        description: Equipmeent being redeemed.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: productOffering.perspectiveDate
+        in: query
+        description: perspective date for product offering id
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: promoCode.perspectiveDate
+        in: query
+        description: perspective date for promo code.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: promotion.perspectiveDate
+        in: query
+        description: perspective date for promotion IDs in input..
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string  
+      - name: portInIndicator
+        in: query
+        description: Is it Port-In activation.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: portInFromCarrier
+        in: query
+        description: ADD CARRIEER ID/CODE here...!!!
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: bibIncludedIndicator
+        in: query
+        description: Has customer taken BiB.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean 
+      - name: simOnlyIndicator
+        in: query
+        description: SIM ONLY
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean    
+      - name: computeBestPromotionIndicator
+        in: query
+        description: Applicable to Business customer type.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      - name: account.creditClass
+        in: query
+        description: Credit class for the customer(B, D etc).
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string    
+      - name: account.riskLevel
+        in: query
+        description: Risk level (100, 200, 400 etc)
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string     
+      - name: account.creditProgramTypeCd
+        in: query
+        description: Credit Program type selected by customer. One of NoDeviceProgram, SecurityDepositProgram, CreditLimitProgram. Required only for activations / add ons.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string          
+      - name: account.creditAssessmentId
+        in: query
+        description: Assessment Id received during the activation / addon. Required only for activations / add on.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string                    
+      - name: newAccount.creditClass
+        in: query
+        description: Target account credit class for the customer(B, D etc) to be used for migrations.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string    
+      - name: newAccount.riskLevel
+        in: query
+        description: Target account risk level (100, 200, 400 etc) to be used for migrations.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string          
+      - name: newAccount.creditProgramTypeCd
+        in: query
+        description: Credit Program type selected by customer. One of NoDeviceProgram, SecurityDepositProgram, CreditLimitProgram. Required only for activations / add ons.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string          
+      - name: newAccount.creditAssessmentId
+        in: query
+        description: Assessment Id received during the activation / addon. Required only for activations / add on.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string                    
+      - name: start
+        in: query
+        description: Requested paginated start index.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      - name: pageSize
+        in: query
+        description: Requested paginated max number of results per page.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PromotionQualification'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /ping:
+    get:
+      tags:
+      - ping
+      summary: status check for PromotionAPI
+      operationId: ping
+      responses:
+        200:
+          description: Ok
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Status'
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Characteristic:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: string    
+    RelatedPartyRef:
+      type: object
+      discriminator: 
+        propertyName: '@referredType'
+        description: one of 'CustomerRef' or 'BillingAccountRef'      
+      required:
+      - '@referredType'
+      properties:
+        id:
+          type: string
+          description: |
+            Unique identifier of the related party
+        href:
+          type: string
+          description: |
+            Reference of the related party, could be a party reference or a party role reference
+        name:
+          type: string
+          description: |
+            Name of the related party
+        role:
+          type: string
+          description: |
+            Role played by the related party. One of 'Customer, Account, Target_Account, Anonymous_Customer'
+        characteristic:
+          type: array
+          items: 
+            $ref: '#/components/schemas/Characteristic'
+          description: characteristcs of the related party
+          example: 'ACCOUNT_TYPE,ACCOUNT_SUBTYPE,MASTER_SOURCE_CD (1001, 103),, BRAND_CD (TELUS,Koodo), CBUCID, RCID, BUSINESS_RECORDED_IND, CREDIT_ASSESSEMENT_ID,CREDIT_PROGRAM_CD, BOLTON_IND, CREDIT_CLASS, COLLECTION_IND, FRAUD_IND'
+        '@referredType':
+          type: string
+          description: one of 'CustomerRef' or 'BillingAccountRef'
+      description: |
+        A related party defines party or party role linked to a specific entity.  
+    CustomerRef:
+      allOf:
+      - $ref: '#/components/schemas/RelatedPartyRef'
+    BillingAccountRef:
+      allOf:
+      - $ref: '#/components/schemas/RelatedPartyRef'
+    ChannelRef:
+      type: object
+      discriminator: 
+        propertyName: '@referredType'
+        description: one of 'CommerceChannel' or others
+      required:
+      - '@referredType'
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        '@referredType':
+          type: string
+    CommerceChannel:
+      allOf:
+      - $ref: '#/components/schemas/ChannelRef'
+      - type: object
+        properties:
+          role:
+            type: string
+            description: "Role played by the related party. One of 'Customer, SalesChannel_UserProfile,\
+              \ SalesChannel_AgentProfile \n"
+          channelOrganizationTypeCd:
+            type: string
+          channelOrganizationInternalId:
+            type: string
+          channelOrganizationNumber:
+            type: string
+          channelOutletInternalId:
+            type: string
+          channelOutletProvinceCd:
+            type: string
+          channelOutletId:
+            type: string
+          loginId:
+            type: string
+          salesPersonRoleCd:
+            type: string
+            description: sales person role code  used for the flow. D2C_PARTNER
+          salesRepId:
+            type: string
+          salesRepInternalId:
+            type: string
+          userPrivilegeRoleCd:
+            type: array
+            items:
+              type: string
+    PlaceRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |
+            The ID of the place
+        href:
+          type: string
+          description: |
+            The self-reference to the place
+        name:
+          type: string
+          description: |
+            A user-friendly name for the place, such as "Paris Store", "London Store", "Main Home"
+        role:
+          type: string
+          description: |
+            Role of the place (One of HOME_PROVINCE, MARKET_PROVINCE, SHIPPING_ADDRESS)
+        characteristics:
+          type: array
+          description: ""
+          items:
+            $ref: '#/components/schemas/Characteristic'
+      description: |
+        Place defines a location generically. Could be a geographic address a geographic address, a geographic location.      
+    PromotionQualification:
+      type: object
+      properties:
+        qualificationType:
+          type: string
+          description: Context of qualification. One of CATALOGUE, CART
+        relatedParty:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedPartyRef'
+          description: 'Any of customer, BillingAcount '
+        channel:
+          type: array
+          items: 
+            $ref: '#/components/schemas/ChannelRef'
+        place:
+          description: 'One of SERVICE_ADDRESS, EXISTING_SERVICE_ADDRESS'
+          type: array
+          items:
+            $ref: '#/components/schemas/PlaceRef'
+        promotionQualificationItem:
+          type: array
+          items: 
+            $ref: '#/components/schemas/PromotionQualificationItem'
+            
+      description: Promotion Qualification Response.
+
+    PromotionQualificationItem:
+      type: object
+      properties:
+        product:
+          $ref: '#/components/schemas/Product'
+        productOffering:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductOffering'
+          description: 'Product Offerings selected for each product'
+        immediatePromotion:
+          $ref: '#/components/schemas/ImmediatePromotion'
+        promoCode:
+          $ref: '#/components/schemas/PromoCodeRef'
+        contractTerm:
+          $ref: '#/components/schemas/ContractTerm'
+        upsell:
+          type: boolean
+          description: For Catalog qualification type this indicates the upsell promotion
+    ProductSpecificationRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |
+            The unique ID of the product specification
+        href:
+          type: string
+          description: |
+            The self-reference to the product specification
+        name:
+          type: string
+          description: |
+            The name of the product specification
+        productSpecificationType:
+          type: string
+
+    ProductCharacteristic:
+      type: object
+      properties:
+        name:
+          type: string
+          description: |
+            The name of the product characteristic |
+            TRANSACTION_TYPE, TRANSACTION_SUB_TYPE
+            |
+            
+        value:
+          type: string
+          description: |
+            The value of the product characteristic
+        metadata:
+          type: array
+          description: |
+            The characteristic of the product
+          items:
+            $ref: '#/components/schemas/Metadata'
+    Metadata:
+      type: object
+      properties:
+        name:
+          type: string
+          description: |
+            The name of the metadata
+        value:
+          type: string
+          description: |
+            The value of the metadata
+        metadataType:
+          type: string
+          description: |
+            The type of the metadata
+        
+    ProductRelationship:
+      type: object
+      properties:
+        type:
+          type: string
+          description: |
+            Type of the product relationship. It can be :
+            <ul>
+            <li>"bundled" if the product is a bundle and you want to describe the "bundled" products inside this bundle</li>
+            <li> "reliesOn" if the product needs another already owned product to rely on (e.g. an option on an already owned mobile access product)</li>
+            </ul>
+        product:
+          $ref: '#/components/schemas/Product'
+
+    Product:
+      type: object
+      description: 'The reference to the product or the product values'
+      properties:
+        id:
+          type: string
+          description: |
+            The unique ID of the product i.e. subscriber number
+        href:
+          type: string
+          description: |
+            The self-reference to the product
+        name:
+          type: string
+          description: |
+            The name of the product
+        referenceId:
+          type: string
+          description: |
+            The unique ID of the product in the cart item hierarchy
+        primaryProductId:
+          type: string
+          description: |
+            The unique ID of the product in the product inventory domain
+        productSpecification:
+          type: array
+          description: |
+            The specification of the product
+          items:
+            $ref: '#/components/schemas/ProductSpecificationRef'
+        characteristic:
+          type: array
+          description: |
+            The characteristics of the product such as winbackind with true or false.  orderType is one of ACTIVATION, RENEWAL, UPGRADE, EXCHANGE, CHANGE. contextTypeList - comma separated list of the selected configuration elements. One of ALL, EQUIPMENT, ADDON, FEATURE
+            
+          items:
+            $ref: '#/components/schemas/ProductCharacteristic'
+        productRelationship:
+          type: array
+          description: |
+            The product relation of the product
+          items:
+            $ref: '#/components/schemas/ProductRelationship'
+        place:
+          type: array
+          description: |
+            The place of the product such as "EXISTING_SERVICE_ADDRESS, MARKET_PROVINCE"
+          items:
+            $ref: '#/components/schemas/PlaceRef'
+    
+    BundledProductOffering:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        productOffering:
+          $ref: '#/components/schemas/ProductOffering'
+    
+    BundledProductOfferingGroup:
+      type: object
+      properties:
+        id:
+          type: string
+        groupType:
+          type: string
+        bundledProductOffering:
+          $ref: '#/components/schemas/BundledProductOffering'
+          
+        
+        
+    ProductOffering:
+      type: object
+      properties:
+        id:
+          type: string
+          description: |
+            The unique ID of the product offering
+        perspectiveDate:
+          type: string
+          
+        bundledProductOfferingGroup:
+          $ref: '#/components/schemas/BundledProductOfferingGroup'
+
+        bundledProductOffering:
+          $ref: '#/components/schemas/BundledProductOffering'
+
+        characteristics:
+          type: array
+          description: |
+            The characteristics of the product offering such as "INCLUDED_ADD_ON" with "true/false".
+            OfferingGroupType - One of "ADDON, EQUIPMENT, FEATURE".
+          items:
+            $ref: '#/components/schemas/ProductCharacteristic'
+        sourceSystemId:
+          type: string
+          description: Source system identifer returned from TOM API. value is CMDB ID for either OMS or TOM.
+    ContractTerm:
+      type: object
+      description: >-
+        A condition under which a ProductOffering is made available to Customers.
+        For instance, a productOffering can be offered with multiple commitment
+        periods.
+      properties:
+        name:
+          type: string
+          description: Name of the term
+        description:
+          type: string
+          description: Description of the term
+        duration:
+          $ref: '#/components/schemas/Quantity'
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+    ImmediatePromotion:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Immediate Promotion id.
+        status:
+          type: string
+          description: Valid values- done
+        promotion:
+          $ref: '#/components/schemas/Promotion'
+        offeringAssignment:
+          $ref: '#/components/schemas/OfferingAssignmentRef'
+        upsell:
+          type: boolean
+          description: For Catalog qualification type this indicates the upsell promotion
+        productOffering:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductOffering'    
+          description: 'Product Offerings selected for each product'
+    OfferingAssignmentRef:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        href:
+          type: string
+        assignmentProcess:
+          type: string
+      description: Offering Assignment
+    Error:
+      required:
+      - code
+      - reason
+      type: object
+      properties:
+        code:
+          type: string
+          description: Application related code.
+        reason:
+          type: integer
+          description: Text that explains the reason for error.
+          format: int32
+        message:
+          type: string
+          description: (optional) Text that provide more details and corrective actions related to the error.
+        status:
+          type: integer
+          description: (optional) http error code extension like 400-2
+          format: int32
+        referenceError:
+          type: string
+          description: (optional) A URL to online documentation that provides more information about the error.
+        additionalError:
+          type: array
+          items:
+            $ref: '#/components/schemas/Error'
+    Status:
+      required:
+      - code
+      type: object
+      properties:
+        code:
+          type: string
+          description: status code. Eg. OK
+        message:
+          type: string
+          description: Detailed description of status code
+        statusExtention:
+          type: array
+          items:
+            $ref: '#/components/schemas/StatusExtension'
+    StatusExtension:
+      required:
+      - name
+      - value
+      type: object
+      properties:
+        name:
+          type: string
+          description: Name
+        value:
+          type: string
+          description: Value
+    Promotion:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier of Promotion.
+        href:
+          type: string
+          description: Hyperlink to access the promotion.
+        name:
+          type: string
+          description: Name of Promotion.
+        description:
+          type: array
+          description: Description of Promotion
+          items:
+            $ref: '#/components/schemas/LocaleDescription'
+        validFor:
+          $ref: '#/components/schemas/TimePeriod'
+        perspectiveDate:
+          type: string
+          description: Perspective Date of Promotion. Used for versioning
+          format: date-time
+        pattern:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionPattern'
+        priority:
+          type: integer
+          description: The priority of the promotion
+          format: int32
+        message:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+        attachment:
+          type: array
+          items:
+            $ref: '#/components/schemas/Attachment'
+        crossProduct:
+          type: boolean
+          description: Indicates whether the promotion rule refers to cross-product logic. The value is calculated by the Promotion domain.
+        programId:
+          type: string
+          description: Promotion's program id.
+        programDescription:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocaleDescription'
+        promotionGroup:
+          $ref: '#/components/schemas/PromotionGroup'
+        promoCodeRef:
+          $ref: '#/components/schemas/PromoCodeRef'
+        promotionType:
+          type: string
+          description: Type of Promotion
+          example: REGULAR,GWP,MANUAL
+        empowerment:
+          type: boolean
+          description: Agent's empowerment promotion such as sweetner if "true"
+    
+      description: Promotion Resource is used to provide the additional incentives, such as credit, service discount, waive and gift to the customer who meets the pre-defined criteria.
+    LocaleDescription:
+      type: object
+      properties:
+        locale:
+          type: string
+          description: Description Locale.
+        description:
+          type: string
+          description: Description Text
+      description: Locale Description
+    TimePeriod:
+      type: object
+      properties:
+        endDateTime:
+          type: string
+          description: An instant of time, ending at the TimePeriod.
+          format: date-time
+        startDateTime:
+          type: string
+          description: An instant of time, starting at the TimePeriod
+          format: date-time
+      description: A base / value business entity used to represent a period of time between two timepoints.
+    PromotionPattern:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier.
+        relationTypeAmongGroup:
+          type: string
+          description: AND/OR ,The logical relation type amongst the promotion criteria group.
+        action:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionAction'
+        criteriaGroup:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionCriteriaGroup'
+        pattern:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionPattern'            
+        productType:
+          type: string
+          description: Product type such as HSIC, TTV, SING
+      
+    PromotionAction:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier.
+        name:
+          type: string
+          description: The localized name of the promotion.
+        description:
+          type: array
+          description: The localized description of the promotion.
+          items:
+            $ref: '#/components/schemas/LocaleDescription'
+        actionType:
+          type: string
+          description: The type of the benefit. The possible value is - Price Alteration.
+        actionValue:
+          type: number
+          description: The value of the action. If the type is Price Alteration, the value is populated with '1'.
+          format: double
+        actionObjectId:
+          type: string
+          description: The ID of the action object
+        characteristic:
+          type: array
+          items:
+            $ref: '#/components/schemas/Characteristic'          
+        actionObjectType:
+          type: string
+          description: Component Type. BILLCREDIT, FEATURE, with more to come
+        duration:
+          $ref: '#/components/schemas/Quantity'
+        actionObject:
+          type: array
+          description: For the Price Alteration type, the object on which the action is being performed, that is, the promotion discount. This object represents a promotion criteria group.
+          items:
+            $ref: '#/components/schemas/PromotionCriteriaGroup'
+        actionObjectRef:
+          type: array
+          description: The reference to the object of the action. For the Price Alteration type, this object is the promotion discount - represents a reference to an existing promotion criteria group in the current promotion rule. If there is a reference only, the ID of the promotion criteria group is populated.
+          items:
+            $ref: '#/components/schemas/PromotionCriteriaGroupRef'
+        promotionPriceAlterationRef:
+          $ref: '#/components/schemas/ProductOfferingPriceRef'
+      description: Action of the promotion.When the customer meets the conditions in the promotion pattern, the customer can be given the benefits in the action.
+    Quantity:
+      type: object
+      properties:
+        units:
+          type: string
+        amount:
+          type: integer
+          format: int32
+    PromotionCriteriaGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique Identifier
+        groupName:
+          type: string
+          description: Name of the group.
+        criteriaType:
+          type: string
+          description: The type of the criteria. Usually, represents a context entity such as Customer, Product Offering, Product, and so on. Valid values are ACCOUNT_TYPE,CHANNEL,TRANSACTION_TYPE,BILLING_REGION,SERVICE_REGION,AUTO_TOPUP,SKU,RATE_PLAN
+        criteriaTypeMethod:
+          type: string
+          description: The criteria type method used to describe the criteria group type. The supported criteria group types are - Scope, Criteria, List, Aggregation, and so on.
+        relationTypeInGroup:
+          type: string
+          description: 'AND/OR,The logical relation type amongst the various criteria
+            inside a promotion criteria group.          '
+        criteria:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionCriteria'    
+        aggregationFunctionCriteria:
+          $ref: '#/components/schemas/PromotionCriteria'
+        criteriaGroup:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionCriteriaGroup'
+        scopeCriteria:
+          $ref: '#/components/schemas/PromotionCriteriaGroup'
+      description: 'The group of the criteria of the promotion. The logical relationship
+        between different groups is decided by the relationTypeInGroup. It is hierarchial.
+        At a given time  either ''subGroup'' or ''criteria'' will populated. '
+    PromotionCriteria:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier.
+        criteriaParam:
+          type: string
+          description: 'The parameter (factor) of the criteria.Eg: CHANNEL'
+        criteriaParamName:
+          type: string
+        criteriaOperator:
+          type: string
+          description: The logic expression including parameter and operator. includeing:=,&gt;,&lt;,&gt;=,&lt;=,&lt;&gt;
+        criteriaValue:
+          type: string
+          description: The value is filled for the comparison of the criteria.
+      description: Criteria of the promotion.
+    PromotionCriteriaGroupRef:
+      type: object
+      properties:
+        id:
+          type: string
+    ProductOfferingPriceRef:
+      type: object
+      properties:
+        id:
+          type: string
+          description: TheID of the product offering price
+      description: The action discount reference, representing the relevant pricing entity that defines the actual discount
+    Message:
+      type: object
+      properties:
+        type:
+          type: string
+          description: The type of the message
+        message:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocaleDescription'
+          description: The localized text of the message
+      description: The message that describes the promotion. The message can be of several types. Typically, the message is presented by consumers in their user interface.
+    Attachment:
+      type: object
+      properties:
+        name:
+          type: string
+          description: The unique ID of the attachment in the element to which it is related
+        type:
+          type: string
+          description: The attachment type, such as a video or a picture
+        description:
+          type: string
+          description: The narrative text describing the content of the attachment
+        url:
+          type: string
+          description: The attachment URL
+        mimeType:
+          type: string
+          description: The attachment MIME type, such as an extension file for a video, a picture, or a document
+      description: The attachment such as video, pictures, and so on, that describes the promotion. Pictures or other materials can be attached to promotions to enable illustrative images.
+    PromotionGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: unique promotion identifier
+          format: int32
+        code:
+          type: string
+          description: Promotion's group code. it will be unique
+        description:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocaleDescription'
+        enforcementType:
+          type: string
+          description: Valid values are MANDATORY_UNLIMITED, MANDATORY_CHOICE, OPTIONAL
+        stackable:
+          type: boolean
+          description: Valid values are true, false. Not applicable for MANDATORY_UNLIMITED
+        minQty:
+          type: integer
+          description: Mininum number of promotions that should be selected.
+          format: int32
+        maxQty:
+          type: integer
+          description: Maximum number of promotion that can be selected.
+          format: int32
+        availability:
+          type: string
+          description: Possible values are IN_MARKET, AGENT_ASSIGNED
+        ranking:
+          type: integer
+          description: Promotion Group Ranking.  
+        promotionGroupType:
+          type: string
+          description: Possible values are CORE, EXTRA, EQUIPMENT
+      description: Promotion Group
+    PromoCodeRef:
+      type: object
+      properties:
+        promoCodeId:
+          type: string
+          description: PromoCode's unique identifier
+        promoCode:
+          type: string
+          description: Promocode's code
+        perspectiveDate:
+          type: string
+          format: date-time
+          description: Promo code perspective date
+        href:
+          type: string
+          description: Promocode's href.
+        validationCode:
+          type: string
+          description: Promocode validation code
+      description: PromoCode reference of promotion. Reference will be only be availabe if the promotion is offered through PromoCode.

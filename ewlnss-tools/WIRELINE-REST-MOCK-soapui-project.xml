@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="1ccc2a19-9413-4731-aa03-aa44cb96b65f" activeEnvironment="Default" name="Wireline_REST_MOCK" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="118af510-370e-485d-b36e-0f1e6ff03464" wadlVersion="http://wadl.dev.java.net/2009/02" name="http://142.63.230.93:7001" type="rest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache/><con:endpoints><con:endpoint>http://142.63.224.221:7001/MSO_REST_EWLNSS</con:endpoint><con:endpoint>http://142.63.230.93:7001</con:endpoint><con:endpoint>http://localhost:7001/MSO_EWLNSS</con:endpoint><con:endpoint>http://localhost:8080</con:endpoint></con:endpoints><con:resource name="Sales-context" path="/v1_1/mso/channelsalesmgmt/salesmanagement/sales-context" id="f67c792d-a699-426e-801e-3cd2dcebd839"><con:settings/><con:parameters/><con:method name="Sales-context" id="304c9f87-15ce-417d-a88a-01ac36789bba" method="POST"><con:settings/><con:parameters/><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/><con:element xmlns:sal="http://localhost/v1_1/mso/channelsalesmgmt/salesmanagement/sales-context">sal:Response</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=UTF-8</con:mediaType><con:status>404 500</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/html</con:mediaType><con:status>200</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:request name="Request 1" id="d59ae8e0-c498-4406-95c8-146b26d7eb26" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://142.63.224.221:7001/MSO_REST_EWLNSS</con:endpoint><con:request>{
+  "context" : {
+    "prepaidInd" : true,
+    "salesChannel" : {
+      "channelOrgTypeCd" : "IOTA",
+      "channelOrgInternalId" : "10140873",
+      "channelOrgNumber" : "00086",
+      "salesRepId" : "0000",
+      "salesRepInternalId" : "10000000",
+      "salesRepAssociatedChannelOutletId" : "ATME0PREPD"
+    },
+    "brandId" : "1",
+    "salesOrderType" : "RENEWAL",
+    "salesOrderOriginatorApplicationId" : "17874"
+  }
+}</con:request><con:originalUri>http://localhost/v1_1/mso/channelsalesmgmt/salesmanagement/sales-context</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request><con:request name="2_ToRealService" id="8b9c0ccc-dac1-49db-a9b1-6fa445e2f001" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://localhost:7001/MSO_EWLNSS</con:endpoint><con:request>{
+  "context" : {
+    "prepaidInd" : true,
+    "salesChannel" : {
+      "channelOrgTypeCd" : "IOTA",
+      "channelOrgInternalId" : "10140873",
+      "channelOrgNumber" : "00086",
+      "salesRepId" : "0000",
+      "salesRepInternalId" : "10000000",
+      "salesRepAssociatedChannelOutletId" : "ATME0PREPD"
+    },
+    "brandId" : "1",
+    "salesOrderType" : "RENEWAL",
+    "salesOrderOriginatorApplicationId" : "17874"
+  }
+}</con:request><con:originalUri>http://142.63.230.93/v1_1/mso/channelsalesmgmt/salesmanagement/sales-context</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/><con:parameterOrder/></con:request></con:method></con:resource></con:interface><con:restMockService id="b41c3aed-ae3e-46bb-a679-30ac02c45a7b" port="8080" path="/" host="L034805" name="WIRELINE_REST_MockService"><con:settings/><con:properties/><con:restMockAction name="/v1_1/mso/channelsalesmgmt/salesmanagement/sales-context" method="POST" resourcePath="/v1_1/mso/channelsalesmgmt/salesmanagement/sales-context" id="f9baa7d1-f58c-48b1-960e-c912a786b81f"><con:settings/><con:defaultResponse>0_error</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>def requestBody = mockRequest.getRequestContent()
+log.info "Request body: " + requestBody
+
+def salesOrderType = new groovy.json.JsonSlurper().parseText(requestBody).context.salesOrderType;
+def salesRepId = new groovy.json.JsonSlurper().parseText(requestBody).context.salesChannel.salesRepId;
+
+log.info "salesOrderType is : ${salesOrderType}"
+log.info "salesRepId is : ${salesRepId}"
+
+if( salesOrderType == "ACTIVATION" )
+{
+    return "Response 1";
+} else if (salesOrderType == "RENEWAL"){
+	return "Response 2";
+}
+</con:dispatchPath><con:response name="Response 1" id="2059de96-8981-4cd7-92ed-7b0ef8447414" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>{
+   "hasError": false,
+   "salesTransactionId": "20180620113013034efa2f534d97449d18890ab829e61d364",
+   "responseMessageList": [],
+   "status":    {
+      "statusCd": "200",
+      "statusTxt": "OK - initialize a sales successfully",
+      "systemErrorTimeStamp": "2018-06-21T11:30:13-0400",
+      "systemErrorCd": "0"
+   }
+}</con:responseContent></con:response><con:response name="0_error" id="392f352d-07a1-4650-ace6-55c8f4c87d51" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>{
+   "hasError": true,
+   "responseMessageList": [   {
+      "messageCode": "50001001",
+      "messageType": "ERROR",
+      "messageContentList": ["Unsupported brandId: 4"]
+   }],
+   "status":    {
+      "statusCd": "400",
+      "statusSubCd": "50001001",
+      "statusTxt": "Invalid request parameter.",
+      "systemErrorTimeStamp": "2018-06-21T11:12:17-0400",
+      "systemErrorCd": "0"
+   }
+}</con:responseContent></con:response><con:response name="Response 2" id="52d39cd9-67ca-46d6-8442-9373a54b8510" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>{
+   "hasError": false,
+   "salesTransactionId": "20180620113013034efa2f534d97449d18890ab829e61d364",
+   "responseMessageList": [],
+   "status":    {
+      "statusCd": "200",
+      "statusTxt": "OK - initialize a sales successfully Response 2",
+      "systemErrorTimeStamp": "2018-06-21T11:30:13-0400",
+      "systemErrorCd": "0"
+   }
+}</con:responseContent></con:response></con:restMockAction></con:restMockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/></con:soapui-project>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap 
+          PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+          "http://www.ibatis.com/dtd/sql-map-2.dtd"  >
+
+<sqlMap namespace="ServiceAgreementDoc">
+
+  <typeAlias alias="ServiceAgreementDoc"  
+             type="com.telus.dspbatch.domain.ServiceAgreementDoc" />
+  
+  <resultMap id="resultServiceAgreementDoc" class="ServiceAgreementDoc">
+      <result property="documentReferenceId" column="DOCUMENT_REFERENCE_ID"/>
+      <result property="transactionId"   column="TRANSACTION_ID"/>
+       <result property="languageCode"   column="LANGUAGE_CD"/>
+  </resultMap>
+
+	
+  <select id="getUnsignedDocRefIdsWithinPeriod"  resultMap="resultServiceAgreementDoc" >
+  <![CDATA[
+ 		select  d.DOCUMENT_REFERENCE_ID as DOCUMENT_REFERENCE_ID
+				,d.LANGUAGE_CD as LANGUAGE_CD
+				, s.TRANSACTION_ID as TRANSACTION_ID
+				,d.SIGNED_IND
+				,s.SRVC_AGRMT_ID,D.SRVC_AGRMT_ID
+		from CONTRACTADM.SRVC_AGRMT_DOC d, CONTRACTADM.SRVC_AGRMT s
+		where d.SIGNED_IND='N'
+		and  d.SRVC_AGRMT_ID = s.SRVC_AGRMT_ID
+		and s.SRVC_AGRMT_STAT_CD='A'
+		and d.DOCUMENT_REFERENCE_ID IS NOT NULL
+		and d.LAST_UPDT_TS > sysdate - NUMTODSINTERVAL( #durationInMinutes# , 'MINUTE' )  
+		order by d.DOCUMENT_REFERENCE_ID
+ ]]>
+  </select>	
+
+</sqlMap>

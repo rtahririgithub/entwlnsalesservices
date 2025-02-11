@@ -1,0 +1,1142 @@
+openapi: 3.0.0
+info:
+  title: CommerceProductInventoryBridge API
+  description: This is a CommerceProductInventoryBridge API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/m_and_m/CommerceProductInventoryBridge/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: CommerceProductInventory
+  description: Calls to CommerceProductInventory
+paths:
+  /productInventory/application/{applicationId}/customer/{customerId}/gift-eligibility:
+    get:
+      tags:
+      - CommerceProductInventory
+      summary: returns gift eligibility information
+      description: |
+        returns gift eligibility information
+      operationId: giftEligibility
+      parameters:
+      - name: transactionId
+        in: header
+        description: business transaction id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: applicationId
+        in: path
+        description: pass an optional search string for looking up inventory
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: customerId
+        in: path
+        description: pass an optional search string for looking up inventory
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: roleId
+        in: query
+        description: roleId
+        required: true
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RequiredService'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /getAssignedAndPendingProducts/customer/{customerId}:
+    get:
+      tags:
+      - CommerceProductInventory
+      summary: returns assigned and pending product for a customer
+      description: |
+        returns assigned and pending product for a customer
+      operationId: getAssignedPendingProductsForCustomer
+      parameters:
+      - name: transactionId
+        in: header
+        description: business transaction id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: customerId
+        in: path
+        description: Customer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: originatorApplicationId
+        in: query
+        description: |
+          originatorApplicationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: brandId
+        in: query
+        description: |
+          brandId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: correlationId
+        in: query
+        description: |
+          correlationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: isRefreshInd
+        in: query
+        description: |
+          isRefreshInd
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesRepId
+        in: query
+        description: |
+          salesRepId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesRepAssociatedChannelOutletId
+        in: query
+        description: |
+          salesRepAssociatedChannelOutletId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignedAndPendingProduct'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /getAssignedAndPendingProducts/customer/{customerId}/account/{accountId}:
+    get:
+      tags:
+      - CommerceProductInventory
+      summary: returns assigned and pending product for an account of a customer
+      description: |
+        returns assigned and pending product for an account of a customer
+      operationId: getAssignedPendingProductsForAccountInCustomer
+      parameters:
+      - name: transactionId
+        in: header
+        description: business transaction id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: customerId
+        in: path
+        description: Customer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: accountId
+        in: path
+        description: Account Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: originatorApplicationId
+        in: query
+        description: |
+          originatorApplicationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: brandId
+        in: query
+        description: |
+          brandId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: correlationId
+        in: query
+        description: |
+          correlationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: isRefreshInd
+        in: query
+        description: |
+          tbd
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesRepId
+        in: query
+        description: |
+          salesRepId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesRepAssociatedChannelOutletId
+        in: query
+        description: |
+          salesRepAssociatedChannelOutletId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignedAndPendingProduct'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /getAssignedAndPendingProductsConsolidated/customer/{customerId}:
+    get:
+      tags:
+      - CommerceProductInventory
+      summary: returns assigned and pending product consolidated for a customer
+      description: |
+        returns assigned and pending product for a customer
+      operationId: getAssignedPendingProductsConsolidatedForCustomer
+      parameters:
+      - name: transactionId
+        in: header
+        description: business transaction id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: customerId
+        in: path
+        description: Customer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: originatorApplicationId
+        in: query
+        description: |
+          originatorApplicationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: brandId
+        in: query
+        description: |
+          brandId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: correlationId
+        in: query
+        description: |
+          correlationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: isRefreshInd
+        in: query
+        description: |
+          tbd
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesRepId
+        in: query
+        description: |
+          salesRepId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesRepAssociatedChannelOutletId
+        in: query
+        description: |
+          salesRepAssociatedChannelOutletId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignedAndPendingProduct'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /getAssignedAndPendingProductsConsolidated/customer/{customerId}/account/{accountId}:
+    get:
+      tags:
+      - CommerceProductInventory
+      summary: returns assigned and pending product consolidated for an account of a customer
+      description: |
+        returns assigned and pending product consolidated for an account of a customer
+      operationId: getAssignedPendingProductsConsolidatedForAccountInCustomer
+      parameters:
+      - name: transactionId
+        in: header
+        description: business transaction id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: customerId
+        in: path
+        description: Customer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: originatorApplicationId
+        in: query
+        description: |
+          originatorApplicationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: brandId
+        in: query
+        description: |
+          brandId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: correlationId
+        in: query
+        description: |
+          correlationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: isRefreshInd
+        in: query
+        description: |
+          tbd
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesRepId
+        in: query
+        description: |
+          salesRepId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesRepAssociatedChannelOutletId
+        in: query
+        description: |
+          salesRepAssociatedChannelOutletId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AssignedAndPendingProduct'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    AssignedAndPendingProduct:
+      type: object
+      properties:
+        subscribedProductList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscribedProductInfo'
+        pendingProductList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscribedProductInfo'
+        customerAccountProfileList:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountProfile'
+        customerProducts:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        primaryAccountProfile:
+          $ref: '#/components/schemas/AccountProfile'
+    AccountProfile:
+      type: object
+      properties:
+        accountTypeCd:
+          type: string
+        accountSubTypeCd:
+          type: string
+        payChannelNum:
+          type: string
+        billingAccountNum:
+          type: string
+        accountMasterSourceId:
+          type: string
+        billingAccountPIN:
+          type: string
+        billPreferredLangCd:
+          type: string
+        accountStatus:
+          type: string
+        accountCreationDt:
+          type: string
+        customerId:
+          type: string
+        customerPreferredLangCd:
+          type: string
+        accountHolderName:
+          $ref: '#/components/schemas/NameInfo'
+        authorizedNameList:
+          type: array
+          items:
+            type: string
+        billingAddress:
+          $ref: '#/components/schemas/Address'
+        billingDeliveryMethodList:
+          type: array
+          items:
+            type: string
+        emailForEbill:
+          type: string
+        accountBalance:
+          type: number
+          format: double
+        bundleDiscountInfo:
+          $ref: '#/components/schemas/BundleDiscountInfo'
+        selfServeInd:
+          type: boolean
+        billCycleCd:
+          type: string
+        customerSegmentCd:
+          type: string
+        contactPhoneNum:
+          type: string
+        contactName:
+          $ref: '#/components/schemas/NameInfo'
+        preferredContactTimePeriodCd:
+          type: string
+        emailAddress:
+          type: string
+        preAuthorizedPaymentInd:
+          type: boolean
+        brandCd:
+          type: string
+        availableForAddOnInd:
+          type: boolean
+        billCycleCloseMonthDay:
+          type: string
+        billingLangCd:
+          type: string
+        subscriberList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriberInfo'
+        subscribedProductList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscribedProductInfo'
+        ebillDeclineReasonCode:
+          type: string
+        smsForEbillNotificationNum:
+          type: string
+        emailForEbillNotificationNum:
+          type: string
+    SubscriberInfo:
+      type: object
+      properties:
+        subscriberId:
+          type: string
+        subscriptionId:
+          type: string
+        subscriberRoleCd:
+          type: string
+        consumerName:
+          $ref: '#/components/schemas/NameInfo'
+        phoneNum:
+          $ref: '#/components/schemas/PhoneNumber'
+        emailAddress:
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        brandCd:
+          type: string
+        productTypeCd:
+          type: string
+    BundleDiscountInfo:
+      type: object
+      properties:
+        bundleDiscountCd:
+          type: string
+        bundleDiscountDesc:
+          type: string
+    NameInfo:
+      type: object
+      properties:
+        title:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        fullName:
+          type: string
+        middleName:
+          type: string
+        nameSuffixCd:
+          type: string
+    PhoneNumber:
+      type: object
+      properties:
+        phoneNum:
+          type: string
+        phoneNumExt:
+          type: string
+        phoneNumTypeCd:
+          type: string
+    SubscribedProductInfo:
+      type: object
+      properties:
+        productLine:
+          type: string
+        productTierCd:
+          type: string
+        productTypeCd:
+          type: string
+        recurringPayChannelNum:
+          type: string
+        oneTimePayChannelNum:
+          type: string
+        productInstance:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductInstanceInfo'
+        subscriptionStatusCd:
+          type: string
+        productInPendingOrderStatusInd:
+          type: boolean
+        serviceAddress:
+          $ref: '#/components/schemas/Address'
+        pricePlanId:
+          type: array
+          items:
+            type: string
+    Product:
+      type: object
+      properties:
+        productStatusDesc:
+          type: string
+        serviceType:
+          type: string
+        actionType:
+          type: string
+        catalogId:
+          type: string
+        offerCatatalogId:
+          type: string
+        resourceID:
+          type: string
+        isLevelOne:
+          type: boolean
+        totalOfferingPrice:
+          type: object
+        isMandatory:
+          type: boolean
+        isEnabled:
+          type: boolean
+        isVisible:
+          type: boolean
+        parentProductSerialNumber:
+          type: string
+        productCharacteristics:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCharacteristicValue'
+        productStatus:
+          type: string
+        productSerialNumber:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        productOffering:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductOffering'
+        productComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        payChannelId:
+          type: string
+        parentCatalogId:
+          type: string
+    ProductOffering:
+      type: object
+      properties:
+        description:
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        actionType:
+          type: string
+        catalogId:
+          type: string
+        productOfferingPrice:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductOfferingPrice'
+        ocWaiveReasonTxt:
+          type: string
+        isOcWaiveAllowed:
+          type: boolean
+        isOcWaived:
+          type: boolean
+        isActivityOneTimeCharges:
+          type: boolean
+        isImplementedOneTimeCharges:
+          type: boolean
+        isMandatory:
+          type: boolean
+        isEnabled:
+          type: boolean
+        ocWaiveReasonType:
+          type: string
+    ProductOfferingPrice:
+      type: object
+      properties:
+        amount:
+          type: string
+        priceType:
+          type: string
+    ProductCharacteristicValue:
+      type: object
+      properties:
+        catalogAttributeId:
+          type: string
+        enabledInd:
+          type: boolean
+        valueType:
+          type: string
+        displayValue:
+          type: string
+        value:
+          type: string
+        validValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductSpecCharacteristicValue'
+        description:
+          type: string
+        name:
+          type: string
+    ProductSpecCharacteristicValue:
+      type: object
+      properties:
+        displayValue:
+          type: string
+        value:
+          type: string
+    ProductInstanceInfo:
+      type: object
+      properties:
+        productInstanceId:
+          type: string
+        serviceId:
+          type: string
+        serviceInstanceId:
+          type: string
+        productName:
+          type: string
+        depositAmt:
+          type: number
+          format: double
+        resourceId:
+          type: string
+        productCatalogId:
+          type: string
+        productSuppressionInd:
+          type: boolean
+        includedForDepositCalcInd:
+          type: boolean
+        commitmentPeriodStartDt:
+          type: string
+        termCd:
+          type: string
+        omsOfferCatalogId:
+          type: string
+        singleLineComponent:
+          $ref: '#/components/schemas/SingleLineInfo'
+        internetComponent:
+          $ref: '#/components/schemas/InternetInfo'
+        ttvComponent:
+          $ref: '#/components/schemas/TvInfo'
+        equipmentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/EquipmentInfo'
+        refServiceId:
+          type: string
+    SingleLineInfo:
+      type: object
+      properties:
+        subscriptionNumList:
+          type: array
+          items:
+            $ref: '#/components/schemas/SubscriptionNumberInfo'
+        singleLineNumListedInd:
+          type: boolean
+        callingFeatureList:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeatureInfo'
+        tollPlanList:
+          type: array
+          items:
+            $ref: '#/components/schemas/FeatureInfo'
+        wholesaleAdslInd:
+          type: boolean
+        featuresPackList:
+          type: array
+          items:
+            type: string
+        homePhonePackList:
+          type: array
+          items:
+            type: string
+        homePhonePackIdList:
+          type: array
+          items:
+            type: string
+        promotionList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionInfo'
+    InternetInfo:
+      type: object
+      properties:
+        internetTypeCd:
+          type: string
+        promotionList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionInfo'
+    TvInfo:
+      type: object
+      properties:
+        hdChannelInd:
+          type: boolean
+        tvPackList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackInfo'
+        tvComboList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PackInfo'
+        promotionList:
+          type: array
+          items:
+            $ref: '#/components/schemas/PromotionInfo'
+    EquipmentInfo:
+      type: object
+      properties:
+        equipmentName:
+          type: string
+        equipmentAcquisitionTypeCd:
+          type: string
+    PackInfo:
+      type: object
+      properties:
+        componentId:
+          type: string
+        componentName:
+          type: string
+    PromotionInfo:
+      type: object
+      properties:
+        promotionId:
+          type: string
+        promotionName:
+          type: string
+    FeatureInfo:
+      type: object
+      properties:
+        categoryName:
+          type: string
+        name:
+          type: string
+        id:
+          type: string
+    SubscriptionNumberInfo:
+      type: object
+      properties:
+        subscriptionNumTxt:
+          type: string
+        phoneNum:
+          type: string
+    Address:
+      type: object
+      properties:
+        streetNum:
+          type: string
+        streetName:
+          type: string
+        unitTypeCd:
+          type: string
+        unitNum:
+          type: string
+        city:
+          type: string
+        provinceCd:
+          type: string
+        countryCd:
+          type: string
+        postalCd:
+          type: string
+        addressTypeCd:
+          type: string
+        poBoxStationName:
+          type: string
+        poBoxNum:
+          type: string
+        rrNum:
+          type: string
+        serviceAddressId:
+          type: string
+    RequiredService:
+      type: object
+      properties:
+        serviceInstanceId:
+          type: string
+        productName:
+          $ref: '#/components/schemas/MultilingualNameList'
+        productTypeCode:
+          type: string
+        startDate:
+          type: string
+          format: date-time
+        endDate:
+          type: string
+          format: date-time
+        earlyTerminationBalanceAmount:
+          type: number
+          format: double
+        tabBalanceWaivedInd:
+          type: boolean
+        resourceInformationTxt:
+          type: string
+        acquisitionInd:
+          type: boolean
+        originalTerm:
+          $ref: '#/components/schemas/TermInformation'
+        remainingTerm:
+          $ref: '#/components/schemas/RemainingTermInformation'
+        previousTerm:
+          $ref: '#/components/schemas/RemainingTermInformation'
+        contractEnforcedCode:
+          type: string
+    TermInformation:
+      type: object
+      properties:
+        costAmt:
+          type: number
+          format: double
+        durationInMonthNum:
+          type: integer
+    RemainingTermInformation:
+      allOf:
+      - $ref: '#/components/schemas/TermInformation'
+      - properties:
+          fullTermInMonthNum:
+            type: integer
+    MultilingualNameList:
+      type: object
+      properties:
+        name:
+          type: array
+          items:
+            $ref: '#/components/schemas/Name'
+    Name:
+      type: object
+      properties:
+        locale:
+          type: string
+        name:
+          type: string
+    Error:
+      required:
+      - code
+      - reason
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            Application relevant detail, defined in the API or a common list
+        reason:
+          type: string
+          description: |
+            Explanation of the reason for the error which can be shown to a client user
+        message:
+          type: array
+          description: |
+            More details and corrective actions related to the error which can be shown to a client user
+          items:
+            $ref: '#/components/schemas/Message'
+        status:
+          type: string
+          description: |
+            HTTP Error code extension
+        traceId:
+          type: string
+          description: |
+            The unique tracker ID used to facilitate troubleshooting
+        characteristic:
+          type: array
+          description: |
+            The relevant parameter that is associated with this error
+          items:
+            $ref: '#/components/schemas/ErrorCharacteristic'
+      description: |
+        "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)""
+    Message:
+      type: object
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        text:
+          type: string
+    ErrorCharacteristic:
+      type: object
+      properties:
+        name:
+          type: string
+          description: |
+            The non localized name identifier of the characteristic
+        value:
+          type: string
+          description: |
+            The value of the characteristic
+      description: |
+        A parameter that is associated with this entity

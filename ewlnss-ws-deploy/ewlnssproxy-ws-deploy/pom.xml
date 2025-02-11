@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+	    <groupId>telus.csm.ewlnss-ws-deploy</groupId>
+    	<artifactId>pom-ewlnss-ws-deploy</artifactId>
+        <version>v1-SNAPSHOT</version>
+	</parent>
+	
+	<groupId>telus.csm.ewlnssproxy-ws-deploy</groupId>
+	<artifactId>pom-ewlnssporxy-ws-deploy</artifactId>
+	<packaging>pom</packaging>
+	<name>pom-ewlnssporxy-ws-deploy</name>
+	
+	<modules>
+		<module>ewlnssproxy-rest</module>
+		<!-- 
+		<module>telus-csm-essproxy-rest-enterprise</module>
+		<module>telus-csm-essproxy-qidc-enterprise</module>
+		 -->
+	</modules>
+	
+</project>

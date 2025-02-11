@@ -1,0 +1,1146 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+    xmlns:tns="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/OfferInformationTypes_v3"
+    xmlns:ect="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9" 
+    targetNamespace="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/OfferInformationTypes_v3"
+    elementFormDefault="qualified" attributeFormDefault="unqualified" version="3.5">
+
+    <xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9"
+        schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v9_1.xsd" />
+
+
+    <!--  ================================================================= -->
+    <!--  Complex Types                                                     -->
+    <!--  ================================================================= -->
+    
+    <xs:complexType name="Program">
+        <xs:sequence>
+            <xs:element name="programId" type="xs:long" minOccurs="1" />
+            <xs:element name="programCode" type="xs:string" minOccurs="1" />
+            <xs:element name="programDescriptionList" type="ect:Description" minOccurs="0" maxOccurs="2" />
+            <xs:element name="perspectiveDate" type="tns:perspectiveDate" minOccurs="1" />
+            <xs:element name="effectiveDate" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="expiryDate" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="brandId" type="xs:long" minOccurs="1" />
+            <xs:element name="promotionCode" type="xs:string" minOccurs="0" />
+            <xs:element name="typeCode" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        WLS - Wireless Program
+                        WLN - Wireline Program
+                        BUNDLE - Bundle Program
+                        SWEETNER - Sweetener Program
+                        PERK - Perk Program
+                        ACCESSORY - Accessory Program
+                        ACCESSORY_WLN_GWP - Accessory Wireline GWP (Gift With Purchase) Program
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="sourceSystemId" type="xs:string" minOccurs="0" >
+              <xs:annotation>
+                <xs:documentation>
+                  Offer Source system Id:
+                    - TOM (TELUS Offer Manager) CMDB Id
+                    - MOM CMDB Id - 20541(for legacy offers)
+                </xs:documentation>
+              </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OfferHeader">
+        <xs:annotation>
+            <xs:documentation>Extends Program; contains minimal offer information that may be used in search operations. This information is included in offer types such as 'OfferSummary' and 'Offer'.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tns:Program">
+                <xs:sequence>
+                    <xs:element name="offerId" type="xs:long" minOccurs="1" />
+                    <xs:element name="offerReferenceId" type="xs:string" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                             Offer definition reference id - common id across multiple offer instances belonging to the same offer definition.
+                             Note: offerId - uniquely identifies an offer instance.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="offerDescriptionList" type="ect:Description" minOccurs="0" maxOccurs="2" />
+                    <xs:element name="offerTierId" type="xs:int" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Telus Tiers are:
+                                11 - Premium Plus
+                                12 - Premium Smartphone
+                                13 - Smartphone
+                                14 - Smartphone Lite
+                                15 - BYOD
+
+                                Koodo Tiers are:
+                                4 - No Tab
+                                6 - TAB Large
+                                7 - Tab medium
+                                8 - Tab Small
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="offerCategoryList" type="tns:OfferCategory" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="basePriceAmt" type="xs:double" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="wirelessOfferCode" type="xs:string" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                For Offer Bundles (wireless and wireline) only. wirelessOfferCode represents the wireless part of the bundle.
+                                Populated only for Business Anywhere and Business Connect customers.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="paymentSupportTypeCode" type="xs:string" minOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Values can be: subsidy, finance, Tab
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="rankingNum" type="xs:integer" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Offer ranking.
+                                Offers with smaller ranking value (eg. 1), have higher probability to be accepted.
+                                Offer ranking can be used by the front-end applications for ordering of offers for presentation purpose.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="productEligiblityList" type="tns:ProductEligiblity" minOccurs="0" maxOccurs="unbounded" >
+                       <xs:annotation>
+                            <xs:documentation>
+                                List of products eligible for this offer. Each product details may include transaction type and term.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="assignedOfferInd" type="xs:boolean" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                             	Assigned id for the targeted offers created through campaign batch or via agent assignment.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="offerMarketingMessageList" type="ect:Message" minOccurs="0" maxOccurs="2">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Defines marketing promotional messages for the purpose of customer targeting strategy.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="OfferSummary">
+        <xs:annotation>
+            <xs:documentation>Extends OfferHeader; represents the summarized version of a single offer.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tns:OfferHeader">
+                <xs:sequence>
+                    <xs:element name="offerProductSummary" type="tns:OfferProductSummary" minOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Offer">
+        <xs:annotation>
+            <xs:documentation>Extends OfferHeader; defines a single offer with complete offer details.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tns:OfferHeader">
+                <xs:sequence>
+                    <xs:element name="offerProduct" type="tns:OfferProduct" minOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="OfferProductSummary">
+        <xs:annotation>
+            <xs:documentation>Summarized version of the 'OfferProduct' type.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="wirelessOfferProductSummary" type="tns:WirelessOfferProductSummary" minOccurs="0" maxOccurs="1" />
+            <xs:element name="wirelineOfferProductSummaryList" type="tns:WirelineOfferProductSummary" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="accessoryOfferProductSummary" type="tns:AccessoryOfferProductSummary" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OfferProduct">
+        <xs:sequence>
+            <xs:element name="wirelessOfferProduct" type="tns:WirelessOfferProduct" minOccurs="0" maxOccurs="1" />
+            <xs:element name="wirelineOfferProductList" type="tns:WirelineOfferProduct" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="accessoryOfferProduct" type="tns:AccessoryOfferProduct" minOccurs="0" maxOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WirelineOfferProductSummary">
+        <xs:annotation>
+            <xs:documentation>Summarized version of the 'WirelineProduct' type.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="productTypeCode" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        TTV, STV, HSIC, SING
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="productCategoryCode" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Defines product category such as OPTIK and PIK. Not all products have product category.
+                        For example, a TTV product would belong to OPTIK or PIK category.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="transactionTypeList" type="tns:TransactionType" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element name="contractTermList" type="xs:integer" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element name="productTemplateIdentifier" type="tns:ProductCatalogueIdentifier" minOccurs="0" />
+            <xs:element name="productComponentList" type="tns:ProductComponent" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="productCatalogSystemId" type="tns:systemId" minOccurs="1"/>
+            <xs:element name="mainComponentIdentifier" type="tns:ProductCatalogueIdentifier" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WirelineOfferProduct">
+        <xs:complexContent>
+            <xs:extension base="tns:WirelineOfferProductSummary">
+                <xs:sequence>
+                    <xs:element name="wirelineEquipmentList" type="tns:WirelineEquipment" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="addOn" type="tns:AddOn" minOccurs="0" />
+                    <xs:element name="discountList" type="tns:Discount" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="feature" type="tns:Feature" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="WirelessOfferProductSummary">
+        <xs:annotation>
+            <xs:documentation>Summarized version of the 'WirelessProduct' type.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="transactionType" type="tns:TransactionType" minOccurs="1" maxOccurs="1" />
+            <xs:element name="equipmentContextInd" type="xs:boolean" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        true - Equipment Related
+                        false - Non-Equipment Related
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="contractTermId" type="xs:integer" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Term in months: 0, 12, 24, 36
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="clientOwnEquipmentInd" type="xs:boolean" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Allow client own equipment for redemption.
+                        If client owned equipmeent, equipment/SKU list will not be provided in the offer.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="keepExistingPlanId" type="xs:int" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        0 - Offer Based - client can keep the existing price plan if it matches with his new profile, and is renewal eligible, and part of the offer.
+                        1 - Append Always - client can keep the existing price plan if it matches with his new profile, and is renewal eligible
+                        2 - Append Never - client can keep the existing price plan if it matches with his new profile, and is renewal eligible, part of the offer, and current.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="financeCode" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        SAP material number associated with the offer (*not* the device SKU)
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="optionTypeId" type="xs:int" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        1 Standard
+                        2 TRP
+                        3 Allotment
+                        4 Float
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="contractCustomization" type="tns:ContractCustomization" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        For corporate offers, business can customize the contract length and contract start date for subscriber.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="productCatalogSystemId" type="tns:systemId" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WirelessOfferProduct">
+        <xs:complexContent>
+            <xs:extension base="tns:WirelessOfferProductSummary">
+                <xs:sequence>
+                    <xs:element name="wirelessEquipment" type="tns:WirelessEquipment" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="wirelessPricePlanSet" type="tns:WirelessPricePlanSet" minOccurs="0" maxOccurs="1">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Price plans configured in the offer.
+                                (These are in addition to market price plans and customized price plans)
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="wirelessServiceSetList" type="tns:WirelessServiceSet" minOccurs="0" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>
+                                Services configured in the offer.
+                                (These are in addition to market services and customized services )
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="minimumServiceCommitmentList" type="tns:MinimumMonthlyServiceCommitment" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="deviceBalanceWaiver" type="tns:DeviceBalanceWaiver" minOccurs="0" />
+                    <xs:element name="billCreditList" type="tns:BillCredit" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="serviceDiscountList" type="tns:ServiceDiscount" minOccurs="0" maxOccurs="unbounded">
+                        <xs:annotation>
+                            <xs:documentation>
+                                List of subscriber service discounts included in the offer.
+                                These are configured through specific soc.
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AccessoryOfferProductSummary">
+        <xs:annotation>
+            <xs:documentation>Summarized version of the 'AccessoryProduct' type.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="accessoryOfferCode" type="xs:string" minOccurs="1" />
+            <xs:element name="eligibilityTypeCd" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>GLOBAL, TRANSACTIONAL</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="stackableInd" type="xs:boolean" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Stackable or not</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="recursiveInd" type="xs:boolean" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>Should this applied more than once in the same transaction.</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="productCatalogSystemId" type="tns:systemId" minOccurs="1"/>
+            <xs:element name="contractTermList" type="xs:integer" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="incompatibleDiscountIdList" type="tns:ProductCatalogueIdentifier" minOccurs="0" maxOccurs="unbounded" >
+              <xs:annotation>
+                    <xs:documentation>List of discounts not compatible with this accessory offer</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="contractEnforcedProductCdList" type="xs:string" minOccurs="0" maxOccurs="unbounded" >
+               <xs:annotation>
+                    <xs:documentation>List of products this accessory offer product is contractually tied to (SING, STV, HSIC, TTV)</xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AccessoryOfferProduct">
+        <xs:complexContent>
+            <xs:extension base="tns:AccessoryOfferProductSummary">
+                <xs:sequence>
+                    <xs:element name="printToReceipt" type="tns:AccessoryPrintToReceipt" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="giftList" type="tns:AccessoryGift" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="discountList" type="tns:AccessoryDiscount" minOccurs="0" maxOccurs="unbounded" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AccessoryPrintToReceipt">
+        <xs:sequence>
+            <xs:element name="printDescriptionList" type="ect:Description" minOccurs="1" maxOccurs="2" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AccessoryGift">
+        <xs:sequence>
+            <xs:element name="typeCode" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        types: HANDSET, VISA, ACCESSORY, STOREGIFTCARD
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="systemId" type="tns:systemId" minOccurs="1"/>
+            <xs:element name="productCode" type="xs:string" minOccurs="1" />
+            <xs:element name="validDayCount" type="xs:integer" minOccurs="0" />
+            <xs:element name="giftAmount" type="xs:double" minOccurs="0" />
+            <xs:element name="giftDiscountPaymentPlanList" type="tns:GiftDiscountPaymentPlan" minOccurs="0" maxOccurs="unbounded" >
+              <xs:annotation>
+                    <xs:documentation>
+                        Available for certain types of gifts, such as Wireline GWP.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AccessoryDiscount">
+        <xs:sequence>
+            <xs:element name="discountSubTypeCd" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        types: ENDDISC, ENDPRICE
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="equalOrLessValueInd" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        if true, equal or less value treatment should apply
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="itemQty" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        how many accessory items needs to be purchased
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="endDiscountTypeCd" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        types: PROGRESS, THRESHOLD
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="discountType" type="tns:DiscountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        types: PERCENT, DOLLAR, OVERRIDE
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="discountAmt" type="xs:double" minOccurs="0" />
+            <xs:element name="groupList" type="tns:AccessoryGroup" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AccessoryGroup">
+        <xs:sequence>
+            <xs:element name="itemQty" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        minimum items quantity that needs to be purchased to qualify.
+                        0 means optional group
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="discountLevelCd" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Defines where the discount is defined. Possible options are:
+                        GROUP - Group
+                        TIER - Tier
+                        PRODUCT - product
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="discountType" type="tns:DiscountType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        types: PERCENT, DOLLAR, OVERRIDE
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="discountAmt" type="xs:double" minOccurs="0" />
+            <xs:element name="productList" type="tns:AccessoryGroupDiscountProduct" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="tierList" type="tns:AccessoryTier" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="excludedProductList" type="tns:AccessoryGroupProduct" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AccessoryGroupProduct">
+        <xs:sequence>
+            <xs:element name="productCategoryId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="productSubCategoryId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="productClassId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="productVendorId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="productManufacturerId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="productCode" type="xs:string" minOccurs="0" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Product SKU
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AccessoryGroupDiscountProduct">
+        <xs:complexContent>
+            <xs:extension base="tns:AccessoryGroupProduct">
+                <xs:sequence>
+                    <xs:element name="discountType" type="tns:DiscountType" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>
+                                types: PERCENT, DOLLAR, OVERRIDE
+                            </xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                    <xs:element name="discountAmt" type="xs:double" minOccurs="0" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="AccessoryTier">
+        <xs:sequence>
+            <xs:element name="minItemQty" type="xs:integer" minOccurs="1" />
+            <xs:element name="maxItemQty" type="xs:integer" minOccurs="1" />
+            <xs:element name="discountType" type="tns:DiscountType" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        types: PERCENT, DOLLAR, OVERRIDE
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="discountAmt" type="xs:double" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="GiftDiscountPaymentPlan">
+        <xs:annotation>
+          <xs:documentation>
+            Gift Discount payment plan defines the details of the gift discount given to the customer,
+            and the potential payment details of the unsubsidised portion of the gift's value that the customer is liable for.
+            A gift discount is given as a SUBSIDY on the partial or full value of the gift.
+            Unsubsidized portion of the gift value can either be financed over a defined number of installments (term), or requested to be paid immediately.
+          </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="paymentTypeCd" type="xs:string" minOccurs="1" >
+                <xs:annotation>
+                    <xs:documentation>
+                        Defines payment type for the gift. Possible values: SUBSIDY, FINANCE
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="paymentAmt" type="xs:double" minOccurs="1" >
+                <xs:annotation>
+                    <xs:documentation>
+                        Gift subsidy or finance amount.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="paymentInstallmentCnt" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                       Applicable for FINANCE paymentTypeCd only. Defines the number of payment installments for the financed portion of the gift.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="immediatePaymentInd" type="xs:boolean" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                       Applicable for FINANCE paymentTypeCd only. True if the financed portion of the gift is to be payed immediately.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProductComponent">
+        <xs:sequence>
+            <xs:element name="productCatalogueItemList" type="tns:ProductCatalogueItem" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element name="marketingDescriptionList" type="ect:Description" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="marketingProductPriceAmt" type="xs:double" minOccurs="0" />
+            <xs:element name="includedServiceConstraintList" type="tns:IncludedServiceConstraint" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="IncludedServiceConstraint">
+        <xs:sequence>
+            <xs:element name="salesCategory" type="tns:SalesCategory" minOccurs="0" />
+            <xs:element name="serviceTypeCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="minItemQty" type="xs:integer" minOccurs="1" />
+            <xs:element name="maxItemQty" type="xs:integer" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Discount">
+        <xs:sequence>
+            <xs:element name="transactionTypeList" type="tns:TransactionType" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="contractTermList" type="xs:integer" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="productCatalogueItemList" type="tns:ProductCatalogueItem" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element name="includedInd" type="xs:boolean" minOccurs="1" />
+            <xs:element name="stackableInd" type="xs:boolean" minOccurs="1" />
+            <xs:element name="winbackInd" type="xs:boolean" minOccurs="1" />
+            <xs:element name="recontractingInd" type="xs:boolean" minOccurs="0" />
+            <xs:element name="crossProductDependencyList" type="tns:CrossProductDependency" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="marketingDescriptionList" type="ect:Description" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="discountCode" type="xs:string" minOccurs="0" />
+            <xs:element name="discountProductCatalogueItemList" type="tns:DiscountProductCatalogueItem" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="marketingNameList" type="ect:Description" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="discountedComponentTypeCd" type="xs:string" minOccurs="0">
+              <xs:annotation>
+                    <xs:documentation>
+                       Discounted component type code such as: ADDON, PRODUCT, EQUIPMENT
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="preSelectedDiscountInd" type="xs:boolean" minOccurs="0">
+              <xs:annotation>
+                    <xs:documentation>
+                       Indicates whether the discount is preselected for redemption or not.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AddOn">
+        <xs:sequence>
+            <xs:element name="includedProductCatalogueItemList" type="tns:ProductCatalogueItem" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="optionalProductCatalogueItemList" type="tns:ProductCatalogueItem" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Feature">
+        <xs:sequence>
+            <xs:element name="minQty" type="xs:integer" minOccurs="1" />
+            <xs:element name="maxQty" type="xs:integer" minOccurs="1" />
+            <xs:element name="includedProductCatalogueItemList" type="tns:ProductCatalogueItem" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="optionalProductCatalogueItemList" type="tns:ProductCatalogueItem" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WirelineEquipment">
+        <xs:sequence>
+            <xs:element name="productCatalogueItem" type="tns:ProductCatalogueItem" minOccurs="1" />
+            <xs:element name="minQty" type="xs:integer" minOccurs="0" />
+            <xs:element name="maxQty" type="xs:integer" minOccurs="0" />
+            <xs:element name="purchaseEquipmentList" type="tns:WirelineEquipmentItem" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="rentalEquipmentList" type="tns:WirelineEquipmentItem" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="byodEquipmentList" type="tns:WirelineEquipmentItem" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WirelineEquipmentItem">
+        <xs:sequence>
+            <xs:element name="materialItemCode" type="xs:string" minOccurs="1" />
+            <xs:element name="equipmentPurchasePriceAmt" type="xs:double" minOccurs="0" maxOccurs="1" />
+            <xs:element name="equipmentRentalPriceAmt" type="xs:double" minOccurs="0" maxOccurs="1" />
+            <xs:element name="equipmentLateReturnPriceAmt" type="xs:double" minOccurs="0" maxOccurs="1" />
+            <xs:element name="equipmentDescriptionList" type="ect:Description" minOccurs="1" maxOccurs="2" />
+            <xs:element name="deliveryMethodList" type="xs:string" minOccurs="1" maxOccurs="unbounded" />
+            <xs:element name="includedInd" type="xs:boolean" minOccurs="1" />
+            <xs:element name="purchaseDiscountList" type="tns:PurchaseDiscount" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PurchaseDiscount">
+        <xs:sequence>
+            <xs:element name="purchaseDiscountCode" type="xs:string" minOccurs="1" />
+            <xs:element name="contractTermId" type="xs:integer" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CrossProductDependency">
+        <xs:sequence>
+            <xs:element name="productCode" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        SING, STV, HSIC, TTV
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="contractTermList" type="xs:integer" minOccurs="1" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MarketingDescription">
+        <xs:sequence>
+            <xs:element name="displayOrderNum" type="xs:integer" />
+            <xs:element name="descriptionList" type="ect:Description" minOccurs="1" maxOccurs="2" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProductCatalogueItem">
+        <xs:sequence>
+            <xs:element name="productCatalogueIdentifier" type="tns:ProductCatalogueIdentifier" minOccurs="1" />
+            <xs:element name="productCatalogueNameList" type="ect:Description" minOccurs="1" maxOccurs="2" />
+            <xs:element name="parentProductCatalogueIdentifier" type="tns:ProductCatalogueIdentifier" minOccurs="1" />
+            <xs:element name="productCatalogueBasePriceAmt" type="xs:double" minOccurs="0" maxOccurs="1" />
+            <xs:element name="packEligibleItemInd" type="xs:boolean" minOccurs="0" />
+            <xs:element name="serviceTypeCode" type="xs:string" minOccurs="0" />
+            <xs:element name="itemRankNum" type="xs:integer" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DiscountProductCatalogueItem">
+        <xs:complexContent>
+            <xs:extension base="tns:ProductCatalogueItem">
+                <xs:sequence>
+                    <xs:element name="discountPriceAmt" type="xs:double" minOccurs="0" maxOccurs="1" />
+                    <xs:element name="recurringCount" type="xs:integer" minOccurs="0" />
+                    <xs:element name="discountType" type="tns:DiscountType" minOccurs="0" maxOccurs="1" />
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ProductCatalogueIdentifier">
+        <xs:sequence>
+            <xs:element name="productCatalogueId" type="xs:string" minOccurs="1" />
+            <xs:element name="externalProductCatalogId" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SweetenerSummary">
+        <xs:annotation>
+            <xs:documentation>Summarized version of a Sweeetner offer.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tns:OfferSummary">
+                <xs:sequence>
+                    <xs:element name="eligibleOfferIdentifierList" type="tns:OfferIdentifier" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="stackableInd" type="xs:boolean" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Stackable or not</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="Sweetener">
+        <xs:annotation>
+            <xs:documentation>Defines a single a Sweeetner offer.</xs:documentation>
+        </xs:annotation>
+        <xs:complexContent>
+            <xs:extension base="tns:Offer">
+                <xs:sequence>
+                    <xs:element name="eligibleOfferIdentifierList" type="tns:OfferIdentifier" minOccurs="0" maxOccurs="unbounded" />
+                    <xs:element name="stackableInd" type="xs:boolean" minOccurs="0">
+                        <xs:annotation>
+                            <xs:documentation>Stackable or not</xs:documentation>
+                        </xs:annotation>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="OfferCategory">
+        <xs:sequence>
+            <xs:element name="categoryTypeCode" minOccurs="1" type="xs:string">
+                <xs:annotation>
+                    <xs:documentation>
+                        This is flexible structure that can hold different categories like channel,
+                        regional etc.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="categoryList" type="tns:Category" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Category">
+        <xs:sequence>
+            <xs:element name="categoryCode" minOccurs="1" type="xs:string" />
+            <xs:element name="categoryDescriptionList" type="ect:Description" minOccurs="1" maxOccurs="2" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TransactionType">
+        <xs:sequence>
+            <xs:element name="transactionTypeCode" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        For WIRELESS: renewal/migration/activation/activation port-in.
+                        For WIRELINE: activation/renewal
+                        Possible values defined in Reference PDS.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="transactionSubTypeCode" type="xs:string" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        mid contract, Pre2Post, Mike2PCS Generic etc.
+                        Possible values defined in Reference PDS.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProgramPromotion">
+        <xs:sequence>
+            <xs:element name="promotionCode" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Alpha numeric string representing the promotion code for a code based program.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="promotionId" type="xs:integer">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numeric key for the promotion code for a code based program.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="programId" type="xs:long">
+                <xs:annotation>
+                    <xs:documentation>
+                        Numeric key for the code based program.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="challengeQuestionList" type="ect:Description" minOccurs="0" maxOccurs="2">
+                <xs:annotation>
+                    <xs:documentation>
+                        Challenge Question string associated with the code based offer.
+                        Both English and French versions will be provided.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="mandatoryResponseInd" type="xs:boolean" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        If true, the response to challenge question is mandatory.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="responseTypeId" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        1 for Validation Code response type.
+                        2 for Free Form response type.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="responseFormatTypeId" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        1 for Numeric response format
+                        2 for Alphanumeric response format
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="responseMaxLengthCnt" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Maximum length of the response string.
+                        Application consumers of the service can proactively render the
+                        response capture element to limit string length to this value.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="challengeQuestionInd" type="xs:boolean" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Determines if challenge question is configured with promo code.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ContractCustomization">
+        <xs:sequence>
+            <xs:element name="forcedContractStartDate" type="xs:dateTime" minOccurs="0" />
+            <xs:element name="forcedCommitmentMonthCount" type="xs:integer" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WirelessServiceSet">
+        <xs:sequence>
+            <xs:element name="enforcementId" type="xs:int" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        0 - means services are optional
+                        1 - means service(s) are mandatory during offer selection
+                        2 - means service(s) are mandatory during contract lifecycle.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="restrictionId" type="xs:int" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        0 - All services are Optional
+                        1 - Only one service is mandatory
+                        2 - All services are mandatory
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="serviceCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="serviceGroupCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WirelessPricePlanSet">
+        <xs:sequence>
+            <xs:element name="enforcementId" type="xs:int" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        0 - means plans are optional
+                        1 - means one of the plans from the list has to be selected for the offer redemption
+                        2 - means one of the plans from the list has to be kept during contract lifecycle. 
+                        See WOME pricing project details for more info.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="pricePlanCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+            <xs:element name="pricePlanGroupCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="MinimumMonthlyServiceCommitment">
+        <xs:sequence>
+            <xs:element name="minimumCommitmentTypeCode" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Both Rate Plan and Feature - PPRS
+                        Rate Plan - PSOC
+                        Feature - REGS
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="minimumCommitmentAmt" type="xs:double" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WirelessEquipment">
+        <xs:annotation>
+            <xs:documentation>
+                if allEquipmentInd = true then for any equipment user select, discount will always be allProductOfferDiscountAmt
+                else search the handset/SIM from offerEquipmentItemList and find the discount.
+            </xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="allEquipmentDiscountDeliveryType" type="tns:DiscountDeliveryType" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        POS - ACTP
+                        BILL - ACTA
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="allEquipmentOfferDiscountAmt" type="xs:double" minOccurs="0" />
+            <xs:element name="allEquipmentDiscountType" type="tns:DiscountType" minOccurs="0" />
+            <xs:element name="allEquipmentInd" type="xs:boolean" minOccurs="1" />
+            <xs:element name="wirelessEquipmentItemList" type="tns:WirelessEquipmentItem" minOccurs="0" maxOccurs="unbounded" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DeviceBalanceWaiver">
+        <xs:sequence>
+            <xs:element name="waiveAmt" type="xs:double" minOccurs="1" />
+            <xs:element name="waiveType" type="tns:DiscountType" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        $ or % amount for DB Waive amt
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="maximumDaysRemainingCount" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Number of days remaining on contract for DB waive to be applied.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="BillCredit">
+        <xs:sequence>
+            <xs:element name="creditReasonCode" type="xs:string" minOccurs="1" />
+            <xs:element name="creditReverseReasonCode" type="xs:string" minOccurs="0" />
+            <xs:element name="creditAmt" type="xs:double" minOccurs="0" />
+            <xs:element name="recurringCount" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        1 for non-recurring;
+                        &gt; 1 for recurring
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="immediateBalanceImpactInd" type="xs:boolean" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        Immediate or At Bill Cycle
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="deviceBalanceRelatedInd" type="xs:boolean" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        true: In this case it should be used to register as device balance
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="activationPortinInd" type="xs:boolean" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        true: if this credit is only applicable to port-in activations
+                        false: if this credit is applicable to regular and port-in activations
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ServiceDiscount">
+        <xs:sequence>
+            <xs:element name="discountedServiceCode" type="xs:string" minOccurs="1" />
+            <xs:element name="useDefaultMonthsInd" type="xs:boolean" minOccurs="1" />
+            <xs:element name="monthCount" type="xs:integer" minOccurs="0">
+                <xs:annotation>
+                    <xs:documentation>
+                        Currently not supported in redemption.
+                        Duration of subscriber discount in months.
+                        If 0 - default value from discount plan code should be used.
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DiscountDeliveryType">
+        <xs:sequence>
+            <xs:element name="discountDeliveryTypeCode" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        POS - ACTP
+                        BILL - ACTA
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DiscountType">
+        <xs:sequence>
+            <xs:element name="discountTypeCode" type="xs:string" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        D - Dollar
+                        P - Percentage
+                        O - Discount override
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="WirelessEquipmentItem">
+        <xs:sequence>
+            <xs:element name="equipment" type="tns:EquipmentProduct" minOccurs="1" />
+            <xs:element name="discountDeliveryType" type="tns:DiscountDeliveryType" minOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        POS - ACTP
+                        BILL - ACTA
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="discountType" type="tns:DiscountType" minOccurs="1" />
+            <xs:element name="discountAmt" type="xs:double" minOccurs="0" />
+            <xs:element name="equipmentBasePrice" type="tns:EquipmentBasePrice" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EquipmentProduct">
+        <xs:sequence>
+            <xs:element name="equipmentProductCode" type="xs:string" minOccurs="1" />
+            <xs:element name="equipmentProductId" type="xs:long" minOccurs="1" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="EquipmentBasePrice">
+        <xs:sequence>
+            <xs:element name="basePriceAmt" type="xs:double" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="AccessoryEquipmentProduct">
+        <xs:sequence>
+            <xs:element name="equipmentCategoryId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="equipmentSubCategoryId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="equipmentClassId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="equipmentVendorId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="equipmentManufacturerId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="equipmentProductCode" type="xs:string" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OfferIdentifier">
+        <xs:annotation>
+            <xs:documentation>Base Offer identifier information.</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="programId" type="xs:long" minOccurs="0" maxOccurs="1" />
+            <xs:element name="programCode" type="xs:string" minOccurs="0" maxOccurs="1" />
+            <xs:element name="perspectiveDate" type="tns:perspectiveDate" minOccurs="0" maxOccurs="1" />
+            <xs:element name="offerId" type="xs:long" minOccurs="1" maxOccurs="1" />
+            <xs:element name="offerTypeCode" type="xs:string" minOccurs="1" maxOccurs="1">
+                <xs:annotation>
+                    <xs:documentation>
+                        WLS - Wireless Program
+                        WLN - Wireline Program
+                        BUNDLE - Bundle Program
+                        SWEETNER - Sweetener Program
+                        PERK - Perk Program
+                        ACCESSORY - Accessory Program
+                        ACCESSORY_WLN_GWP - Accessory Wireline GWP (Gift With Purchase) Program
+                    </xs:documentation>
+                </xs:annotation>
+            </xs:element>
+            <xs:element name="sourceSystemId" type="xs:string" minOccurs="0" >
+              <xs:annotation>
+                <xs:documentation>
+                  Offer Source system Id:
+                    - TOM (TELUS Offer Manager) CMDB Id
+                    - MOM CMDB Id - 20541(for legacy offers)
+              </xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ProductEligiblity">
+        <xs:annotation>
+            <xs:documentation>Defines a product eligibility criteria that can be associated with an offer</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="productTypeCd" type="xs:string" minOccurs="1" maxOccurs="1">
+              <xs:annotation>
+                  <xs:documentation>Eligible product types. Eg: TTV, STV, HSIC, SING</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="productTemplateIdentifier" type="tns:ProductCatalogueIdentifier" minOccurs="0">
+              <xs:annotation>
+                <xs:documentation>Eligible product OMS template</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="productComponentIdentifierList" type="tns:ProductCatalogueIdentifier" minOccurs="0" maxOccurs="unbounded">
+              <xs:annotation>
+                <xs:documentation>Eligible Product components (tiers) - if present, customer needs to have at least one of them to be eligible for this offer</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="transactionType" type="tns:TransactionType" minOccurs="0" maxOccurs="1" >
+               <xs:annotation>
+                  <xs:documentation>Eligible Product transaction type</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element name="contractTermList" type="xs:integer" minOccurs="0" maxOccurs="unbounded" >
+               <xs:annotation>
+                  <xs:documentation>Eligible Product contract terms. Eg. 12, 24</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="SalesCategory">
+        <xs:annotation>
+            <xs:documentation>Generic sales category definition</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+            <xs:element name="salesCategoryCode" type="xs:string" minOccurs="1" />
+            <xs:element name="salesCategoryNameList" type="ect:Description" minOccurs="2" maxOccurs="2" />
+        </xs:sequence>
+    </xs:complexType>
+
+    <!--  ================================================================= -->
+    <!--  Simple Types                                                      -->
+    <!--  ================================================================= -->
+    
+    <xs:simpleType name="perspectiveDate">
+        <xs:restriction base="xs:dateTime">
+            <xs:annotation>
+                <xs:documentation>
+                    Represents the logical version of the offer or program.
+                    Used as both input (when looking for offer as of specific date) and output element
+                    (results is valid with this date) for offer retrieval operations.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="systemId">
+        <xs:restriction base="xs:string">
+            <xs:annotation>
+                <xs:documentation>
+                    If systemId=??, this is KB product catalog Id.
+                    If systemId=??, this is EPC product catalog Id.
+                </xs:documentation>
+            </xs:annotation>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>telus.csm.ewlnss</groupId>
+		<artifactId>EnterpriseWLNSalesServices</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>pom-ewlnss-laird-deploy</artifactId>
+	<packaging>pom</packaging>
+	<name>pom-ewlnss-laird-deploy</name>
+
+	<modules>
+		<module>ess-rest-laird-war</module>
+		<module>ewlnsis-rest-laird-war</module>
+		<module>ewlnsms-rest-laird-war</module>
+		<module>ewlnsis-soap-laird-war</module>
+		<module>ewlnsms-soap-laird-war</module>
+		<module>ewlnsvs-soap-laird-war</module>
+		<module>ewlnsos-rest-laird-war</module>
+		<module>ewlnssproxy-rest-laird-war</module>
+	</modules>
+	
+	<dependencies>
+		<dependency>
+		  <groupId>thirdparty.coherence</groupId>
+		  <artifactId>coherence</artifactId>
+          <version>3.7.1.6</version>
+		</dependency>
+	</dependencies>
+
+</project>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+	    <artifactId>pom-ewlnss-common-shared-adapter</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>ewlnss-adapter-shared</artifactId>
+	
+	<dependencies>
+ 		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared</groupId>
+		    <artifactId>ewlnss-shared-util</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+  		<dependency>
+			<groupId>telus.csm.ewlnss.common.adapter.wsdl</groupId>
+			<artifactId>ConsumerCustomerMgmtSvc-soap-client</artifactId>
+			<scope>provided</scope>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+ 			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<!-- added for performance package -->
+      	<dependency>
+  			<groupId>telus.chnlsales.ucss</groupId>
+  			<artifactId>ucss-common</artifactId>
+  			<version>2.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+			<version>4.5.6</version>
+		</dependency>
+				<!-- 
+ 		<dependency>
+			<groupId>telus.csm.ewlnss.common.adapter.wsdl</groupId>
+			<artifactId>EnterpriseCreditProfileManagementService-soap-client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.adapter.wsdl</groupId>
+			<artifactId>WLNCreditEligibilityProxyService-soap-client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.adapter.wsdl</groupId>
+			<artifactId>WLNCreditProfileManagementProxyService-soap-client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.adapter.wsdl</groupId>
+			<artifactId>WLNCreditProfileManagementService-soap-client</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+ -->	</dependencies>
+</project>

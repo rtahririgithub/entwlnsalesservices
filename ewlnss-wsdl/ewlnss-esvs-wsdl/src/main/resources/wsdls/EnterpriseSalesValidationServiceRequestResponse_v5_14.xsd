@@ -1,0 +1,547 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS COMMUNICATIONS) -->
+<xs:schema xmlns:tns="http://xmlschema.tmi.telus.com/srv/MSO/ChannelSalesMgmt/EnterpriseSalesValidationServiceRequestResponse_v5" xmlns:esc="http://xmlschema.tmi.telus.com/xsd/MarketingSales/SalesChannel/SalesCommonTypes_v5" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ec="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8" targetNamespace="http://xmlschema.tmi.telus.com/srv/MSO/ChannelSalesMgmt/EnterpriseSalesValidationServiceRequestResponse_v5" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/MarketingSales/SalesChannel/SalesCommonTypes_v5" schemaLocation="http://xmlschema.tmi.telus.com/xsd/MarketingSales/SalesChannel/SalesCommonTypes_v5_14.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8_0.xsd"/>
+	<xs:element name="getSubscriberEligibility" type="tns:GetSubscriberEligibilityType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Subscriber Eligibility.  This is used for checking subscriber level eligibility for international Dialing, deposit amount and balance repayment options</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSubscriberEligibilityResponse" type="tns:GetSubscriberEligibilityResponseType">
+		<xs:annotation>
+			<xs:documentation>Response of the Get Subscriber Eligibility operation.  This indicates eligibility for international dialing, deposit amount, balance repayment options</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="validateSalesOrder">
+		<xs:annotation>
+			<xs:documentation>Request for the Validate Order.  This is used to validate compatibility of the selected Equipment, Offer, Term, PricePlan and Services. 
+			By passing a specific scope, the validation will be restricted to that specific scope (e.g. validate Equipment only).  Current implementation supports Wireless order type only.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="validateWirelessSalesOrder" type="tns:ValidateWirelessSalesOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="validateSalesOrderResponse">
+		<xs:annotation>
+			<xs:documentation>Response of the Validate Renewal Order operation.  This indicates if the validation is successful.  It also contains specific error information for Calling Circle if Calling circle is part of the selected Services</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage">
+								<xs:sequence>
+									<xs:element name="validateOrderItemType" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>POS_INVENTORY, EQUIPMENT, OFFER, TERM, PRICEPLAN, SERVICE, PORTIN or ORDER</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="validateOrderItemSubType" type="xs:string" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>SIM, HANDSET</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="problemServiceCodeList" type="xs:string" minOccurs="0" maxOccurs="500">
+										<xs:annotation>
+											<xs:documentation>List of SOCs that have a conflict in a contract change</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:extension>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="validateWirelessSalesOrderResponse" type="tns:ValidateWirelessSalesOrderResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getSalesEligibility" type="tns:GetSalesEligibilityType">
+		<xs:annotation>
+			<xs:documentation>Request for Checking the sales eligibility for activation, renewal, upgrade (Koodo), migration and return/exchange.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSalesEligibilityResponse" type="tns:GetSalesEligibilityResponseType">
+		<xs:annotation>
+			<xs:documentation>Response of the check sales eligibility operation.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getFutureDatedSalesEligibility" type="tns:GetFutureDatedSalesEligibilityType">
+		<xs:annotation>
+			<xs:documentation>Request for Checking the future dated sales eligibility</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getFutureDatedSalesEligibilityResponse" type="tns:GetFutureDatedSalesEligibilityResponseType">
+		<xs:annotation>
+			<xs:documentation>Response of the Check Future Dated Sales Eligibility operation. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getNumberPortInEligibility" type="tns:GetNumberPortInEligibilityType"/>
+	<xs:element name="getNumberPortInEligibilityResponse" type="tns:GetNumberPortInEligibilityResponseType"/>
+	<xs:element name="validatePendingTransactionForResume" type="tns:ValidatePendingTransactionForResumeType">
+		<xs:annotation>
+			<xs:documentation>This operation is used to validate a pending reserved transaction which is to be resumed.
+				Request used to validate bundle order
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="validatePendingTransactionForResumeResponse" type="tns:ValidatePendingTransactionForResumeResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for this operation is used to validate a pending reserved transaction which is to be resumed.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="validateSalesOrderItem" type="tns:ValidateSalesOrderItemType">
+		<xs:annotation>
+			<xs:documentation>This operation is used to validate a sales order item list. Sales order item can be acessory, warranty, perk.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="validateSalesOrderItemResponse" type="tns:ValidateSalesOrderItemResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for this operation is used to validate a sales order perk.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getServiceEligibility" type="tns:GetServiceEligibilityType">
+		<xs:annotation>
+			<xs:documentation>This operation is used to validate if the bill charges comply with the CRTC rules for customer consent
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getServiceEligibilityResponse" type="tns:GetServiceEligibilityResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for this operation is used to validate if the bill charges comply with CRTC rules</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getCustomerEligibility" type="tns:GetCustomerEligibilityType">
+		<xs:annotation>
+			<xs:documentation>This is used for checking subscriber level eligibility on credit result for treatment, fraud, purchase restrictions. ***WLN stack dependency***</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getCustomerEligibilityResponse" type="tns:GetCustomerEligibilityResponseType">
+		<xs:annotation>
+			<xs:documentation>This indicates eligibility based on credit result for treatment, fraud, purchase restrictions</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GetSubscriberEligibilityType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone number for one subscriber. Alternative with subscriberCount, if this is provided, will ignore subscriberCount and only get one subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriberCount" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The number of subscriber's to check eligibility for.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetSubscriberEligibilityResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="channelCarePhoneNumber" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>This is the client care phone number that the user must call for credit resolution.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="phoneNumber" type="xs:string"/>
+					<xs:element name="accountEligibility" type="esc:AccountEligibilityInformation"/>
+					<xs:element name="earlyDeviceUpgradeFee" type="esc:EarlyDeviceUpgradeFee"/>
+					<xs:element name="balancePaymentOnBillEligibilityIndicator" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>For Koodo, if true, client is eligible to put outstanding tab balance repayment on bill</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetFutureDatedSalesEligibilityType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetFutureDatedSalesEligibilityResponseType">
+		<xs:annotation>
+			<xs:documentation>The messages contain eligibility messages</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="allowFutureDatedSalesIndicator" type="xs:boolean"/>
+					<xs:element name="futureDatedTransactionsStartDate" type="xs:date" minOccurs="0"/>
+					<xs:element name="futureDatedTransactionsEndDate" type="xs:date" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ValidateWirelessSalesOrderType">
+		<xs:sequence>
+			<xs:element name="billingAccountNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>For NON-BC to BC migration this is expected to be the source BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesOrder" type="esc:Order"/>
+			<xs:element name="validateOrderItemTypeList" type="xs:string" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>This list indicates to the service what order item types needs to be validated. It could be one of a combination of POS_INVENTORY, EQUIPMENT, OFFER, TERM, PRICEPLAN, SERVICE, PORTIN,RESERVE_PHONENUMBER and ORDER.  If it's blank, it means ORDER</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validationOnlyInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="returnOrderTransactionId" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValidateWirelessSalesOrderResponseType">
+		<xs:sequence>
+			<xs:element name="orderValidIndicator" type="xs:boolean"/>
+			<xs:element name="callingCircleErrorList" type="tns:CallingCircleError" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CallingCircleError">
+		<xs:sequence>
+			<xs:element name="phoneNumber" type="xs:string"/>
+			<xs:element name="messageList" type="ec:MultilingualCodeDescTextList"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetSalesEligibilityType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>existing BAN for renewal/migration or new BAN for acitvation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Phone number of the existing subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="migrationToBillingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>only for migration transaction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="resumeOrderEligibilityInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If TRUE will include the resumable orders list.  If blank or FALSE it will not.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetSalesEligibilityResponseType">
+		<xs:annotation>
+			<xs:documentation>The messages contain eligibility messages</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="eligibilityResultList" type="tns:SalesEligibilityResultType" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Indicates if subscriber is eligible for any sales transaction.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="eligibileResumeSalesIdList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>List of SalesIds that can be resumed.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetNumberPortInEligibilityType">
+		<xs:annotation>
+			<xs:documentation>There are two ways to use this operation:
+1. Upfront without an account: in this case there is not billing account number or equipment, but user must supply brandCode/hspaIndicator
+2. During process of activation: in this case user should supply billing account number/equipment</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>one of billing account number or brand code must be provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Phone number to check port-in eligibility for.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="prepaidIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Can be derived from billing account number, however, must be supplied if billing account number is not supplied.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipment" type="esc:EquipmentSerialNumberSet" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>one of equipment or hspaIndicator must be provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hspaIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>one of equipment or hspaIndicator must be provided</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetNumberPortInEligibilityResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="eligibilityIndicator" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>TRUE if phone number is eligible.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="portDirectionCd" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>WIRELESS_TO_WIRELESS = A
+WIRELINE_TO_WIRELESS = C
+The direction is used in order for the client system to know what details to populate when submitting the port request.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="numberGroupCd" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This can be used to filter offer  by sub-market code</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="numberGroupProvinceCd" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This can be used to filter offer by market code</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ValidatePendingTransactionForResumeType">
+		<xs:annotation>
+			<xs:documentation>This operation is used to validate a pending reserved transaction which is to be resumed.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="bundleOrderId" type="xs:string" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Bundle Order Id from the Business Order Item</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValidatePendingTransactionForResumeResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for this operation is used to validate a pending reserved transaction which is to be resumed.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="bundleOrderValidIndicator" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EligibileReturnOrderSummaryType">
+		<xs:sequence>
+			<xs:element name="salesId" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>primary key to identify original sales activity and order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderCreationDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Original timestamp when order is created for fulfillment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="handsetSerialNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="simSerialNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="eTransactionId" type="xs:string" minOccurs="0"/>
+			<xs:element name="eligibilityExpiryDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>expiry date for eligible return or exchange</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="allowKeepPromotionCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Alpha numeric string representing the promotion code for a code based offer which is allowed to retain during exchange	</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SalesEligibilityResultType">
+		<xs:annotation>
+			<xs:documentation>The messages contain eligibility messages</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="eligibleSalesOrderTypeCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Activation, Renewal, Migration, Return, Exchange</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibilityIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>True: subscriber is eligible 
+False: subscriber is not eligible</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibilityReasonCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>- Dellinquent_Account
+- Subscriber_In_Vacation_Status
+- Subscriber_Equipment_Lost_Stolen
+- Subscriber_Locked</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="clpIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Deprecated. Account is currently on CLP.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditProgram" type="esc:CreditProgram" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Credit Program eligibility</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibleReturnOrderList" type="tns:EligibileReturnOrderSummaryType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Only for return/exchange</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EligibileResumeOrderSummaryType">
+		<xs:sequence>
+			<xs:element name="salesId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The ESS SalesId.  May not exist, depends on the application flow.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="salesOrderContextExistInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>indicate whether a sales order has been created.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValidateSalesOrderItemType">
+		<xs:annotation>
+			<xs:documentation>This operation is used to validate a sales order perk.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="salesOrderPerk" type="esc:SalesItemPerk" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValidateSalesOrderItemResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for this operation is used to validate a sales order perk.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="salesOrderItemValidIndicator" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetCustomerEligibilityType">
+		<xs:annotation>
+			<xs:documentation>This operation is used to validate a sales order perk.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="customerId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>customer ID for existing customer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditProfile" type="esc:CustomerCreditInformation" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>new or updated credit profile</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newCustomerInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true - new customer will trigger credit worthness check in credit system</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="refreshCreditResultInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true - existing client whose has credit information change and requires a credit check and refresh existing credit result</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetCustomerEligibilityResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for this operation is used to validate a sales order perk.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="creditAssessment" type="esc:CreditAssessmentResult" minOccurs="0"/>
+					<xs:element name="creditEligibility" type="esc:CreditEligibilityResult" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetServiceEligibilityType">
+		<xs:annotation>
+			<xs:documentation>Response for this operation is used to validate a sales order perk.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="refreshInd" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>For NON-BC to BC migration this is expected to be the source BAN.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone number being worked upon in the order.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceItemList" type="esc:ServiceItem" minOccurs="0" maxOccurs="50">
+				<xs:annotation>
+					<xs:documentation>Clients should pass only optional/add-on service SOC</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetServiceEligibilityResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for this operation is used to validate a sales order perk.</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="billChargeComplianceEligibility" type="tns:BillChargeComplianceEligibility" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BillChargeComplianceEligibility">
+		<xs:sequence>
+			<xs:element name="billChargeComplianceInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>TRUE, if compliant, False if non compliant</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billChargeComplianceTypeCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>One Of FULL_COMPLIANCE, PER_ZONE_COMPLIANCE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billChargeComplianceDetailList" type="esc:BillChargeComplianceDetail" minOccurs="0" maxOccurs="10"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

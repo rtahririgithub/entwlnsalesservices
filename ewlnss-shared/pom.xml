@@ -1,0 +1,31 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+        <groupId>telus.csm.ewlnss</groupId>
+        <artifactId>EnterpriseWLNSalesServices</artifactId>
+        <version>v1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>telus.csm.ewlnss-shared</groupId>
+    <artifactId>pom-ewlnss-shared</artifactId>
+    <packaging>pom</packaging>
+	<version>v1</version>
+    <name>pom-ewlnss-shared</name>
+
+    <modules>
+		<module>ewlnss-grid-loader</module>
+		<module>ewlnss-esdg</module>
+		<module>ucss-common</module>
+    </modules>
+
+	<dependencies>
+		<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-core</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

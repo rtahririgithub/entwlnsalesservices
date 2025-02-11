@@ -1,0 +1,24 @@
+<project name="frameworks" default="test" basedir=".">
+
+	<target name="test">
+
+		<replaceregexp byline="true">
+			<regexp pattern="&lt;auth-constraint&gt;" />
+			<substitution expression="&lt;!-- auth-constraint&gt;" />
+			<fileset dir="src/main/webapp/WEB-INF">
+				<include name="web.xml" />
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp byline="true">
+			<regexp pattern="&lt;/auth-constraint&gt;" />
+			<substitution expression="&lt;/auth-constraint --&gt;" />
+			<fileset dir="src/main/webapp/WEB-INF">
+				<include name="web.xml" />
+			</fileset>
+		</replaceregexp>
+		
+	</target>
+
+
+</project>

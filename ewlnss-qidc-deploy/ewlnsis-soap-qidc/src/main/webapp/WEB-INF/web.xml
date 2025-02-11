@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>telus-csm-esis-webservices</display-name>
+
+	<!-- Configure ContextLoaderListener to use AnnotationConfigWebApplicationContext 
+		instead of the default XmlWebApplicationContext -->
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>org.springframework.web.context.support.AnnotationConfigWebApplicationContext</param-value>
+	</context-param>
+
+	<!-- Configuration locations must consist of one or more comma- or space-delimited 
+		fully-qualified @Configuration classes. Fully-qualified packages may also 
+		be specified for component-scanning -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>com.telus.csm.ewlnsc.config.EnterpriseWlnSalesServiceConfig</param-value>
+	</context-param>
+
+	<!-- get the spring config from EnterpriseWlnSalesServiceConfig.java -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>EnterpriseSalesInformationServlethttp</servlet-name>
+		<servlet-class>com.telus.csm.ewlnsis.soap.webservice.EnterpriseSalesInformationService</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EnterpriseSalesInformationServlethttp</servlet-name>
+		<url-pattern>/EnterpriseSalesInformationService_v5_0</url-pattern>
+	</servlet-mapping>
+
+	<!-- FOR Application Monitor : STARTS -->
+	<servlet>
+		<servlet-name>monitor</servlet-name>
+		<servlet-class>com.telus.csm.ewlnsc.monitor.ESSMonitorServlet</servlet-class>
+		<load-on-startup>10</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>monitor</servlet-name>
+		<url-pattern>/monitor</url-pattern>
+	</servlet-mapping>
+	<!-- FOR Application Monitor : ENDS -->
+
+	<!-- FOR ASPECT WEAVER : STARTS -->
+	<servlet>
+		<display-name>ServiceUsageHttpServlet</display-name>
+		<servlet-name>ServiceUsageHttpServlet</servlet-name>
+		<servlet-class>com.telus.channelsalesmgmt.common.aspect.profiling.ServiceUsageHttpServlet</servlet-class>
+		<init-param>
+			<param-name>ServiceName</param-name>
+			<param-value>EnterpriseSalesInformationService</param-value>
+		</init-param>
+		<load-on-startup>100</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ServiceUsageHttpServlet</servlet-name>
+		<url-pattern>/v</url-pattern>
+	</servlet-mapping>
+<!-- 	<servlet>
+		<display-name>EnterpriseSalesInformationServiceUsageChartHttpServlet</display-name>
+		<servlet-name>EnterpriseSalesInformationServiceUsageChartHttpServlet</servlet-name>
+		<servlet-class>com.telus.csm.essc.profiler.SalesStatisticHttpServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EnterpriseSalesInformationServiceUsageChartHttpServlet</servlet-name>
+		<url-pattern>/x</url-pattern>
+	</servlet-mapping>
+ -->	<!-- FOR ASPECT WEAVER : ENDS -->
+
+	<resource-ref>
+		<res-ref-name>WorkManager-Online-Priority</res-ref-name>
+   		<res-type>commonj.work.WorkManager</res-type>
+   		<res-auth>Container</res-auth>
+   		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	<resource-ref>
+		<res-ref-name>WorkManager-Online</res-ref-name>
+		<res-type>commonj.work.WorkManager</res-type>
+		<res-auth>Container</res-auth>
+		<res-sharing-scope>Shareable</res-sharing-scope>
+	</resource-ref>
+	<resource-ref>  
+		<res-ref-name>ServiceUsageTimerManager</res-ref-name>  
+		<res-type>commonj.timers.TimerManager</res-type>  
+		<res-auth>Container</res-auth>  
+		<res-sharing-scope>Unshareable</res-sharing-scope>  
+	</resource-ref>  
+
+	<display-name>EnterpriseSalesInformationService</display-name>
+
+</web-app>

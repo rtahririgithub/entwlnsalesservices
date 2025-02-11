@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>telus.csm.ewlnssproxy-ws-deploy</groupId>
+		<artifactId>pom-ewlnssporxy-ws-deploy</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ewlnssproxy-rest</artifactId>
+	<packaging>war</packaging>
+	<name>ewlnssproxy-rest</name>	
+	<build>
+		<finalName>EnterpriseWLNSalesProxySvcREST_${target.version}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<packagingExcludes>WEB-INF/lib/ojdbc*.jar</packagingExcludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>telus.csm.ewlnss-common</groupId>
+			<artifactId>ewlnss-common-domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>telus.csm.ewlnss-wsdl</groupId>
+            <artifactId>ewlnsis-wsdl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+	    <dependency>
+			<groupId>telus.csm.ewlnss-yaml</groupId>
+			<artifactId>ewlnsis-yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnsis-ws-deploy</groupId>
+			<artifactId>ewlnsis-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+<!--		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>ewlnsis-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		-->
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.rest</groupId>
+			<artifactId>ewlnss-common-rest</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>telus.csm.ewlnss-yaml.ewlnss-essproxy-yaml</groupId>
+			<artifactId>ewlnssproxy-CommerceCustomerBridge-yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>telus.csm.ewlnss-yaml.ewlnss-essproxy-yaml</groupId>
+			<artifactId>ewlnssproxy-CommerceProductInventoryBridge-yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>telus.csm.ewlnss-yaml.ewlnss-essproxy-yaml</groupId>
+			<artifactId>ewlnssproxy-CommerceProductQualificationBridge-yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>telus.csm.ewlnss-yaml.ewlnss-essproxy-yaml</groupId>
+			<artifactId>ewlnssproxy-CommercereferencePDSBridge-yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>telus.csm.ewlnss-yaml.ewlnss-essproxy-yaml</groupId>
+			<artifactId>ewlnssproxy-CommerceServiceAddressBridge-yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>com.oracle.coherence</groupId>
+			<artifactId>coherence</artifactId>
+			<scope>provided</scope>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>thirdparty.coherence</groupId> -->
+<!-- 			<artifactId>coherence</artifactId> -->
+<!-- 			<version>3.7.1.6</version> -->
+<!--  		</dependency> -->
+
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>
+		
+	</dependencies>
+</project>
+

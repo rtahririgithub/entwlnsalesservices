@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>telus.csm.ewlnss-shared</groupId>
+		<artifactId>pom-ewlnss-shared</artifactId>
+		<version>v1</version>
+	</parent>
+	
+	<artifactId>ucss-common</artifactId>
+	<version>2.7.1-SNAPSHOT</version>
+
+	<dependencies>
+		<dependency>
+			<groupId>telus-maven.plugins-support</groupId>
+			<artifactId>telus-core</artifactId>
+		</dependency>	
+		<dependency>
+			<groupId>weblogic</groupId>
+			<artifactId>wlfullclient</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+  			<groupId>org.springframework</groupId>
+  			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.jfree</groupId>
+			<artifactId>jfreechart</artifactId>
+			<version>1.0.19</version>
+		</dependency>
+		<dependency>
+			<groupId>com.thoughtworks.xstream</groupId>
+			<artifactId>xstream</artifactId>
+			<version>1.4.10</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.beehive</groupId>
+			<artifactId>beehive-netui-core</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.struts</groupId>
+			<artifactId>struts-core</artifactId>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>telus.chnlsales.salessvc.common</groupId> -->
+<!-- 			<artifactId>salessvc-ws-client</artifactId> -->
+<!-- 			<scope>provided</scope> -->
+<!-- 		</dependency> -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aspects</artifactId>
+		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>xpp3</groupId> -->
+<!-- 			<artifactId>xpp3_min</artifactId> -->
+<!-- 		</dependency> -->
+	</dependencies>
+
+	<properties>
+		<telus.javac.source>1.6</telus.javac.source>
+		<telus.javac.target>1.6</telus.javac.target>
+	</properties>
+
+	<build>
+		<finalName>ucss-common-${project.version}</finalName>
+	</build>
+	
+    <profiles>
+		<profile>
+			<id>Javadoc</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-javadoc-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<maven.javadoc.skip>false</maven.javadoc.skip>
+				<attach>true</attach>
+			</properties>
+		</profile>
+		<profile>
+			<id>Sources</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-source-plugin</artifactId>
+					</plugin>
+				</plugins>
+			</build>
+			<properties>
+				<source.skip>false</source.skip>
+				<source.attach>true</source.attach>
+			</properties>
+		</profile>
+	</profiles>
+</project>

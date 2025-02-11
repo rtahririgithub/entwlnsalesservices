@@ -1,0 +1,126 @@
+
+<!DOCTYPE cache-config SYSTEM "cache-config.dtd">
+<cache-config>
+    <caching-scheme-mapping>
+        <cache-mapping>
+            <cache-name>*</cache-name>
+            <scheme-name>remote.ess2</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+            <cache-name>local.*</cache-name>
+            <scheme-name>local</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+            <cache-name>local-small.*</cache-name>
+            <scheme-name>local-small</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+            <cache-name>local-medium.*</cache-name>
+            <scheme-name>local-medium</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+            <cache-name>local-large.*</cache-name>
+            <scheme-name>local-large</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+            <cache-name>local-unlimited.*</cache-name>
+            <scheme-name>local-unlimited</scheme-name>
+        </cache-mapping>
+        <cache-mapping>
+            <cache-name>near.*</cache-name>
+            <scheme-name>near</scheme-name>
+        </cache-mapping>
+    </caching-scheme-mapping>
+    <caching-schemes>
+        <local-scheme>
+            <scheme-name>local</scheme-name>
+            <service-name>LocalCache</service-name>
+            <eviction-policy>HYBRID</eviction-policy>
+            <high-units>{local-size-limit 100}</high-units>
+            <expiry-delay>{local-expiry 1h}</expiry-delay>
+            <flush-delay>1m</flush-delay>
+        </local-scheme>
+        <local-scheme>
+            <scheme-name>local-small</scheme-name>
+            <service-name>LocalCache</service-name>
+            <eviction-policy>HYBRID</eviction-policy>
+            <high-units>{local-size-limit 50}</high-units>
+            <expiry-delay>{local-expiry 1h}</expiry-delay>
+            <flush-delay>1m</flush-delay>
+        </local-scheme>
+        <local-scheme>
+            <scheme-name>local-medium</scheme-name>
+            <service-name>LocalCache</service-name>
+            <eviction-policy>HYBRID</eviction-policy>
+            <high-units>{local-size-limit 500}</high-units>
+            <expiry-delay>{local-expiry 1h}</expiry-delay>
+            <flush-delay>1m</flush-delay>
+        </local-scheme>
+        <local-scheme>
+            <scheme-name>local-large</scheme-name>
+            <service-name>LocalCache</service-name>
+            <eviction-policy>HYBRID</eviction-policy>
+            <high-units>{local-size-limit 5000}</high-units>
+            <expiry-delay>{local-expiry 1h}</expiry-delay>
+            <flush-delay>1m</flush-delay>
+        </local-scheme>
+        <local-scheme>
+            <scheme-name>local-unlimited</scheme-name>
+            <service-name>LocalCache</service-name>
+        </local-scheme>
+        <local-scheme>
+            <scheme-name>front</scheme-name>
+            <service-name>LocalCache</service-name>
+            <eviction-policy>HYBRID</eviction-policy>
+            <high-units>{front-size-limit 100}</high-units>
+            <expiry-delay>{front-expiry 10m}</expiry-delay>
+            <flush-delay>1m</flush-delay>
+        </local-scheme>
+        <near-scheme>
+            <scheme-name>near</scheme-name>
+            <front-scheme>
+                <local-scheme>
+                    <scheme-ref>front</scheme-ref>
+                </local-scheme>
+            </front-scheme>
+            <back-scheme>
+                <remote-cache-scheme>
+                    <scheme-ref>remote</scheme-ref>
+                </remote-cache-scheme>
+            </back-scheme>
+            <invalidation-strategy>none</invalidation-strategy>
+        </near-scheme>
+        <remote-cache-scheme>
+            <scheme-name>remote.ess2</scheme-name>
+            <initiator-config>
+                <serializer>
+                    <class-name>com.tangosol.io.DefaultSerializer</class-name>
+                </serializer>
+                <tcp-initiator>
+                    <remote-addresses>
+                        <socket-address>
+                            <address>@act-essb:COHERENCE_SERVER_QAS1@</address>
+                            <port>@act-essb:COHERENCE_SERVER_QAP1@</port>
+                        </socket-address>
+						<socket-address>
+                            <address>@act-essb:COHERENCE_SERVER_QAS2@</address>
+                            <port>@act-essb:COHERENCE_SERVER_QAP2@</port>
+                        </socket-address>
+						<socket-address>
+                            <address>@act-essb:COHERENCE_SERVER_QAS3@</address>
+                            <port>@act-essb:COHERENCE_SERVER_QAP3@</port>
+                        </socket-address>
+						<socket-address>
+                            <address>@act-essb:COHERENCE_SERVER_QAS4@</address>
+                            <port>@act-essb:COHERENCE_SERVER_QAP4@</port>
+                        </socket-address>
+                    </remote-addresses>
+                </tcp-initiator>
+                <outgoing-message-handler>
+                    <request-timeout>10s</request-timeout>
+                    <heartbeat-interval>5s</heartbeat-interval>
+                </outgoing-message-handler>
+            </initiator-config>
+        </remote-cache-scheme>
+        </caching-schemes>
+</cache-config>

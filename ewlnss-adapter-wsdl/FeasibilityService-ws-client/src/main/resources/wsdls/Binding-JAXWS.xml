@@ -1,0 +1,13 @@
+<bindings xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+  wsdlLocation="FeasibilityService_v3_0.wsdl"
+  xmlns="http://java.sun.com/xml/ns/jaxws">
+	<enableWrapperStyle>false</enableWrapperStyle>	
+	<bindings node="wsdl:definitions/wsdl:portType[@name='FeasibilityServicePortType']">
+	        <class name="FeasibilityServicePortType"/> 
+	</bindings>
+	<bindings node="wsdl:definitions/wsdl:service[@name='FeasibilityService_v3_0']">
+		    <class name="FeasibilityServiceStub"/> 
+	</bindings>
+</bindings>

@@ -1,0 +1,1 @@
+You should rename L2Longname folder to your application L2 Long Name

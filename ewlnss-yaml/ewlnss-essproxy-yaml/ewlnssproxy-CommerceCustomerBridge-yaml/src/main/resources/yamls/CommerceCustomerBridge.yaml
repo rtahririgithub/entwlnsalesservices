@@ -1,0 +1,583 @@
+openapi: 3.0.0
+info:
+  title: CommerceCustomerBridge API
+  description: This is a simple API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/m_and_m/CommerceCustomerBridge/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: CommerceCustomerBridge
+  description: Calls to CommerceCustomerBridge
+paths:
+  /customer/{customerId}/creditProfile:
+    get:
+      tags:
+      - CommerceCustomerBridge
+      summary: Retrieves the Credit Profile for a customer
+      description: |
+        Retrieves the Credit Profile for a customer by ID
+      operationId: getCustomerCreditProfile
+      parameters:
+      - name: transactionId
+        in: header
+        description: business transaction id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: customerId
+        in: path
+        description: Customer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: refreshcacheInd
+        in: query
+        description: refreshcacheInd
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: userId
+        in: query
+        description: userId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: userTypeCode
+        in: query
+        description: userTypeCode
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesRepresentativeId
+        in: query
+        description: salesRepresentativeId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: channelOrganizationId
+        in: query
+        description: channelOrganizationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: outletId
+        in: query
+        description: outletId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: originatorApplicationId
+        in: query
+        description: originatorApplicationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: correlationId
+        in: query
+        description: correlationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: timestamp
+        in: query
+        description: timestamp
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        200:
+          description: Credit Profile for a Customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerCreditProfile'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /customer/{customerId}/credit-eligibility:
+    get:
+      tags:
+      - CommerceCustomerBridge
+      summary: Retrieves the Credit Profile for a customer
+      description: |
+        Retrieves the Credit Eligibility for a customer by ID
+      operationId: getCreditEligibility
+      parameters:
+      - name: transactionId
+        in: header
+        description: business transaction id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: customerId
+        in: path
+        description: Customer Id
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: refreshcacheInd
+        in: query
+        description: refreshcacheInd
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: userId
+        in: query
+        description: userId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: userTypeCode
+        in: query
+        description: userTypeCode
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: salesRepresentativeId
+        in: query
+        description: salesRepresentativeId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: channelOrganizationId
+        in: query
+        description: channelOrganizationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: outletId
+        in: query
+        description: outletId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: originatorApplicationId
+        in: query
+        description: originatorApplicationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: correlationId
+        in: query
+        description: correlationId
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      - name: timestamp
+        in: query
+        description: timestamp
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+          format: date-time
+      responses:
+        200:
+          description: Credit Eligibility for a Customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsumerCreditEligibility'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ConsumerCreditProfile:
+      allOf:
+      - $ref: '#/components/schemas/CreditProfileData'
+      - type: object
+        properties:
+          creditWorthiness:
+            $ref: '#/components/schemas/CreditWorthiness'
+          reportIndicator:
+            type: boolean
+          creditValueEffectiveDate:
+            type: string
+            format: date-time
+          firstCreditAssessmentDate:
+            type: string
+            format: date-time
+          latestCreditAssessmentDate:
+            type: string
+            format: date-time
+    CreditProfileData:
+      type: object
+      properties:
+        creditProfileID:
+          type: integer
+          format: int64
+        customerID:
+          type: integer
+          format: int64
+        creditIdentification:
+          $ref: '#/components/schemas/CreditIdentification'
+        creditAddress:
+          $ref: '#/components/schemas/CreditAddress'
+        applicationProvinceCd:
+          type: string
+        personalInfo:
+          $ref: '#/components/schemas/PersonalInfo'
+        creditCardCd:
+          $ref: '#/components/schemas/CreditCardCode'
+        creditProfileStatusCd:
+          type: string
+        businessLastUpdateTimestamp:
+          type: string
+          format: date-time
+        bypassMatchIndicator:
+          type: boolean
+        formatCd:
+          type: string
+        methodCd:
+          type: string
+        customerGuarantor:
+          $ref: '#/components/schemas/CustomerGuarantor'
+        commentTxt:
+          type: string
+    CreditAddress:
+      type: object
+      properties:
+        creditAddressTypeCd:
+          type: string
+        addressTypeCd:
+          type: string
+        addressLineOne:
+          type: string
+        addressLineTwo:
+          type: string
+        addressLineThree:
+          type: string
+        addressLineFour:
+          type: string
+        addressLineFive:
+          type: string
+        cityName:
+          type: string
+        provinceCd:
+          type: string
+        countryCd:
+          type: string
+        postalCd:
+          type: string
+    PersonalInfo:
+      type: object
+      properties:
+        employmentStatusCd:
+          type: string
+        residencyCd:
+          type: string
+        creditCheckConsentCd:
+          type: string
+        birthDate:
+          type: string
+          format: date
+        underLegalCareCd:
+          type: string
+        provinceOfCurrentResidenceCd:
+          type: string
+    CreditCardCode:
+      type: object
+      properties:
+        primaryCreditCardCd:
+          type: string
+        secondaryCreditCardCd:
+          type: string
+    CustomerGuarantor:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        guarantorCustomerID:
+          type: integer
+          format: int64
+        guarantorCreditProfileID:
+          type: integer
+          format: int64
+        expiryDate:
+          type: string
+          format: date
+        guaranteedAmt:
+          type: number
+        guarantorFullName:
+          type: string
+        guarantorPhoneNum:
+          type: string
+        referenceNum:
+          type: string
+        commentTxt:
+          type: string
+    CreditIdentification:
+      type: object
+      properties:
+        driverLicense:
+          $ref: '#/components/schemas/DriverLicense'
+        sin:
+          type: string
+        healthCard:
+          $ref: '#/components/schemas/HealthCard'
+        passport:
+          $ref: '#/components/schemas/Passport'
+        provincialIdCard:
+          $ref: '#/components/schemas/ProvincialIdCard'
+    DriverLicense:
+      type: object
+      properties:
+        driverLicenseNum:
+          type: string
+        provinceCd:
+          type: string
+        expiryDate:
+          type: string
+          format: date
+    HealthCard:
+      type: object
+      properties:
+        healthCardNum:
+          type: string
+        provinceCd:
+          type: string
+    Passport:
+      type: object
+      properties:
+        passportNum:
+          type: string
+        countryCd:
+          type: string
+    ProvincialIdCard:
+      type: object
+      properties:
+        provincialIdNum:
+          type: string
+        provinceCd:
+          type: string
+    CreditWorthiness:
+      type: object
+      properties:
+        customerID:
+          type: integer
+          format: int64
+        creditAssessmentId:
+          type: integer
+          format: int64
+        creditValueCd:
+          type: string
+        creditRiskLevel:
+          type: integer
+        assessmentMessageCd:
+          type: string
+        productCategoryQualification:
+          $ref: '#/components/schemas/ProductCategoryQualification'
+        fraudIndicatorCd:
+          type: string
+        fraudMessageCdList:
+          type: array
+          items:
+            type: string
+        creditAssessmentTypeCd:
+          type: string
+        creditAssessmentSubTypeCd:
+          type: string
+        creditAssessmentCreationDate:
+          type: string
+          format: date-time
+        decisionCd:
+          type: string
+    ProductCategoryQualification:
+      type: object
+      properties:
+        productCategoryList:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductCategory'
+        boltOnInd:
+          type: boolean
+    ProductCategory:
+      type: object
+      properties:
+        categoryCd:
+          type: string
+        qualified:
+          type: boolean
+    ConsumerCreditEligibility:
+      type: object
+      properties:
+        equipmentQualificationList:
+          $ref: '#/components/schemas/EquipmentCategoryQualificationList'
+        collectionInd:
+          type: boolean
+        fraudInd:
+          type: boolean
+        eligibilityWarningMessageCd:
+          type: string
+    EquipmentCategoryQualificationList:
+      type: object
+      properties:
+        equipmentCategory:
+          type: array
+          items:
+            $ref: '#/components/schemas/EquipmentCategory'
+    EquipmentCategory:
+      type: object
+      properties:
+        productCd:
+          type: string
+        maxCount:
+          type: integer
+    Error:
+      required:
+      - code
+      - reason
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            Application relevant detail, defined in the API or a common list
+        reason:
+          type: string
+          description: |
+            Explanation of the reason for the error which can be shown to a client user
+        message:
+          type: array
+          description: |
+            More details and corrective actions related to the error which can be shown to a client user
+          items:
+            $ref: '#/components/schemas/Message'
+        status:
+          type: string
+          description: |
+            HTTP Error code extension
+        traceId:
+          type: string
+          description: |
+            The unique tracker ID used to facilitate troubleshooting
+        characteristic:
+          type: array
+          description: |
+            The relevant parameter that is associated with this error
+          items:
+            $ref: '#/components/schemas/ErrorCharacteristic'
+      description: |
+        "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)""
+    Message:
+      type: object
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        text:
+          type: string
+    ErrorCharacteristic:
+      type: object
+      properties:
+        name:
+          type: string
+          description: |
+            The non localized name identifier of the characteristic
+        value:
+          type: string
+          description: |
+            The value of the characteristic
+      description: |
+        A parameter that is associated with this entity

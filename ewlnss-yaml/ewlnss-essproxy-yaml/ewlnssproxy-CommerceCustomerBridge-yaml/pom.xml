@@ -1,0 +1,156 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>telus.csm.ewlnss-yaml.ewlnss-essproxy-yaml</groupId>
+		<artifactId>pom-ewlnss-essproxy-yaml</artifactId>
+        <version>v1-SNAPSHOT</version>
+	</parent>	
+		
+	<artifactId>ewlnssproxy-CommerceCustomerBridge-yaml</artifactId>
+	<name>ewlnssproxy-CommerceCustomerBridge-yaml</name>
+  
+  	<dependencies>
+		<dependency>
+			<groupId>telus.csm.ewlnss-yaml</groupId>
+			<artifactId>ewlnss-yaml-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>			
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>		  
+		    <scope>provided</scope>
+		</dependency>	
+<dependency>
+    <groupId>javax.validation</groupId>
+    <artifactId>validation-api</artifactId>
+    <version>1.0.0.GA</version>
+</dependency>			
+ 	</dependencies>
+
+	<build>
+		<finalName>${project.name}-${project.version}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>GenWsdl</id>
+						<configuration>
+							<tasks>
+								<java jar="../openapi-generator-cli-3.3.4.jar" fork="true"
+									dir="${basedir}" failonerror="true" maxmemory="128m">
+									<arg value="generate" />
+									<arg value="-i" />
+									<arg value="src/main/resources/yamls/CommerceCustomerBridge.yaml" />
+									<arg value="-Dmodels" />
+									<arg value="-l" />
+									<arg value="java" />
+									<arg value="-o" />
+									<arg value="target" />
+									<arg value="-c" />
+									<arg value="src/main/resources/yamls/codegen-options.json" />
+								</java>
+							</tasks>
+						</configuration>
+						<goals>
+							<goal>run</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>maven-replacer-plugin</artifactId>
+				<version>1.4.1</version>
+				<executions>
+					<execution>
+						<id>replaceTokens</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<basedir>${basedir}/target</basedir>
+					<includes>
+						<include>**/*.java</include>
+					</includes>
+					<regexFlags>
+						<regexFlag>DOTALL</regexFlag>
+					</regexFlags>
+					<replacements>
+						<replacement>
+							<token>import java.util.Objects</token>
+							<value>//import java.util.Objects</value>
+						</replacement>
+						<replacement>
+							<token>import java.io.IOException</token>
+							<value>//import java.io.IOException</value>
+						</replacement>
+						<replacement>
+							<token>import io.swagger</token>
+							<value>//import io.swagger</value>
+						</replacement>
+						<replacement>
+							<token>@ApiModel</token>
+							<value>//@ApiModel</value>
+						</replacement>
+						<replacement>
+							<token>import com.google</token>
+							<value>//import com.google</value>
+						</replacement>
+						<replacement>
+							<token>@SerializedName</token>
+							<value>//@SerializedName</value>
+						</replacement>
+						<replacement>
+							<token>@Override(.*)public boolean equals(.*)@Override(.*)public String toString</token>
+							<value>/*$1@Override$1public boolean equals$2*/$1@Override$3public String toString</value>
+						</replacement>
+						<replacement>
+							<token>import org.joda.time</token>
+							<value>import com.telus.csm.ewlnss.rest.time</value>
+						</replacement>
+					</replacements>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${basedir}/target/src/main/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+		<resources>
+			<resource>
+				<directory>target/src/main/java</directory>
+				<filtering>false</filtering>
+			</resource>
+		</resources>
+	</build>
+
+</project>

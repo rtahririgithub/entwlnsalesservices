@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+<group name="irrelevant">
+    
+	<!--added for NGSP Aug 2017 Release: starts -->
+	<group name="wln_offer_loader" >
+		<prop name="putSize">@WLN_LOADER_MAX_PUT_SIZE@</prop>
+ 		<prop name="waitTime">@WLN_LOADER_WAIT_TIME@</prop>
+ 		<prop name="retryCnt">@WLN_LOADER_RETRY_COUNT@</prop>
+    </group>
+
+ 
+</group>

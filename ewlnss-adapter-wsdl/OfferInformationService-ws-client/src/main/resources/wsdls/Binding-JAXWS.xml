@@ -1,0 +1,13 @@
+<bindings xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+  wsdlLocation="OfferInformationSvc_v3_7.wsdl"
+  xmlns="http://java.sun.com/xml/ns/jaxws">
+	<enableWrapperStyle>false</enableWrapperStyle>	
+	<bindings node="wsdl:definitions/wsdl:portType[@name='OfferInformationSvc_v3_0_PortType']">
+	        <class name="OfferInformationServicePortType"/> 
+	</bindings>
+	<bindings node="wsdl:definitions/wsdl:service[@name='OfferInformationSvc_v3_0']">
+		    <class name="OfferInformationServiceStub"/> 
+	</bindings>
+</bindings>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>telus.csm.ewlnss</groupId>
+		<artifactId>pom-ewlnss-qidc-deploy</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+
+	<artifactId>ewlnsis-soap-qidc</artifactId>
+	<packaging>war</packaging>
+	<name>EnterpriseWLNSalesInformationSvcSOAP_QIDC</name>
+	<properties>
+		<applet.finalname>EnterpriseWLNSalesInformationSvcSOAP_QIDC_v1</applet.finalname>
+	</properties>
+	<build>
+		<finalName>${applet.finalname}</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<overlays>
+						<overlay>
+							<groupId>telus.csm.ewlnsis-ws-deploy</groupId>
+							<artifactId>ewlnsis-soap</artifactId>
+							<excludes>
+								<exclude>WEB-INF/lib/coherence-3.7.1.6.jar</exclude>
+
+								<!--This WAR is to be included in two EARs,	one for QIDC SOAP, one for QIDC REST. 
+								Both contain their own version of appCtx.properties. As such this WAR must not contain WEB-INF/classes/appCtx.properties.
+								In order to archive this, we do two things:
+								  1) this project's src/main/resource shall not contain appCtx.properties, remove it if it exists
+								  2) excluding appCtx.properties from the original telus-csm-esfs-webservices.war 
+								-->
+								<exclude>WEB-INF/classes/appCtx.properties</exclude>
+							</excludes>
+						</overlay>
+					</overlays>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>telus.csm.ewlnsis-ws-deploy</groupId>
+			<artifactId>ewlnsis-soap</artifactId>
+			<version>v1-SNAPSHOT</version>
+			<type>war</type>
+			<scope>runtime</scope>
+		</dependency>
+	</dependencies>
+</project>

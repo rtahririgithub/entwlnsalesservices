@@ -1,0 +1,2042 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2015 rel. 4 (x64) (http://www.altova.com) by Telus (Telus) -->
+<xs:schema xmlns:tns="http://xmlschema.tmi.telus.com/srv/MSO/ChannelSalesMgmt/EnterpriseSalesInformationServiceRequestResponse_v5" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ec="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8" xmlns:esc="http://xmlschema.tmi.telus.com/xsd/MarketingSales/SalesChannel/SalesCommonTypes_v5" xmlns:bdsr="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/BundleCommitmentCommonType_v1" xmlns:poc="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/ProductOfferingCommon_v5" targetNamespace="http://xmlschema.tmi.telus.com/srv/MSO/ChannelSalesMgmt/EnterpriseSalesInformationServiceRequestResponse_v5" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/MarketingSales/SalesChannel/SalesCommonTypes_v5" schemaLocation="SalesCommonTypes_v5_13.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/ProductOfferingCommon_v5" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/ProductOfferingCommon_v5_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/BundleCommitmentCommonType_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Product/ProductOffering/BundleCommitmentCommonType_v1_1.xsd"/>
+	<xs:element name="getNpaNxx" type="tns:GetNpaNxxType">
+		<xs:annotation>
+			<xs:documentation>Will be deprecated with the next major version. Request for the Get NpaNxx.  This is used for getting the NpaNxx list based on certains parameters like Equipment and Province</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getNpaNxxResponse" type="tns:GetNpaNxxResponseType">
+		<xs:annotation>
+			<xs:documentation>Will be deprecated with the next major version. Response from the Get NpaNxx operation.  This contains all the valid NpaNxx based on certain parameters like Equipment and Province</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getNpaNxxList" type="tns:GetNpaNxxListType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get NpaNxx.  This is used for getting the NpaNxx list based on certains parameters like Equipment and Province</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getNpaNxxListResponse" type="tns:GetNpaNxxListResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get NpaNxx operation.  This contains all the valid NpaNxx based on certain parameters like Equipment and Province</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableTelephoneNumber" type="tns:GetAvailableTelephoneNumberType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Available Telephone Number.  This is used for retrieving all the available telephone number based on the selected NpaNxx</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableTelephoneNumberResponse" type="tns:GetAvailableTelephoneNumberResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Available Telephone Number operation.  This contains all the valid Telephone Numbers from the selected NpaNxx</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableTerms" type="tns:GetAvailableTermsType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Available Terms.  This is used for getting the available Terms based on selected Offer (optional) and other conditions like allowing to upgrade to a higher term only</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableTermsResponse" type="tns:GetAvailableTermsResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Available Terms operation.  This contains the available terms based on selected Offer (optional) and other considtions</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailablePricePlan" type="tns:GetAvailablePricePlanType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Available Price Plan List.  This is used for getting the available price plans based mainly on the selected Offer and Equipment</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailablePricePlanResponse" type="tns:GetAvailablePricePlanResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Available Price Plan List operation.  This contains the available price plans based mainly on the selected Offer and Equipment</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSalesRecommendation" type="tns:GetSalesRecommendationType">
+		<xs:annotation>
+			<xs:documentation>This is used for getting sales recommendation for offer, plan, feature, device and message</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSalesRecommendationResponse" type="tns:GetSalesRecommendationResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Available Price Plan List operation.  This contains the available price plans based mainly on the selected Offer and Equipment</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getPricePlanDetail" type="tns:GetPricePlanDetailType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Price Plan Detail.  This is used for getting the price plan detail along with the available Features and Services based on the selected Price plan</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getPricePlanDetailResponse" type="tns:GetPricePlanDetailResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Price Plan Detail.  This contains the price plan detail along with the available Features and Services based on the selected Price plan</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getPricePlanSummary" type="tns:GetPricePlanSummaryType">
+		<xs:annotation>
+			<xs:documentation>This is used for getting the price plan/add-ons summary</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getPricePlanSummaryResponse" type="tns:GetPricePlanSummaryResponseType">
+		<xs:annotation>
+			<xs:documentation>This contains the price plan/add-ons summary information</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getEquipmentInfo" type="tns:GetEquipmentInfoType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Equipment Information.  This is used for validating and retrieving the availability of the selected equipment and validating the discounts</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getEquipmentInfoResponse" type="tns:GetEquipmentInfoResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Equipment Info operation.  This indicates the validity and availability of the the selected equipment.  It also contains the details of the Equipment</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableOfferSummary">
+		<xs:annotation>
+			<xs:documentation>Clients should call this operation to get Wireless/Wireline Offer Summary List.  
+			This is used to get summary information of the Wireless/Wireline Offers based mainly on the selected SKU (optional).
+			Current implementation supports Wireless offers only.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="attributeOptionInclusionList" type="xs:string" minOccurs="0" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>Attribute inclusion list for the operation. One of OFFER, ALL (Default)</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="attributeOptionExclusionList" type="xs:string" minOccurs="0" maxOccurs="20">
+					<xs:annotation>
+						<xs:documentation>Attribute exclusion list for the operation. None Supported currently</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="getAvailableWirelessOfferSummary" type="tns:GetWirelessOfferSummaryType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAvailableOfferSummaryResponse">
+		<xs:annotation>
+			<xs:documentation>Response from Get Offer Summary List operation.  
+			This contains the summary information of the Wireless/Wireline Offers based mainly on the selected SKU.
+			Current implementation supports Wireless offers only.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="getAvailableWirelessOfferSummaryResponse" type="tns:GetWirelessOfferSummaryResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAvailableOfferSummaryList" type="tns:GetAvailableOfferSummaryListType">
+		<xs:annotation>
+			<xs:documentation>Clients should call this operation to get Wireless/Wireline / Accessory/ Sweetner Offer Summary List.  
+Currently implementation only supports the Accessory offer retrieval.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableOfferSummaryListResponse" type="tns:GetAvailableOfferSummaryListResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from Get Offer Summary List operation.  
+			This contains the summary information of the Wireless/Wireline/Accessory Offers based mainly on the selected SKU.
+			Currently implementation only supports the Accessory offer retrieval.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableWirelineProductList" type="tns:GetAvailableProductComponentType">
+		<xs:annotation>
+			<xs:documentation>Retrieve available product components</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableWirelineProductListResponse" type="tns:GetAvailableProductComponentResponseType">
+		<xs:annotation>
+			<xs:documentation>Return list of available Product Components for the given criteria</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getWirelineProductComponentList" type="tns:GetWirelineProductComponentListType">
+		<xs:annotation>
+			<xs:documentation>Retrieve product components based on the customer, service address and offer selected</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getWirelineProductComponentListResponse" type="tns:GetWirelineProductComponentListResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from Get Offer Summary List operation.  
+			This contains the summary information of the Wireless/Wireline/Accessory Offers based mainly on the selected SKU.
+			Currently implementation only supports the Accessory offer retrieval.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getOfferDetail">
+		<xs:annotation>
+			<xs:documentation>Clients should call this operation to get more details about the selected Wireless/Wireline Offer.  
+			This is used for retrieving the details about Wireless/Wireline Offer along with the summary of valid Price Plan based on the selected Offer or Code-based Offer.
+			Current implementation supports Wireless offers only.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="getWirelessOfferDetail" type="tns:GetWirelessOfferDetailType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getOfferDetailResponse">
+		<xs:annotation>
+			<xs:documentation>Response from Get Wireless Offer Detail.  
+			This contains the details of the Wireless/Wireline Offer along with the summary of valid Price Plan based on the selected Offer or Code-based Offer.
+			Current implementation supports Wireless offers only.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="getWirelessOfferDetailResponse" type="tns:GetWirelessOfferDetailResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getSalesOfferDetail" type="tns:GetSalesOfferDetailType">
+		<xs:annotation>
+			<xs:documentation>Clients should call this operation to get more details about the selected Wireless/Wireline Offer.  
+			This is used for retrieving the details about Wireless/Wireline Offer along with the summary of valid Price Plan based on the selected Offer or Code-based Offer.
+			Current implementation supports Wireless offers only.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSalesOfferDetailResponse" type="tns:GetSalesOfferDetailResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from Get Wireless Offer Detail.  
+			This contains the details of the Wireless/Wireline Offer along with the summary of valid Price Plan based on the selected Offer or Code-based Offer.
+			Current implementation supports Wireless offers only.
+			</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="findBetterOffer">
+		<xs:annotation>
+			<xs:documentation>Request for the Find Better Offer.  This is used to find a better Offer in terms of monetary value for the same selected Price Plan and Services.  This should be only called if the Offer is an AOM offer.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="findBetterWirelessOffer" type="tns:FindBetterWirelessOfferType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="findBetterOfferResponse">
+		<xs:annotation>
+			<xs:documentation>Response of the Find Better Offer operation.  This contains all the better Offer selection in terms of monetary value for the same selected Price Plan and Services.  The Offers returned are only AOM offers</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="findBetterWirelessOfferResponse" type="tns:FindBetterWirelessOfferResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAvailableSweetenerSummary">
+		<xs:annotation>
+			<xs:documentation>Clients should call this operation to get Wireless/Wireline Sweetener Summary List.  
+			This is used to get summary information of the Wireless/Wireline Offers based mainly on the selected SKU (optional).
+			Current implementation supports Wireless sweetener only.
+</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="getAvailableWirelessSweetenerSummary" type="tns:GetWirelessSweetenerSummaryType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAvailableSweetenerSummaryResponse">
+		<xs:annotation>
+			<xs:documentation>Response from Get Sweetener Summary List operation. 		</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="getAvailableSweetenerSummaryResponse" type="tns:GetWirelessSweetenerSummaryResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getSweetenerDetail">
+		<xs:annotation>
+			<xs:documentation>Clients should call this operation to get more details about the selected Wireless/Wireline Sweetener.  
+			This is used for retrieving the details about Wireless/Wireline Offer along with the summary of valid Price Plan based on the selected Offer or Code-based Offer.
+			Current implementation supports Wireless sweeteners only.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="getWirelessSweetenerDetail" type="tns:GetWirelessSweetenerDetailType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getSweetenerDetailResponse">
+		<xs:annotation>
+			<xs:documentation>Response from Get Wireless Sweetener Detail.  </xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="getWirelessSweetenerDetailResponse" type="tns:GetWirelessSweetenerDetailResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAvailableManufactureAndProduct" type="tns:GetAvailableManufactureAndProductType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Available Make and Model.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableManufactureAndProductResponse" type="tns:GetAvailableManufactureAndProductResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Available Make and Model operation. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getProductInventory" type="tns:GetProductInventoryType"/>
+	<xs:element name="getProductInventoryResponse" type="tns:GetProductInventoryResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Product Inventory operation. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getEquipmentSummary" type="tns:GetEquipmentSummaryType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Equipment Information.  This is used for validating and retrieving the availability of the selected equipment and validating the discounts</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getEquipmentSummaryResponse" type="tns:GetEquipmentSummaryResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Equipment Info operation.  This indicates the validity and availability of the the selected equipment.  It also contains the details of the Equipment</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getServiceCompatibilityList" type="tns:GetServiceCompatibilityListType"/>
+	<xs:element name="getServiceCompatibilityListResponse" type="tns:GetServiceCompatibilityListResponseType"/>
+	<xs:element name="getAvailableBundleList">
+		<xs:annotation>
+			<xs:documentation>Retrieve the bundle information.  1. based on the starter seat location (for new starter seat activation).  2. based on the bundle ID/group ID or BAN (add-on for non-starter seat)
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="starterSeatCriteria" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="bundleTypeCode" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>Bundle type code such as "BC" for Business Connect bundles</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="provinceCode" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>Province code for the bundle selection such as "BC, AB, ON, QC" based on the starter seat service address.  Mandatory for starter seat activation.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="hsiaTypeCode" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>HSIA type code for bundle selection such as "ILEC, CLEC, BYOA"</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>For secondary starter seat, this BAN will help to identify existing primary starter seatType+serviceEdition. 
+eg. If existing primary starter is Mobile Pro Edition, secondary starter is only to allow for BYOD bundle/Mobile Pro  Edition</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="nonStarterSeatCriteria" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="billingAccountNumber" type="xs:string">
+								<xs:annotation>
+									<xs:documentation>Mandatory for Addon, Renewal, and Migration for a non-starter seat.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="bundleId" type="xs:long" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Bundle Identifier.  Mandatory if seat group ID is not specified for non-starter seat activation.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="seatGroupId" type="xs:long">
+								<xs:annotation>
+									<xs:documentation>Starter seat group identifier.  Mandatory if bundle ID is not specified for non-starter seat activation.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="seatTypeCode" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Seat type such as "STRT, OFFC, MOBL".  Mandatory for addon, migration for a non-starter seat.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="bundleQuoteCriteria" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="billingAccountNum" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Mandatory for existing client flow for Business Anywhere</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="bundleQuoteReferenceNum" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Mandatory for new client flow for Business Anywhere.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="accountTypeCode" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Mandatory for new client flow for Business Anywhere.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+							<xs:element name="accountSubTypeCode" type="xs:string" minOccurs="0">
+								<xs:annotation>
+									<xs:documentation>Mandatory for new client flow for Business Anywhere.</xs:documentation>
+								</xs:annotation>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAvailableBundleListResponse">
+		<xs:annotation>
+			<xs:documentation>This contains the details of the bundle containing the bundle information, wireless offer, and AOM/OOM offer code.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:complexContent>
+				<xs:extension base="esc:SalesResponseMessage">
+					<xs:sequence>
+						<xs:element name="bundleInformationList" type="esc:BundleInfoType" minOccurs="0" maxOccurs="100">
+							<xs:annotation>
+								<xs:documentation>List of bundles for new starter seat activation.  Only one instance at most for the non-starter seat add-on.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="customerQuote" type="tns:CustomerQuote" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>For business anywhere, this is customer quote information for new client</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="bundleSummaryList" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>For business anywhere, this is bundle information and offer summary information</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="bundleNameList" type="ec:Name" minOccurs="0" maxOccurs="2">
+										<xs:annotation>
+											<xs:documentation>Bundle Name</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="offerSummaryList" type="tns:BundleOfferSummary" minOccurs="0" maxOccurs="unbounded">
+										<xs:annotation>
+											<xs:documentation>TOM offer summary </xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:extension>
+			</xs:complexContent>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getAvailablePerkList" type="tns:GetAvailablePerkListType"/>
+	<xs:element name="getAvailablePerkListResponse" type="tns:GetAvailablePerkListResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Product Inventory operation. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableInstallDate" type="tns:GetAvailableInstallDateType">
+		<xs:annotation>
+			<xs:documentation>Retrieve available installation dates for wireline product or service ***WLN stack dependency***</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAvailableInstallDateResponse" type="tns:GetAvailableInstallDateResponseType">
+		<xs:annotation>
+			<xs:documentation>Return list of available installation dates for wireline product or service</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getInstallationDetail" type="tns:GetInstallationDetailType">
+		<xs:annotation>
+			<xs:documentation>Retrieve available installation dates for wireline product or service ***WLN stack dependency***</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getInstallationDetailResponse" type="tns:GetInstallationDetailResponseType">
+		<xs:annotation>
+			<xs:documentation>Return list of available installation dates for wireline product or service</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GetNpaNxxType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>BAN is required in order to retrieve the list of valid number groups.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required when calling ResourceOrderReferenceService.getNumberGroupByPhoneNumberAndProductType.ProductType is retrieved from subscriber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipment" type="esc:EquipmentSerialNumberSet">
+				<xs:annotation>
+					<xs:documentation>equipment is required in order to retrieve the list of valid number groups. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="provinceCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>selected province code for the subscriber during the transaction. provinceCode is required in order to filter numberGroups by province code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedOffer" type="esc:WirelessOfferHeader" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>offerId is optional. Filter NumberGroups by offer if AOM offer ID is provided to ensure the phone number change is within the selected offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetNpaNxxResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="npaNxxList" type="tns:NpaNxxType" minOccurs="0" maxOccurs="300"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetNpaNxxListType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>BAN is required in order to retrieve the list of valid number groups.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="npaNxxWLSCriteria" type="tns:NpaNxxCriteriaType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="npaNxxVOIPCriteria" type="tns:NpaNxxCriteriaType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation/>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="voipTollFreeInd" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetNpaNxxListResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="npaNxxByPhoneNumberTypeList" minOccurs="0" maxOccurs="10">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="phoneNumberTypeCode" type="xs:string" minOccurs="0">
+									<xs:annotation>
+										<xs:documentation>One of WLS, VOIP-LOCAL, VOIP-TOLL-FREE.</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="npaNxxList" type="esc:NpaNxxType" minOccurs="0" maxOccurs="300"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableTelephoneNumberType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>BAN is required in order to retrieve the list of valid phone numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required for exchange when calling ResourceOrderReferenceService for getNumberGroupByPhoneNumberAndProductType and getAvailablePhoneNumberList. Not required for Activation and Renewal as they are calling ClientAPIWrapper.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumberTypeCode" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>One of WLS, VOIP-LOCAL, VOIP-TOLL-FREE.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipment" type="esc:EquipmentSerialNumberSet" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>equipment is required in order to retrieve the list of valid phone numbers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedOffer" type="esc:WirelessOfferHeader" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Optional. Validate the submitted npaNXX against the AOM offer if offer ID is provided.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="npaNxx" type="tns:NpaNxxType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Will be deprecated with the next major version. Available telephone numbers derived from.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="npaNxxType" type="esc:NpaNxxType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Available telephone numbers derived from.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="asianFriendlyIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>TRUE if the user wants only asian-friendly phone numbers returned in the response.  FALSE if the user wants ALL phone numbers returned in the response (including asian friendly and non asian friendly phone numbers). If Koodo, set to FALSE.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="customPhoneNumberSearchIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>TRUE if the user would like to submit a wildcard search to customize the list of phone numbers returned. False to return all available phone number. If Koodo, set to FALSE.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastFourDigits" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Deprecating this element. Four for WLS and VOIP, 3 for Toll Free. Required if customPhoneNumberSearchIndicator is TRUE.  Use '*' to indicate wildcard search, e.g. **98 or 9**8.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastNDigits" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Four for WLS and VOIP, 7 for Toll Free. Required if customPhoneNumberSearchIndicator is TRUE.  Use '*' to indicate wildcard search, e.g. **98 or 9**8.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="provinceCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Optional. Validate the submitted npaNXX against the province if provinceCode is provided.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cityName" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableTelephoneNumberResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="availablePhoneNumberList" type="xs:string" minOccurs="0" maxOccurs="100">
+						<xs:annotation>
+							<xs:documentation>Return no more than 100 phone numbers.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableTermsType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="1"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0" maxOccurs="1"/>
+			<xs:element name="selectedOffer" type="esc:WirelessOfferHeader" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required for Exchange from Activation on an AOM offer. Optional for Standard Activation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerGetPhoneIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>required only for buy_get offer redemption. true indicates to get term list from get hardware list. Otherwise, get term list from buy hardware list. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="termInMonths" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This is subscriber's current contract/commitment term in months</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Equipment SKU to filter the Offer List response and retrieve the applicable term in months</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableTermsResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="availableTermInMonthsList" type="xs:integer" minOccurs="0" maxOccurs="5">
+						<xs:annotation>
+							<xs:documentation>Currently valid terms are: 0, 12,24,36</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetAvailablePricePlanType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Not required for Activation, mandatory for other transaction types</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pricePlanFilter" type="tns:PricePlanFilter" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Price plan filter to select specific price plan configuration items</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipment" type="esc:EquipmentSerialNumberSet" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Equipment is required in order to filter price plan list.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deviceTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required for SIM-Only. Equipment type is device Type when SIM-Only. DeviceTypes: PCS Phone, PDASmartPhone, BlackBerry Smartphone, Mobile InternetDevice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedOffer" type="esc:WirelessOfferHeader" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Required for Retention flow.Optional for activation or plan change.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="termInMonths" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If no offer is selected, price plans will be filtered by these selected terms.  If empty, no filtering will be performed.  Possible values: 0, 12, 24, 36.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerGetPhoneIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>required only for buy_get offer redemption. true indicates to get term list from get hardware list. Otherwise, get term list from buy hardware list. Price Plans are filtered by term list if offer is selected. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditLimitProgramIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Set to true if client on credit limit program. Price plans are filtered by credit limit if true is set.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="availableForSaleInMarketPlanOnlyIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Set to true if client needs current in-market price plan. Set to false or empty if client needs both current and non-current in-market plans</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailablePricePlanResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="availablePricePlanList" type="esc:PricePlan" minOccurs="0" maxOccurs="300"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetPricePlanDetailType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="attributeOptionInclusionList" type="xs:string" minOccurs="0" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Attribute inclusion list for the operation. None Supported currently.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attributeOptionExclusionList" type="xs:string" minOccurs="0" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Attribute exclusion list for the operation. One of INCLUDED_ALLOWANCE, NONE (Default).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="pricePlanFilter" type="tns:PricePlanFilter" minOccurs="0"/>
+			<xs:element name="equipment" type="esc:EquipmentSerialNumberSet" minOccurs="0"/>
+			<xs:element name="deviceTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required for SIM-Only. Equipment type is device Type when SIM-Only. DeviceTypes: PCS Phone, PDASmartPhone, BlackBerry Smartphone, Mobile InternetDevice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pricePlanCode" type="xs:string"/>
+			<xs:element name="termInMonths" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Validate price plan agains this selected term.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedOffer" type="esc:WirelessOfferHeader" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For retrieval bonus and customized price plan from offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="internationalDialingDepositPaidIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>should be true if international dialing deposit has been paid.Filter socs such as ID/IR against this indicator.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="includeInternationalServiceIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>When set to true, include international service in the result regardless deposit payment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditLimitProgramIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used to validate that the price plan submitted is valid under the CLP conditions.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="recommendFeatureIndicator" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true - make feature recommendation based on ACE analytics</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetPricePlanDetailResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="pricePlanDetail" type="tns:PricePlanDetail" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetPricePlanSummaryType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Not required for Activation, mandatory for other transaction types</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pricePlanFilter" type="tns:PricePlanFilter" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Price plan filter to select specific price plan configuration items</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipment" type="esc:EquipmentSerialNumberSet">
+				<xs:annotation>
+					<xs:documentation>Equipment is required in order to filter price plan list.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="deviceTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required for SIM-Only. Equipment type is device Type when SIM-Only. DeviceTypes: PCS Phone, PDASmartPhone, BlackBerry Smartphone, Mobile InternetDevice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="termInMonths" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If no offer is selected, price plans will be filtered by these selected terms.  If empty, no filtering will be performed.  Possible values: 0, 12, 24, 36.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pricePlanCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Price plan code</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceCodeList" type="xs:string" minOccurs="0" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>Service code list</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetPricePlanSummaryResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="pricePlanSummary">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="pricePlanCode" type="xs:string"/>
+								<xs:element name="equipmentTypeCodeList" type="xs:string" minOccurs="0" maxOccurs="20"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="serviceSummaryList" minOccurs="0" maxOccurs="100">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="serviceCode" type="xs:string"/>
+								<xs:element name="equipmentTypeCodeList" type="xs:string" minOccurs="0" maxOccurs="20"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetSalesRecommendationType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="recommendationTypeCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Possible values:
+OFFER
+PRICE_PLAN
+FEATURE
+DEVICE
+MESSAGE
+ALL (all above)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetSalesRecommendationResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="recommendationList" type="esc:SalesRecommendation" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetEquipmentInfoType">
+		<xs:annotation>
+			<xs:documentation>Request for validate the subscriber's handset and or SIM equipment.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Ban of existing subscriber.  Used for cache and information messages</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone number of the subscriber.  Used for cache and information messages</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="currentEquipmentItem" type="esc:EquipmentSerialNumberSet" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Existing equipment of the subscriber.  Mainly used for Exchange to compare with the new Equipment for Like-for-Like checking</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="newEquipmentItem" type="esc:EquipmentSerialNumberSet">
+				<xs:annotation>
+					<xs:documentation>New equipment being ordered</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedOffer" type="esc:WirelessOfferHeader" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>New Offer (if Offer is selected first) or the Existing Offer.  Used for validating the Equipment with the Offer</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="termInMonths" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The contract term in months.
+0 = MTM, 12 = 1 year, 24 = 2 year, 36 = 3 year
+If not submitted, discounts for all available terms will be used.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="provinceCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Used for filtering the valid equipment discounts</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerGetPhoneIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required if activating with an AOM offer that is considered Buy X Get X. Used for validating the Equipment with the Offer.  Existing Offer might be multi-unit containing both Buy List and Get List.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetEquipmentInfoResponseType">
+		<xs:annotation>
+			<xs:documentation>Returns valid subscriber handset and SIM equipment</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="validEquipmentList" type="tns:Equipment" minOccurs="0" maxOccurs="10"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetWirelessOfferSummaryType">
+		<xs:sequence>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required for Exchange of Renewal. Check if it is CLP subscribers. Filter Base Offers for CLP client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone number of the subscriber.  Required for RENEWAL, UPGRADE, EXCHANGE, RETURN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerFilter" type="esc:WirelessOfferFilter" minOccurs="0"/>
+			<xs:element name="channelPromotionOnlyIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>eg. TRL store specific promotions (where p3ms promotion is defeined as ownership_group_cd = 'CS' and promotionTypeCd = 'Ord')</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetWirelessOfferSummaryResponseType">
+		<xs:sequence>
+			<xs:element name="offerSummaryList" type="esc:WirelessOfferSummary" minOccurs="0" maxOccurs="300"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetWirelessOfferDetailType">
+		<xs:sequence>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Billing Account Number.  Required if add-on indicator is TRUE for Activation.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone number of the subscriber.  Required for Renewal, Upgrade, Exchange, Return</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedOffer" type="esc:WirelessOfferHeader" minOccurs="0"/>
+			<xs:element name="promoCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Inputed code-based Offer for OOM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetWirelessOfferDetailResponseType">
+		<xs:sequence>
+			<xs:element name="offerDetailList" type="esc:WirelessOfferDetail" minOccurs="0" maxOccurs="10"/>
+			<xs:element name="promoCodeOfferInfo" type="tns:PromoCodeOfferInfo" minOccurs="0" maxOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FindBetterWirelessOfferType">
+		<xs:sequence>
+			<xs:element name="offerSearchKey" type="tns:PromotionalOfferSearchKey">
+				<xs:annotation>
+					<xs:documentation>This element should represent the request used for retreiving Promotional offers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedOffer" type="esc:WirelessOfferHeader">
+				<xs:annotation>
+					<xs:documentation>The ID of currently selected offer. The better offer should have lower offer price than selected offer.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedPricePlan" type="tns:PricePlanSummary">
+				<xs:annotation>
+					<xs:documentation>The price plan currently selected. The better offer has to be eligible for selected price plan. e.g. price plan code, MinCombinedValueAmt.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedOptionalServiceList" type="tns:ServiceSummary" minOccurs="0" maxOccurs="50">
+				<xs:annotation>
+					<xs:documentation>The services currently selected.The better offer has to be eligible for selected services. e.g. returning eligible services, checking MinCombinedValueAmt.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FindBetterWirelessOfferResponseType">
+		<xs:sequence>
+			<xs:element name="offerDetail" type="esc:WirelessOfferDetail" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetWirelessSweetenerSummaryType">
+		<xs:sequence>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required for Exchange of Renewal. Check if it is CLP subscribers. Filter Base Offers for CLP client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone number of the subscriber.  Required for RENEWAL, UPGRADE, EXCHANGE, RETURN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sweetenerFilter" type="esc:WirelessSweetenerFilter" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetWirelessSweetenerSummaryResponseType">
+		<xs:sequence>
+			<xs:element name="sweetenerSummaryList" type="esc:WirelessSweetenerSummary" minOccurs="0" maxOccurs="300"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetWirelessSweetenerDetailType">
+		<xs:sequence>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Billing Account Number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone number of the subscriber.  Required for Renewal, Upgrade, Exchange, Return</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedSweetener" type="esc:WirelessSweetenerHeader">
+				<xs:annotation>
+					<xs:documentation>Sweetener header</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetWirelessSweetenerDetailResponseType">
+		<xs:sequence>
+			<xs:element name="sweetenerDetail" type="esc:WirelessSweetenerDetail"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableManufactureAndProductType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="availableManufactureAndProductCriteria" type="tns:ManufactureAndProductCriteriaType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ManufactureAndProductCriteriaType">
+		<xs:sequence>
+			<xs:element name="technologyTypeCd" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>P3MS technology type e.g. VOIP</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableManufactureAndProductResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="manufactureProductList" type="tns:ManufactureProductType" minOccurs="0" maxOccurs="500"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetProductInventoryType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="productInventoryCriteria" type="tns:ProductInventoryCriteriaType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductInventoryCriteriaType">
+		<xs:sequence>
+			<xs:element name="provinceCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If provided, inventory information is only based on province level inventory check</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productCdList" type="xs:string" minOccurs="0" maxOccurs="1000">
+				<xs:annotation>
+					<xs:documentation>If provided, only matching inventory information will be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetProductInventoryResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="productInventoryList" type="tns:ProductInventoryType" minOccurs="0" maxOccurs="500"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetEquipmentSummaryType">
+		<xs:annotation>
+			<xs:documentation>Request for validate the subscriber's handset and or SIM equipment.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="equipmentSerialNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>New equipment being ordered</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>TELUS/KOODO product SKU.
+If equipment is not selected in a pre-order flow, SKU is entered to retrieve product related informaiton (eg. base price)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Mandatory for BC flow to bring back the VoIP financing options</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="retrieveCompatibleSimInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Must be set to bring back the list of compatible SIM skus for the selected product sku</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetEquipmentSummaryResponseType">
+		<xs:annotation>
+			<xs:documentation>Returns valid subscriber handset and SIM equipment</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="manufactureName" type="ec:MultilingualNameList" minOccurs="0"/>
+					<xs:element name="productSummary" type="esc:ProductSummary" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetServiceCompatibilityListType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="serviceCodeList" type="xs:string" minOccurs="2" maxOccurs="1000"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetServiceCompatibilityListResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="compatibilityResultList" type="tns:ServiceCompatibilityResultType" maxOccurs="1000"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetAvailablePerkListType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Mobility or FFH account number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountMasterSourceTypeCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Possible Values:
+- 1001 (Enabler)
+- 130 (KB)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="servicePhoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Mobility subscriber phone number, or  Wireline service number.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibleOfferProgramList" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Eligible TOM offer and program ID list</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="programId" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>For legacy MoM offer, this is the same as MoM offer ID </xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="programCode" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>For legacy MoM offer, this is the same as MoM offer code</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="offerId" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailablePerkListResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="wirelessPerkList" type="esc:WirelessPerk" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Wireless perk content</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="wirelinePerkList" type="esc:WirelinePerk" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Wireline perk content</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableInstallDateType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="combinationInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true - returns install dates for all the combinations of the products ordered.
+							false - returns install dates for the exactly the products ordered
+							</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderedProductList" type="esc:WirelineProductSummary" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>The products the customer ordered.
+						</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscribedProductList" type="esc:WirelineProductSummary" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>The products the customer already have in his
+							current profile
+						</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceAddress" type="esc:ServiceAddress">
+				<xs:annotation>
+					<xs:documentation>Service Address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>The date to start looking the appointments from. (YYYY-MM-DD) eg. 2017-08-02
+							</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="endDate" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>The date till which to look for appointments. (YYYY-MM-DD) eg. 2017-08-16
+							</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableInstallDateResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="availableInstallDatesList" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="installationRequiredInd" type="xs:boolean" minOccurs="1">
+									<xs:annotation>
+										<xs:documentation>true - install date booking for this product or product combination is required</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="dateList" type="xs:date" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Available installation dates. eg. 2017-08-02
+										</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="serviceTypeList" type="xs:string" maxOccurs="3">
+									<xs:annotation>
+										<xs:documentation>Install dates are based on the service type list eg. SING, HSIC, TTV
+										</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetInstallationDetailType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="attributeExclusionList" type="xs:string" minOccurs="0" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>One of INSTALL_DATES</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="combinationInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true - returns install dates for all the combinations of the products ordered.
+							false - returns install dates for the exactly the products ordered
+							</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderedProductList" type="esc:WirelineProductSummary" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>The products the customer ordered.
+						</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscribedProductList" type="esc:WirelineProductSummary" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>The products the customer already have in his
+							current profile
+						</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceAddress" type="esc:ServiceAddress">
+				<xs:annotation>
+					<xs:documentation>Service Address</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="startDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date to start looking the appointments from. (YYYY-MM-DD) eg. 2017-08-02
+							</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="endDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The date till which to look for appointments. (YYYY-MM-DD) eg. 2017-08-16
+							</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetInstallationDetailResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="serviceInstallDetailList" type="esc:ServiceInstallDetail" minOccurs="0" maxOccurs="4"/>
+					<xs:element name="availableInstallDatesList" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="installationRequiredInd" type="xs:boolean" minOccurs="1">
+									<xs:annotation>
+										<xs:documentation>true - install date booking for this product or product combination is required</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="dateList" type="xs:date" minOccurs="0" maxOccurs="unbounded">
+									<xs:annotation>
+										<xs:documentation>Available installation dates. eg. 2017-08-02
+										</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+								<xs:element name="serviceTypeList" type="xs:string" maxOccurs="3">
+									<xs:annotation>
+										<xs:documentation>Install dates are based on the service type list eg. SING, HSIC, TTV
+										</xs:documentation>
+									</xs:annotation>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ServiceCompatibilityResultType">
+		<xs:sequence>
+			<xs:element name="serviceCode1" type="xs:string"/>
+			<xs:element name="serviceCode2" type="xs:string"/>
+			<xs:element name="compatibilityIndicator" type="xs:boolean"/>
+			<xs:element name="incompatibilityReasonCode" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EligiblePricePlanList">
+		<xs:sequence>
+			<xs:element name="pricePlanDescriptionText" type="ec:MessageType" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EligibleServiceList">
+		<xs:sequence>
+			<xs:element name="serviceDescriptionText" type="ec:MessageType" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Equipment">
+		<xs:sequence>
+			<xs:element name="offerProduct" type="tns:OfferProduct"/>
+			<xs:element name="serialNumber" type="xs:string"/>
+			<xs:element name="hardwareSubsidyIndicator" type="xs:boolean"/>
+			<xs:element name="equipmentGroupCode" type="xs:string"/>
+			<xs:element name="internationalDialingCapableIndicator" type="xs:boolean"/>
+			<xs:element name="hardwareValidationCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="eligibleForTermIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Denotes whether the equipment is eligible for a term-based subscription. (Not all Koodo equipment is eligible for term-based subscriptions).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NpaNxxType">
+		<xs:annotation>
+			<xs:documentation>Deprecated. Will be removed in future major version.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="npaNxx" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>A given NPA-NXX. e.g. 403370</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="descriptionList" type="ec:MultilingualCodeDescTextList" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>An internationalized description of the NPA-NXX suitable to display for user selection, e.g. CALGARY - 403-370 </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OfferDiscount">
+		<xs:sequence>
+			<xs:element name="discountAmount" type="xs:double"/>
+			<xs:element name="discountTermInMonths" type="xs:integer"/>
+			<xs:element name="discountdeliveryTypeCode" type="poc:DiscountDeliveryType">
+				<xs:annotation>
+					<xs:documentation>POS or Airtime</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="netEquipmentPriceAmount" type="xs:double" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>The price paid for the equipment after fees and discouints are applied. This is only populated in a hierarchy where the product and offer is known. Note, does not include Data Cancellation Charge (DCC) or MinimumServiceCommitment (MSC) charge</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OfferProduct">
+		<xs:sequence>
+			<xs:element name="productCode" type="xs:string"/>
+			<xs:element name="productDescriptionTextList" type="ec:MultilingualCodeDescTextList"/>
+			<xs:element name="universalProductCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="productNetworkTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Represents equipment network type (i.e. CDMA, HSPA, etc...)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="suggestedPriceAmount" type="xs:double" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>MSRP of product.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productImageLinkUrl" type="xs:anyURI" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>URL link for additional product details.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productFeatureList" type="tns:ProductFeature" minOccurs="0" maxOccurs="50">
+				<xs:annotation>
+					<xs:documentation>Applies to OOM only. Lists the capabilities of the handset (i.e. GPS, etc)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerDiscountList" type="tns:OfferDiscount" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Optional in case OOM decides not to load discounts as part of this response. Max 10 in order to support different terms for the same product for AOM offers. No populated when OfferProduct is the root element of the hierarchy.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerList" type="esc:WirelessOfferSummary" minOccurs="0" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>This element is populated when the service client requests to view offers grouped by product, i.e. for a given product show all the applicable offers.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productEffectiveDate" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="productExpiryDate" type="xs:dateTime" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CustomerQuote">
+		<xs:complexContent>
+			<xs:extension base="bdsr:CustomerInfo">
+				<xs:sequence>
+					<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BundleOfferSummary">
+		<xs:complexContent>
+			<xs:extension base="esc:WirelessOfferSummary">
+				<xs:sequence>
+					<xs:element name="originalOffersAvailableNum" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Original available offer number in a bundle quote</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="offersRedeemedNum" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Redeemed offer number in a bundle quote</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProductFeature">
+		<xs:sequence>
+			<xs:element name="productFeature" type="xs:anyURI" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PromoCodeOfferInfo">
+		<xs:sequence>
+			<xs:element name="promotionCode" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Alpha numeric string representing the promotion
+						code for a code based offer.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="promotionId" type="xs:long" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Promotion Code Identifier for the promotion code. 
+						Is used during Promotion code redemption.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="challengeQuestion" type="ec:MultilingualCodeDescTextList" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						Challenge Question string associated with the
+						code based offer. Both English and French
+						versions will be provided.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="mandatoryResponseIndicator" type="xs:boolean" minOccurs="1">
+				<xs:annotation>
+					<xs:documentation>
+						If true, the response to challenge question is
+						mandatory.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="responseType" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						1 - for Validation Code response type. 2 - for
+						Free Form response type.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="responseFormat" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						1 - for Numeric response format 2 - for
+						Alphanumeric response format
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="responseMaxLength" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						Maximum length of the response string. Consumers
+						of the service can proactively render the
+						response capture element to limit string length
+						to this value.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="validationErrorMessageList" type="ec:CodeDescText" minOccurs="0" maxOccurs="20"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PricePlanFilter">
+		<xs:sequence>
+			<xs:element name="accountTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="accountSubTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="productTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="equipmentTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="provinceCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="seatTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Seat type codes "STRT", "OFFC", "MOBL"</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="familyTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>eg. BC corresponding family type for RC edition in activation flow</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eligibleServiceEditionTypeCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>For brand new starter seat activation, this list is configured in selected bundle. Eg. BYOA bundle, Mobile Pro edition is allowed</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PricePlanDetail">
+		<xs:sequence>
+			<xs:element name="pricePlan" type="esc:PricePlan"/>
+			<xs:element name="serviceGroupList" type="tns:ServiceGroup" minOccurs="0" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>i.e. included features, mandatory services, features bundles, optional features and services</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="callingCircleMandatoryIndicator" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="headOfficeCallingMandatoryIndicator" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="ineligibleServiceList" type="esc:ServiceDetailBase" minOccurs="0" maxOccurs="300">
+				<xs:annotation>
+					<xs:documentation>The list of ineligible services</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceGroup">
+		<xs:sequence>
+			<xs:element name="serviceGroupTypeCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>INCL = included features 
+BUND = feature bundles 
+OPT = optional 
+MAND = mandatory for selected price plan 
+OFFERMAND = mandatory if configured in selected offer
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceGroupTypeDescriptionTextList" type="ec:MultilingualCodeDescTextList">
+				<xs:annotation>
+					<xs:documentation>i.e. included features, mandatory services, features bundles, optional features and services</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceCategoryList" type="tns:ServiceCategory" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>Represent sub categories by SOC category code. May require 'default' if no sub-categories exist. Will return Business Connect categories as well.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="featureCategoryList" type="tns:ServiceCategory" minOccurs="0" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>Deprecated. Represent sub categories by marketing categorization. This is defined in P3MS.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceDetailList" type="esc:ServiceDetail" maxOccurs="300">
+				<xs:annotation>
+					<xs:documentation>The actual services (i.e. My Surf Enterprise, Messaging 30)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceTypeCategorizationList" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Represents list of service type categorization, based on familyType, featureType etc.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="serviceCategorizationTypeLabel" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>One of FEATURE_CATEGORY, FAMILY_TYPE, SOC_SERVICE_TYPE</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="serviceCategorizationTypeList" type="tns:ServiceCategorizationTypeList" minOccurs="0" maxOccurs="unbounded"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="minimumServiceSelectionNum" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>0 = no restriction and service selection is optional
+1 = at least one service from OFFERMAND category feature list
+n = at least n services from OFFERMAND category feature list
+-1 = must select all configured services from OFFERMAND category feature list
+</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceCategorizationTypeList">
+		<xs:annotation>
+			<xs:documentation>Represent grouping based on familyType of the service. </xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="serviceCategorizationTypeCode" type="xs:string"/>
+			<xs:element name="serviceCategoryDescriptionTextList" type="ec:MultilingualCodeDescTextList" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>i.e. Calling Features, Visual Voicemail, Messaging Features etc...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceCodeList" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="mutuallyExclusiveIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>i.e. checkboxes vs. radio buttons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sortOrder" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>i.e sort by price, alphabetical</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceCategory">
+		<xs:sequence>
+			<xs:element name="serviceCategoryDescriptionTextList" type="ec:MultilingualCodeDescTextList">
+				<xs:annotation>
+					<xs:documentation>i.e. Calling Features, Visual Voicemail, Messaging Features etc...</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceCategoryTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Defined in application configuration.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceCodeList" type="xs:string" maxOccurs="300"/>
+			<xs:element name="mutuallyExclusiveIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>i.e. checkboxes vs. radio buttons</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="sortOrder" type="xs:integer">
+				<xs:annotation>
+					<xs:documentation>i.e sort by price, alphabetical</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PricePlanSummary">
+		<xs:sequence>
+			<xs:element name="pricePlanCode" type="xs:string"/>
+			<xs:element name="pricePlanAmount" type="xs:double"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ServiceSummary">
+		<xs:sequence>
+			<xs:element name="serviceCode" type="xs:string"/>
+			<xs:element name="serviceAmount" type="xs:double"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PromotionalOfferSearchKey">
+		<xs:sequence>
+			<xs:element name="productCode" type="xs:string"/>
+			<xs:element name="accountTypeCode" type="xs:string"/>
+			<xs:element name="accountSubTypeCode" type="xs:string"/>
+			<xs:element name="subscriberProvinceCode" type="xs:string"/>
+			<xs:element name="termInMonths" type="xs:integer"/>
+			<xs:element name="hardwareValidationCode" type="xs:string"/>
+			<xs:element name="addOnIndicator" type="xs:boolean" minOccurs="0"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required if add-on indicator is TRUE.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="multiUnitActivationProductCodeList" type="xs:string" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>other product codes in a multi unit activation that don't already have an offer assigned.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ManufactureProductType">
+		<xs:sequence>
+			<xs:element name="manufactureName" type="ec:MultilingualNameList"/>
+			<xs:element name="productSummaryList" type="esc:ProductSummary" minOccurs="0" maxOccurs="500"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProductInventoryType">
+		<xs:sequence>
+			<xs:element name="productCd" type="xs:string"/>
+			<xs:element name="inventoryLevel" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Actual inventory number count</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="inventoryStatusCd" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Possible value:
+OUT - out of stock
+LOW - low stock (typically count below 25)
+AVAILABLE - plenty</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NpaNxxCriteriaType">
+		<xs:sequence>
+			<xs:element name="provinceCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>selected province code for the subscriber during the transaction. provinceCode is required in order to filter numberGroups by province code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="cityName" type="xs:string" minOccurs="0"/>
+			<xs:element name="equipment" type="esc:EquipmentSerialNumberSet" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Mandatory for WLS. Optional for VOIP. equipment is required in order to retrieve the list of valid number groups. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="selectedOffer" type="esc:WirelessOfferHeader" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>offerId is optional. Filter NumberGroups by offer if AOM offer ID is provided to ensure the phone number change is within the selected offers</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableOfferSummaryListType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="accessoryOfferCriteria" type="tns:AccessoryOfferCriteria" minOccurs="0"/>
+			<xs:element name="salesOfferCriteria" type="tns:SalesAvailableOfferFilterCriteria" minOccurs="0"/>
+			<xs:element name="sweetenerOfferCriteria" type="tns:SweetnerOfferFilterCriteria" minOccurs="0"/>
+			<!--<xs:element name="wirelessOfferCriteria" type="tns:WirelessOfferCriteria" minOccurs="0"/>-->
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableOfferSummaryListResponseType">
+		<xs:sequence>
+			<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="ec:ResponseMessage">
+							<xs:sequence>
+								<xs:element name="relatedMessageList" type="esc:RelatedMessage" minOccurs="0" maxOccurs="10"/>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="accessoryOfferSummaryList" type="esc:AccessoryOffer" minOccurs="0" maxOccurs="100"/>
+			<xs:element name="salesOfferSummaryList" type="esc:EnterpriseSalesOfferSummary" minOccurs="0" maxOccurs="100"/>
+			<xs:element name="sweetenerOfferSummaryList" type="esc:SweetenerOfferSummary" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableProductComponentType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="serviceAddress" type="esc:ServiceAddressBase" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableProductComponentResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="productList" type="esc:WirelineProduct" minOccurs="0" maxOccurs="10"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetWirelineProductComponentListType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="salesProductComponentList" maxOccurs="4">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="productTypeCode" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>HSIC,TTV,SING,STV</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="productTemplateId" type="xs:string"/>
+						<xs:element name="mainComponentId" type="xs:string"/>
+						<xs:element name="productComponentList" type="esc:ProductComponentIdentifier" maxOccurs="100"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetWirelineProductComponentListResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="salesProductComponentList" type="esc:WirelineProductCatalogueItem" minOccurs="0" maxOccurs="4"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetSalesOfferDetailType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="wirelineOfferDetail" type="tns:SalesOfferDetailFilter" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetSalesOfferDetailResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="offerDetail" type="esc:EnterpriseSalesOfferDetail" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableProductPlanListType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="productPlanFilter" type="esc:WirelineOfferHeader" minOccurs="0"/>
+			<xs:element name="selectedOffer" type="esc:WirelineOfferHeader" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAvailableProductPlanListResponseType">
+		<xs:sequence>
+			<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="ec:ResponseMessage"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="productPlanList" type="esc:ProductPlan" minOccurs="0" maxOccurs="100"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccessoryOfferCriteria">
+		<xs:sequence>
+			<xs:element name="customerId" type="xs:string" minOccurs="0"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Billing Account Number for the sale</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serviceAddress" type="esc:ServiceAddressBase" minOccurs="0"/>
+			<xs:element name="subscribedServiceIdentifierList" type="esc:ServiceIdentifier" minOccurs="0" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Required for FFH orders. Service Id of the service being renewed or activated.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="associatedWirelessSalesSummary" type="tns:WirelessSalesOrderSummary" minOccurs="0"/>
+			<xs:element name="associatedWirelineSalesSummaryList" type="esc:WirelineSalesOrderSummary" minOccurs="0" maxOccurs="3"/>
+			<xs:element name="offerFilter" type="esc:AccessoryOfferFilter" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WirelessSalesOrderSummary">
+		<xs:sequence>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required for Exchange of Renewal. Check if it is CLP subscribers. Filter Base Offers 	for CLP client.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="offerHeader" type="esc:MobilityOfferHeader" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Offer Header of the associated sales</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="handsetProductCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Handset Product code of the associated sale</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SalesAvailableOfferFilterCriteria">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesHeader">
+				<xs:sequence>
+					<xs:element name="offerFilter" type="esc:WirelineOfferFilter" minOccurs="0"/>
+					<xs:element name="promotionCd" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SalesOfferDetailFilter">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesHeader">
+				<xs:sequence>
+					<xs:element name="selectedOffer" type="esc:WirelineOfferHeaderWithOfferFilter" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SweetnerOfferFilterCriteria">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesHeader">
+				<xs:sequence>
+					<xs:element name="associatedWirelineSalesSummaryList" type="tns:WirelineSalesSummary" minOccurs="0" maxOccurs="3"/>
+					<xs:element name="offerFilter" type="esc:SweetenerOfferFilter" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WirelineSalesSummary">
+		<xs:sequence>
+			<xs:element name="offerHeader" type="esc:WirelineOfferHeaderWithOfferFilter" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Offer Header of the associated wireline sales</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="productList" type="esc:OfferProductHeader" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Consumer to pass this to filter offers based on products selected</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

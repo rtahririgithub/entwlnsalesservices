@@ -1,0 +1,22 @@
+<!-- setup.xml -->
+<project name="master-setup" default="setup-all">
+	
+	<macrodef name="setup-app">
+	   <attribute name="app-folder" default="NOT SET"/>
+	   <sequential>
+	   		<echo>Calling @{app-folder}/RemoveLastMilePolicy.xml</echo>
+			<ant antfile="@{app-folder}/RemoveLastMilePolicy.xml" inheritAll="false"/>
+	   </sequential>
+	</macrodef>
+
+	<target name="setup-all">
+		<setup-app app-folder="ewlnss-wsdl/ewlnss-esis-wsdl/src/main/resources/wsdls"/>
+		<setup-app app-folder="ewlnss-wsdl/ewlnss-esms-wsdl/src/main/resources/wsdls"/>
+		<setup-app app-folder="ewlnss-wsdl/ewlnss-esvs-wsdl/src/main/resources/wsdls"/>
+		<setup-app app-folder="ewlnss-ws-deploy/ewlnsms-ws-deploy/ewlnsms-rest"/>
+		<setup-app app-folder="ewlnss-ws-deploy/ewlnsis-ws-deploy/ewlnsis-rest"/>
+		<setup-app app-folder="ewlnss-ws-deploy/ewlnsos-ws-deploy/ewlnsos-rest"/>
+		<setup-app app-folder="ewlnss-ws-deploy/ess-ws-deploy/ess-rest"/>
+	</target>
+	
+</project>

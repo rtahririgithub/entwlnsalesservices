@@ -1,0 +1,1534 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "TELUS TMF663 Shopping Cart",
+        "description": "The Shopping Cart API provides a standardized mechanism for the management of shopping carts, including creation, update, retrieval, deletion and notification of event. Shopping Cart entity is used for the temporary selection and reservation of product offerings in e-commerce and retail purchase. Shopping cart supports purchase of both tangible and intangible goods and service (e.g. handset, telecom network service). The charge includes the one-off fee such as the fee for handset and the recurring fee such as the fee of a network service. Shopping Cart contains a list of cart items, a reference to party or party role (e.g. customer) or contact medium in case of unknown customer, and also the calculated total items price including promotions.",
+        "version": "2.0",
+        "contact": {
+            "email": "dlTAFT@telus.com"
+        }
+    },
+    "host": "serverRoot",
+    "basePath": "/tmf-api/shoppingCart/v2/",
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/shoppingCart": {
+            "get": {
+                "operationId": "listShoppingCart",
+                "summary": "List or find 'ShoppingCart' objects",
+                "tags": [
+                    "shoppingCart"
+                ],
+                "parameters": [
+                    {
+                        "type": "string",
+                        "required": true,
+                        "in": "query",
+                        "name": "relatedParty.id",
+                        "description": "This field holds the value of ECID of customer account."
+                    },
+                    {
+                        "in": "query",
+                        "name": "relatedParty.role",
+                        "type": "string",
+                        "description": "This field holds the role of the account.",
+                        "required": true
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "type": "string",
+                        "description": "The fields filter takes in properties with a '-' or '+' in front of each property name. \n\n* '-' will remove that field from the response\n* '+' will only display that field in the response\n\n> You can only use one at a time. Combining '-' and '+' will return an error from NC.\n\nFor example: `fields=+characteristic.id,+characteristic.value`"
+                    },
+                    {
+                        "in": "query",
+                        "name": "dataset.filter",
+                        "type": "string",
+                        "description": "This field will hold the path to the property you want to target, and the value(s) that you want to keep.\n\nFor example: `dataset.filter=cartItem.product.characteristic.id=id1,id2`\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/ShoppingCart"
+                            },
+                            "type": "array"
+                        },
+                        "examples": {
+                            "ncmapping": [
+                                {
+                                    "id": "NC.cartID",
+                                    "createdDateTime": "NC.createdDate",
+                                    "status": "NC.status",
+                                    "channel": [
+                                        {
+                                            "id": "NC.distributionChannel",
+                                            "name": "Distribution"
+                                        }
+                                    ],
+                                    "cartTotalPrice": [
+                                        {
+                                            "priceType": "NC.cartTotalPrice[].type",
+                                            "price": {
+                                                "dutyFreeAmount": {
+                                                    "value": "NC.cartTotalPrice[].value"
+                                                }
+                                            },
+                                            "priceAlteration": [
+                                                {
+                                                    "id": "NC.cartTotalPrice[].discount[].id",
+                                                    "catalogId": "NC.cartTotalPrice[].discount[].promotionid",
+                                                    "name": "NC.cartTotalPrice[].discount[].name",
+                                                    "originalDisplayName": "NC.cartTotalPrice[].discount[].originalName",
+                                                    "description": "NC.cartTotalPrice[].discount[].description",
+                                                    "priceType": "NC.cartTotalPrice[].discount[].type",
+                                                    "applicationDuration": "NC.cartTotalPrice[].discount[].duration",
+                                                    "applicationDurationUnits": "NC.cartTotalPrice[].discount[].durationType",
+                                                    "action": "NC.cartTotalPrice[].discount[].action",
+                                                    "price": {
+                                                        "dutyFreeAmount": {
+                                                            "value": "NC.cartTotalPrice[].discount[].value"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "cartItem": [
+                                        {
+                                            "action": "NC.cartItems[].action",
+                                            "id": "NC.cartItems[].id",
+                                            "cartItem": [
+                                                ""
+                                            ],
+                                            "product": {
+                                                "id": "NC.cartItems[].productInstanceId",
+                                                "name": "NC.cartItems[].name",
+                                                "originalDisplayName": "NC.cartItems[].originalName",
+                                                "place": [
+                                                    {
+                                                        "id": "NC.cartItems[].locationId",
+                                                        "role": "service address"
+                                                    }
+                                                ],
+                                                "characteristic": [
+                                                    {
+                                                        "_comment": "NC.cartItems[].characteristicItems[] standard T_Characteristic mapping"
+                                                    }
+                                                ]
+                                            },
+                                            "itemPrice": [
+                                                {
+                                                    "priceType": "NC.cartItems[].calculatedPrice[].type",
+                                                    "price": {
+                                                        "dutyFreeAmount": {
+                                                            "value": "NC.cartItems[].calculatedPrice[].value"
+                                                        }
+                                                    },
+                                                    "priceAlteration": [
+                                                        {
+                                                            "_comment": "include NC.cartItems[].discount[] entries where NC.cartItems.discount[].type==NC.cartItems[].calculatedPrice[].type",
+                                                            "id": "NC.cartItems[].discount[].id",
+                                                            "catalogId": "NC.cartItems[].discount[].promotionId",
+                                                            "name": "NC.cartItems[].discount[].name",
+                                                            "originalDisplayName": "NC.cartItems[].discount[].originalName",
+                                                            "description": "NC.cartItems[].discount[].description",
+                                                            "priceType": "NC.cartItems[].discount[].type, which is equal to NC.cartItems[].calculatedPrice[].type",
+                                                            "applicationDuration": "NC.cartItems[].discount[].duration",
+                                                            "applicationDurationUnits": "NC.cartItems[].discount[].durationType",
+                                                            "action": "NC.cartItems[].discount[].action",
+                                                            "price": {
+                                                                "dutyFreeAmount": {
+                                                                    "value": "NC.cartItems[].discount[].value"
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            ],
+                                            "productOffering": {
+                                                "_comment": "see https://app.swaggerhub.com/apis/Telus-POC/api-product_offering_qualification/1.0.0"
+                                            },
+                                            "cartItemRelationship": [
+                                                {
+                                                    "id": "NC.cartItems[].parentId",
+                                                    "type": "Parent"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "relatedParty": [
+                                        {
+                                            "id": "NC.createdBy",
+                                            "role": "Creator"
+                                        },
+                                        {
+                                            "id": "NC.customerId",
+                                            "role": "Customer"
+                                        },
+                                        {
+                                            "id": "NC.assignee",
+                                            "role": "Assignee"
+                                        }
+                                    ],
+                                    "characteristic": [
+                                        {
+                                            "_comment": "NC.characteristicItems[] standard T_Characteristic mapping"
+                                        }
+                                    ],
+                                    "validationErrors": [
+                                        {
+                                            "message": "NC.validationErrors[].message",
+                                            "action": "NC.validationErrors[].action",
+                                            "notificationType": "NC.validationErrors[].notificationType",
+                                            "validationErrorType": "NC.validationErrors[].validationErrorType"
+                                        }
+                                    ],
+                                    "ruleExecutionResult": [
+                                        {
+                                            "ruleAction": "NC.ruleExecutionResult[].ruleAction",
+                                            "notificationType": "NC.ruleExecutionResult[].notificationType",
+                                            "ruleId": "NC.ruleExecutionResult[].ruleId",
+                                            "callbackActions": [
+                                                {
+                                                    "id": "NC.ruleExecutionResult[].callbackActions[].id",
+                                                    "action": "NC.ruleExecutionResult[].callbackActions[].action"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not allowed",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "description": "List carts operation supports finding shopping carts by ECID."
+            },
+            "post": {
+                "operationId": "createShoppingCart",
+                "summary": "Creates a 'ShoppingCart'",
+                "tags": [
+                    "shoppingCart"
+                ],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "type": "string",
+                        "description": "The fields filter takes in properties with a '-' or '+' in front of each property name. \n\n* '-' will remove that field from the response\n* '+' will only display that field in the response\n\n> You can only use one at a time. Combining '-' and '+' will return an error from NC.\n\nFor example: `fields=+characteristic.id,+characteristic.value`"
+                    },
+                    {
+                        "in": "query",
+                        "name": "dataset.filter",
+                        "type": "string",
+                        "description": "This field will hold the path to the property you want to target, and the value(s) that you want to keep.\n\nFor example: `dataset.filter=cartItem.product.characteristic.id=id1,id2`\n\n"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "description": "Shopping Cart resource is used for the temporarily selection and reservation of product offerings in e-commerce, call center and retail purchase. Shopping cart supports purchase of both physical and digital goods and service (e.g. handset, telecom network service). Shopping Cart contain list of cart items, a reference to customer (partyRole) or contact medium in case customer not exist, and the total items price including promotions\nSkipped properties: cartTotalPrice, createdDateTime, characteristic, status",
+                            "properties": {
+                                "relatedParty": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/RelatedPartyRef"
+                                    }
+                                },
+                                "channel": {
+                                    "description": "TELUS added to TMF",
+                                    "$ref": "#/definitions/ChannelRef"
+                                },
+                                "place": {
+                                    "description": "TELUS added to TMF",
+                                    "$ref": "#/definitions/Place"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/ShoppingCart"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not allowed",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "description": "Creates shopping cart"
+            }
+        },
+        "/shoppingCart/{id}/validate": {
+            "post": {
+                "operationId": "validateShoppingCart",
+                "summary": "Validate Cart",
+                "tags": [
+                    "shoppingCart"
+                ],
+                "parameters": [
+                    {
+                        "required": true,
+                        "type": "string",
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of shopping Cart"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "type": "string",
+                        "description": "The fields filter takes in properties with a '-' or '+' in front of each property name. \n\n* '-' will remove that field from the response\n* '+' will only display that field in the response\n\n> You can only use one at a time. Combining '-' and '+' will return an error from NC.\n\nFor example: `fields=+characteristic.id,+characteristic.value`"
+                    },
+                    {
+                        "in": "query",
+                        "name": "dataset.filter",
+                        "type": "string",
+                        "description": "This field will hold the path to the property you want to target, and the value(s) that you want to keep.\n\nFor example: `dataset.filter=cartItem.product.characteristic.id=id1,id2`\n"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/ShoppingCart"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not allowed",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "description": "Validate the Shopping Cart content by Id"
+            }
+        },
+        "/shoppingCart/{id}/checkout": {
+            "post": {
+                "operationId": "checkoutShoppingCart",
+                "summary": "Submit Cart",
+                "tags": [
+                    "shoppingCart"
+                ],
+                "parameters": [
+                    {
+                        "required": true,
+                        "type": "string",
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of Shopping Cart"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "Created",
+                        "schema": {
+                            "$ref": "#/definitions/T_ProductOrderRef"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not allowed",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "description": "Transforms shopping cart to product order and submits it. Returns refetence to product order"
+            }
+        },
+        "/shoppingCart/{id}": {
+            "get": {
+                "operationId": "retrieveShoppingCart",
+                "summary": "Retrieves a ShoppingCart by ID",
+                "description": "This operation retrieves a ShoppingCart entity. Attribute selection is enabled for all first level attributes.",
+                "tags": [
+                    "shoppingCart"
+                ],
+                "parameters": [
+                    {
+                        "required": true,
+                        "type": "string",
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of the Shopping Cart"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "type": "string",
+                        "description": "The fields filter takes in properties with a '-' or '+' in front of each property name. \n\n* '-' will remove that field from the response\n* '+' will only display that field in the response\n\n> You can only use one at a time. Combining '-' and '+' will return an error from NC.\n\n\nFor example: `fields=+characteristic.id,+characteristic.value`"
+                    },
+                    {
+                        "in": "query",
+                        "name": "dataset.filter",
+                        "type": "string",
+                        "description": "This field will hold the path to the property you want to target, and the value(s) that you want to keep.\n\nFor example: `dataset.filter=cartItem.product.characteristic.id=id1,id2`\n\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "schema": {
+                            "items": {
+                                "$ref": "#/definitions/ShoppingCart"
+                            },
+                            "type": "array"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not allowed",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "operationId": "patchShoppingCart",
+                "summary": "Updates partially a 'ShoppingCart' by Id",
+                "tags": [
+                    "shoppingCart"
+                ],
+                "parameters": [
+                    {
+                        "required": true,
+                        "type": "string",
+                        "name": "id",
+                        "in": "path",
+                        "description": "Identifier of the Shopping Cart"
+                   },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "type": "string",
+                        "description": "The fields filter takes in properties with a '-' or '+' in front of each property name. \n\n* '-' will remove that field from the response\n* '+' will only display that field in the response\n\n> You can only use one at a time. Combining '-' and '+' will return an error from NC.\n\n\nFor example: `fields=+characteristic.id,+characteristic.value`"
+                    },
+                    {
+                        "in": "query",
+                        "name": "dataset.filter",
+                        "type": "string",
+                        "description": "This field holds the value of characteristic ids that you want to keep within all `characteristic` arrays within the shoppingCart object. \n\nFor example: `dataset.filter=cartItem.product.characteristic.id=id1,id2`\n"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Updated",
+                        "schema": {
+                            "$ref": "#/definitions/ShoppingCart"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not allowed",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "description": "This operation is used to add/remove or modify Cart Items in the Shopping Cart."
+            },
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "type": "string",
+                    "required": true
+                }
+            ],
+            "delete": {
+                "responses": {
+                    "204": {
+                        "description": "",
+                        "schema": {
+                            "type": "object",
+                            "properties": {}
+                        }
+                    },
+                    "400": {
+                        "description": "Cart with {id} is already deleted / Cart with {id} is in submitted state"
+                    },
+                    "404": {
+                        "description": "Cart ID not found"
+                    },
+                    "500": {
+                        "description": "Internal Server Error"
+                    }
+                },
+                "summary": "Delete Shopping Cart by Id",
+                "description": "This operation will delete a shopping cart by cart id",
+                "operationId": "deleteShoppingCart",
+                "tags": [
+                    "shoppingCart"
+                ],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "description": "Shopping Cart Id",
+                        "required": true
+                    }
+                ]
+            }
+        },
+        "/shoppingCart/{id}/revertto/{cartVersion}": {
+            "post": {
+                "responses": {
+                    "200": {
+                        "description": "Reverted",
+                        "schema": {
+                            "$ref": "#/definitions/ShoppingCart"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "405": {
+                        "description": "Method Not Allowed",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "409": {
+                        "description": "Conflict",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                },
+                "summary": "Revert cart Version",
+                "tags": [
+                    "shoppingCart"
+                ],
+                "operationId": "revertShoppingCart",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "type": "string",
+                        "required": true,
+                        "description": "Identifier of the Shopping Cart"
+                    },
+                    {
+                        "in": "path",
+                        "name": "cartVersion",
+                        "type": "string",
+                        "required": true,
+                        "description": "Identifier of the Shopping Cart version"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fields",
+                        "type": "string",
+                        "description": "The fields filter takes in properties with a '-' or '+' in front of each property name. \n\n* '-' will remove that field from the response\n* '+' will only display that field in the response\n\n> You can only use one at a time. Combining '-' and '+' will return an error from NC.\n\n\nFor example: `fields=+characteristic.id,+characteristic.value`"
+                    },
+                    {
+                        "in": "query",
+                        "name": "dataset.filter",
+                        "type": "string",
+                        "description": "This field will hold the path to the property you want to target, and the value(s) that you want to keep.\n\nFor example: `dataset.filter=cartItem.product.characteristic.id=id1,id2`\n\n"
+                    },
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "schema": {
+                            "type": "object",
+                            "description": "Shopping Cart resource is used for the temporarily selection and reservation of product offerings in e-commerce, call center and retail purchase. Shopping cart supports purchase of both physical and digital goods and service (e.g. handset, telecom network service). Shopping Cart contain list of cart items, a reference to customer (partyRole) or contact medium in case customer not exist, and the total items price including promotions\nSkipped properties: cartTotalPrice, createdDateTime, characteristic, status",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "Unique identifier created on provider side (e.g. Order Capture system)",
+                                    "example": "6a44fe00-4454-4b03-b4a4-c105d530c701"
+                                },
+                                "relatedParty": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/RelatedPartyRef"
+                                    }
+                                },
+                                "channel": {
+                                    "description": "TELUS added to TMF",
+                                    "$ref": "#/definitions/ChannelRef"
+                                },
+                                "place": {
+                                    "description": "TELUS added to TMF",
+                                    "$ref": "#/definitions/Place"
+                                }
+                            }
+                        },
+                        "description": "The Shopping Cart to revert to previous version."
+                    }
+                ],
+                "description": "The operation will be changing the cart data to {version}’s state and create a new version. I.e. the example: cart went through the following versions: 1, 2, 3,…, 8,…, 16, 17(current). By calling shoppingCart/{id}/revertto/8 will create a new version 18 where content will be equal to version 8."
+            }
+        }
+    },
+    "definitions": {
+        "T_Characteristic": {
+            "type": "object",
+            "description": "TELUS added to TMF. Key-value pair characteristics, with potential selection options.",
+            "required": [
+                "name",
+                "value"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "unique identifier of the Characteristic, really should be called key",
+                    "example": "9148958205313021610"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "value for this characteristic, or a reference key for the currently selected characteristic value option",
+                    "example": "9148958005813021493"
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "localized, human-readable name for this characteristic",
+                    "example": "Color"
+                },
+                "originalDisplayName": {
+                    "type": "string",
+                    "description": "non-localized, human-readable name for this characteristic",
+                    "example": "Color"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "description of the Characteristic",
+                    "example": "Color of the iPhone"
+                },
+                "valueOptions": {
+                    "type": "array",
+                    "description": "selection choices for this characteristic",
+                    "items": {
+                        "$ref": "#/definitions/T_CharacteristicOption"
+                    }
+                }
+            },
+            "example": {
+                "name": "9148958205313021610",
+                "value": "9148958005813021493",
+                "displayName": "Color",
+                "originalDisplayName": "Color",
+                "description": "Color of the iPhone",
+                "valueOptions": [
+                    {
+                        "value": "9148958005813021493",
+                        "displayName": "Black",
+                        "originalDisplayName": "Black",
+                        "isDefault": true
+                    },
+                    {
+                        "value": "9148958005813021494",
+                        "displayName": "White",
+                        "originalDisplayName": "White",
+                        "isDefault": false
+                    }
+                ]
+            }
+        },
+        "T_CharacteristicOption": {
+            "type": "object",
+            "description": "TELUS added to TMF. One possible value of the characteristic.",
+            "required": [
+                "value"
+            ],
+            "properties": {
+                "value": {
+                    "type": "string",
+                    "description": "key that represents this option, which becomes the characteristic's value if selected.",
+                    "example": "9148958005813021493"
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "localized, human-readable name for this characteristic option",
+                    "example": "Black"
+                },
+                "originalDisplayName": {
+                    "type": "string",
+                    "description": "non-localized, human-readable name for this characteristic option",
+                    "example": "Black"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "describes this characteristic value option",
+                    "example": "Black iPhone"
+                },
+                "isDefault": {
+                    "type": "boolean",
+                    "description": "whether this is the default option",
+                    "example": true
+                }
+            }
+        },
+        "T_ProductOffering": {
+            "type": "object",
+            "description": "TELUS modified. Represents entities that are orderable from the provider of the catalog, this resource includes pricing information.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of the productOffering"
+                },
+                "orderNumber": {
+                    "type": "string",
+                    "description": "TELUS added to TMF."
+                },
+                "name": {
+                    "type": "string",
+                    "description": "TELUS renamed from name to displayName. Name of the productOffering"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Description of the productOffering"
+                },
+                "isSellable": {
+                    "type": "string",
+                    "description": "A flag indicating if this product offer can be sold stand-alone for sale or not. If this flag is false it indicates that the offer can only be sold within a bundle."
+                },
+                "category": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CategoryRef"
+                    }
+                },
+                "requireList": {
+                    "type": "array",
+                    "description": "TELUS added to TMF.",
+                    "items": {
+                        "$ref": "#/definitions/ProductOfferingRef"
+                    }
+                },
+                "conflictList": {
+                    "type": "array",
+                    "description": "TELUS added to TMF.",
+                    "items": {
+                        "$ref": "#/definitions/ProductOfferingRef"
+                    }
+                },
+                "productOfferingPrice": {
+                    "type": "array",
+                    "description": "TELUS changed from ProductOfferingPrice to T_Pricing.",
+                    "items": {
+                        "$ref": "#/definitions/T_Pricing"
+                    }
+                },
+                "bundledProductOffering": {
+                    "type": "array",
+                    "description": "TELUS changed from BundledProductOffering to ProductOffering.",
+                    "items": {
+                        "$ref": "#/definitions/T_ProductOffering"
+                    }
+                },
+                "bundledProductOfferingOption": {
+                    "type": "array",
+                    "description": "TELUS added to TMF. Use only if this is a bundled product offering.",
+                    "items": {
+                        "$ref": "#/definitions/BundledProdOfferOption"
+                    }
+                },
+                "prodSpecCharValueUse": {
+                    "type": "array",
+                    "description": "TELUS changed from ProdSpecCharValueUse to T_Characteristic.",
+                    "items": {
+                        "$ref": "#/definitions/T_Characteristic"
+                    }
+                }
+            }
+        },
+        "CategoryRef": {
+            "type": "object",
+            "description": "The category resource is used to group product offerings, service and resource candidates in logical containers. Categories can contain other categories and/or product offerings, resource or service candidates.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of the category",
+                    "example": "9137773148713852470"
+                }
+            }
+        },
+        "T_Pricing": {
+            "type": "object",
+            "description": "TELUS changed from ProductOfferingPrice/CartPrice to T_Pricing and introduced changes for consistency across all APIs. An amount, usually of money, that is asked for or allowed when an item is bought, rented, or leased. The price is valid for a defined period of time and may not represent the actual price paid by a customer.",
+            "properties": {
+                "priceType": {
+                    "type": "string",
+                    "description": "A category that describes the price, such as recurring, discount, allowance, penalty, and so forth.",
+                    "example": "One_Time"
+                },
+                "price": {
+                    "$ref": "#/definitions/Price",
+                    "description": "The amount of money that characterizes the price."
+                },
+                "priceAlteration": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/PriceAlteration"
+                    }
+                }
+            }
+        },
+        "Price": {
+            "type": "object",
+            "description": "Provides all amounts (tax included, duty free, tax rate), used currency and percentage to apply for Price Alteration.",
+            "properties": {
+                "dutyFreeAmount": {
+                    "$ref": "#/definitions/Money",
+                    "description": "All taxes excluded amount (expressed in the given currency)"
+                }
+            }
+        },
+        "PriceAlteration": {
+            "type": "object",
+            "description": "Is an amount, usually of money, that modifies the price charged for an order item.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "9152520719913434711"
+                },
+                "catalogId": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "9150597643213199691"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "TELUS renamed from name to displayName. A short descriptive name such as \"Monthly discount\"",
+                    "example": "$10 off for 24 months"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "A narrative that explains in detail the semantics of this order item price alteration",
+                    "example": "service agreement promo"
+                },
+                "priceType": {
+                    "type": "string",
+                    "description": "A category that describes the price such as recurring, one time and usage.",
+                    "example": "Recurrent"
+                },
+                "applicationDuration": {
+                    "type": "integer",
+                    "description": "Duration during which the alteration applies on the order item price (for instance 2 months free of charge for the recurring charge)",
+                    "example": 24
+                },
+                "applicationDurationUnits": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "Months"
+                },
+                "action": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "Add"
+                },
+                "price": {
+                    "$ref": "#/definitions/Price"
+                }
+            }
+        },
+        "Money": {
+            "type": "object",
+            "description": "A base / value business entity used to represent money",
+            "properties": {
+                "value": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "A positive floating point number",
+                    "example": -10
+                }
+            }
+        },
+        "ShoppingCart": {
+            "type": "object",
+            "description": "Shopping Cart resource is used for the temporarily selection and reservation of product offerings in e-commerce, call center and retail purchase. Shopping cart supports purchase of both physical and digital goods and service (e.g. handset, telecom network service). Shopping Cart contain list of cart items, a reference to customer (partyRole) or contact medium in case customer not exist, and the total items price including promotions",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier created on provider side (e.g. Order Capture system)"
+                },
+                "createdDateTime": {
+                    "type": "string",
+                    "description": "TELUS added to TMF."
+                },
+                "status": {
+                    "description": "TELUS added to TMF.",
+                    "type": "string"
+                },
+                "channel": {
+                    "$ref": "#/definitions/ChannelRef"
+                },
+                "place": {
+                    "description": "TELUS added to TMF.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Place"
+                    }
+                },
+                "cartTotalPrice": {
+                    "type": "array",
+                    "description": "Total amount of the shopping cart, usually of money, that represents the actual price paid by the Customer for cart (considering only Active cart items)",
+                    "items": {
+                        "$ref": "#/definitions/T_Pricing"
+                    }
+                },
+                "cartItem": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CartItem"
+                    }
+                },
+                "relatedParty": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/RelatedPartyRef"
+                    }
+                },
+                "characteristic": {
+                    "type": "array",
+                    "description": "TELUS added to TMF.",
+                    "items": {
+                        "$ref": "#/definitions/T_Characteristic"
+                    }
+                },
+                "validationErrors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/T_ValidationError"
+                    }
+                },
+                "ruleExecutionResult": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/T_RuleExecutionResult"
+                    }
+                },
+                "shoppingCartDelta": {
+                    "$ref": "#/definitions/T_ShoppingCartDelta"
+                }
+            },
+            "required": [
+                "cartItem"
+            ]
+        },
+        "CartItem": {
+            "type": "object",
+            "description": "An identified part of the shopping cart. A shopping cart  is decomposed into one or more shopping cart item. Cart item represents a product offering or bundled product offering that user wish to purchase, as well as the pricing of the product offering, reference to product in case of configured characteristic or installation address. Cart items can be related to other cart item to related bundled offerings or reference cart Items to a shipping options",
+            "required": [
+                "id",
+                "action"
+            ],
+            "properties": {
+                "action": {
+                    "type": "string",
+                    "description": "Can be \"Add\" / \"Modify\" / \"No_Change\"/ \"Delete\"",
+                    "example": "Add"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "Identifier of the cart item (generally it is a sequence number 01, 02, 03, ...) in the shopping cart",
+                    "example": "1"
+                },
+                "cartItem": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CartItem"
+                    }
+                },
+                "product": {
+                    "$ref": "#/definitions/Product"
+                },
+                "itemPrice": {
+                    "type": "array",
+                    "description": "TELUS changed from CartPrice to T_Pricing.",
+                    "items": {
+                        "$ref": "#/definitions/T_Pricing"
+                    }
+                },
+                "productOffering": {
+                    "description": "TELUS changed from ProductOfferingRef to T_ProductOffering",
+                    "$ref": "#/definitions/T_ProductOffering"
+                },
+                "cartItemRelationship": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CartItemRelationship"
+                    }
+                },
+                "provisioningStatus": {
+                    "type": "string",
+                    "description": "A String. Used to identify the state of individual items within the cart:\n\n• Pending – For order items that are part of a pending Sales Order and has a related Product Order in Entering state \n\n• Activating - For order items that are part of a Sales Order and has a related Product Order in Processing state \n\n• Active – For items that have been activated.\n\nAssumptions: \n\n• response parameters are returned only for Amend SC \n\n• value calculation is performed only for Create, Assign, Validate SC operations;\n\n• parameter values will be stored in couch base and returned for another SC operations; parameter value might be out of date for moment of Update or Retrieve operation. "
+                },
+                "restrictedActions": {
+                    "type": "array",
+                    "description": "Used to determine if there are limits on available actions for this cartItem.\nList elements may be 'All' or individual action names.\n'All' indicates that no actions are possible and individual actions being used if a subset remain available.\nOnly 'All' is in use initially.\nIf this parameter is absent then there are no restricted actions.\n\nAssumptions: \n\n• response parameters are returned only for Amend SC \n\n• value calculation is performed only for Create, Assign, Validate SC operations;\n\n• parameter values will be stored in couch base and returned for another SC operations; parameter value might be out of date for moment of Update or Retrieve operation. ",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "RelatedPartyRef": {
+            "type": "object",
+            "description": "RelatedParty reference. A related party defines party or party role linked to a specific entity.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of a related party",
+                    "example": "Anonymous: 10.236.2.233"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "Role of the related party.",
+                    "example": "creator"
+                },
+                "characteristic": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/T_Characteristic"
+                    }
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "Product": {
+            "type": "object",
+            "description": "Product reference. Configure the product characteristics (only configurable characteristics and necessary only if a non default value is selected) and/or identify the product that needs to be modified/deleted.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of the product",
+                    "example": "productInstanceId"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "TELUS changed from name to displayName for consistency. Name of the product",
+                    "example": "Internet $10 off for 2 years"
+                },
+                "originalDisplayName": {
+                    "description": "TELUS added to TMF. Non-localized version of name.",
+                    "example": "Internet $10 off for 2 years"
+                },
+                "place": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Place"
+                    }
+                },
+                "characteristic": {
+                    "type": "array",
+                    "description": "TELUS changed from ProductCharacteristic to T_Characteristic.",
+                    "items": {
+                        "$ref": "#/definitions/T_Characteristic"
+                    }
+                }
+            }
+        },
+        "ProductOfferingRef": {
+            "type": "object",
+            "description": "ProductOffering reference. A product offering represents entities that are orderable from the provider of the catalog, this resource includes pricing information.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of the product offering",
+                    "example": "9150554859213487280"
+                }
+            }
+        },
+        "CartItemRelationship": {
+            "type": "object",
+            "description": "Relationship among cart items mainly other than hierarchical relationships such as \"RelyOn\", \"DependentOn\", \"Shipping\" etc.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of the referred cart item",
+                    "example": "2"
+                },
+                "type": {
+                    "type": "string",
+                    "description": "Type of the cart item relationship",
+                    "example": "parent"
+                }
+            }
+        },
+        "Place": {
+            "type": "object",
+            "description": "Place defines a location generically. Could be a geographic address a geographic address, a geographic location.",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier of the place",
+                    "example": "9151344777113212938"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "A user-friendly name for the place",
+                    "example": "3777 Kingsway"
+                },
+                "role": {
+                    "type": "string",
+                    "description": "Role of the place",
+                    "example": "Service Address"
+                }
+            }
+        },
+        "Error": {
+            "required": [
+                "code",
+                "reason"
+            ],
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "description": "Application related code."
+                },
+                "reason": {
+                    "type": "integer",
+                    "description": "Text that explains the reason for error."
+                },
+                "message": {
+                    "type": "string",
+                    "description": "(optional) Text that provide more details and corrective actions related to the error."
+                },
+                "status": {
+                    "type": "integer",
+                    "description": "(optional) http error code extension like 400-2"
+                },
+                "referenceError": {
+                    "type": "string",
+                    "description": "(optional) A URL to online documentation that provides more information about the error."
+                },
+                "@type": {
+                    "type": "string",
+                    "description": "(optional) The class type of a REST resource."
+                },
+                "@schemaLocation": {
+                    "type": "string",
+                    "description": "(optional) A link to the schema describing a REST resource."
+                }
+            }
+        },
+        "ChannelRef": {
+            "description": "TELUS added to shopping cart. The channel defines the channel for selling product offerings.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "description": "Unique identifier of the channel",
+                    "type": "string",
+                    "example": "9144413504413358531"
+                },
+                "name": {
+                    "description": "Name of the channel.",
+                    "type": "string",
+                    "example": "SSP"
+                },
+                "@referenceType": {
+                    "type": "string",
+                    "description": "This can hold two values :\n1.NC_ID\n2.External_Id\n\nBy default , API considers Channel id as NC internal Id. If @referenceType=External_Id , then we treat ID as CPMS Channel Outlet ID.\n\nNOTE : FOr External_ID to work , the CPMS outlet ID needs to exist in NC Product Catalog.",
+                    "default": "NC_ID",
+                    "example": "\"@referenceType \"  : \"External_Id\""
+                }
+            },
+            "required": [
+                "id"
+            ]
+        },
+        "BundledProdOfferOption": {
+            "type": "object",
+            "description": "A set of numbers that specifies the lower and upper limits for a ProductOffering that can be procured as part of the related BundledProductOffering. Values can range from 0 to unbounded",
+            "properties": {
+                "numberRelOfferLowerLimit": {
+                    "type": "integer",
+                    "description": "lower limit for a product offering that can be procured as part of the related BundledProductOffering",
+                    "example": 1
+                },
+                "numberRelOfferUpperLimit": {
+                    "type": "integer",
+                    "description": "upper limit for a product offering that can be procured as part of the related BundledProductOffering",
+                    "example": 1
+                }
+            }
+        },
+        "T_ValidationError": {
+            "description": "TELUS added to TMF, required by NC.",
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "Unlimited WI-FI is not available for ordering"
+                },
+                "action": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "BLOCK_ORDERING"
+                },
+                "notificationType": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "ERROR"
+                },
+                "validationErrorType": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "ELIGIBILITY"
+                }
+            }
+        },
+        "T_RuleExecutionResult": {
+            "description": "TELUS added to TMF, required by NC.",
+            "type": "object",
+            "properties": {
+                "ruleAction": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "IGNORE"
+                },
+                "notificationType": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "WARNING"
+                },
+                "ruleId": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "9146029493213732386"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "TELUS added to TMF.",
+                    "example": "Your temporary quote can't be applied because it contains offers which have conflicts"
+                }
+            }
+        },
+        "T_ProductOrderRef": {
+            "type": "object",
+            "description": "Reference to Product Order",
+            "required": [
+                "id"
+            ],
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "Unique identifier created on provider side (e.g. Order Capture system)",
+                    "example": "6a44fe00-4454-4b03-b4a4-c105d530c701"
+                }
+            }
+        },
+        "T_ShoppingCartDelta": {
+            "type": "object",
+            "description": "This object array represents the delta between current cart version and the version of cart sent as part of updateCart operation.",
+            "properties": {
+                "itemDelta": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/T_DeltaItem"
+                    }
+                }
+            }
+        },
+        "T_DeltaItem": {
+            "type": "object",
+            "description": "This object represent the delta for a specific cart item.",
+            "properties": {
+                "cartItemId": {
+                    "type": "integer"
+                },
+                "delta": {
+                    "type": "string",
+                    "enum": [
+                        "Add",
+                        "Remove",
+                        "Modify",
+                        "Delete",
+                        "Suspend",
+                        "Resume",
+                        "Cancel"
+                    ]
+                },
+                "newAction": {
+                    "type": "string"
+                },
+                "newOfferId": {
+                    "type": "integer"
+                },
+                "oldAction": {
+                    "type": "string"
+                },
+                "oldOfferId": {
+                    "type": "integer"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "shoppingCart"
+        }
+    ],
+    "x-apiname": "fifaShoppingCart",
+    "x-tmfdomain": "marketsales",
+    "x-cmdbid": "20672",
+    "x-api-engagement-num": "70"
+}

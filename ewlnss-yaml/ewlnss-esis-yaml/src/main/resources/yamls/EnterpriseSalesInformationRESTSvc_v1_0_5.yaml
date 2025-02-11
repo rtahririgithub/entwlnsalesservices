@@ -1,0 +1,645 @@
+---
+swagger: "2.0"
+info:
+  description: This service provides the interface for operations to retrieve information required to build the ESS shopping cart, and submit the sales
+  version: 1.0.4
+  title: EnterpriseSalesInformationRESTSvc
+  contact:
+    name: dlchocolatemousse@telus.com
+    email: dlchocolatemousse@telus.com
+host: virtserver.swaggerhub.com
+basePath: /AmanPS/ESISRestSvc/1.0.0
+tags:
+- name: EnterpriseSalesRESTSvc
+  description: Provides resources to create, update sales resources
+schemes:
+- https
+- http
+paths:
+  /available-product-items:
+    get:
+      tags:
+      - ESIS
+      - Resource
+      summary: Get available product plans for the sale.
+      description: Returns the available product items for each of the products chosen for the order. The operation supports multiple products being chosen at the same time.
+      operationId: getAvailableProductItems
+      parameters:
+      - name: sales-transaction-id
+        in: query
+        description: Transaction id, as the unique id passed by the consumer. Is akin to a corelation id.
+        required: true
+        type: string
+      - name: shopping-cart-id
+        in: query
+        description: Identifier of the Shopping Cart. Returned when the Post shopping-cart was called.
+        required: true
+        type: string
+      - name: commerce-cartitem-id
+        in: query
+        description: Identifier of the Cart Item. Returned when the Post shopping-cart was called.
+        required: false
+        type: string
+      responses:
+        200:
+          description: Ok
+          schema: {}
+        400:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/GetAvailableProductItemErrorResponse'
+        500:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/GetAvailableProductItemErrorResponse'
+  /available-appointments:
+    post:
+      tags:
+      - ESIS
+      - Scheduling
+      summary: Get available installation timeslots for the wireline products and services part of the sale.
+      description: '\nRequest  \n1. Shopping Cart Id. \n2. Operation Header SalesTransaction Id. \n3. From Date \n4. To Date \n5 Combination Required Indicator.\ \nResponse:  IF successful, return the list of available timeslots.  '
+      operationId: getAvailableAppointments
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      parameters:
+      - in: body
+        name: body
+        description: Request object for available appointments. Consumer needs to pass the shopping cart id for which the appointments are requested.
+        required: true
+        schema:
+          $ref: '#/definitions/GetAvailableAppointmentRequest'
+      responses:
+        200:
+          description: Ok
+          schema:
+            $ref: '#/definitions/GetAvailableAppointmentResponse'
+        400:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/GetAvailableAppointmentErrorResponse'
+        500:
+          description: Unsuccessful operation
+          schema:
+            $ref: '#/definitions/GetAvailableAppointmentErrorResponse'
+definitions:
+  WirelineEquipmentItem:
+    type: object
+    properties:
+      productItemIdentifier:
+        $ref: '#/definitions/ProductItemIdentifier'
+      externalProductItemInstanceId:
+        type: string
+        description: Instance Id used by the external system for the product item.
+      equipmentTypeCd:
+        type: string
+        description: TTV_SETTOP_BOX, HIGH_SPEED_MODEM, WIFI_BOOST
+      equipmentSubTypeCd:
+        type: string
+        description: STARTER, EXPANSION
+      modelName:
+        type: string
+      materialItemCode:
+        type: string
+      includedInd:
+        type: boolean
+      equipmentDescription:
+        type: array
+        items:
+          $ref: '#/definitions/MultilingualText'
+      deliveryMethods:
+        type: array
+        items:
+          type: string
+      equipmentPrice:
+        $ref: '#/definitions/Price'
+      equipmentPriceDiscount:
+        $ref: '#/definitions/PriceDiscount'
+      associatedProductItems:
+        type: array
+        items:
+          $ref: '#/definitions/AssociatedProductItem'
+  AvailableWirelineEquipmentType:
+    type: object
+    properties:
+      quantityAllowed:
+        $ref: '#/definitions/QuantityAllowed'
+      buyEquipmentList:
+        type: array
+        items:
+          $ref: '#/definitions/WirelineEquipmentItem'
+      rentalEquipmentList:
+        type: array
+        items:
+          $ref: '#/definitions/WirelineEquipmentItem'
+      clientOwnedEquipmentList:
+        type: array
+        items:
+          $ref: '#/definitions/WirelineEquipmentItem'
+      existingEquipmentList:
+        type: array
+        items:
+          $ref: '#/definitions/ExistingWirelineEquipmentType'
+  QuantityAllowed:
+    type: object
+    properties:
+      minimumQty:
+        type: integer
+      maximumQty:
+        type: integer
+  AssociatedProductItem:
+    allOf:
+    - $ref: '#/definitions/ProductItemBase'
+    - {}
+  ProductItem:
+    allOf:
+    - $ref: '#/definitions/ProductItemBase'
+    - properties:
+        associatedProductItems:
+          type: array
+          items:
+            $ref: '#/definitions/AssociatedProductItem'
+  MarketOfferClassification:
+    type: object
+    properties:
+      addOnInd:
+        type: boolean
+      sweetenerInd:
+        type: boolean
+        description: Represents the product item is a sweetener
+      callingFeatureInd:
+        type: boolean
+        description: Represents the product item is a calling feature
+      productComponentInd:
+        type: boolean
+        description: Represents the product item is a product component from per the market offer
+      discountInd:
+        type: boolean
+        description: Represents the product item is a dpiscount promotion
+    description: classification of product items by market offer
+  ProductItemBase:
+    type: object
+    properties:
+      productItemIdentifier:
+        $ref: '#/definitions/ProductItemIdentifier'
+      productItemCategoryList:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemCategory'
+      
+      externalProductItemInstanceId:
+        type: string
+        description: Instance Id used by the external system for the prooduct item.
+      productCatalogueName:
+        type: array
+        items:
+          $ref: '#/definitions/MultilingualText'
+      productCatalogueDescription:
+        type: array
+        items:
+          $ref: '#/definitions/MultilingualText'
+      preSelectedInd:
+        type: boolean
+      mandatoryInd:
+        type: boolean
+      discountCode:
+        type: string
+      includedInd:
+        type: boolean
+      smartRingInd:
+        type: boolean
+      existingProductItemInd:
+        type: boolean
+        description: One of True, False, null. True if the product item exists on the product profile of the service, False otherwise. Null means, not existing on the profle. Relevant for change, recontract orders only.
+      carryOverInd:
+        type: boolean
+        description: One of True, False. True if the product item can be retained upon renewal. False otherwise. Relevant for recontract and change orders only.
+      marketOfferClassification:
+        $ref: '#/definitions/MarketOfferClassification'
+      productItemPriceCharge:
+        $ref: '#/definitions/Price'
+      productItemPriceDiscount:
+        $ref: '#/definitions/PriceDiscount'
+  GroupCategory:
+    type: object
+    properties:
+      groupTypeCd:
+        type: string
+      groupSubTypeCd:
+        type: string
+  ProductItemGroupCategory:
+    type: object
+    properties:
+      groupCategory:
+        $ref: '#/definitions/GroupCategory'
+      productItems:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItem'
+  ProductItemConstraintList:
+    type: object
+    properties:
+      constraintTypeCd:
+        type: string
+        description: 'For example: One of defined FREE Pricing sub groups'
+      eligibleForMinMaxPricingInd:
+        type: boolean
+      freePricingQuantityAllowed:
+        $ref: '#/definitions/QuantityAllowed'
+      productItemList:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemIdentifier'
+  ProductItemConstraintGroupList:
+    type: object
+    properties:
+      constraintGroupTypeCd:
+        type: string
+        description: One of FREE_PRICING
+      productItemConstraintList:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemConstraintList'
+  ExistingWirelineEquipmentType:
+    allOf:
+    - $ref: '#/definitions/WirelineEquipmentItem'
+    - properties:
+        carryOverInd:
+          type: boolean
+          description: One of True, False. True if the product item can be retained upon renewal. False otherwise. Relevant for recontract and change orders only.
+        acquisitionType:
+          $ref: '#/definitions/EquipmentAcquisitionType'
+  AvailableAccessoryProductItem:
+    type: object
+    properties:
+      productItemGroupCategories:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemGroupCategory'
+      productItemConstraintGroupList:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemConstraintGroupList'
+      availableEquipmentList:
+        type: array
+        items:
+          $ref: '#/definitions/AvailableWirelineEquipmentType'
+  AvailableInternetProductItem:
+    type: object
+    properties:
+      productItemGroupCategories:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemGroupCategory'
+      productItemConstraintGroupList:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemConstraintGroupList'
+      availableEquipmentList:
+        type: array
+        items:
+          $ref: '#/definitions/AvailableWirelineEquipmentType'
+  AvailableTelevisionProductItem:
+    type: object
+    properties:
+      productItemGroupCategories:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemGroupCategory'
+      productItemConstraintGroupList:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemConstraintGroupList'
+      equipments:
+        type: array
+        items:
+          $ref: '#/definitions/AvailableWirelineEquipmentType'
+  AvailableHomePhoneProductItem:
+    type: object
+    properties:
+      productItemGroupCategories:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemGroupCategory'
+      productItemConstraintGroupList:
+        type: array
+        items:
+          $ref: '#/definitions/ProductItemConstraintGroupList'
+  AvailableProductItemResponse:
+    type: object
+    properties:
+      internetProductItems:
+        type: array
+        items:
+          $ref: '#/definitions/AvailableInternetProductItem'
+      televisionProductItems:
+        type: array
+        items:
+          $ref: '#/definitions/AvailableTelevisionProductItem'
+      homePhoneProductItems:
+        type: array
+        items:
+          $ref: '#/definitions/AvailableHomePhoneProductItem'
+      accessoryProductItems:
+        type: array
+        items:
+          $ref: '#/definitions/AvailableAccessoryProductItem'
+  GetAvailableProductItemErrorResponse:
+    allOf:
+    - $ref: '#/definitions/ResponseBase'
+    - {}
+  ProductServiceInstallRequirement:
+    type: object
+    properties:
+      productServiceTypeCd:
+        type: string
+        description: " \n1. TTV  ( for optic TV, TVX) \n2. HSIC (for High Speed) \n3. SING (for Single line) \n4. STV (Satellite TV) "
+      installTypeCd:
+        type: string
+        description: " \n1. FW  ( for Field Work) \n2. RW (for Rack Work) \n3. SW (for Software) \n4. STV (Satellite TV) "
+      estimatedAppointmentHoursAmt:
+        type: number
+        format: double
+  GetAvailableAppointmentRequest:
+    type: object
+    required:
+    - operationHeader
+    - shoppingCartId
+    properties:
+      operationHeader:
+        $ref: '#/definitions/OperationHeader'
+      shoppingCartId:
+        type: string
+        description: Identifier for the ESS Shopping cart ID. This is a mandatory in the request body.
+      fromDate:
+        type: string
+        format: date
+        description: The date to start looking the appointments from. The default is the service request date in the shoppint cart. If Service request date is not found the behaviour is to use current date.
+      toDate:
+        type: string
+        format: date
+        description: The date till which to look for appointments. The default is fromDate + 4 weeks.
+      combinationRequiredIndicator:
+        type: boolean
+        description: ""
+      projectCode:
+        type: string
+        description: The Project Code of the Installation Detail
+      techLanguage:
+        type: string
+        description: The Language Preference
+  AvailableProductAppointment:
+    type: object
+    properties:
+      productServiceTypeCdList:
+        type: array
+        items:
+          type: string
+          description: " \n1. TTV  ( for optic TV, TVX) \n2. HSIC (for High Speed) \n3. SING (for Single line) \n4. STV (Satellite TV) "
+      availableAppointments:
+        type: array
+        items:
+          $ref: '#/definitions/AvailableAppointment'
+  AvailableInstallCreditType:
+    type: object
+    properties:
+      productTypeCd:
+        type: string
+      sweetener:
+        $ref: '#/definitions/WirelineSweetenerType'
+  AvailableAppointment:
+    type: object
+    properties:
+      availableInstallCreditList:
+        type: array
+        items:
+          $ref: '#/definitions/AvailableInstallCreditType'
+      appointmentDate:
+        type: string
+        format: date
+      availableTimeSlots:
+        type: array
+        items:
+          $ref: '#/definitions/AppointmentTimeSlot'
+      timeZoneCd:
+        type: string
+        description: ' example value can be America/Edmonton'
+  GetAvailableAppointmentResponse:
+    type: object
+    properties:
+      productServiceInstallRequirement:
+        type: array
+        items:
+          $ref: '#/definitions/ProductServiceInstallRequirement'
+      installationRequiredIndicator:
+        type: boolean
+        description: Specifies if installation required. True for FW/RW. False for SW
+      availableProductAppointments:
+        type: array
+        items:
+          $ref: '#/definitions/AvailableProductAppointment'
+  GetAvailableAppointmentErrorResponse:
+    allOf:
+    - $ref: '#/definitions/ResponseBase'
+    - {}
+  ProductItemIdentifier:
+    type: object
+    properties:
+      productCatalogueId:
+        type: string
+      parentProductCatalogueId:
+        type: string
+  MultilingualText:
+    type: object
+    properties:
+      localeTxt:
+        type: string
+        description: EN, FR
+      valueTxt:
+        type: string
+  Price:
+    type: object
+    properties:
+      pricingTypeCd:
+        type: string
+        description: One of DUE_NOW, RECURRING, ONE_TIME
+      basePriceAmount:
+        $ref: '#/definitions/Money'
+      recurrenceCount:
+        type: integer
+        description: optional
+      installmentOptions:
+        type: array
+        description: optional finance option of the price
+        items:
+          $ref: '#/definitions/InstallmentOption'
+    description: Provides all amounts (tax included, duty free, tax rate)
+  Money:
+    type: object
+    properties:
+      valueAmt:
+        type: number
+        format: float
+        description: A positive floating point number
+    description: A base / value business entity used to represent money
+  InstallmentOption:
+    type: object
+    properties:
+      installmentOptionCd:
+        type: string
+        description: One of OPTIONAL,MANDATORY
+      downPaymentAmount:
+        $ref: '#/definitions/Money'
+      numberOfInstallments:
+        type: integer
+        description: number of month
+      installmentAmount:
+        $ref: '#/definitions/Money'
+    description: finance options
+  PriceDiscount:
+    allOf:
+    - $ref: '#/definitions/Price'
+    - properties:
+        priceAlterationTypeCd:
+          type: string
+          description: One of DISCOUNT
+        promotionId:
+          type: string
+        perspectiveDate:
+          type: string
+          format: date-time
+  EquipmentAcquisitionType:
+    type: object
+    properties:
+      buyIndicator:
+        type: boolean
+      customerOwnedIndicator:
+        type: boolean
+      rentalEquipmentIndicator:
+        type: boolean
+    description: One of the three indicators can be marked as true at a given time.
+  ResponseBase:
+    type: object
+    properties:
+      responseMessages:
+        type: array
+        items:
+          $ref: '#/definitions/ResponseMessage'
+  ResponseMessage:
+    type: object
+    properties:
+      errorCode:
+        type: string
+      messageTypeCd:
+        type: string
+      messages:
+        type: array
+        items:
+          $ref: '#/definitions/MessageType'
+      contextDataAttributes:
+        type: array
+        items:
+          $ref: '#/definitions/ContextAttribute'
+      shoppingCartIdentifier:
+        $ref: '#/definitions/CartItemIdentifier'
+  MessageType:
+    type: object
+    properties:
+      messageTxt:
+        type: string
+      localeCd:
+        type: string
+  ContextAttribute:
+    type: object
+    properties:
+      attributeTypeTxt:
+        type: string
+      attributeValueTxt:
+        type: string
+  CartItemIdentifier:
+    type: object
+    properties:
+      shoppingCartId:
+        type: string
+      cartItemId:
+        type: string
+      cartItemRelationId:
+        type: string
+      cartItemIdentifier:
+        $ref: '#/definitions/CartItemIdentifier'
+  OperationHeader:
+    type: object
+    properties:
+      salesTransactionId:
+        type: string
+      sourceSystemId:
+        type: string
+      userId:
+        type: string
+    example:
+      salesTransactionId: salesTransactionId
+  WirelineSweetenerType:
+    type: object
+    properties:
+      offerHeader:
+        $ref: '#/definitions/WirelineOfferHeader'
+      discounts:
+        type: array
+        items:
+          $ref: '#/definitions/WirelineDiscountType'
+  WirelineOfferHeader:
+    allOf:
+    - $ref: '#/definitions/OfferHeader'
+  OfferHeader:
+    type: object
+    properties:
+      offerId:
+        type: string
+        format: int64
+      offerCode:
+        type: string
+      offerPromotionCode:
+        type: string
+        description: Promo code published for the offer
+      offerProgramId:
+        type: string
+      systemId:
+        type: string
+      perspectiveDate:
+        type: string
+        format: date-time
+  WirelineDiscountType:
+    type: object
+    properties:
+      discountCode:
+        type: string
+        description: discount code received from offer
+      discountItemList:
+        type: array
+        items:
+          $ref: '#/definitions/DiscountItem'
+  DiscountItem:
+    allOf:
+    - $ref: '#/definitions/SelectedProductItemBase'
+  SelectedProductItemBase:
+    type: object
+    properties:
+      actionCd:
+        type: string
+        description: One of ADD, REMOVE, NO_CHANGE. Default value is NO_CHANGE if product item not passed
+      productCatalogueIdentifier:
+        $ref: '#/definitions/ProductItemIdentifier'
+  AppointmentTimeSlot:
+    type: object
+    properties:
+      startTime:
+        type: string
+      endTime:
+        type: string
+  ProductItemCategory:
+    type: object
+    properties:
+      id:
+        type: string

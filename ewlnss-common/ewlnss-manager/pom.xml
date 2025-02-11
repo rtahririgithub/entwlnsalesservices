@@ -1,0 +1,292 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+        <groupId>telus.csm.ewlnss-common</groupId>
+        <artifactId>pom-ewlnss-common</artifactId>
+        <version>v1-SNAPSHOT</version>
+    </parent>
+    <artifactId>ewlnss-common-manager</artifactId>
+
+	<dependencies>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>ServiceAddressMgmtSvc-ws-adapter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>ConsumerCustomerMgmtSvc-ws-adapter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>ConsumerDiarySvc-ws-adapter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>ConsumerIdentityProfileService-ws-adapter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>ConsumerBillingAccountManagementSvc-ws-adapter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>EnterpriseConsumerProfileRegistrationSvc-ws-adapter</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>PromotionQualification-ws-adapter</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>CommerceShoppingCartMgmt-ws-adapter</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>FIFAProductOffering-ws-adapter</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>FifaShoppingCartMgmt-ws-adapter</artifactId>
+			<version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>FieldWorkAppointmentSvc-ws-adapter</artifactId>
+			<version>${project.version}</version>
+        </dependency>
+    
+		<!-- ******************** for Customer Eligibility START ******************** -->
+		
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>EnterpriseCreditProfileManagementService-ws-adapter</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>WLNCreditEligibilityProxyService-ws-adapter</artifactId>
+			<version>${project.version}</version>
+			<!--  <scope>provided</scope> -->
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>WLNCreditProfileManagementProxyService-ws-adapter</artifactId>
+			<version>${project.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>WLNCreditProfileManagementService-ws-adapter</artifactId>
+			<version>${project.version}</version>
+			<!-- <scope>provided</scope> -->
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>OrderDepositCalculatorProxyService-ws-adapter</artifactId>
+			<version>${project.version}</version>
+			<!-- <scope>provided</scope> -->
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>FifaShoppingCartMgmt-ws-adapter</artifactId>
+			<version>${project.version}</version>
+			<!--  scope>provided</scope-->
+		</dependency>		
+				
+		<!-- ********************  for Customer Eligibility END ******************** -->
+				
+		<dependency>
+			<groupId>telus.csm.ewlnss-common</groupId>
+			<artifactId>ewlnss-common-domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.csm.ewlnss-common</groupId>
+			<artifactId>ess-common</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>ewlnss-adapter-factory</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<!-- <version>1.9.13</version> -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<!-- <version>1.9.13</version> -->
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>WLNBookingRESTSvc-ws-adapter
+			</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>ReferencePDSDataService-ws-adapter
+			</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+			<artifactId>FeasibilityService-ws-adapter
+			</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>MarketOfferService-ws-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>OfferInformationService-ws-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>OrderQueryRESTSvc-ws-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>ExchangeForborneStatusSvc-ws-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>        
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>WLNOrderShoppingCartRESTSvc-ws-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>WLNOrderChargingRESTSvc-ws-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>BoltOnOfferService-ws-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>SalesCustomerInfoRESTSvc-ws-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>CorporateStoresPOSService-ws-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.soap</groupId>
+            <artifactId>ewlnss-common-soap</artifactId>
+            <version>${project.version}</version>
+        </dependency> 
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>WirelineOrderManagerEJBSvc</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>WirelineOrderManagerEJBSvc</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+         <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>WLNOrderShoppingCartRESTSvc-ws-adapter</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- ESDG cache store, domain object dependency -->
+        <dependency>
+            <groupId>telus.csm.ewlnss-shared</groupId>
+            <artifactId>esdg-cache-store</artifactId>
+            <version>R6-SNAPSHOT</version>
+        </dependency>
+        
+                    
+ 		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+		</dependency>
+		<dependency>
+		  <groupId>thirdparty.coherence</groupId>
+		  <artifactId>coherence</artifactId>
+          <version>3.7.1.6</version>
+		  <scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>weblogic.1035</groupId>
+			<artifactId>wlfullclient</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+        	<groupId>com.thoughtworks.xstream</groupId>
+        	<artifactId>xstream</artifactId>
+        	<version>1.4.3</version>
+        	<scope>test</scope>
+        </dependency>
+
+ 		<!--  Gary added for MOCK  -->
+ 		<dependency>
+ 			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-client</artifactId>
+			<version>1.18</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-core</artifactId>
+			<version>1.18</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jersey</groupId>
+			<artifactId>jersey-json</artifactId>
+			<version>1.18</version>
+			<scope>provided</scope>
+			<!-- 		 <scope>provided</scope>	      -->
+			<exclusions>
+				<exclusion>
+					<artifactId>jettison</artifactId>
+					<groupId>org.codehaus.jettison</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>      
+	</dependencies>
+		
+</project>

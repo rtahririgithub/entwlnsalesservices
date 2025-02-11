@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+        <groupId>telus.csm.ewlnss-common</groupId>
+        <artifactId>pom-ewlnss-common</artifactId>
+        <version>v1-SNAPSHOT</version>
+    </parent>
+    <artifactId>ewlnss-common-config</artifactId>
+
+	<dependencies>
+	 	<dependency>
+			<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+			<artifactId>frameworks-core</artifactId>
+		</dependency>
+			<dependency>
+			<groupId>telus.chnlsales.wireline-sales.shared</groupId>
+			<artifactId>wireline-sales-ejb-client</artifactId>
+			<version>1.8.2-SNAPSHOT</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-databind</artifactId>
+
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-core</artifactId>
+
+				</exclusion>
+				<exclusion>
+					<groupId>com.fasterxml.jackson.core</groupId>
+					<artifactId>jackson-annotations</artifactId>
+
+				</exclusion>
+	
+
+			</exclusions>
+
+
+
+
+		</dependency>
+		<dependency>
+			<groupId>telus.chnlsales.ucss</groupId>
+			<artifactId>ssm</artifactId>
+			<version>2018.nov.rel.1.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>		
+
+</project>

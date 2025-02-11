@@ -1,0 +1,181 @@
+openapi: 3.0.0
+info:
+  title: CommercereferencePDSBridge API
+  description: This is a Commerce Reference PDS Bridge API
+  contact:
+    email: you@your-company.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.0
+servers:
+- url: https://virtserver.swaggerhub.com/m_and_m/CommerceReferencePDSBridge/1.0.0
+  description: SwaggerHub API Auto Mocking
+tags:
+- name: RefPDS
+  description: Accessing the RefPDS
+paths:
+  /referencepds-value/application/{applicationId}/entity:
+    get:
+      tags:
+      - RefPDS
+      summary: retrives the RefPDS data by application Id and entity name
+      description: |
+        retrives the RefPDS data by application Id and entity name
+      operationId: getRefPDSData
+      parameters:
+      - name: transactionId
+        in: header
+        description: business transaction id
+        required: false
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: applicationId
+        in: path
+        description: identifies an application for a RefPDS table belongs to
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: entityName
+        in: query
+        description: identifies a RefPDS table
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: search results matching criteria
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReferencePDSData'
+        400:
+          description: |
+            *Bad Request* - The server cannot process the request due to a malformed
+            syntax. The response can be caused by missing mandatory query
+            parameters, invalid value in the query parameters, validation
+            exceptions, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        404:
+          description: |
+            *Not Found* - The server did not find anything matching the request URI.
+            The response can be caused by missing path parameters, invalid WEB
+            resource, and so on.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        500:
+          description: |
+            *Internal Server Error* - The server encountered an unexpected condition
+            that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ReferencePDSData:
+      type: object
+      properties:
+        referencePDSTableMap:
+          type: object
+          additionalProperties:
+            type: string
+        referencePDSTableObjectMap:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+        ruleList:
+          type: array
+          items:
+            $ref: '#/components/schemas/BusinessRuleInstanceType'
+    BusinessRuleInstanceType:
+      type: object
+      properties:
+        input:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeValueType'
+        output:
+          type: array
+          items:
+            $ref: '#/components/schemas/CodeValueType'
+    CodeValueType:
+      type: object
+      properties:
+        code:
+          type: string
+        value:
+          type: array
+          items:
+            type: string
+    Error:
+      required:
+      - code
+      - reason
+      type: object
+      properties:
+        code:
+          type: string
+          description: |
+            Application relevant detail, defined in the API or a common list
+        reason:
+          type: string
+          description: |
+            Explanation of the reason for the error which can be shown to a client user
+        message:
+          type: array
+          description: |
+            More details and corrective actions related to the error which can be shown to a client user
+          items:
+            $ref: '#/components/schemas/Message'
+        status:
+          type: string
+          description: |
+            HTTP Error code extension
+        traceId:
+          type: string
+          description: |
+            The unique tracker ID used to facilitate troubleshooting
+        characteristic:
+          type: array
+          description: |
+            The relevant parameter that is associated with this error
+          items:
+            $ref: '#/components/schemas/ErrorCharacteristic'
+      description: |
+        "Used when an API throws an Error, typically with a HTTP error response-code (3xx, 4xx, 5xx)""
+    Message:
+      type: object
+      properties:
+        code:
+          type: string
+        type:
+          type: string
+        text:
+          type: string
+    ErrorCharacteristic:
+      type: object
+      properties:
+        name:
+          type: string
+          description: |
+            The non localized name identifier of the characteristic
+        value:
+          type: string
+          description: |
+            The value of the characteristic
+      description: |
+        A parameter that is associated with this entity

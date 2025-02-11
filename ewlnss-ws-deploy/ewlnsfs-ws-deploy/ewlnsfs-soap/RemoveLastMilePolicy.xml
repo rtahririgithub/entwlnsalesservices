@@ -1,0 +1,46 @@
+<project name="frameworks" default="test" basedir="target">
+
+	<property name="sourceFile" value="EnterpriseWLNSalesFulfillmentSvcSOAP_v1.war" />
+	<property name="wsdlJarFile" value="WEB-INF/lib/ewlnsfs-wsdl-v1-SNAPSHOT.jar" />
+
+	<target name="test">
+
+		<delete dir="temp" />
+
+		<unzip src="${sourceFile}" dest="temp/war">
+		</unzip>
+
+		<unzip src="temp/war/${wsdlJarFile}" dest="temp/wsdlJar">
+		</unzip>
+
+
+		<replaceregexp byline="true">
+			<regexp pattern="&lt;wsp:Policy>" />
+			<substitution expression="&lt;!-- wsp:Policy>" />
+			<fileset dir="temp/wsdlJar">
+				<include name="**/*.wsdl" />
+			</fileset>
+		</replaceregexp>
+
+		<replaceregexp byline="true">
+			<regexp pattern="&lt;/wsp:Policy>" />
+			<substitution expression="&lt;/wsp:Policy -->" />
+			<fileset dir="temp/wsdlJar">
+				<include name="**/*.wsdl" />
+			</fileset>
+		</replaceregexp>
+
+		<delete file="temp/war/${wsdlJarFile}" />
+
+		<zip destfile="temp/war/${wsdlJarFile}" basedir="temp/wsdlJar" />
+		
+		<delete file="NoLastMile${sourceFile}" />
+
+		<zip destfile="NoLastMile${sourceFile}" basedir="temp/war" />
+
+		<delete dir="temp" />
+
+	</target>
+
+
+</project>

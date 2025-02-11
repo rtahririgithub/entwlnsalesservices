@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- telus.archetype.version:20160823.Application.Complete -->
+	<parent>
+		<groupId>telus-maven.dependencyManagement</groupId>
+		<artifactId>TELUS_Base_Dependencies</artifactId>
+		<version>3.0.0</version>
+	</parent>
+	
+	<groupId>telus.csm.ewlnss</groupId>
+	<artifactId>EnterpriseWLNSalesServices</artifactId>
+	<version>v1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>ewlnss</name>
+	
+	<properties>
+		<cmdbAppID>11271</cmdbAppID>
+		<target.version>v1</target.version>
+	</properties>
+	
+	<dependencyManagement>
+		<!-- Use this section to define additional 3rd party or Application jars 
+			that are not specified in the telus-maven.dependencyManagement:TELUS_Frameworks6 
+			pom but used by the various modules of the application. This configuration 
+			section does not result in a JAR being downloaded or included in the project. 
+			On the other hand, this allows author to directly specify which version of 
+			a dependency should be used for transitive dependencies or dependencies where 
+			version number has not been specified. This is a simple way to force Maven 
+			to select a specific dependency version. In the case of an aggregate project, 
+			it is best to add this to the aggregate pom since it specifies the dependency 
+			versions in one place for all of the child modules. -->
+		<dependencies>
+			<dependency>
+				<groupId>telus.frameworks.enterprise.frameworks-share</groupId>
+				<artifactId>frameworks-core</artifactId>
+				<version>6.6.1</version>
+			</dependency>
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-core-asl</artifactId>
+				<version>1.9.13</version>
+			</dependency>              
+			<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-mapper-asl</artifactId>
+				<version>1.9.13</version>
+			</dependency>
+		
+		</dependencies>
+		
+	</dependencyManagement>
+
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+		</dependency>
+
+	</dependencies>
+
+
+</project>

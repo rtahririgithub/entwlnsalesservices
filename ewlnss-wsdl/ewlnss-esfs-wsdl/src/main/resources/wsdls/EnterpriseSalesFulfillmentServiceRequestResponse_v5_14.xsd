@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2014 (x64) (http://www.altova.com) by TELUS COMMUNICATIONS (TELUS COMMUNICATIONS) -->
+<xs:schema xmlns:tns="http://xmlschema.tmi.telus.com/srv/MSO/ChannelSalesMgmt/EnterpriseSalesFulfillmentServiceRequestResponse_v5" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ec="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8" xmlns:esc="http://xmlschema.tmi.telus.com/xsd/MarketingSales/SalesChannel/SalesCommonTypes_v5" targetNamespace="http://xmlschema.tmi.telus.com/srv/MSO/ChannelSalesMgmt/EnterpriseSalesFulfillmentServiceRequestResponse_v5" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/MarketingSales/SalesChannel/SalesCommonTypes_v5" schemaLocation="http://xmlschema.tmi.telus.com/xsd/MarketingSales/SalesChannel/SalesCommonTypes_v5_14.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8_0.xsd"/>
+	<xs:element name="createWirelineSalesOrder">
+		<xs:annotation>
+			<xs:documentation>
+				Clients should call this operation to provision an Order - Wireline.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<!--<xs:element name="createWirelessSalesOrder" type="tns:CreateWirelessSalesOrderType" minOccurs="0"/>-->
+				<xs:element name="createWirelineSalesOrder" type="tns:CreateWirelineSalesOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createWirelineSalesOrderResponse" type="tns:CreateWirelineSalesOrderResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Create Order operation.  This contains the processing result of the subscriber or the list of subscribers</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="createSalesOrder">
+		<xs:annotation>
+			<xs:documentation>
+				Clients should call this operation to provision an Order - Wireless or Wireline.  Current implementation supports provisioing of Wireless Orders only		
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="createWirelessSalesOrder" type="tns:CreateWirelessSalesOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createSalesOrderResponse">
+		<xs:annotation>
+			<xs:documentation>Response from the Create Order operation.  This contains the processing result of the subscriber or the list of subscribers</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="createWirelessSalesOrderResponse" type="tns:CreateWirelessSalesOrderResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createSalesBatchOrder">
+		<xs:annotation>
+			<xs:documentation>
+				Clients should call this operation to provision an Order Batch - Wireless or Wireline.  Current implementation supports provisioing of Wireless Orders only		
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="createWirelessSalesBatchOrder" type="tns:CreateWirelessSalesBatchOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createSalesBatchOrderResponse" type="tns:CreateWirelessSalesBatchOrderResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Create Sales Batch Order operation.  This contains the processing result of the batch submission</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="completeSalesOrder">
+		<xs:annotation>
+			<xs:documentation>		</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader">
+					<xs:annotation>
+						<xs:documentation>Deprecated element. To be removed in ESS v6.0</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+				<xs:element name="completeWirelessSalesOrder" type="tns:CompleteWirelessSalesOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="completeSalesOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="completeWirelessSalesOrderResponse" type="tns:CompleteWirelessSalesOrderResponseType" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Deprecated element. To be removed in ESS v6.0</xs:documentation>
+					</xs:annotation>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="completeSalesBatchOrder">
+		<xs:annotation>
+			<xs:documentation>		</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="completeWirelessSalesBatchOrder" type="tns:CompleteWirelessSalesBatchOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="completeSalesBatchOrderResponse" type="tns:CompleteWirelessSalesBatchOrderResponseType"/>
+	<xs:element name="reserveSalesOrder">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="reserveWirelessSalesOrder" type="tns:ReserveWirelessSalesOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="reserveSalesOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="reserveWirelessSalesOrderResponse" type="tns:ReserveWirelessSalesOrderResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="unreserveSalesOrder">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="unreserveWirelessSalesOrder" type="tns:UnreserveWirelessSalesOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="unreserveSalesOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="unreserveWirelessSalesOrderResponse" type="tns:UnreserveWirelessSalesOrderResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="submitSalesToPos">
+		<xs:annotation>
+			<xs:documentation>	</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="submitWirelessSalesToPos" type="tns:SubmitWirelessSalesToPosType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="submitSalesToPosResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="submitWirelessSalesToPosResponse" type="tns:SubmitWirelessSalesToPosResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cancelSalesOrder">
+		<xs:annotation>
+			<xs:documentation>		</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="cancelWirelessSalesOrder" type="tns:CancelWirelessSalesOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="cancelSalesOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="cancelWirelessSalesOrderResponse" type="tns:CancelWirelessSalesOrderResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updatePendingSalesOrder">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="updatePendingWirelessSalesOrder" type="tns:UpdatePendingWirelessSalesOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updatePendingSalesOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="updatePendingWirelessSalesOrderResponse" type="tns:UpdatePendingWirelessSalesOrderResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updateSalesOrder">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="updateWirelessSalesOrder" type="tns:UpdateWirelessSalesOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="updateSalesOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="updateWirelessSalesOrderResponse" type="tns:UpdateWirelessSalesOrderResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="returnSalesOrder">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="returnWirelessSalesOrder" type="tns:ReturnWirelessSalesOrderType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="returnSalesOrderResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="returnWirelessSalesOrderResponse" type="tns:ReturnWirelessSalesOrderResponseType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createSalesOrderItem">
+		<xs:annotation>
+			<xs:documentation>This operation is used to create a sales order item list. Sales order item can be acessory, warranty, perk.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="operationHeader" type="esc:OperationHeader"/>
+				<xs:element name="salesOrderPerk" type="esc:SalesItemPerk" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="createSalesOrderItemResponse">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+					<xs:complexType>
+						<xs:complexContent>
+							<xs:extension base="ec:ResponseMessage"/>
+						</xs:complexContent>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<!-- placeholder for future release
+	<xs:element name="getSalesOrderStatus">
+		<xs:annotation>
+			<xs:documentation>
+				Clients should call this operation to retrieve an Order Batch Status - Wireless or Wireline.  Current implementation supports provisioing of Wireless Orders only		
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="getWirelessSalesOrderStatus" type="tns:GetWirelessSalesOrderStatusType" minOccurs="0"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="getSalesOrderStatusResponse" type="tns:GetSalesOrderStatusResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Create Order operation.  This contains the processing result of the subscriber or the list of subscribers</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+-->
+	<xs:complexType name="CreateWirelessSalesOrderType">
+		<xs:sequence>
+			<xs:element name="salesOrder" type="tns:SalesOrderType" minOccurs="1"/>
+			<xs:element name="salesOrderItemList" type="esc:SalesOrderItemType" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>One Order Item per object</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="termsAndConditionsConsentIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicator that the client has agreed/signed the agreement before shipping is triggered.  If not signed then shipping is not triggered.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountSetupFeeConsentIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>i.e. I have accepted the account-set up fee
+					Required for POSTPAID orders
+					Not required for PREPAID orders</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="finalizeFailedSalesOrderIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true - Finalize sales order in case of error. When this happens, sales order status will be set to 'Failed' and corresponding failed element within order will be updated to reflect error state.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateWirelessSalesOrderResponseType">
+		<xs:sequence>
+			<xs:element name="phoneNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>WLS phone number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="successfulProcessIndicator" type="xs:boolean"/>
+			<xs:element name="serviceRequest" type="esc:ServiceRequest" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Identifies the child (order item) service request</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriptionIdentifier" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>subscription id corresponding to the WLS phone number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateWirelessSalesBatchOrderType">
+		<xs:sequence>
+			<xs:element name="batchOrderExternalRefNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>This unique reference number is to identify a batch submission (eg. batch file name). Duplicated submission will only be processed once.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesBatchTypeCd" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Possible Values:
+- CorpBatch
+- BusinessBundle
+- MultiUnit</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="corporateSalesBatchOrder" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Corp activation/renwal batch order. Most of corp. transactions contain the same offer, plan/addon, device type selections which can be found in template element. Individual transaction detail may contain unique IMEI, SIM or subscriber phone number. </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="corporateSalesBatchHeader" type="esc:BatchOperationHeader"/>
+						<xs:element name="corporateSalesBatchOrderTemplate" type="esc:CorporateBatchOrderItem" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>Order template for the same order attributes</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="corporateSalesBatchOrderItemList" type="esc:CorporateBatchOrderItem" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Individual order item which overwrite and merge attributes in template if provided</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="multiUnitSalesBatchOrderList" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Multi-unit order may contain different types of transaction but requires to be fulfilled in a bundle (eg. business connnect) or a multi-unit transaction.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="salesOrderHeader" type="esc:OperationHeader"/>
+						<xs:element name="salesOrder" type="esc:Order"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateWirelessSalesBatchOrderResponseType">
+		<xs:complexContent>
+			<xs:extension base="ec:ResponseMessage">
+				<xs:sequence>
+					<xs:element name="salesBatchId" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>ESS system generated batch  ID</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="salesBatchCreationDateTime" type="xs:dateTime">
+						<xs:annotation>
+							<xs:documentation>batch submission timestamp</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="newBatchInd" type="xs:boolean">
+						<xs:annotation>
+							<xs:documentation>true = newly created batch
+false = salesBatchId refers to existing batch which was submitted previously</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompleteWirelessSalesOrderType">
+		<xs:sequence>
+			<xs:element name="salesOrder" type="tns:SalesOrderType">
+				<xs:annotation>
+					<xs:documentation>obsolete item. To be removed in next ESS major verion (v6.x)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesIdList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Orders in the list will be processed in sequence. This is mostly used for same BAN order processing situation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompleteWirelessSalesOrderResponseType">
+		<xs:sequence>
+			<xs:element name="phoneNumber" type="xs:string"/>
+			<xs:element name="successfulProcessIndicator" type="xs:boolean"/>
+			<xs:element name="serviceRequest" type="esc:ServiceRequest" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompleteWirelessSalesBatchOrderType">
+		<xs:sequence>
+			<xs:element name="salesBatchId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Orders associated to the batch ID will be processed in sequence</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CompleteWirelessSalesBatchOrderResponseType">
+		<xs:complexContent>
+			<xs:extension base="ec:ResponseMessage">
+				<xs:sequence>
+					<xs:element name="successfulProcessIndicator" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CancelWirelessSalesOrderType">
+		<xs:sequence>
+			<xs:element name="salesOrder" type="tns:SalesOrderType"/>
+			<xs:element name="reasonCd" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CancelWirelessSalesOrderResponseType">
+		<xs:sequence>
+			<xs:element name="phoneNumber" type="xs:string"/>
+			<xs:element name="successfulProcessIndicator" type="xs:boolean"/>
+			<xs:element name="serviceRequest" type="esc:ServiceRequest" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReserveWirelessSalesOrderType">
+		<xs:sequence>
+			<xs:element name="salesOrder" type="tns:SalesOrderType"/>
+			<xs:element name="salesOrderItemList" type="esc:SalesOrderItemType" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>One Order Item per object</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReserveWirelessSalesOrderResponseType">
+		<xs:sequence>
+			<xs:element name="phoneNumber" type="xs:string"/>
+			<xs:element name="successfulProcessIndicator" type="xs:boolean"/>
+			<xs:element name="customerAssignedOfferId" type="xs:string" minOccurs="0"/>
+			<xs:element name="serviceRequest" type="esc:ServiceRequest" minOccurs="0"/>
+			<xs:element name="bundleOrderId" type="xs:string" minOccurs="0"/>
+			<xs:element name="orderExpirationDate" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>reserved order expiration date.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UnreserveWirelessSalesOrderType">
+		<xs:sequence>
+			<xs:element name="salesOrder" type="tns:SalesOrderType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UnreserveWirelessSalesOrderResponseType">
+		<xs:sequence>
+			<xs:element name="phoneNumber" type="xs:string"/>
+			<xs:element name="successfulProcessIndicator" type="xs:boolean"/>
+			<xs:element name="serviceRequest" type="esc:ServiceRequest" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdatePendingWirelessSalesOrderType">
+		<xs:sequence>
+			<xs:element name="serviceRequest" type="esc:ServiceRequest"/>
+			<xs:element name="newFulfillmentDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="newServiceRequestStatus" type="xs:string" minOccurs="0"/>
+			<xs:element name="externalOrderId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>External systems's Order Id e.g. ATG Order Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateWirelessSalesOrderType">
+		<xs:sequence>
+			<xs:element name="serviceRequest" type="esc:ServiceRequest" minOccurs="0"/>
+			<xs:element name="newFulfillmentDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="newServiceRequestStatus" type="xs:string" minOccurs="0"/>
+			<xs:element name="externalOrderId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>External systems's Order Id e.g. ATG Order Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipment" type="esc:EquipmentSerialNumberChangeSet" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Handset and SIM equipments associated with sales transaction</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="updateOrderItemList" type="tns:UpdateOrderItem" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This is a list of items that needs to be updated on the saved order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateOrderItem">
+		<xs:sequence>
+			<xs:element name="updateOrderItemType" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>This will uniquely identify the order item type that needs to be updated.  
+					Supported Values: WAREHOUSE_SHIPMENT
+SYSTEM_INTEGRATION
+
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="updateOrderItemTypeParamList" type="tns:UpdateOrderItemTypeParameter" minOccurs="1" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This is a list of parameters for a given updateOrderItemType</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateOrderItemTypeParameter">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>For updateOrderItemType WAREHOUSE_SHIPMENT following parameter names are supported:
+								1) SAP_ORDER_NUMBER
+				2) SAP_REFUND_NUMBER</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="value" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Include actual value for the corresponding parameter name</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateWirelessSalesOrderResponseType">
+		<xs:sequence>
+			<xs:element name="successfulProcessIndicator" type="xs:boolean"/>
+			<xs:element name="serviceRequest" type="esc:ServiceRequest" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdatePendingWirelessSalesOrderResponseType">
+		<xs:sequence>
+			<xs:element name="successfulProcessIndicator" type="xs:boolean"/>
+			<xs:element name="serviceRequest" type="esc:ServiceRequest" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReturnWirelessSalesOrderType">
+		<xs:sequence>
+			<xs:element name="salesId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>original sales ID for return</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="eTransactionId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>original e transaction ID for return</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesTransactionTimestamp" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>sales transaction time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="noCardPaymentReversalIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true - CC payment reversal is handled outside of ESS. Eg. POS or SOVC agent tools</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReturnWirelessSalesOrderResponseType">
+		<xs:sequence>
+			<xs:element name="successfulProcessIndicator" type="xs:boolean"/>
+			<xs:element name="serviceRequest" type="esc:ServiceRequest" minOccurs="0"/>
+			<xs:element name="returnSalesOrderSummary" type="esc:ReturnSalesOrderSummary" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubmitWirelessSalesToPosType">
+		<xs:sequence>
+			<xs:element name="billingAccountNumber" type="xs:string"/>
+			<xs:element name="salesOrder" type="tns:SalesOrderType"/>
+			<xs:element name="simFromStoreInventoryIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>true = SIM is sold from store inventory
+false = SIM is a walk-in SIM</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubmitWirelessSalesToPosResponseType">
+		<xs:sequence>
+			<xs:element name="successfulProcessIndicator" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!-- placeholder for future release
+	<xs:complexType name="GetWirelessSalesOrderStatusType">
+		<xs:sequence>
+			<xs:element name="salesBatchId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This is the unique ESS batch ID being assigned to each batch upload</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="batchOrderExternalRefNum" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This unique reference number is to identify a batch submission (eg. batch file name). Duplicated submission will only be processed once.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesIdList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This is the unique ESS sales ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesOrderExternalRefNumList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>This is the external order reference number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="searchCriteria" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>If batch ID or sales ID is not provided, ESS can perform a search based on criteria</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="searchTypeCd" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Possible Values:
+- SALES_ORDER
+- SALES_BATCH</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="dateRange" minOccurs="0">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="startDate" type="xs:dateTime" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>order search start date.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>order search end date.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="salesStatusTypeList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+							<xs:annotation>
+								<xs:documentation>Possible Values:
+- INCOMPLETE_ORDER</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetWirelessSalesOrderStatusResponseType">
+		<xs:sequence>
+			<xs:element name="salesBatchId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>WLS phone number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesBatchCreationDateTime" type="xs:dateTime" minOccurs="0"/>
+			<xs:element name="salesBatchOrderItemList" type="tns:SalesOrderItemStatus" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+-->
+	<xs:complexType name="RecordedFee">
+		<xs:sequence>
+			<xs:element name="recordedFeeDescriptionTextList" type="ec:MultilingualCodeDescTextList"/>
+			<xs:element name="recordedFeeAmount" type="xs:double"/>
+			<xs:element name="recordedFeeCreditedIndicator" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProcessError">
+		<xs:sequence>
+			<xs:element name="processErrorCode" type="xs:string"/>
+			<xs:element name="processErrorTypeCode" type="xs:boolean"/>
+			<xs:element name="processErrorDescriptionTextList" type="ec:MultilingualCodeDescTextList"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProcessErrorList">
+		<xs:sequence>
+			<xs:element name="ProcessError" type="tns:ProcessError" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CallingCircleError">
+		<xs:sequence>
+			<xs:element name="phoneNumber" type="xs:string"/>
+			<xs:element name="messageList" type="ec:MultilingualCodeDescTextList"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CallingCircleErrorList">
+		<xs:sequence>
+			<xs:element name="callingCircleError" type="tns:CallingCircleError" maxOccurs="50"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SalesOrderType">
+		<xs:complexContent>
+			<xs:extension base="esc:Order"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<!-- placeholder for future release
+	<xs:complexType name="SalesOrderItemStatus">
+		<xs:sequence>
+			<xs:element name="lineItemNum" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Unique line item number which matches original line item number in batch upload file</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Unique sales ID for a sales transaction and order</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderCreationDateTime" type="xs:dateTime" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Original timestamp when order is created for fulfillment</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderStatusCd" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Order status</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderStatusDateTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>Order status change time</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderFulfillmentErrorCdList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>List of error code for fulfillment problem</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="orderFulfillmentRetryCount" type="xs:long" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+-->
+	<xs:complexType name="CreateWirelineSalesOrderType">
+		<xs:sequence>
+			<xs:element name="salesOrder" type="tns:EnterpriseSalesOrderType" minOccurs="1"/>
+			<xs:element name="termsAndConditionsConsentIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Indicator that the client has agreed/signed the agreement before shipping is triggered.  If not signed then shipping is not triggered.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="finalizeFailedSalesOrderIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true - Finalize sales order in case of error. When this happens, sales order status will be set to 'Failed' and corresponding failed element within order will be updated to reflect error state.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EnterpriseSalesOrderType">
+		<xs:complexContent>
+			<xs:extension base="esc:EnterpriseOrder"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateWirelineSalesOrderResponseType">
+		<xs:sequence>
+			<xs:element name="messageList" minOccurs="0" maxOccurs="10">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="esc:SalesResponseMessage"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="salesTransactionId" type="xs:string" minOccurs="1"/>
+			<xs:element name="salesId" type="xs:string" minOccurs="1"/>
+			<xs:element name="successfulProcessIndicator" type="xs:boolean" minOccurs="1"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="getSalesOrderByShoppingCart" type="tns:GetSalesOrderByShoppingCartType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Client Pending Sales Detail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSalesOrderByShoppingCartResponse" type="tns:GetSalesOrderByShoppingCartResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Client Pending Sales Detail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="GetSalesOrderByShoppingCartType">
+		<xs:annotation>
+			<xs:documentation>Either search by an known order id or search by subscriber phone</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="shoppingCartId" type="xs:string" minOccurs="1" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Shopping Cart Identifier.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetSalesOrderByShoppingCartResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="salesOrderList" type="esc:Order" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

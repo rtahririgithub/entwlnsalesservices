@@ -1,0 +1,3009 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="3ad95063-846b-41b8-8bd2-b145b1ee0857" activeEnvironment="Default" name="OMS9_ESMS" resourceRoot="" soapui-version="5.2.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:RestService" id="d77d5680-577e-4e00-b0e7-a85eb05a34a3" wadlVersion="http://wadl.dev.java.net/2009/02" name="EnterpriseSalesManagementRESTSvc" type="rest" basePath="/v2/mso/channelsalesmgmt/enterprise-sales-management-service" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>This service provides the interface for getting information required to build the ESS shopping cart, and submit the sales</con:description><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://142.63.230.63:7001</con:endpoint><con:endpoint>http://142.63.230.63:7001/MSO_REST_EWLNSS_ESMS</con:endpoint><con:endpoint>http://L034805:8089/</con:endpoint><con:endpoint>http://localhost:7001/MSO_REST_EWLNSS_ESMS</con:endpoint><con:endpoint>http://virtserver.swaggerhub.com</con:endpoint><con:endpoint>https://virtserver.swaggerhub.com</con:endpoint></con:endpoints><con:resource name="/book-appointment" path="/book-appointment" id="9ebd3338-5f9e-4636-b57a-ca5de3b43bdb"><con:settings/><con:parameters/><con:method name="bookAppointment" id="997c641f-24ad-4154-b0c7-78e188fcc965" method="POST"><con:description>
+Books the appointment based on the products selected</con:description><con:settings/><con:parameters><con:parameter required="true"><con:name>salesTransactionId</con:name><con:style>QUERY</con:style><con:description>consumer identifier for the transaction</con:description></con:parameter><con:parameter required="true"><con:name>shopping-cart-id</con:name><con:style>QUERY</con:style><con:description>Identifier of the Shopping Cart</con:description></con:parameter></con:parameters><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>500</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>text/html; charset=iso-8859-1</con:mediaType><con:status>200</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/><con:element xmlns:book="http://L034805/v2/mso/channelsalesmgmt/enterprise-sales-management-service/book-appointment">book:Fault</con:element></con:representation><con:request name="Request 1" id="d95ee550-ec18-4059-aac3-d7c6721d6802" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://142.63.230.63:7001/MSO_REST_EWLNSS_ESMS</con:endpoint><con:request>{
+  "operationHeader": {
+    "salesTransactionId": "0001"
+  },
+  "shoppingCartId": "1111",
+  "appointmentDate": "2018-08-20",
+  "appointmentTimeSlot": {
+    "startTime": "08:00:00",
+    "endTime": "09:00:00"
+  }
+}
+</con:request><con:originalUri>http://L034805/v2/mso/channelsalesmgmt/enterprise-sales-management-service/book-appointment</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource><con:resource name="/shopping-cart/{shopping-cart-id}/price" path="/shopping-cart/{shopping-cart-id}/price" id="4f86dcf9-26f1-473c-8805-0a8b64fc8f85"><con:settings/><con:parameters><con:parameter><con:name>shopping-cart-id</con:name><con:value>0001</con:value><con:style>TEMPLATE</con:style><con:default>0001</con:default></con:parameter></con:parameters><con:method name="getPrice" id="2fe3343c-addc-42ea-8522-be4829ec933e" method="GET"><con:description>
+Get price for the cart items in the shopping cart. Returns pricing based on teh context of the shopping cart.</con:description><con:settings/><con:parameters><con:parameter required="true"><con:name>salesTransactionId</con:name><con:style>QUERY</con:style><con:description>consumer identifier for the transaction</con:description></con:parameter><con:parameter required="true"><con:name>shopping-cart-id</con:name><con:style>TEMPLATE</con:style><con:description>Identifier of the Shopping Cart</con:description></con:parameter></con:parameters><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>400</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>500</con:status><con:params/></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>500</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType xsi:nil="true"/><con:status>404</con:status><con:params/><con:element>data</con:element></con:representation><con:representation type="FAULT"><con:mediaType>application/json</con:mediaType><con:status>401</con:status><con:params/><con:element xmlns:pric="http://L034805/v2/mso/channelsalesmgmt/enterprise-sales-management-service/shopping-cart/0001/price">pric:Fault</con:element></con:representation><con:representation type="FAULT"><con:mediaType>text/html; charset=UTF-8</con:mediaType><con:status>404</con:status><con:params/><con:element>html</con:element></con:representation><con:representation type="RESPONSE"><con:mediaType>text/html; charset=iso-8859-1</con:mediaType><con:status>200</con:status><con:params/><con:element>html</con:element></con:representation><con:request name="Request 1" id="84c690e4-a384-492f-b870-71f60128de36" mediaType="application/json" postQueryString="false"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:endpoint>http://142.63.230.63:7001/MSO_REST_EWLNSS_ESMS</con:endpoint><con:request/><con:originalUri>http://L034805/v2/mso/channelsalesmgmt/enterprise-sales-management-service/shopping-cart/0001/price</con:originalUri><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters>
+  <con:entry key="salesTransactionId" value="0008"/>
+  <con:entry key="shopping-cart-id" value="0001"/>
+</con:parameters></con:request></con:method></con:resource></con:interface><con:restMockService id="68b9bfd3-97f7-4603-a994-fb106f005d2a" port="8089" path="/" host="L034805" name="MOCK_ESMS"><con:settings/><con:properties/><con:restMockAction name="v2/mso/channelsalesmgmt/enterprise-sales-management-service/book-appointment" method="POST" resourcePath="/v2/mso/channelsalesmgmt/enterprise-sales-management-service/book-appointment" id="e7976256-faf0-4d44-8bba-4aa1993c1b45"><con:settings/><con:defaultResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">9_error_system_exception</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath>def requestPath = mockRequest.getPath()
+log.info("Sales  ----> ")
+log.info "Path: "+ requestPath
+ 
+log.info(requestPath)
+ 
+def requestBody = mockRequest.getRequestContent()
+log.info "Request body: " + requestBody
+def String salesTransactionId = new groovy.json.JsonSlurper().parseText(requestBody).operationHeader.salesTransactionId;
+
+log.info "salesTransactionId is : ${salesTransactionId}" 
+requestContext.salesTransactionId = salesTransactionId
+
+if (salesTransactionId == "0001"  ){
+	return '1_ok_0001'
+} else {
+	return '9_error_system_exception'
+}
+
+</con:dispatchPath><con:response name="1_ok_0001" id="25cbe4db-c363-48c4-b013-77c812c3ee77" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>{
+  "softBookingInd": true,
+  "appointmentBookingInfo": {
+    "appointmentId": "100000287242"
+  }
+}
+</con:responseContent></con:response><con:response name="9_error_system_exception" id="1456fea0-2148-4b26-aacb-977bdd3411b0" httpResponseStatus="400" mediaType="application/json"><con:settings/><con:responseContent>{
+  "responseMessages": [
+    {
+      "errorCode": "ESS-FFH-00009001",
+      "messageTypeCd": "ERROR",
+      "messages": [
+        {
+          "messageTxt": "System Exception",
+          "localeCd": "en"
+        }
+      ],
+      "contextDataAttributes": [
+        {
+          "attributeTypeTxt": "EXCEPTION",
+          "attributeValueTxt": "fail - system exception"
+        } 
+      ]
+    }
+  ]
+}
+</con:responseContent></con:response></con:restMockAction><con:restMockAction name="v2/mso/channelsalesmgmt/enterprise-sales-management-service/shopping-cart/0001/price" method="GET" resourcePath="/v2/mso/channelsalesmgmt/enterprise-sales-management-service/shopping-cart" id="59eef2af-d068-4207-9c2a-86cf1e7809f8"><con:settings/><con:defaultResponse>9_error_system_exception</con:defaultResponse><con:dispatchStyle>SCRIPT</con:dispatchStyle><con:dispatchPath><![CDATA[
+
+log.info "inside ESMS MOCK"
+
+/****************************************/
+/* get shopping card id from path       */
+/****************************************/
+def requestPath = mockRequest.getPath()
+log.info "Path: "+ requestPath
+
+String[] pathFields = requestPath.split("/")
+
+def shoppingCartId
+
+pathFields.each{  
+	if ( (it != "v2") &&  (it != "mso") &&  (it != "channelsalesmgmt") &&  (it != "enterprise-sales-management-service") &&  (it != "shopping-cart") &&  (it != "price"))
+		shoppingCartId = it 
+} 
+
+ 
+/****************************************/
+/* get salesTransactionID from Query    */
+/****************************************/
+def queryString = mockRequest.getRequest().getQueryString()
+log.info "QueryString: " + queryString
+
+
+String[] fields = queryString.split("&")
+
+String salesTransactionId = ""; 
+
+ 
+fields.each{  
+
+	def (value1, value2) = it.tokenize( '=' )
+ 	if (value1.equalsIgnoreCase("salestransactionid"))
+		salesTransactionId = value2
+}
+
+
+log.info("salesTransactionid = " + salesTransactionId)
+log.info("shopping-cart-id = " + shoppingCartId)
+
+if (salesTransactionId == "0001")
+	return "1_ok_0001"
+else if (salesTransactionId == "0002")
+	return "2_ok_0002"
+else if (salesTransactionId == "0007")
+	return "7_ok_0007"
+else if (salesTransactionId == "0008")
+	return "8_ok_0008"
+	
+return "9_error_system_exception"
+
+]]></con:dispatchPath><con:response name="1_ok_0001" id="6e559288-47c8-425d-8b40-62a23c32ebc9" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>[  
+   {  
+      "cartItemPrice":[  
+         {  
+            "cartItemId":"ESO11111112",
+            "productPriceList":[  
+               {  
+                  "internetProductPrice":{  
+                     "productItemGroupCategoryPrice":[  
+                        {  
+                           "groupCategory":{  
+                              "groupType":"OTHER"
+                           },
+                           "combinedPrice":{  
+                              "billPrice":[  
+                                 {  
+                                    "priceCharge":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":76.0
+                                       },
+                                       "recurrenceCount":3
+                                    },
+                                    "priceCredit":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":26.0
+                                       },
+                                       "recurrenceCount":3,
+                                       "priceAlterationType":"DISCOUNT"
+                                    },
+                                    "totalPrice":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":50.0
+                                       },
+                                       "recurrenceCount":3
+                                    },
+                                    "duration":{  
+                                       "startMonthCnt":1,
+                                       "endMonthCnt":3
+                                    }
+                                 },
+                                 {  
+                                    "priceCharge":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":76.0
+                                       }
+                                    },
+                                    "priceCredit":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":0.0
+                                       },
+                                       "priceAlterationType":"DISCOUNT"
+                                    },
+                                    "totalPrice":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":76.0
+                                       }
+                                    },
+                                    "duration":{  
+                                       "startMonthCnt":4
+                                    }
+                                 }
+                              ]
+                           },
+                           "productItemPriceList":[  
+                              {  
+                                 "productItemIdentifier":{  
+                                    "productCatalogueId":"1543254",
+                                    "parentProductCatalogueId":"101082"
+                                 },
+                                 "combinedPrice":{  
+                                    "billPrice":[  
+                                       {  
+                                          "priceCharge":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":0.0
+                                             }
+                                          },
+                                          "priceCredit":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":26.0
+                                             },
+                                             "recurrenceCount":3,
+                                             "priceAlterationType":"DISCOUNT"
+                                          },
+                                          "totalPrice":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":-26
+                                             },
+                                             "recurrenceCount":3
+                                          },
+                                          "duration":{  
+                                             "startMonthCnt":1,
+                                             "endMonthCnt":3
+                                          }
+                                       },
+                                       {  
+                                          "priceCharge":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":0.0
+                                             }
+                                          },
+                                          "priceCredit":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":0.0
+                                             },
+                                             "priceAlterationType":"DISCOUNT"
+                                          },
+                                          "totalPrice":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":0.0
+                                             }
+                                          },
+                                          "duration":{  
+                                             "startMonthCnt":4
+                                          }
+                                       }
+                                    ]
+                                 }
+                              },
+                              {  
+                                 "productItemIdentifier":{  
+                                    "productCatalogueId":"700473",
+                                    "parentProductCatalogueId":"101082"
+                                 },
+                                 "combinedPrice":{  
+                                    "billPrice":[  
+                                       {  
+                                          "priceCharge":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":76.0
+                                             }
+                                          },
+                                          "priceCredit":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":0.0
+                                             },
+                                             "priceAlterationType":"DISCOUNT"
+                                          },
+                                          "totalPrice":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":76.0
+                                             }
+                                          },
+                                          "duration":{  
+                                             "startMonthCnt":1
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "equipmentPrice":[  
+                        {  
+                           "acquisitionType":{  
+                              "buyIndicator":true
+                           },
+                           "equipmentPrice":{  
+                              "productItemIdentifier":{  
+                                 "productCatalogueId":"101104",
+                                 "parentProductCatalogueId":"101102"
+                              },
+                              "combinedPrice":{  
+                                 "billPrice":[  
+                                    {  
+                                       "priceCharge":{  
+                                          "pricingType":"RECURRING",
+                                          "basePriceAmount":{  
+                                             "value":20.0
+                                          }
+                                       },
+                                       "priceCredit":{  
+                                          "pricingType":"RECURRING",
+                                          "basePriceAmount":{  
+                                             "value":0
+                                          },
+                                          "recurrenceCount":0,
+                                          "priceAlterationType":"DISCOUNT"
+                                       },
+                                       "totalPrice":{  
+                                          "pricingType":"RECURRING",
+                                          "basePriceAmount":{  
+                                             "value":20.0
+                                          }
+                                       },
+                                       "duration":{  
+                                          "startMonthCnt":1
+                                       }
+                                    }
+                                 ]
+                              }
+                           }
+                        }
+                     ],
+                     "estimatedPriceInd":true
+                  }
+               }
+            ]
+         }
+      ],
+      "deposit":[  
+         {  
+            "depositType":"SECURITY_DEPOSIT",
+            "depositAmt":200.0,
+            "estimatedDepositInd":true
+         }
+      ],
+      "totalPrice":{  
+         "billPrice":[  
+            {  
+               "priceCharge":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":96.0
+                  },
+                  "recurrenceCount":3
+               },
+               "priceCredit":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":26.0
+                  },
+                  "recurrenceCount":3,
+                  "priceAlterationType":"DISCOUNT"
+               },
+               "totalPrice":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":70.0
+                  },
+                  "recurrenceCount":3
+               },
+               "duration":{  
+                  "startMonthCnt":1,
+                  "endMonthCnt":3
+               }
+            },
+            {  
+               "priceCharge":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":96.0
+                  }
+               },
+               "priceCredit":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":0.0
+                  },
+                  "priceAlterationType":"DISCOUNT"
+               },
+               "totalPrice":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":96.0
+                  }
+               },
+               "duration":{  
+                  "startMonthCnt":4
+               }
+            }
+         ]
+      }
+   }
+]</con:responseContent></con:response><con:response name="9_error_system_exception" id="0cea1844-5b59-40e8-83fe-fa3ece839767" httpResponseStatus="401" mediaType="application/json"><con:settings/><con:responseContent>{
+  "responseMessages": [
+    {
+      "errorCode": "ESS-FFH-00009001",
+      "messageTypeCd": "ERROR",
+      "messages": [
+        {
+          "messageTxt": "System Exception",
+          "localeCd": "en"
+        }
+      ],
+      "contextDataAttributes": [
+        {
+          "attributeTypeTxt": "EXCEPTION",
+          "attributeValueTxt": "fail to get available price - system exception"
+        } 
+      ]
+    }
+  ]
+}
+</con:responseContent></con:response><con:response name="2_ok_0002" id="5d94a7cc-ae4c-499a-aa8a-3e46ba11bc6a" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>[  
+   {  
+      "cartItemPrice":[  
+         {  
+            "cartItemId":"ESO11111112",
+            "productPriceList":[  
+               {  
+                  "internetProductPrice":{  
+                     "productItemGroupCategoryPrice":[  
+                        {  
+                           "groupCategory":{  
+                              "groupType":"OTHER"
+                           },
+                           "combinedPrice":{  
+                              "billPrice":[  
+                                 {  
+                                    "priceCharge":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":76.0
+                                       },
+                                       "recurrenceCount":3
+                                    },
+                                    "priceCredit":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":26.0
+                                       },
+                                       "recurrenceCount":3,
+                                       "priceAlterationType":"DISCOUNT"
+                                    },
+                                    "totalPrice":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":50.0
+                                       },
+                                       "recurrenceCount":3
+                                    },
+                                    "duration":{  
+                                       "startMonthCnt":1,
+                                       "endMonthCnt":3
+                                    }
+                                 },
+                                 {  
+                                    "priceCharge":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":76.0
+                                       }
+                                    },
+                                    "priceCredit":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":0.0
+                                       },
+                                       "priceAlterationType":"DISCOUNT"
+                                    },
+                                    "totalPrice":{  
+                                       "pricingType":"RECURRING",
+                                       "basePriceAmount":{  
+                                          "value":76.0
+                                       }
+                                    },
+                                    "duration":{  
+                                       "startMonthCnt":4
+                                    }
+                                 }
+                              ]
+                           },
+                           "productItemPriceList":[  
+                              {  
+                                 "productItemIdentifier":{  
+                                    "productCatalogueId":"1543254",
+                                    "parentProductCatalogueId":"101082"
+                                 },
+                                 "combinedPrice":{  
+                                    "billPrice":[  
+                                       {  
+                                          "priceCharge":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":0.0
+                                             }
+                                          },
+                                          "priceCredit":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":26.0
+                                             },
+                                             "recurrenceCount":3,
+                                             "priceAlterationType":"DISCOUNT"
+                                          },
+                                          "totalPrice":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":-26
+                                             },
+                                             "recurrenceCount":3
+                                          },
+                                          "duration":{  
+                                             "startMonthCnt":1,
+                                             "endMonthCnt":3
+                                          }
+                                       },
+                                       {  
+                                          "priceCharge":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":0.0
+                                             }
+                                          },
+                                          "priceCredit":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":0.0
+                                             },
+                                             "priceAlterationType":"DISCOUNT"
+                                          },
+                                          "totalPrice":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":0.0
+                                             }
+                                          },
+                                          "duration":{  
+                                             "startMonthCnt":4
+                                          }
+                                       }
+                                    ]
+                                 }
+                              },
+                              {  
+                                 "productItemIdentifier":{  
+                                    "productCatalogueId":"700473",
+                                    "parentProductCatalogueId":"101082"
+                                 },
+                                 "combinedPrice":{  
+                                    "billPrice":[  
+                                       {  
+                                          "priceCharge":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":76.0
+                                             }
+                                          },
+                                          "priceCredit":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":0.0
+                                             },
+                                             "priceAlterationType":"DISCOUNT"
+                                          },
+                                          "totalPrice":{  
+                                             "pricingType":"RECURRING",
+                                             "basePriceAmount":{  
+                                                "value":76.0
+                                             }
+                                          },
+                                          "duration":{  
+                                             "startMonthCnt":1
+                                          }
+                                       }
+                                    ]
+                                 }
+                              }
+                           ]
+                        }
+                     ],
+                     "equipmentPrice":[  
+                        {  
+                           "acquisitionType":{  
+                              "buyIndicator":true
+                           },
+                           "equipmentPrice":{  
+                              "productItemIdentifier":{  
+                                 "productCatalogueId":"101104",
+                                 "parentProductCatalogueId":"101102"
+                              },
+                              "combinedPrice":{  
+                                 "billPrice":[  
+                                    {  
+                                       "priceCharge":{  
+                                          "pricingType":"RECURRING",
+                                          "basePriceAmount":{  
+                                             "value":20.0
+                                          }
+                                       },
+                                       "priceCredit":{  
+                                          "pricingType":"RECURRING",
+                                          "basePriceAmount":{  
+                                             "value":0
+                                          },
+                                          "recurrenceCount":0,
+                                          "priceAlterationType":"DISCOUNT"
+                                       },
+                                       "totalPrice":{  
+                                          "pricingType":"RECURRING",
+                                          "basePriceAmount":{  
+                                             "value":20.0
+                                          }
+                                       },
+                                       "duration":{  
+                                          "startMonthCnt":1
+                                       }
+                                    }
+                                 ]
+                              }
+                           }
+                        }
+                     ],
+                     "estimatedPriceInd":true
+                  }
+               }
+            ]
+         }
+      ],
+      "totalPrice":{  
+         "billPrice":[  
+            {  
+               "priceCharge":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":96.0
+                  },
+                  "recurrenceCount":3
+               },
+               "priceCredit":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":26.0
+                  },
+                  "recurrenceCount":3,
+                  "priceAlterationType":"DISCOUNT"
+               },
+               "totalPrice":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":70.0
+                  },
+                  "recurrenceCount":3
+               },
+               "duration":{  
+                  "startMonthCnt":1,
+                  "endMonthCnt":3
+               }
+            },
+            {  
+               "priceCharge":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":96.0
+                  }
+               },
+               "priceCredit":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":0.0
+                  },
+                  "priceAlterationType":"DISCOUNT"
+               },
+               "totalPrice":{  
+                  "pricingType":"RECURRING",
+                  "basePriceAmount":{  
+                     "value":96.0
+                  }
+               },
+               "duration":{  
+                  "startMonthCnt":4
+               }
+            }
+         ]
+      }
+   }
+]</con:responseContent></con:response><con:response name="7_ok_0007" id="1b06248e-7646-499e-b4e4-0d5e7d5953cd" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>[{
+	"cartItemPrice": [{
+		"cartItemId": "ESITEM_11111114",
+		"productPriceList": [{
+			"internetProductPrice": {
+				"productItemGroupCategoryPrice": [{
+					"groupCategory": {
+						"groupType": "Other"
+					},
+					"priceSummary": {
+						"billPrice": [{
+								"priceCharge": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 71.1
+									},
+									"recurrenceCount": 3
+								},
+								"priceDiscount": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 21.0
+									},
+									"recurrenceCount": 3
+								},
+								"totalPrice": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 50.0
+									},
+									"recurrenceCount": 3
+								},
+								"duration": {
+									"startMonthCnt": 1,
+									"endMonthCnt": 3
+								}
+							},
+							{
+								"priceCharge": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 71.1
+									}
+								},
+								"priceDiscount": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 0.0
+									}
+								},
+								"totalPrice": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 71.0
+									}
+								},
+								"duration": {
+									"startMonthCnt": 4
+								}
+							}
+						]
+					},
+					"productItemPriceList": [{
+							"productItemIdentifier": {
+								"productCatalogueId": "700489",
+								"parentProductCatalogueId": "101082"
+							},
+							"priceSummary": {
+								"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 71.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 71.0
+										}
+									},
+									"duration": {
+										"startMonthCnt": 1
+									}
+								}]
+							}
+						},
+						{
+							"productItemIdentifier": {
+								"productCatalogueId": "1543610",
+								"parentProductCatalogueId": "101082"
+							},
+							"priceSummary": {
+								"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										},
+										"recurrenceCount": 3
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 21.0
+										},
+										"recurrenceCount": 3
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": -21.0
+										},
+										"recurrenceCount": 3
+									},
+									"duration": {
+										"startMonthCnt": 1,
+										"endMonthCnt": 3
+									}
+								}]
+							}
+						}
+					]
+				}],
+				"equipmentPrice": [{
+					"materialItemCode": "2368850",
+					"acquisitionType": {
+						"rentalEquipmentIndicator": true
+					},
+					"equipmentPrice": {
+						"productItemIdentifier": {
+							"productCatalogueId": "101104",
+							"parentProductCatalogueId": "101102"
+						},
+						"priceSummary": {
+							"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 5.0
+										},
+										"recurrenceCount": 24
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 5.0
+										},
+										"recurrenceCount": 24
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										},
+										"recurrenceCount": 24
+									},
+									"duration": {
+										"startMonthCnt": 1,
+										"endMonthCnt": 24
+									}
+								},
+								{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 5.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 5.0
+										}
+									},
+									"duration": {
+										"startMonthCnt": 24
+									}
+								}
+							]
+						},
+						"associatedProductItemPrice": [{
+							"productItemIdentifier": {
+								"productCatalogueId": "1404101",
+								"parentProductCatalogueId": "101104"
+							},
+							"priceSummary": {
+								"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										},
+										"recurrenceCount": 24
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 5.0
+										},
+										"recurrenceCount": 24
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": -5.0
+										},
+										"recurrenceCount": 24
+									},
+									"duration": {
+										"startMonthCnt": 1,
+										"endMonthCnt": 24
+									}
+								}]
+							}
+						}]
+					}
+				}],
+				"priceSummary": {
+					"billPrice": [{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 76.0
+								},
+								"recurrenceCount": 3
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 26.0
+								},
+								"recurrenceCount": 3
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 0
+								},
+								"recurrenceCount": 3
+							},
+							"duration": {
+								"startMonthCnt": 1,
+								"endMonthCnt": 3
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 76.0
+								},
+								"recurrenceCount": 9
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 5.0
+								},
+								"recurrenceCount": 9
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 71.0
+								},
+								"recurrenceCount": 9
+							},
+							"duration": {
+								"startMonthCnt": 4,
+								"endMonthCnt": 24
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 76.0
+								}
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 0.0
+								}
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 76.0
+								}
+							},
+							"duration": {
+								"startMonthCnt": 25
+							}
+						}
+					]
+				},
+				"estimatedPriceInd": true
+			},
+			"televisionProductPrice": {
+				"productItemGroupCategoryPrice": [{
+						"groupCategory": {
+							"groupType": "Other"
+						},
+						"priceSummary": {
+							"billPrice": [{
+									"priceCharge": {
+										"pricingType": "ONE_TIME",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "ONE_TIME",
+										"basePriceAmount": {
+											"value": 50.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "ONE_TIME",
+										"basePriceAmount": {
+											"value": -50.0
+										}
+									}
+								},
+								{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 128.0
+										},
+										"recurrenceCount": 6
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 40.0
+										},
+										"recurrenceCount": 6
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 88.0
+										},
+										"recurrenceCount": 6
+									},
+									"duration": {
+										"startMonthCnt": 1,
+										"endMonthCnt": 6
+									}
+								},
+								{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 138.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 138.0
+										}
+									},
+									"duration": {
+										"startMonthCnt": 7
+									}
+								}
+							]
+						},
+						"productItemPriceList": [{
+								"productItemIdentifier": {
+									"productCatalogueId": "1218038",
+									"parentProductCatalogueId": "705787"
+								},
+								"priceSummary": {
+									"billPrice": [{
+										"priceCharge": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 90.0
+											}
+										},
+										"priceDiscount": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 0.0
+											}
+										},
+										"totalPrice": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 90.0
+											}
+										},
+										"duration": {
+											"startMonthCnt": 1
+										}
+									}]
+								}
+							},
+							{
+								"productItemIdentifier": {
+									"productCatalogueId": "1218031",
+									"parentProductCatalogueId": "101108"
+								},
+								"priceSummary": {
+									"billPrice": [{
+										"priceCharge": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 38.0
+											}
+										},
+										"priceDiscount": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 0.0
+											}
+										},
+										"totalPrice": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 38.0
+											}
+										},
+										"duration": {
+											"startMonthCnt": 1
+										}
+									}]
+								}
+							},
+							{
+								"productItemIdentifier": {
+									"productCatalogueId": "1543262",
+									"parentProductCatalogueId": "101108"
+								},
+								"priceSummary": {
+									"billPrice": [{
+										"priceCharge": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 0.0
+											},
+											"recurrenceCount": 6
+										},
+										"priceDiscount": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 40.0
+											},
+											"recurrenceCount": 6
+										},
+										"totalPrice": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": -40.0
+											},
+											"recurrenceCount": 6
+										},
+										"duration": {
+											"startMonthCnt": 1,
+											"endMonthCnt": 6
+										}
+									}]
+								}
+							},
+							{
+								"productItemIdentifier": {
+									"productCatalogueId": "1191003",
+									"parentProductCatalogueId": "101108"
+								},
+								"priceSummary": {
+									"billPrice": [{
+										"priceCharge": {
+											"pricingType": "ONE_TIME",
+											"basePriceAmount": {
+												"value": 0.0
+											}
+										},
+										"priceDiscount": {
+											"pricingType": "ONE_TIME",
+											"basePriceAmount": {
+												"value": 50.0
+											}
+										},
+										"totalPrice": {
+											"pricingType": "ONE_TIME",
+											"basePriceAmount": {
+												"value": -50.0
+											}
+										}
+									}]
+								}
+							}
+						]
+					},
+					{
+						"groupCategory": {
+							"groupType": "Theme Pack"
+						},
+						"priceSummary": {
+							"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 14.0
+										},
+										"recurrenceCount": 3
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 14.0
+										},
+										"recurrenceCount": 3
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										},
+										"recurrenceCount": 3
+									},
+									"duration": {
+										"startMonthCnt": 1,
+										"endMonthCnt": 3
+									}
+								},
+								{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 14.0
+										},
+										"recurrenceCount": 9
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 7.0
+										},
+										"recurrenceCount": 9
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 7.0
+										},
+										"recurrenceCount": 9
+									},
+									"duration": {
+										"startMonthCnt": 4,
+										"endMonthCnt": 12
+									}
+								},
+								{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 14.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 14.0
+										}
+									},
+									"duration": {
+										"startMonthCnt": 13
+									}
+								}
+							]
+						},
+						"productItemPriceList": [{
+								"productItemIdentifier": {
+									"productCatalogueId": "1218008",
+									"parentProductCatalogueId": "101253"
+								},
+								"priceSummary": {
+									"billPrice": [{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 12
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 12
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												},
+												"recurrenceCount": 12
+											},
+											"duration": {
+												"startMonthCnt": 1,
+												"endMonthCnt": 12
+											}
+										},
+										{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												}
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												}
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												}
+											},
+											"duration": {
+												"startMonthCnt": 13
+											}
+										}
+									]
+								},
+								"associatedProductItemPrice": [{
+									"productItemIdentifier": {
+										"productCatalogueId": "1217063",
+										"parentProductCatalogueId": "1218008"
+									},
+									"priceSummary": {
+										"billPrice": [{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												},
+												"recurrenceCount": 12
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 12
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": -7.0
+												},
+												"recurrenceCount": 12
+											},
+											"duration": {
+												"startMonthCnt": 1,
+												"endMonthCnt": 12
+											}
+										}]
+									}
+								}]
+							},
+							{
+								"productItemIdentifier": {
+									"productCatalogueId": "1504100",
+									"parentProductCatalogueId": "101253"
+								},
+								"priceSummary": {
+									"billPrice": [{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 3
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 3
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												},
+												"recurrenceCount": 3
+											},
+											"duration": {
+												"startMonthCnt": 1,
+												"endMonthCnt": 3
+											}
+										},
+										{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												}
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												}
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												}
+											},
+											"duration": {
+												"startMonthCnt": 4
+											}
+										}
+									]
+								},
+								"associatedProductItemPrice": [{
+									"productItemIdentifier": {
+										"productCatalogueId": "1543728",
+										"parentProductCatalogueId": "1504100"
+									},
+									"priceSummary": {
+										"billPrice": [{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												},
+												"recurrenceCount": 3
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 3,
+												"priceAlterationType": "RECURRING"
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": -7.0
+												},
+												"recurrenceCount": 3
+											},
+											"duration": {
+												"startMonthCnt": 1,
+												"endMonthCnt": 3
+											}
+										}]
+									}
+								}]
+							}
+						]
+					},
+					{
+						"groupCategory": {
+							"groupType": "Add On Packs"
+						},
+						"priceSummary": {
+							"billPrice": [{
+								"priceCharge": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 7.0
+									}
+								},
+								"priceDiscount": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 0.0
+									}
+								},
+								"totalPrice": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 7.0
+									}
+								},
+								"duration": {
+									"startMonthCnt": 1
+								}
+							}]
+						},
+						"productItemPriceList": [{
+							"productItemIdentifier": {
+								"productCatalogueId": "1432100",
+								"parentProductCatalogueId": "101240"
+							},
+							"priceSummary": {
+								"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 7.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 7.0
+										}
+									},
+									"duration": {
+										"startMonthCnt": 1
+									}
+								}]
+							}
+						}]
+					}
+				],
+				"equipmentPrice": [{
+					"materialItemCode": "1638336",
+					"acquisitionType": {
+						"buyIndicator": true
+					},
+					"equipmentPrice": {
+						"productItemIdentifier": {
+							"productCatalogueId": "101111",
+							"parentProductCatalogueId": "101110"
+						},
+						"priceSummary": {
+							"billPrice": [{
+								"priceCharge": {
+									"pricingType": "ONE_TIME",
+									"basePriceAmount": {
+										"value": 250.0
+									}
+								},
+								"priceDiscount": {
+									"pricingType": "ONE_TIME",
+									"basePriceAmount": {
+										"value": 0.0
+									}
+								},
+								"totalPrice": {
+									"pricingType": "ONE_TIME",
+									"basePriceAmount": {
+										"value": 250.0
+									}
+								}
+							}]
+						}
+					}
+				}],
+				"priceSummary": {
+					"billPrice": [{
+							"priceCharge": {
+								"pricingType": "ONE_TIME",
+								"basePriceAmount": {
+									"value": 250.0
+								}
+							},
+							"priceDiscount": {
+								"pricingType": "ONE_TIME",
+								"basePriceAmount": {
+									"value": 50.0
+								}
+							},
+							"totalPrice": {
+								"pricingType": "ONE_TIME",
+								"basePriceAmount": {
+									"value": 200.0
+								}
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 149.0
+								},
+								"recurrenceCount": 3
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 54.0
+								},
+								"recurrenceCount": 3
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 95.0
+								},
+								"recurrenceCount": 3
+							},
+							"duration": {
+								"startMonthCnt": 1,
+								"endMonthCnt": 3
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 149.0
+								},
+								"recurrenceCount": 3
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 47.0
+								},
+								"recurrenceCount": 3
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 102.0
+								},
+								"recurrenceCount": 3
+							},
+							"duration": {
+								"startMonthCnt": 4,
+								"endMonthCnt": 6
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 149.0
+								},
+								"recurrenceCount": 6
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 7.0
+								},
+								"recurrenceCount": 6
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 142.0
+								},
+								"recurrenceCount": 6
+							},
+							"duration": {
+								"startMonthCnt": 7,
+								"endMonthCnt": 12
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 149.0
+								}
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 7.0
+								}
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 149.0
+								}
+							},
+							"duration": {
+								"startMonthCnt": 13
+							}
+						}
+
+					]
+				},
+				"estimatedPriceInd": true
+			}
+		}]
+	}],
+	"deposit": [{
+		"depositType": "SECURITY_DEPOSIT",
+		"depositAmt": 200.0,
+		"estimatedDepositInd": true
+	}],
+	"totalPrice": {
+		"billPrice": [{
+				"priceCharge": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 3
+				},
+				"priceDiscount": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 80.0
+					},
+					"recurrenceCount": 3
+				},
+				"totalPrice": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 145.0
+					},
+					"recurrenceCount": 3
+				},
+				"duration": {
+					"startMonthCnt": 1,
+					"endMonthCnt": 3
+				}
+			},
+			{
+				"priceCharge": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 3
+				},
+				"priceDiscount": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 52.0
+					},
+					"recurrenceCount": 3
+				},
+				"totalPrice": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 173.0
+					},
+					"recurrenceCount": 3
+				},
+				"duration": {
+					"startMonthCnt": 4,
+					"endMonthCnt": 6
+				}
+			},
+			{
+				"priceCharge": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 6
+				},
+				"priceDiscount": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 12.0
+					},
+					"recurrenceCount": 6
+				},
+				"totalPrice": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 213.0
+					},
+					"recurrenceCount": 6
+				},
+				"duration": {
+					"startMonthCnt": 7,
+					"endMonthCnt": 12
+				}
+			},
+			{
+				"priceCharge": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 12
+				},
+				"priceDiscount": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 5.0
+					},
+					"recurrenceCount": 12
+				},
+				"totalPrice": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 221.0
+					},
+					"recurrenceCount": 12
+				},
+				"duration": {
+					"startMonthCnt": 13,
+					"endMonthCnt": 24
+				}
+			},
+			{
+				"priceCharge": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 12
+				},
+				"priceDiscount": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 0.0
+					},
+					"recurrenceCount": 12
+				},
+				"totalPrice": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 12
+				},
+				"duration": {
+					"startMonthCnt": 25
+				}
+			}
+		]
+	}
+}]</con:responseContent></con:response><con:response name="8_ok_0008" id="496142a2-8ff8-4547-b42a-dafb62b3c56f" httpResponseStatus="200" mediaType="application/json"><con:settings/><con:responseContent>[{
+	"cartItemPrice": [{
+		"cartItemId": "ESITEM_11111114",
+		"productPriceList": [{
+			"internetProductPrice": {
+				"productItemGroupCategoryPrice": [{
+					"groupCategory": {
+						"groupType": "Other"
+					},
+					"priceSummary": {
+						"billPrice": [{
+								"priceCharge": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 71.1
+									},
+									"recurrenceCount": 3
+								},
+								"priceDiscount": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 21.0
+									},
+									"recurrenceCount": 3
+								},
+								"totalPrice": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 50.0
+									},
+									"recurrenceCount": 3
+								},
+								"duration": {
+									"startMonthCnt": 1,
+									"endMonthCnt": 3
+								}
+							},
+							{
+								"priceCharge": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 71.1
+									}
+								},
+								"priceDiscount": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 0.0
+									}
+								},
+								"totalPrice": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 71.0
+									}
+								},
+								"duration": {
+									"startMonthCnt": 4
+								}
+							}
+						]
+					},
+					"productItemPriceList": [{
+							"productItemIdentifier": {
+								"productCatalogueId": "700489",
+								"parentProductCatalogueId": "101082"
+							},
+							"priceSummary": {
+								"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 71.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 71.0
+										}
+									},
+									"duration": {
+										"startMonthCnt": 1
+									}
+								}]
+							}
+						},
+						{
+							"productItemIdentifier": {
+								"productCatalogueId": "1543610",
+								"parentProductCatalogueId": "101082"
+							},
+							"priceSummary": {
+								"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										},
+										"recurrenceCount": 3
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 21.0
+										},
+										"recurrenceCount": 3
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": -21.0
+										},
+										"recurrenceCount": 3
+									},
+									"duration": {
+										"startMonthCnt": 1,
+										"endMonthCnt": 3
+									}
+								}]
+							}
+						}
+					]
+				}],
+				"equipmentPrice": [{
+					"materialItemCode": "2368850",
+					"acquisitionType": {
+						"rentalEquipmentIndicator": true
+					},
+					"equipmentPrice": {
+						"productItemIdentifier": {
+							"productCatalogueId": "101104",
+							"parentProductCatalogueId": "101102"
+						},
+						"priceSummary": {
+							"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 5.0
+										},
+										"recurrenceCount": 24
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 5.0
+										},
+										"recurrenceCount": 24
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										},
+										"recurrenceCount": 24
+									},
+									"duration": {
+										"startMonthCnt": 1,
+										"endMonthCnt": 24
+									}
+								},
+								{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 5.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 5.0
+										}
+									},
+									"duration": {
+										"startMonthCnt": 24
+									}
+								}
+							]
+						},
+						"associatedProductItemPrice": [{
+							"productItemIdentifier": {
+								"productCatalogueId": "1404101",
+								"parentProductCatalogueId": "101104"
+							},
+							"priceSummary": {
+								"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										},
+										"recurrenceCount": 24
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 5.0
+										},
+										"recurrenceCount": 24
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": -5.0
+										},
+										"recurrenceCount": 24
+									},
+									"duration": {
+										"startMonthCnt": 1,
+										"endMonthCnt": 24
+									}
+								}]
+							}
+						}]
+					}
+				}],
+				"priceSummary": {
+					"billPrice": [{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 76.0
+								},
+								"recurrenceCount": 3
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 26.0
+								},
+								"recurrenceCount": 3
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 0
+								},
+								"recurrenceCount": 3
+							},
+							"duration": {
+								"startMonthCnt": 1,
+								"endMonthCnt": 3
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 76.0
+								},
+								"recurrenceCount": 9
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 5.0
+								},
+								"recurrenceCount": 9
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 71.0
+								},
+								"recurrenceCount": 9
+							},
+							"duration": {
+								"startMonthCnt": 4,
+								"endMonthCnt": 24
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 76.0
+								}
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 0.0
+								}
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 76.0
+								}
+							},
+							"duration": {
+								"startMonthCnt": 25
+							}
+						}
+					]
+				},
+				"estimatedPriceInd": true
+			},
+			"televisionProductPrice": {
+				"productItemGroupCategoryPrice": [{
+						"groupCategory": {
+							"groupType": "Other"
+						},
+						"priceSummary": {
+							"billPrice": [{
+									"priceCharge": {
+										"pricingType": "ONE_TIME",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "ONE_TIME",
+										"basePriceAmount": {
+											"value": 50.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "ONE_TIME",
+										"basePriceAmount": {
+											"value": -50.0
+										}
+									}
+								},
+								{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 128.0
+										},
+										"recurrenceCount": 6
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 40.0
+										},
+										"recurrenceCount": 6
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 88.0
+										},
+										"recurrenceCount": 6
+									},
+									"duration": {
+										"startMonthCnt": 1,
+										"endMonthCnt": 6
+									}
+								},
+								{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 138.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 138.0
+										}
+									},
+									"duration": {
+										"startMonthCnt": 7
+									}
+								}
+							]
+						},
+						"productItemPriceList": [{
+								"productItemIdentifier": {
+									"productCatalogueId": "1218038",
+									"parentProductCatalogueId": "705787"
+								},
+								"priceSummary": {
+									"billPrice": [{
+										"priceCharge": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 90.0
+											}
+										},
+										"priceDiscount": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 0.0
+											}
+										},
+										"totalPrice": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 90.0
+											}
+										},
+										"duration": {
+											"startMonthCnt": 1
+										}
+									}]
+								}
+							},
+							{
+								"productItemIdentifier": {
+									"productCatalogueId": "1218031",
+									"parentProductCatalogueId": "101108"
+								},
+								"priceSummary": {
+									"billPrice": [{
+										"priceCharge": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 38.0
+											}
+										},
+										"priceDiscount": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 0.0
+											}
+										},
+										"totalPrice": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 38.0
+											}
+										},
+										"duration": {
+											"startMonthCnt": 1
+										}
+									}]
+								}
+							},
+							{
+								"productItemIdentifier": {
+									"productCatalogueId": "1543262",
+									"parentProductCatalogueId": "101108"
+								},
+								"priceSummary": {
+									"billPrice": [{
+										"priceCharge": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 0.0
+											},
+											"recurrenceCount": 6
+										},
+										"priceDiscount": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": 40.0
+											},
+											"recurrenceCount": 6
+										},
+										"totalPrice": {
+											"pricingType": "RECURRING",
+											"basePriceAmount": {
+												"value": -40.0
+											},
+											"recurrenceCount": 6
+										},
+										"duration": {
+											"startMonthCnt": 1,
+											"endMonthCnt": 6
+										}
+									}]
+								}
+							},
+							{
+								"productItemIdentifier": {
+									"productCatalogueId": "1191003",
+									"parentProductCatalogueId": "101108"
+								},
+								"priceSummary": {
+									"billPrice": [{
+										"priceCharge": {
+											"pricingType": "ONE_TIME",
+											"basePriceAmount": {
+												"value": 0.0
+											}
+										},
+										"priceDiscount": {
+											"pricingType": "ONE_TIME",
+											"basePriceAmount": {
+												"value": 50.0
+											}
+										},
+										"totalPrice": {
+											"pricingType": "ONE_TIME",
+											"basePriceAmount": {
+												"value": -50.0
+											}
+										}
+									}]
+								}
+							}
+						]
+					},
+					{
+						"groupCategory": {
+							"groupType": "Theme Pack"
+						},
+						"priceSummary": {
+							"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 14.0
+										},
+										"recurrenceCount": 3
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 14.0
+										},
+										"recurrenceCount": 3
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										},
+										"recurrenceCount": 3
+									},
+									"duration": {
+										"startMonthCnt": 1,
+										"endMonthCnt": 3
+									}
+								},
+								{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 14.0
+										},
+										"recurrenceCount": 9
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 7.0
+										},
+										"recurrenceCount": 9
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 7.0
+										},
+										"recurrenceCount": 9
+									},
+									"duration": {
+										"startMonthCnt": 4,
+										"endMonthCnt": 12
+									}
+								},
+								{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 14.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 14.0
+										}
+									},
+									"duration": {
+										"startMonthCnt": 13
+									}
+								}
+							]
+						},
+						"productItemPriceList": [{
+								"productItemIdentifier": {
+									"productCatalogueId": "1218008",
+									"parentProductCatalogueId": "101253"
+								},
+								"priceSummary": {
+									"billPrice": [{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 12
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 12
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												},
+												"recurrenceCount": 12
+											},
+											"duration": {
+												"startMonthCnt": 1,
+												"endMonthCnt": 12
+											}
+										},
+										{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												}
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												}
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												}
+											},
+											"duration": {
+												"startMonthCnt": 13
+											}
+										}
+									]
+								},
+								"associatedProductItemPrice": [{
+									"productItemIdentifier": {
+										"productCatalogueId": "1217063",
+										"parentProductCatalogueId": "1218008"
+									},
+									"priceSummary": {
+										"billPrice": [{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												},
+												"recurrenceCount": 12
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 12
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": -7.0
+												},
+												"recurrenceCount": 12
+											},
+											"duration": {
+												"startMonthCnt": 1,
+												"endMonthCnt": 12
+											}
+										}]
+									}
+								}]
+							},
+							{
+								"productItemIdentifier": {
+									"productCatalogueId": "1504100",
+									"parentProductCatalogueId": "101253"
+								},
+								"priceSummary": {
+									"billPrice": [{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 3
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 3
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												},
+												"recurrenceCount": 3
+											},
+											"duration": {
+												"startMonthCnt": 1,
+												"endMonthCnt": 3
+											}
+										},
+										{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												}
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												}
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												}
+											},
+											"duration": {
+												"startMonthCnt": 4
+											}
+										}
+									]
+								},
+								"associatedProductItemPrice": [{
+									"productItemIdentifier": {
+										"productCatalogueId": "1543728",
+										"parentProductCatalogueId": "1504100"
+									},
+									"priceSummary": {
+										"billPrice": [{
+											"priceCharge": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 0.0
+												},
+												"recurrenceCount": 3
+											},
+											"priceDiscount": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": 7.0
+												},
+												"recurrenceCount": 3,
+												"priceAlterationType": "RECURRING"
+											},
+											"totalPrice": {
+												"pricingType": "RECURRING",
+												"basePriceAmount": {
+													"value": -7.0
+												},
+												"recurrenceCount": 3
+											},
+											"duration": {
+												"startMonthCnt": 1,
+												"endMonthCnt": 3
+											}
+										}]
+									}
+								}]
+							}
+						]
+					},
+					{
+						"groupCategory": {
+							"groupType": "Add On Packs"
+						},
+						"priceSummary": {
+							"billPrice": [{
+								"priceCharge": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 7.0
+									}
+								},
+								"priceDiscount": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 0.0
+									}
+								},
+								"totalPrice": {
+									"pricingType": "RECURRING",
+									"basePriceAmount": {
+										"value": 7.0
+									}
+								},
+								"duration": {
+									"startMonthCnt": 1
+								}
+							}]
+						},
+						"productItemPriceList": [{
+							"productItemIdentifier": {
+								"productCatalogueId": "1432100",
+								"parentProductCatalogueId": "101240"
+							},
+							"priceSummary": {
+								"billPrice": [{
+									"priceCharge": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 7.0
+										}
+									},
+									"priceDiscount": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 0.0
+										}
+									},
+									"totalPrice": {
+										"pricingType": "RECURRING",
+										"basePriceAmount": {
+											"value": 7.0
+										}
+									},
+									"duration": {
+										"startMonthCnt": 1
+									}
+								}]
+							}
+						}]
+					}
+				],
+				"equipmentPrice": [{
+					"materialItemCode": "1638336",
+					"acquisitionType": {
+						"buyIndicator": true
+					},
+					"equipmentPrice": {
+						"productItemIdentifier": {
+							"productCatalogueId": "101111",
+							"parentProductCatalogueId": "101110"
+						},
+						"priceSummary": {
+							"billPrice": [{
+								"priceCharge": {
+									"pricingType": "ONE_TIME",
+									"basePriceAmount": {
+										"value": 250.0
+									}
+								},
+								"priceDiscount": {
+									"pricingType": "ONE_TIME",
+									"basePriceAmount": {
+										"value": 0.0
+									}
+								},
+								"totalPrice": {
+									"pricingType": "ONE_TIME",
+									"basePriceAmount": {
+										"value": 250.0
+									}
+								}
+							}]
+						}
+					}
+				}],
+				"priceSummary": {
+					"billPrice": [{
+							"priceCharge": {
+								"pricingType": "ONE_TIME",
+								"basePriceAmount": {
+									"value": 250.0
+								}
+							},
+							"priceDiscount": {
+								"pricingType": "ONE_TIME",
+								"basePriceAmount": {
+									"value": 50.0
+								}
+							},
+							"totalPrice": {
+								"pricingType": "ONE_TIME",
+								"basePriceAmount": {
+									"value": 200.0
+								}
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 149.0
+								},
+								"recurrenceCount": 3
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 54.0
+								},
+								"recurrenceCount": 3
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 95.0
+								},
+								"recurrenceCount": 3
+							},
+							"duration": {
+								"startMonthCnt": 1,
+								"endMonthCnt": 3
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 149.0
+								},
+								"recurrenceCount": 3
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 47.0
+								},
+								"recurrenceCount": 3
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 102.0
+								},
+								"recurrenceCount": 3
+							},
+							"duration": {
+								"startMonthCnt": 4,
+								"endMonthCnt": 6
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 149.0
+								},
+								"recurrenceCount": 6
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 7.0
+								},
+								"recurrenceCount": 6
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 142.0
+								},
+								"recurrenceCount": 6
+							},
+							"duration": {
+								"startMonthCnt": 7,
+								"endMonthCnt": 12
+							}
+						},
+						{
+							"priceCharge": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 149.0
+								}
+							},
+							"priceDiscount": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 7.0
+								}
+							},
+							"totalPrice": {
+								"pricingType": "RECURRING",
+								"basePriceAmount": {
+									"value": 149.0
+								}
+							},
+							"duration": {
+								"startMonthCnt": 13
+							}
+						}
+
+					]
+				},
+				"estimatedPriceInd": true
+			}
+		}]
+	}],	
+	"totalPrice": {
+		"billPrice": [{
+				"priceCharge": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 3
+				},
+				"priceDiscount": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 80.0
+					},
+					"recurrenceCount": 3
+				},
+				"totalPrice": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 145.0
+					},
+					"recurrenceCount": 3
+				},
+				"duration": {
+					"startMonthCnt": 1,
+					"endMonthCnt": 3
+				}
+			},
+			{
+				"priceCharge": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 3
+				},
+				"priceDiscount": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 52.0
+					},
+					"recurrenceCount": 3
+				},
+				"totalPrice": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 173.0
+					},
+					"recurrenceCount": 3
+				},
+				"duration": {
+					"startMonthCnt": 4,
+					"endMonthCnt": 6
+				}
+			},
+			{
+				"priceCharge": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 6
+				},
+				"priceDiscount": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 12.0
+					},
+					"recurrenceCount": 6
+				},
+				"totalPrice": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 213.0
+					},
+					"recurrenceCount": 6
+				},
+				"duration": {
+					"startMonthCnt": 7,
+					"endMonthCnt": 12
+				}
+			},
+			{
+				"priceCharge": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 12
+				},
+				"priceDiscount": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 5.0
+					},
+					"recurrenceCount": 12
+				},
+				"totalPrice": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 221.0
+					},
+					"recurrenceCount": 12
+				},
+				"duration": {
+					"startMonthCnt": 13,
+					"endMonthCnt": 24
+				}
+			},
+			{
+				"priceCharge": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 12
+				},
+				"priceDiscount": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 0.0
+					},
+					"recurrenceCount": 12
+				},
+				"totalPrice": {
+					"pricingType": "RECURRING",
+					"basePriceAmount": {
+						"value": 225.0
+					},
+					"recurrenceCount": 12
+				},
+				"duration": {
+					"startMonthCnt": 25
+				}
+			}
+		]
+	}
+}]</con:responseContent></con:response></con:restMockAction></con:restMockService><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:sensitiveInformation/></con:soapui-project>

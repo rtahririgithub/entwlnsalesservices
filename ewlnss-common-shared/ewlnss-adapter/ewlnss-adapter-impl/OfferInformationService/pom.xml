@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+		<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+		<version>v1-SNAPSHOT</version>
+		<artifactId>pom-ewlnss-common-shared-adapter-impl</artifactId>
+    </parent>
+
+    <artifactId>OfferInformationService-ws-adapter</artifactId>
+    <name>OfferInformationService-ws-adapter</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.adapter.wsdl</groupId>
+            <artifactId>OfferInformationService-soap-client</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+  		<dependency>
+			<groupId>telus.csm.ewlnss.common.adapter.wsdl</groupId>
+			<artifactId>ConsumerCustomerMgmtSvc-soap-client</artifactId>
+			<scope>provided</scope>
+			<version>${project.version}</version>
+		</dependency>
+    </dependencies>
+
+
+</project>

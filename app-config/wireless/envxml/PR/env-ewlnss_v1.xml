@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE group PUBLIC "-//TELUS.com//DTD PropertyNode 1.0//EN" "http://www.telus.com/dtd/PropertyNode.dtd">
+<!-- Env.xml file for :D3M enviroment is found in /apps/common/env/wk/Common -->
+<!--  notes -->
+<!-- svc is short for service -->
+<!--  svr is short for server -->
+<group name="irrelevant">
+	<group name="dirs">
+		<group name="log4j">
+			<prop name="EnterpriseWLNSalesSvc">/work/infra/wls/8.1/PR/logs/applications/${weblogic.Name}</prop>
+			<prop name="logLevel">DEBUG</prop>
+		</group>
+	</group>
+	<group name="log4j">
+		<group name="severity">
+			<prop name="threshold">DEBUG</prop>
+			<prop name="level">DEBUG</prop>
+		</group>
+		<group name="config">
+			<prop name="path">fw_logging</prop>
+			<prop name="maxFiles">100</prop>
+			<prop name="maxSize">1KB</prop>
+			<prop name="timeInterval">1</prop>
+		</group>
+	</group>
+	<!-- frameworks properties -->
+	<group name="fw_props">
+		<group name="audit">
+			<prop name="maxQueueDepth">5000</prop>
+		</group>
+		<group name="performance">
+			<prop name="maxQueueDepth">5000</prop>
+		</group>
+		<group name="error">
+			<prop name="maxQueueDepth">5000</prop>
+			<prop name="errorWorkerCount">5</prop>
+			<!-- errorWorkerPeriod in milliseconds -->
+			<prop name="errorWorkerPeriod">5000</prop>
+		</group>
+	</group>
+	<group name="privileges">
+		<group name="virtualService">
+			<prop name="applicationName">APP_WirelineESS</prop>
+			<prop name="applicationPwd">soaorgid</prop>
+		</group>
+	</group>
+	<group name="connections">
+		<!--  the default will be to use the protocol followed by the fully qualified host name and the port -->
+		<group name="servers">
+			<!-- Error, Performance and Audit frameworks properties -->
+			<prop name="readAuditSvr">t3://sedm3226.ent.agt.ab.ca:33334</prop>
+			<prop name="performanceAuditSvr">t3://sedm3226.ent.agt.ab.ca:33334</prop>
+		</group>
+		<group name="services">
+			<group name="workManagerSvc">
+				<prop name="url">t3://shome2bussvc-channelsales-pr.tsl.telus.com:50183</prop>
+				<prop name="jndiName">java:comp/env/WorkManager-Online-Priority</prop>
+				<prop name="maxTimeout">300000</prop>
+			</group>
+		</group>
+		<group name="kongApiGateway">
+			<prop name="authorizationServerEndpoint">https://apigw-pr.telus.com/token</prop>
+			<prop name="proxyHost">pac.tsl.telus.com</prop>
+			<prop name="proxyPort">8080</prop>
+			<prop name="tokenTimeoutGracePeriodSeconds">5</prop>
+			<prop name="clientId">20519f79-b71b-4de8-b050-b17aa1f02a7e</prop>
+			<prop name="clientSecret">246e9bc3-8865-4129-a3e4-f5b2af128ce68a75f1a6-990e-42eb-82c1-35aa595b56ed</prop>
+			<!--space-delimited multiple scope list: 382:Commerce SC; 241:Fifa SC; 28: Fifa OQ-->
+			<prop name="scope">382 241 28</prop>
+		</group>
+		<group name="webServices">
+			<group name="consumerBillingAccountManagementService">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/CMO/InformationMgmt/BillingAccountManagement/ConsumerBillingAccountManagementService_v1_2_vs0</prop>
+			</group>
+			<group name="consumerCustomerMgmtSvc">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/CMO/InformationMgmt/CustomerManagement/ConsumerCustomerManagementService_v2_7_vs0</prop>
+			</group>
+			<group name="consumerDiaryMgmtSvc">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/CMO/InformationMgmt/Diary/ConsumerDiaryManagmentService_v1_0_1_vs0</prop>
+			</group>
+			<group name="consumerIdentityProfileMgmtSvc">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/CMO/InformationMgmt/IdentityProfileManagement/ConsumerIdentityProfileManagementService_v1_0_1_vs0</prop>
+			</group>
+			<group name="enterpriseCreditProfileManagementService">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/CMO/OrderMgmt/EnterpriseCreditProfileManagement/EnterpriseCreditProfileManagementService_v1_3_vs0</prop>
+			</group>
+			<group name="enterpriseConsumerProfileRegistrationSvc">
+				<prop name="wsdlUrl">https://soa-mp-kidc-pr.tsl.telus.com/v1-1/cmo/informationmgmt/registration/EnterpriseConsumerProfileRegistrationSvc_v1_1_vs0</prop>
+			</group>
+			<group name="restServiceAddressMgmtSvc">
+				<prop name="wsdlUrl">http://ams-dv-addr-mgmt.paas-app-east-np.tsl.telus.com/addrmgmt-17775-webservices-1_0/resource/address</prop>
+			</group>
+			<group name="serviceAddressMgmtSvc">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/SMO/OrderMgmt/ServiceAddressManagementService_v1_1_vs0</prop>
+			</group>
+			<group name="wlnCreditEligibilityProxyService">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/CMO/OrderMgmt/WLNCreditEligibilityProxy/WLNCreditEligibilityProxyService_v1_0_vs0</prop>
+			</group>
+			<group name="wlnCreditProfileManagementProxyService">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileManagementProxy/WLNCreditProfileManagementProxyService_v2_0_vs0</prop>
+			</group>
+			<group name="wlnCreditProfileManagementService">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/CMO/OrderMgmt/WLNCreditProfileManagement/WLNCreditProfileManagementService_v2_0_vs0</prop>
+			</group>
+			<group name="feasibilityService">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/SMO/OrderMgmt/Activation/FeasibilityService_v3_0_1_vs0</prop>
+			</group>
+			<group name="wlnBookingRestSvc">
+				<prop name="wsdlUrl">https://soa-mp-kidc-pr.tsl.telus.com/v1/cmo/ordermgmt/orderappointment</prop>
+			</group>
+			<group name="refpds">
+				<prop name="wsdlUrl">http://utilmgtsvcwest.tsl.telus.com/telus-ref-rpds-webservices/ReferencePDSDataService?WSDL</prop>
+			</group>
+			<group name="marketOfferService">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com:443/v3/mso/massmarketsalesmgmt/marketofferservice/MarketOfferService_v3_0_vs0</prop>
+			</group>
+			<group name="offerInformationService">
+				<prop name="wsdlUrl">https://soa-mp-rmsk-pr.tsl.telus.com:443/MSO/MassMarketSalesMgmt/OfferInformationSvc_v3_0_vs0</prop>
+			</group>
+			<group name="depositMgmtSvc">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com:443/v1/cmo/billingaccountmgmt/compass/dms/depositmanagementservice-v1-0_vs0</prop>
+			</group>
+			<group name="orderQueryRestSvc">
+				<prop name="wsdlUrl">https://soa-mp-kidc-pr.tsl.telus.com:443/cmo/ordermgmt/orderquery</prop>
+			</group>
+			<group name="wlnOrderChargingRestSvc">
+				<prop name="wsdlUrl">https://soa-mp-kidc-pr.tsl.telus.com:443/v1/cmo/ordermgmt/charge</prop>
+			</group>
+			<group name="orderShoppingCartRestSvc">
+				<prop name="wsdlUrl">https://soa-mp-kidc-pr.tsl.telus.com/v1/cmo/ordermgmt/ordershoppingcart</prop>
+			</group>
+			<group name="salesCustomerInfoRestSvc">
+				<prop name="wsdlUrl">https://soa-mp-rmsk-pr.tsl.telus.com/v2/mso/channelsalesmgmt/salescustomerinfo</prop>
+			</group>
+			<group name="exchangeForborneStatusSvc">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/RMO/OrderMgmt/ExchangeForborneStatusSvc_v1_0_vs0</prop>
+			</group>
+			<group name="boltOnOfferSvc">
+				<prop name="wsdlUrl">https://soa-mp-laird-pr.tsl.telus.com/MSO/CampaignMgmt/Offer/BoltOnOfferService_v3_0_vs0</prop>
+			</group>
+			<group name="wirelineSalesEjbSvr">
+				<prop name="url">t3://cmf-ordermgmt2-pr.tmi.telus.com:50038</prop>
+				<prop name="jndi">om#com.telus.ucss.wirelinesales.ejb.OrderManager</prop>
+			</group>
+			<group name="depositCalculatorProxySvc">
+				<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/CMO/OrderMgmt/OrderDepositCalculatorProxyService/OrderDepositCalculatorProxyService_v1_0_vs0</prop>
+			</group>
+			<group name="corporateStoresPOSService">
+				<prop name="wsdlUrl">https://soa-mp-laird-pr.tsl.telus.com:443/MSO/ChannelSalesMgmt/RetailOutlets/CorporateStoresPOSService_v1_6/CorporateStoresPOSService_v1_6_vs0</prop>
+			</group>
+			<group name="InventoryService">
+					<prop name="wsdlUrl">https://soa-mp-toll-pr.tsl.telus.com/SMO/InventoryMgmt/Activation/InventoryService_v2_0_vs0</prop>
+			</group>
+			<group name="enterpriseFullfilmentSvc">
+					<prop name="wsdlUrl">https://soa-mp-laird-pr.tsl.telus.com:443/MSO/ChannelSalesMgmt/EnterpriseSalesFulfillmentService_v5_0/EnterpriseSalesFulfillmentService_v5_0_vs0</prop>
+			</group>
+			<group name="promotionQualificationRestSvc">
+					<prop name="wsdlUrl">https://soa-mp-rmsk-pr.tsl.telus.com/v1/mso/channelsalesmgmt/promotionqualification/promotionQualification</prop>
+			</group>
+			<group name="commerceShoppingCartMgmtRestSvc">
+				<prop name="endpoint">http://commerceshoppingcartmanagement-pr.paas-app-east.tsl.telus.com/v1/mso/channelsalesmgmt/commerceshoppingcartmanagement</prop>
+				<prop name="endpoint">https://apigw-pr.tsl.telus.com/marketsales/shoppingCart/v2</prop>
+				<prop name="kongEnv">pr</prop>
+			</group>
+			<group name="fifaShoppingCartMgmtRestSvc">
+				<prop name="endpoint">http://shoppingcarttmfmicroservice-pr-foma.paas-app-west.tsl.telus.com/tmf-api/shoppingCart/v2/shoppingcart</prop>
+				<prop name="endpoint">https://apigw-pr.tsl.telus.com/marketsales/fifaShoppingCart/v2/shoppingcart</prop>
+				<prop name="kongEnv">pr</prop>
+			</group>
+			<group name="fieldWorkAppointmentSvc">
+					<prop name="wsdlUrl">https://soa-mp-rmsk-pr.tsl.telus.com/RMO/ProcessMgmt/FieldWorkAppointmentService_v3_0_vs0</prop>
+			</group>				
+			<group name="fifaProductOfferingQualificationRestSvc">
+				<prop name="wsdlUrl">https://productofferingqualification-pr-foma.paas-app-west.tsl.telus.com//tmf-api/productofferingqualificationmanagement/v2/productOfferingQualification</prop>
+				<prop name="wsdlUrl">http://chnlsales-commerceoffersbridge.paas-app-east.tsl.telus.com/v1/mso/channelsalesmgmt/offers</prop>
+				<prop name="kongEnv">pr</prop>
+			</group>										
+		</group>
+		<group name="security">
+			<group name="jndiLookup">
+				<!-- 
+                This is used by fw-refresh-spring.xml of TELUS Error frameworks
+                -->
+				<group name="telus">
+					<prop name="principal">verification</prop>
+					<prop name="credentials">verification</prop>
+				</group>
+			</group>
+		</group>
+		<group name="ejbServices">
+			<group name="readAuditSvc">
+				<prop name="url">${connections/servers/readAuditSvr}</prop>
+				<prop name="jndiName">com.telus.framework.audit.service.db.AuditSvc</prop>
+			</group>
+		</group>
+	</group>
+	<group name="common">
+		<group name="featureCatalogIds">
+			<prop name="smartRing">101422</prop> 
+		</group>
+		<group name="installCredit">
+			<prop name="sweetnerCodes">hs-weekday-install-credit,tv-optik-weekday-install-credit</prop>
+		</group>
+		<group name="wlnProductSpecification">
+			<prop name="productTypeHSIC">51285</prop>
+			<prop name="productTypeTTV">111</prop>
+			<prop name="productTypeSING">65</prop>
+			<prop name="productTypeSTV">62754</prop>
+		</group>
+		<group name="getAvailableInstallDateParams">
+			<prop name="maxDays">31</prop>
+			<prop name="chunkSize">14</prop>
+		</group>
+		<group name="getAvailableOfferSummaryListParams">
+			<prop name="pikTvOmsOfferIds">40937304</prop>
+			<prop name="nonSellableProduct">HSZERO</prop>
+		</group>
+		<group name="getWirelineProductComponentListParams">
+			<prop name="maxProductComponentList">999</prop>
+		</group>
+		<group name="ttvCatalogIds">
+			<prop name="essentialsV1Internal">700189</prop>
+			<prop name="essentialsV2Internal">1218031</prop>
+			<prop name="tvLiteInternal">1284148</prop>
+			<prop name="pikTVInternal">1355101</prop>
+		</group>
+	</group>
+</group>

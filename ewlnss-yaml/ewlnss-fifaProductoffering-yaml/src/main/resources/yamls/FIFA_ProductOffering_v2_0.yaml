@@ -1,0 +1,960 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Product Offering Qualification API is one of Pre-Ordering Management API Family. Product Offering Qualification API goal is to provide Product Offering commercial eligibility. This API allows to \n•\trequest a specific productOffering eligibility\n•\tlook for productOffering eligibles (ot not) from a product category\n•\tlook for productOffering eligibles (or not) from a productspec description.\nBecause the API allows describing product from the inventory, it is also possible to use it to retrieve productOffering available to complete existing product.",
+    "version": "2.0",
+    "title": "API ProductOfferingQualification",
+    "contact": {
+      "email": "dlTAFT@telus.com"
+    }
+  },
+  "host": "serverRoot",
+  "basePath": "/tmf-api/productOfferingQualificationManagement/v2",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json;charset=utf-8"
+  ],
+  "produces": [
+    "application/json;charset=utf-8"
+  ],
+  "tags": [
+    {
+      "name": "ProductOfferingQualification",
+      "description": ""
+    },
+    {
+      "name": "Unsupported Operations"
+    }
+  ],
+  "paths": {
+    "/productOfferingQualification": {
+      "post": {
+        "tags": [
+          "ProductOfferingQualification"
+        ],
+        "operationId": "productOfferingQualificationCreate",
+        "summary": "Create Offer Qualification ",
+        "description": "Returns offer qualification for a given address and channel.",
+        "deprecated": false,
+        "parameters": [
+          {
+            "name": "ProductOfferingQualification",
+            "required": true,
+            "in": "body",
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/POST_REQ_ProductOfferingQualification"
+            }
+          },
+          {
+            "in": "query",
+            "name": "fields",
+            "type": "string",
+            "description": "The fields filter takes in properties with a '-' or '+' in front of each property name. \n\n* '-' will remove that field from the response\n* '+' will only display that field in the response\n\n> You can only use one at a time. Combining '-' and '+' will return an error from NC.\n\nFor example: `fields=+characteristic.id,+characteristic.value`"
+          },
+          {
+            "in": "query",
+            "name": "dataset.filter",
+            "type": "string",
+            "description": "This field will hold the path to the property you want to target, and the value(s) that you want to keep.\n\nFor example: `dataset.filter=cartItem.product.characteristic.id=id1,id2`\n"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ProductOfferingQualification"
+            },
+            "examples": {
+              "standard": {
+                "id": "-1",
+                "productOfferingQualificationItem": {
+                  "id": "-1",
+                  "state": "done",
+                  "qualificationItemResult": "qualified",
+                  "productOffering": {
+                    "id": "9150554859213487280",
+                    "orderNumber": "100",
+                    "displayName": "TELUS Internet 300/300",
+                    "originalDisplayName": "TELUS Internet 300/300",
+                    "description": "Up to 300 Mbps download and 300 Mbps upload speets. 1TB monthly data.",
+                    "isSellable": true,
+                    "category": [
+                      {
+                        "id": "9137773148713852470"
+                      },
+                      {
+                        "id": "9149543011313517339"
+                      },
+                      {
+                        "id": "9150841010013860395"
+                      }
+                    ],
+                    "productOfferingPrice": [
+                      {
+                        "priceType": "One_time",
+                        "price": {
+                          "dutyFreeAmount": {
+                            "value": 0
+                          }
+                        }
+                      },
+                      {
+                        "priceType": "Recurrent",
+                        "price": {
+                          "dutyFreeAmount": {
+                            "value": 110
+                          }
+                        },
+                        "priceAlteration": [
+                          {
+                            "id": "",
+                            "catalogId": "",
+                            "displayName": "$10 off for 24 months",
+                            "originalDisplayName": "$10 off for 24 months",
+                            "description": "service agreement promo",
+                            "priceType": "Recurrent",
+                            "applicationDuration": "24",
+                            "applicationDurationUnits": "Months",
+                            "price": {
+                              "dutyFreeAmount": {
+                                "value": -10
+                              }
+                            }
+                          },
+                          {
+                            "id": "",
+                            "catalogId": "",
+                            "displayName": "Service Agreement on High Speed",
+                            "originalDisplayName": "Service Agreement on High Speed",
+                            "description": "Service Agreement on High Speed",
+                            "priceType": "Recurrent",
+                            "applicationDuration": "24",
+                            "applicationDurationUnits": "Months",
+                            "price": {
+                              "dutyFreeAmount": {
+                                "value": 0
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "prodSpecCharValueUse": [
+                      {
+                        "name": "9147228137813869123",
+                        "value": "9147230727613885409",
+                        "displayName": "Monthly Data Usage Capacity Characteristic",
+                        "originalDisplayName": "Monthly Data Usage Capacity Characteristic",
+                        "description": null,
+                        "valueOptions": [
+                          {
+                            "value": "9147230727613885409",
+                            "displayName": "1000 GB",
+                            "originalDisplayName": "1000 GB",
+                            "description": null,
+                            "isDefault": true
+                          },
+                          {
+                            "value": "9147240190313129364",
+                            "displayName": "15",
+                            "originalDisplayName": "15",
+                            "description": null,
+                            "isDefault": false
+                          }
+                        ]
+                      },
+                      {
+                        "name": "9136412083513358130",
+                        "value": "9136412083513358133",
+                        "displayName": "IP Address Assignment Type",
+                        "originalDisplayName": "IP Address Assignment Type",
+                        "description": null,
+                        "valueOptions": [
+                          {
+                            "value": "9136412083513358133",
+                            "displayName": "Dynamic",
+                            "originalDisplayName": "Dynamic",
+                            "description": null,
+                            "isDefault": true
+                          },
+                          {
+                            "value": "9136412083513358132",
+                            "displayName": "Static",
+                            "originalDisplayName": "Static",
+                            "description": null,
+                            "isDefault": false
+                          }
+                        ]
+                      }
+                    ],
+                    "requireList": [],
+                    "conflictList": [],
+                    "bundledProductOffering": [
+                      {
+                        "id": "9150554859213487280",
+                        "orderNumber": 100,
+                        "displayName": "Advanced WiFi Modem",
+                        "originalDisplayName": "Advanced WiFi Modem",
+                        "description": "Experience faster, even more reliable Wi-Fi thanks to the latest dual band and AC technology.",
+                        "isSellable": false,
+                        "category": [
+                          {
+                            "id": "9148302515313935425"
+                          },
+                          {
+                            "id": "9148302515313935481"
+                          }
+                        ],
+                        "productOfferingPrice": [],
+                        "prodSpecCharValueUse": [],
+                        "requireList": [],
+                        "conflictList": [],
+                        "bundledProdOfferOption": {
+                          "numberRelOfferLowerLimit": 1,
+                          "numberRelOfferUpperLimit": 1
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "ncmapping": {
+                "summary": "illustrates how to map from NetCracker",
+                "id": "-1",
+                "productOfferingQualificationItem": {
+                  "id": "-1",
+                  "state": "done",
+                  "qualificationItemResult": "qualified",
+                  "productOffering": {
+                    "id": "NC.originalId",
+                    "orderNumber": "NC.orderNumber",
+                    "displayName": "NC.name",
+                    "originalDisplayName": "NC.originalName",
+                    "description": "NC.description",
+                    "isSellable": "NC.isRoot",
+                    "category": [
+                      {
+                        "id": "NC.categoryId[]"
+                      }
+                    ],
+                    "productOfferingPrice": [
+                      {
+                        "priceType": "NC.calculatedPrice[].type",
+                        "price": {
+                          "dutyFreeAmount": {
+                            "value": "NC.calculatedPrice[].value"
+                          }
+                        },
+                        "priceAlteration": [
+                          {
+                            "id": "NC.calculatedPrice[].discount[].id",
+                            "catalogId": "NC.calculatedPrice[].discount[].promotionId",
+                            "displayName": "NC.calculatedPrice[].discount[].name",
+                            "originalDisplayName": "NC.calculatedPrice[].discount[].originalName",
+                            "description": "NC.calculatedPrice[].discount[].description",
+                            "priceType": "NC.calculatedPrice[].discount[].type",
+                            "applicationDuration": "NC.calculatedPrice[].discount[].duration",
+                            "applicationDurationUnits": "NC.calculatedPrice[].discount[].durationType",
+                            "price": {
+                              "dutyFreeAmount": {
+                                "value": "NC.calculatedPrice[].discount[].value"
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    ],
+                    "prodSpecCharValueUse": [
+                      {
+                        "name": "NC.characteristicItems[].characteristicId",
+                        "value": "NC.characteristicItems[].characteristicValueId || NC.characteristicItems[].value || null",
+                        "displayName": "NC.characteristicItems[].name",
+                        "originalDisplayName": "NC.characteristicItems[].originalName",
+                        "description": "NC.characteristicItems[].description",
+                        "valueOptions": [
+                          {
+                            "value": "NC.characteristicItems[].characteristicValues[].characteristicValueId",
+                            "displayName": "NC.characteristicItems[].characteristicValues[].name",
+                            "originalDisplayName": "NC.characteristicItems[].characteristicValues[].originalName",
+                            "description": "NC.characteristicItems[].characteristicValues[].description",
+                            "isDefault": "NC.characteristicItems[].characteristicValueId==NC.characteristicItems[].characteristicValues[].characteristicValueId"
+                          }
+                        ]
+                      }
+                    ],
+                    "requireList": [
+                      {
+                        "id": "NC.requireList[]"
+                      }
+                    ],
+                    "conflictList": [
+                      {
+                        "id": "NC.conflictList[]"
+                      }
+                    ],
+                    "bundledProductOffering": [
+                      {
+                        "id": "NC.children[].originalId",
+                        "orderNumber": "NC.children[]... same as productOffering",
+                        "bundledProdOfferOption": {
+                          "numberRelOfferLowerLimit": "NC.children[].minQty",
+                          "numberRelOfferUpperLimit": "NC.children[].maxQty"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request\n\nList of supported error codes:\n- 20: Invalid URL parameter value\n- 21: Missing body\n- 22: Invalid body\n- 23: Missing body field\n- 24: Invalid body field\n- 25: Missing header\n- 26: Invalid header value\n- 27: Missing query-string parameter\n- 28: Invalid query-string parameter value",
+            "schema": {
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "401": {
+            "description": "Unauthorized\n\nList of supported error codes:\n- 40: Missing credentials\n- 41: Invalid credentials\n- 42: Expired credentials",
+            "schema": {
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "403": {
+            "description": "Forbidden\n\nList of supported error codes:\n- 50: Access denied\n- 51: Forbidden requester\n- 52: Forbidden user\n- 53: Too many requests",
+            "schema": {
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "404": {
+            "description": "Not Found\n\nList of supported error codes:\n- 60: Resource not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity\n\nFunctional error",
+            "schema": {
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "500": {
+            "description": "Internal Server Error\n\nList of supported error codes:\n- 1: Internal error",
+            "schema": {
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          },
+          "503": {
+            "description": "Service Unavailable\n\nList of supported error codes:\n- 5: The service is temporarily unavailable\n- 6: Orange API is over capacity, retry later !",
+            "schema": {
+              "$ref": "#/definitions/ErrorRepresentation"
+            }
+          }
+        }
+      },
+      "get": {
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "operationId": "getProductOfferingQualification",
+        "summary": "Get Offer Qualification",
+        "description": "This operation retrieves offer qualification entity",
+        "tags": [
+          "Unsupported Operations"
+        ]
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "summary": "Partial updates to qualification",
+        "description": "Unsupprted",
+        "tags": [
+          "Unsupported Operations"
+        ],
+        "operationId": "productOfferingQualificationPatch"
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {}
+            }
+          }
+        },
+        "summary": "Delete qualification entity",
+        "description": "Unsupported",
+        "tags": [
+          "Unsupported Operations"
+        ],
+        "operationId": "DeleteQualification"
+      }
+    }
+  },
+  "definitions": {
+    "T_Characteristic": {
+      "type": "object",
+      "description": "TELUS added to TMF. Key-value pair characteristics, with potential selection options.",
+      "required": [
+        "name",
+        "value"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "unique identifier of the Characteristic, really should be called key"
+        },
+        "value": {
+          "type": "string",
+          "description": "value for this characteristic, or a reference key for the currently selected characteristic value option"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "localized, human-readable name for this characteristic"
+        },
+        "originalDisplayName": {
+          "type": "string",
+          "description": "non-localized, human-readable name for this characteristic"
+        },
+        "description": {
+          "type": "string",
+          "description": "description of the Characteristic"
+        },
+        "valueOptions": {
+          "type": "array",
+          "description": "selection choices for this characteristic",
+          "items": {
+            "$ref": "#/definitions/T_CharacteristicOption"
+          }
+        }
+      },
+      "example": {
+        "summary": "a standard example, where Black is the currently selected option",
+        "name": "9148958205313021610",
+        "value": "9148958005813021493",
+        "displayName": "Color",
+        "originalDisplayName": "Color",
+        "description": "Color of the iPhone",
+        "valueOptions": [
+          {
+            "value": "9148958005813021493",
+            "displayName": "Black",
+            "originalDisplayName": "Black",
+            "isDefault": true
+          },
+          {
+            "value": "9148958005813021494",
+            "displayName": "White",
+            "originalDisplayName": "White",
+            "isDefault": false
+          }
+        ]
+      }
+    },
+    "T_CharacteristicOption": {
+      "type": "object",
+      "description": "TELUS added to TMF. One possible value of the characteristic.",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "key that represents this option, which becomes the characteristic's value if selected."
+        },
+        "name": {
+          "type": "string",
+          "description": "localized, human-readable name for this characteristic option"
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "whether this is the default option"
+        }
+      },
+      "example": {
+        "value": "9148958005813021493",
+        "displayName": "Black",
+        "originalDisplayName": "Black",
+        "isDefault": true
+      }
+    },
+    "T_ProductOffering": {
+      "type": "object",
+      "description": "TELUS modified. Represents entities that are orderable from the provider of the catalog, this resource includes pricing information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the productOffering"
+        },
+        "orderNumber": {
+          "type": "string",
+          "description": "TELUS added to TMF."
+        },
+        "name": {
+          "type": "string",
+          "description": "TELUS renamed from name to displayName. Name of the productOffering"
+        },
+        "originalDisplayName": {
+          "type": "string",
+          "description": "TELUS added to TMF. Non-localized version of name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the productOffering"
+        },
+        "isSellable": {
+          "type": "string",
+          "description": "A flag indicating if this product offer can be sold stand-alone for sale or not. If this flag is false it indicates that the offer can only be sold within a bundle."
+        },
+        "category": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CategoryRef"
+          }
+        },
+        "requireList": {
+          "type": "array",
+          "description": "TELUS added to TMF.",
+          "items": {
+            "$ref": "#/definitions/ProductOfferingRef"
+          }
+        },
+        "conflictList": {
+          "type": "array",
+          "description": "TELUS added to TMF.",
+          "items": {
+            "$ref": "#/definitions/ProductOfferingRef"
+          }
+        },
+        "productOfferingPrice": {
+          "type": "array",
+          "description": "TELUS changed from ProductOfferingPrice to T_Price.",
+          "items": {
+            "$ref": "#/definitions/T_Pricing"
+          }
+        },
+        "bundledProductOffering": {
+          "type": "array",
+          "description": "TELUS changed from BundledProductOffering to ProductOffering.",
+          "items": {
+            "$ref": "#/definitions/T_ProductOffering"
+          }
+        },
+        "bundledProdOfferOption": {
+          "type": "object",
+          "description": "A set of numbers that specifies the lower and upper limits for a ProductOffering that can be procured as part of the related BundledProductOffering. Values can range from 0 to unbounded",
+          "properties": {
+            "numberRelOfferLowerLimit": {
+              "type": "integer",
+              "description": "lower limit for a product offering that can be procured as part of the related BundledProductOffering",
+              "example": 1
+            },
+            "numberRelOfferUpperLimit": {
+              "type": "integer",
+              "description": "upper limit for a product offering that can be procured as part of the related BundledProductOffering",
+              "example": 1
+            }
+          }
+        },
+        "prodSpecCharValueUse": {
+          "type": "array",
+          "description": "TELUS changed from ProdSpecCharValueUse to T_Characteristic.",
+          "items": {
+            "description": "TELUS changed from ProdSpecCharValueUse to T_Characteristic.",
+            "$ref": "#/definitions/T_Characteristic"
+          }
+        }
+      }
+    },
+    "ProductOfferingRef": {
+      "type": "object",
+      "description": "A product offering represents entities that are orderable from the provider of the catalog, this resource includes pricing information.",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "description": "Unique identifier of the product offering.",
+          "type": "string"
+        }
+      }
+    },
+    "BundledProdOfferOption": {
+      "type": "object",
+      "description": "A set of numbers that specifies the lower and upper limits for a ProductOffering that can be procured as part of the related BundledProductOffering. Values can range from 0 to unbounded",
+      "properties": {
+        "numberRelOfferLowerLimit": {
+          "type": "integer",
+          "description": "lower limit for a product offering that can be procured as part of the related BundledProductOffering"
+        },
+        "numberRelOfferUpperLimit": {
+          "type": "integer",
+          "description": "upper limit for a product offering that can be procured as part of the related BundledProductOffering"
+        }
+      }
+    },
+    "T_Pricing": {
+      "type": "object",
+      "description": "TELUS changed from ProductOfferingPrice to T_Price and introduced changes for consistency across all APIs. An amount, usually of money, that is asked for or allowed when an item is bought, rented, or leased. The price is valid for a defined period of time and may not represent the actual price paid by a customer.",
+      "properties": {
+        "priceType": {
+          "type": "string",
+          "description": "A category that describes the price, such as recurring, discount, allowance, penalty, and so forth."
+        },
+        "price": {
+          "$ref": "#/definitions/Price",
+          "description": "The amount of money that characterizes the price."
+        },
+        "priceAlteration": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PriceAlteration"
+          }
+        }
+      }
+    },
+    "Price": {
+      "type": "object",
+      "description": "Provides all amounts (tax included, duty free, tax rate), used currency and percentage to apply for Price Alteration.",
+      "properties": {
+        "dutyFreeAmount": {
+          "$ref": "#/definitions/Money",
+          "description": "All taxes excluded amount (expressed in the given currency)"
+        }
+      }
+    },
+    "PriceAlteration": {
+      "type": "object",
+      "description": "Is an amount, usually of money, that modifies the price charged for an order item.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "TELUS added to TMF."
+        },
+        "catalogId": {
+          "type": "string",
+          "description": "TELUS added to TMF."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "TELUS renamed from name to displayName. A short descriptive name such as \"Monthly discount\""
+        },
+        "description": {
+          "type": "string",
+          "description": "A narrative that explains in detail the semantics of this order item price alteration"
+        },
+        "priceType": {
+          "type": "string",
+          "description": "A category that describes the price such as recurring, one time and usage."
+        },
+        "applicationDuration": {
+          "type": "integer",
+          "description": "Duration during which the alteration applies on the order item price (for instance 2 months free of charge for the recurring charge)"
+        },
+        "applicationDurationUnits": {
+          "type": "string",
+          "description": "TELUS added to TMF."
+        },
+        "action": {
+          "type": "string",
+          "description": "TELUS added to TMF."
+        },
+        "price": {
+          "$ref": "#/definitions/Price"
+        }
+      }
+    },
+    "Money": {
+      "type": "object",
+      "description": "A base / value business entity used to represent money",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "A positive floating point number"
+        },
+        "unit": {
+          "type": "string",
+          "description": "TELUS will always be CAD. Currency (ISO4217 norm uses 3 letters to define the currency)."
+        }
+      }
+    },
+    "ErrorRepresentation": {
+      "description": "Error representation",
+      "required": [
+        "code",
+        "reason"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "",
+          "type": "integer",
+          "format": "int32"
+        },
+        "reason": {
+          "description": "",
+          "type": "string"
+        },
+        "message": {
+          "description": "",
+          "type": "string"
+        },
+        "status": {
+          "description": "",
+          "type": "string"
+        },
+        "referenceError": {
+          "description": "",
+          "type": "string"
+        },
+        "@type": {
+          "description": "",
+          "type": "string"
+        },
+        "@schemaLocation": {
+          "description": "",
+          "type": "string"
+        }
+      }
+    },
+    "ChannelRef": {
+      "description": "The channel defines the channel for selling product offerings.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier of the channel",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the channel.",
+          "type": "string"
+        },
+        "@referenceType": {
+          "description": "Value could be 'External_ID' (External channel ID) / 'NC_ID' internal NC channel id",
+          "type": "string"
+        }
+      }
+    },
+    "Place": {
+      "description": "Describe a place (using either geographicAddress or GeographicLocation) and/or identify an existing place (either an existing geographicAddress or existing GeographicLocation or existing GeographicSite) through its id.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Must be a geographicAddress id or GeographicLocation id or GeographicSite id",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the place",
+          "type": "string"
+        },
+        "role": {
+          "description": "Role of the place - could be'installation place' for example",
+          "type": "string"
+        }
+      }
+    },
+    "CategoryRef": {
+      "type": "object",
+      "description": "The category resource is used to group product offerings, service and resource candidates in logical containers. Categories can contain other categories and/or product offerings, resource or service candidates.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the category"
+        }
+      }
+    },
+    "RelatedPartyRef": {
+      "description": "A related party defines party or party role linked to a specific entity.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier of a related party",
+          "type": "string"
+        },
+        "role": {
+          "description": "Role of the related party.",
+          "type": "string"
+        },
+        "characteristic": {
+          "type": "array",
+          "description": "TELUS added to TMF.",
+          "items": {
+            "$ref": "#/definitions/T_Characteristic"
+          }
+        },
+        "@referredType": {
+          "description": "Indicates the base (class) type of the party.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductOfferingQualificationItem": {
+      "description": "An item of a productOfferingQualification.",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "TELUS unused so is always -1. Id of the productOfferingQualification item.",
+          "type": "string"
+        },
+        "state": {
+          "description": "TELUS unused so is always done. State of the productOfferingQualification item (acknowledged, inProgress, terminatedWithError, done).",
+          "type": "string"
+        },
+        "qualificationItemResult": {
+          "description": "TELUS unused so is always qualified.\nQualification result for this productOfferingQualification item. It could be:\n     -  qualified (request productOffering or productSpecification are available), \n     - unqualified (requested not available and not alternate available),\n     - alternate (requested not available but proposal available)\n",
+          "type": "string"
+        },
+        "productOffering": {
+          "description": "TELUS changed from ProductOfferingRef to ProductOffering.",
+          "$ref": "#/definitions/T_ProductOffering"
+        },
+        "qualificationItemRelationship": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QualificationItemRelationship"
+          }
+        }
+      }
+    },
+    "QualificationItemRelationship": {
+      "description": "Used to describe link(s) to other items to the one qualified.",
+      "required": [
+        "type",
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of relationship (ex: reliesOn, connectedTo, etc...).",
+          "type": "string"
+        },
+        "id": {
+          "description": "Id of the ProductOfferingQualificationItem (from the same ProductOfferingQualificationItem).",
+          "type": "string"
+        }
+      }
+    },
+    "POST_REQ_ProductOfferingQualificationItem": {
+      "description": "",
+      "required": [
+        "id"
+      ],
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "TELUS unused so is always -1. Id of the productOfferingQualification item.",
+          "type": "string"
+        },
+        "state": {
+          "description": "TELUS unused so is always done. State of the productOfferingQualification item (acknowledged, inProgress, terminatedWithError, done).",
+          "type": "string"
+        },
+        "qualificationItemResult": {
+          "description": "TELUS unused so is always qualified.\nQualification result for this productOfferingQualification item. It could be:\n     -  qualified (request productOffering or productSpecification are available), \n     - unqualified (requested not available and not alternate available),\n     - alternate (requested not available but proposal available)\n",
+          "type": "string"
+        },
+        "productOffering": {
+          "description": "TELUS changed from ProductOfferingRef to ProductOffering.",
+          "$ref": "#/definitions/T_ProductOffering"
+        }
+      }
+    },
+    "ProductOfferingQualification": {
+      "description": "ProductOfferingQualification is used to perform a commercial eligibility. It allows to retrieve a list of productOffering that are commercially available in the context of the interaction (defined be place, channel, party, product).",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "TELUS unused so is always -1. Unique identifier of the productOfferingQualification resource.",
+          "type": "string"
+        },
+        "relatedParty": {
+          "type": "array",
+          "description": "A related party defines party or party role linked to a specific entity.",
+          "items": {
+            "$ref": "#/definitions/RelatedPartyRef"
+          }
+        },
+        "channel": {
+          "$ref": "#/definitions/ChannelRef"
+        },
+        "productOfferingQualificationItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductOfferingQualificationItem"
+          }
+        },
+        "place": {
+          "$ref": "#/definitions/Place"
+        },
+        "shoppingCart": {
+          "$ref": "#/definitions/ShoppingCartRef"
+        }
+      }
+    },
+    "POST_REQ_ProductOfferingQualification": {
+      "description": "",
+      "required": [
+        "relatedParty",
+        "productOfferingQualificationItem"
+      ],
+      "type": "object",
+      "properties": {
+        "relatedParty": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RelatedPartyRef"
+          }
+        },
+        "channel": {
+          "$ref": "#/definitions/ChannelRef"
+        },
+        "productOfferingQualificationItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/POST_REQ_ProductOfferingQualificationItem"
+          }
+        },
+        "place": {
+          "$ref": "#/definitions/Place"
+        }
+      }
+    },
+    "ShoppingCartRef": {
+      "type": "object",
+      "description": "TELUS added to TMF. Shopping Cart reference.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "unique identifier of the shopping cart."
+        }
+      }
+    }
+  },
+  "x-apiname": "fifaproductofferingqualification",
+  "x-tmfdomain": "marketsales",
+  "x-cmdbid": "20672",
+  "x-api-engagement-num": 193
+}

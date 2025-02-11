@@ -1,0 +1,2 @@
+version=@@BUILDLABEL@@
+buildDate=@@BUILDDATE@@

@@ -1,0 +1,24 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+	    <groupId>telus.csm.ewlnss.common.shared</groupId>
+	    <artifactId>pom-ewlnss-common-shared</artifactId>
+        <version>v1-SNAPSHOT</version>
+    </parent>
+
+	<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+    <artifactId>pom-ewlnss-common-shared-adapter</artifactId>
+    <packaging>pom</packaging>
+    <name>pom-ewlnss-common-shared-adapter</name>
+
+    <modules>
+		<module>ewlnss-adapter-shared</module>
+		<module>ewlnss-adapter-impl</module>		
+		<module>ewlnss-adapter-factory</module>
+    </modules>
+
+
+</project>

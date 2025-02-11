@@ -1,0 +1,1837 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2017 rel. 3 (x64) (http://www.altova.com) by TELUS (TELUS) -->
+<xs:schema xmlns:tns="http://xmlschema.tmi.telus.com/srv/MSO/ChannelSalesMgmt/EnterpriseSalesManagementServiceRequestResponse_v5" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ec="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8" xmlns:cssf="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerServiceSupportFeeCommon_v1" xmlns:cust="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v1" xmlns:esc="http://xmlschema.tmi.telus.com/xsd/MarketingSales/SalesChannel/SalesCommonTypes_v5" xmlns:credit="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" targetNamespace="http://xmlschema.tmi.telus.com/srv/MSO/ChannelSalesMgmt/EnterpriseSalesManagementServiceRequestResponse_v5" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/BaseTypes/CustomerCommon_v1_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Enterprise/BaseTypes/EnterpriseCommonTypes_v8_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/MarketingSales/SalesChannel/SalesCommonTypes_v5" schemaLocation="SalesCommonTypes_v5_13.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerServiceSupportFeeCommon_v1" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerServiceSupportFeeCommon_v1_0.xsd"/>
+	<xs:import namespace="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4" schemaLocation="http://xmlschema.tmi.telus.com/xsd/Customer/Customer/CustomerManagementCommonTypes_v4_0.xsd"/>
+	<xs:element name="authenticateClient" type="tns:AuthenticateClientType">
+		<xs:annotation>
+			<xs:documentation>Request for the Authenticate Client.  This is used to validate the Account Identification.  Indicators can be passed if Account and Subscriber information are needed in the response</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="authenticateClientResponse" type="tns:AuthenticateClientResponseType">
+		<xs:annotation>
+			<xs:documentation>Response ffrom the Authenticate Client operation.  This indicates if the Account identification is valid.  It may contain Account and Subscriber information based on the request flags</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="authenticateAccount" type="tns:AuthenticateAccountType">
+		<xs:annotation>
+			<xs:documentation>Request for the Authenticate Account.  This is used to validate the Account Identification.  Indicators can be passed if Account and Subscriber information are needed in the response.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="authenticateAccountResponse" type="tns:AuthenticateAccountResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for the Authenticate Account.  This is used to validate the Account Identification.  Indicators can be passed if Account and Subscriber information are needed in the response.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAccountSummary" type="tns:GetAccountSummaryType">
+		<xs:annotation>
+			<xs:documentation>Request for the getAccountSummary. This is used to retrieve a summary of the Account Identification.  Context related attributes can be passed for retrieving specific information.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getAccountSummaryResponse" type="tns:GetAccountSummaryResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for the getAccountSummary. This is used to retrieve a summary of the Account Identification.  Context related attributes can be passed for retrieving specific information.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getDataSharingSummary" type="tns:GetDataSharingSummaryType">
+		<xs:annotation>
+			<xs:documentation>Request for the getDataSharingSummary. This is used to retrieve a summary of the data sharing subscriber info</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getDataSharingSummaryResponse" type="tns:GetDataSharingSummaryResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for the getAccountSummary. This is used to retrieve a summary of the Account Identification.  Context related attributes can be passed for retrieving specific information.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSubscriberDetail" type="tns:GetSubscriberDetailType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Client Detail.  This is used to retrieve supplementary information for a Subscriber like Equipment, Offer, etc.  Indicators can be passed for the desired supplementary information to be returned</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSubscriberDetailResponse" type="tns:GetSubscriberDetailResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Client Detail operation. IncludeAllowanceList element is not returned in price plan/service detail. Subscriber level usage detail is aggregated in getUsageDetail operation. Offer elment is not returned as part of subscriber detail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="calculatePrice" type="tns:CalculatePriceType">
+		<xs:annotation>
+			<xs:documentation>Request for the Calculate Price.  This used mainly for the Exchange business flow, to calculate the previous hardware and offer (optional) returned and the new hardware and offer (optional) redeemed</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="calculatePriceResponse" type="tns:CalculatePriceResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Calculate Price operation.  This contains details for the Exchange calculation containing Hardware pricing and Penalty Pricing for both previous and new hardware and offer (optional)</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="submitSalesOrderPayment" type="tns:SubmitSalesOrderPaymentType">
+		<xs:annotation>
+			<xs:documentation>This is used for paying the international dialing deposit, security deposit or hardware balance by credit card. If a deposit or balance payment is not paid by credit card (cheque, deduction from comm.), this payment will be ignored in the operation and the payment will be processed in createOrder as part of order fulfillment.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="submitSalesOrderPaymentResponse" type="tns:SubmitSalesOrderPaymentResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Submit Deposit operation.  It contains the Credit Card Transaction Id if paid by Credit card</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getConsolidatedAccountProfile" type="tns:GetConsolidatedAccountProfileType">
+		<xs:annotation>
+			<xs:documentation>Get consolidated account profile</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getConsolidatedAccountProfileResponse" type="tns:GetConsolidatedAccountProfileResponseType"/>
+	<xs:element name="getUsageDetail" type="tns:GetUsageDetailType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Client Usage Detail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getUsageDetailResponse" type="tns:GetUsageDetailResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Client Usage Detail operation. </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSalesOrderHistory" type="tns:GetSalesOrderHistoryType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Client Pending Sales Detail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSalesOrderHistoryResponse" type="tns:GetSalesOrderHistoryResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Client Pending Sales Detail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getEstimatedProratedBill" type="tns:GetEstimatedProratedBillType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Client Pending Sales Detail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getEstimatedProratedBillResponse" type="tns:GetEstimatedProratedBillResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Client Pending Sales Detail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="payOutstandingAccountBalanceAndRestoreSuspension" type="tns:PayOutstandingAccountBalanceType">
+		<xs:annotation>
+			<xs:documentation>Request for pay outstanding account balance</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="payOutstandingAccountBalanceAndRestoreSuspensionResponse" type="tns:PayOutstandingAccountBalanceResponseType"/>
+	<xs:element name="createAccount" type="tns:CreateAccountType"/>
+	<xs:element name="createAccountResponse" type="tns:CreateAccountResponseType"/>
+	<xs:element name="updateAccount" type="tns:UpdateAccountType">
+		<xs:annotation>
+			<xs:documentation>Request for updateCreateAccount. Updates account related information, that needs to be updated in the context of the sale.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="updateAccountResponse" type="tns:UpdateAccountResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for updateAccount. Updates account related information, that needs to be updated in the context of the sale.</xs:documentation>
+			<xs:documentation>Response for updateAccount. Updates account related information, that needs to be updated in the context of the sale.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="reservePhoneNumber" type="tns:ReservePhoneNumberType"/>
+	<xs:element name="reservePhoneNumberResponse" type="tns:ReservePhoneNumberResponseType"/>
+	<xs:element name="unreservePhoneNumber" type="tns:UnreservePhoneNumberType"/>
+	<xs:element name="unreservePhoneNumberResponse" type="tns:UnreservePhoneNumberResponseType"/>
+	<xs:element name="searchClientNotes" type="tns:searchClientNotesType">
+		<xs:annotation>
+			<xs:documentation>Request for the Search Client Notes operation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="searchClientNotesResponse" type="tns:searchClientNotesResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for the Search Client Notes operation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="createClientNote" type="tns:createClientNoteType">
+		<xs:annotation>
+			<xs:documentation>Request for the Create Client Note operation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="createClientNoteResponse" type="tns:createClientNoteResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for the Create Client Note operation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="initializeSales" type="tns:InitializeSalesType">
+		<xs:annotation>
+			<xs:documentation>Clients should call this operation to initialize and get a unique sales ID.  This operation is specifically used for the Save and Resume flow where an order can be stored and resumed later on using a unique salesId.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="initializeSalesResponse" type="tns:InitializeSalesResponseType">
+		<xs:annotation>
+			<xs:documentation>Returns a unique sales context ID</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getCorporateHierarchy" type="tns:GetCorporateHierarchyType">
+		<xs:annotation>
+			<xs:documentation>Return corporate hierarchy</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getCorporateHierarchyResponse" type="tns:GetCorporateHierarchyResponseType">
+		<xs:annotation>
+			<xs:documentation>Returns corporate hierarchy tree</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getCorporateAccountSummaryList" type="tns:GetCorporateAccountSummaryListType">
+		<xs:annotation>
+			<xs:documentation>Return list of coporate account summary </xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getCorporateAccountSummaryListResponse" type="tns:GetCorporateAccountSummaryListResponseType">
+		<xs:annotation>
+			<xs:documentation>Return list of corporate account summary</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="searchClient" type="tns:SearchClientType">
+		<xs:annotation>
+			<xs:documentation>Request for the Search Client operation. It is only supporting FFH search.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="searchClientResponse" type="tns:SearchClientResponseType">
+		<xs:annotation>
+			<xs:documentation>Response for the Search Client operation</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="updateSalesReference" type="tns:UpdateSalesReferenceType">
+		<xs:annotation>
+			<xs:documentation>Clients should call this operation to update sales reference data</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="updateSalesReferenceResponse" type="tns:UpdateSalesReferenceResponseType">
+		<xs:annotation>
+			<xs:documentation>Returns generic response message</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSalesOrderContract" type="tns:GetSalesOrderContractType">
+		<xs:annotation>
+			<xs:documentation>Request for the Get Client Sales Contract Detail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="getSalesOrderContractResponse" type="tns:GetSalesOrderContractResponseType">
+		<xs:annotation>
+			<xs:documentation>Response from the Get Client Sales Contract Detail.</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="searchServiceAddress" type="tns:SearchServiceAddressType">
+		<xs:annotation>
+			<xs:documentation>FMS address search for matching service address ***WLN stack dependency ***</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="searchServiceAddressResponse" type="tns:SearchServiceAddressResponseType">
+		<xs:annotation>
+			<xs:documentation>Return matching service address and addtional location information</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="createWirelineAccount" type="tns:CreateWirelineAccountType">
+		<xs:annotation>
+			<xs:documentation>Create wireline BAN ***WLN stack dependency ***</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="createWirelineAccountResponse" type="tns:CreateWirelineAccountResponseType">
+		<xs:annotation>
+			<xs:documentation>Return newly created wireline BAN and customer information</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="AuthenticateClientType">
+		<xs:annotation>
+			<xs:documentation>must provide either billing account number plus pin or phone number plus serial no last 6.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="firstName" type="xs:string" minOccurs="0"/>
+			<xs:element name="lastName" type="xs:string" minOccurs="0"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Needed in conjunction with PIN or Last 6 digits of serial number or postal code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Needed in conjunction with PIN or last 6 digits of serial number or postal code.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="pin" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Needed in conjunction with billingAccountNumber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="serialNumberLastSix" type="xs:string" minOccurs="0"/>
+			<xs:element name="postalCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="requesterConsentIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>Consent that: Requester identification obtained and consent verified.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="ignoreWarningIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>this allows account information to be returned in case of authentication failure, i,e, billing account number is found, but pin does not match. this is audited.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="includeDetailIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Clients should indicate True if detail information regarding Account or Subscriber needs to be retrieved</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AuthenticateClientResponseType">
+		<xs:annotation>
+			<xs:documentation>If authentication failed return messagaes.  Otherwise return account and subscriber information.  Messages could result if verification data does not match (i.e. BAN/PIN combination)</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="authenticationStatusCode" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Possible values:
+- SUCC (First and Last match plus PIN match or ESN match or PostalCd match)
+- FAILED.  
+
+The messageList will contain reasons for the failure.  
+- ACCOUNT_NOT_FOUND - You have entered an invalid Billing Account Number.
+- PHONE_NOT_FOUND - You have entered an invalid Service Phone Number.
+- PIN_NOT_MATCH - Client PIN does not match our records.
+- EQUIP_SERIAL_NOT_MATCH - Serial number does not match our records.
+- BILLING_POSTAL_CODE_NOT_MATCH - Postal code does not match our records.
+- ACCOUNT_STATUS_INVALID
+- FIRST_LAST_NOT_MATCH</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="accountSummary" type="esc:AccountSummary" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Optional if BAN found, but verification fails (i.e. non-matching BAN/PIN or phone number/serial number)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="individualNameList" type="esc:IndividualName" minOccurs="0" maxOccurs="100">
+						<xs:annotation>
+							<xs:documentation>List containing account holder name, authorized name, and subscriber names to be used for manual verification process if required (see FR444847 for further details)..</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="subscriberList" type="esc:Subscriber" minOccurs="0" maxOccurs="10">
+						<xs:annotation>
+							<xs:documentation>Single Subscriber if PhoneNumber is in the Request, else Multiple Subscribers (Current business rules are that if there are more than 10 subscribers on the account then only the first 10 will be returned)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetAccountSummaryType">
+		<xs:annotation>
+			<xs:documentation>
+				Get Account Summary for an account.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="attributeOptionInclusionList" type="xs:string" minOccurs="0" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Attribute inclusion list for the operation
+CUSTOMER_SUMMARY ACCOUNT_SUMMARY
+PRODUCT_SUMMARY (FFH product type)
+PRODUCT_INSTANCE (FFH product instance and details)
+ALL (Default)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attributeOptionExclusionList" type="xs:string" minOccurs="0" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Attribute exclusion list for the operation. None Supported currently</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billingAccountNumber" type="cust:billingAccountNumberType" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>Mobility or FFH account number</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="servicePhoneNumber" type="xs:string" minOccurs="0" maxOccurs="1">
+				<xs:annotation>
+					<xs:documentation>System generated/assigned WLS phone number (not visible to Client), VoIP local phone number, or VoIP toll-free phone number for seats continaing only VoIP/HSIA components (Starter/Office), or the WirelineNumber.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="servicePhoneNumberTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>One of WLS, WLN, VOIP-LOCAL, or VOIP-TOll-FREE.  Default behavior is to lookup both WLS and WLN.  Derived value - VOIP resource type code: V (Primary VoIP) - local, L (Additional VoIP), or O (Toll free VoIP) - toll free</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="accountMasterSourceTypeCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Possible Values:
+- 1001 (Enabler)
+- 103 (KB)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetAccountSummaryResponseType">
+		<xs:annotation>
+			<xs:documentation>
+				Authenticate Wireless or Wireline account
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="accountSummary" type="esc:AccountBaseTaxationType">
+						<xs:annotation>
+							<xs:documentation>Mobility or FFH account summary</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="subscriberList" type="esc:SubscriberBase" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Mobility subscriber list</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="subscribedProductList" type="esc:WirelineProductSummary" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>FFH product list</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetDataSharingSummaryType">
+		<xs:annotation>
+			<xs:documentation>
+				Get Account Summary for an account.
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetDataSharingSummaryResponseType">
+		<xs:annotation>
+			<xs:documentation>
+				Authenticate Wireless or Wireline account
+			</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="dataSharingSummary" type="esc:AccountDataSharingSummary"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AuthenticateAccountType">
+		<xs:annotation>
+			<xs:documentation>
+				Authenticate Wireless or Wireline account
+			</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="customerCredentials" maxOccurs="1">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="customerId" type="credit:CustomerId" minOccurs="0"/>
+						<xs:element name="billingAccountNumber" type="cust:billingAccountNumberType" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="brandId" type="credit:BrandId"/>
+						<xs:element name="billingAccountPIN" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="servicePhoneNumber" type="xs:string" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>For wireless account, the service phone is the TN# being assigned to the subscriber, not the contact phone at billing level. For WLN, it's the primary resource TN# Format: digit number</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="customerFirstName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="customerLastName" type="xs:string" minOccurs="0" maxOccurs="1"/>
+						<xs:element name="equipmentSerialNum" type="xs:string" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Format: digit number and last 6 digits</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="postalCd" type="xs:string" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>Format: no space for postal code</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="wirelessOnlyInd" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AuthenticateAccountResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="authenticationStatusCd" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Possible values: - SUCC (First and Last	match plus PIN match or ESN match or PostalCd match) - FAILED</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="authenticationFailureReasonCodeList" type="xs:string" minOccurs="0" maxOccurs="20">
+						<xs:annotation>
+							<xs:documentation>Possible Values:1) ACCOUNT_NOT_FOUND - You have entered an invalid Billing Account Number. 2)PHONE_NOT_FOUND - You have entered an invalid Service Phone Number. 3)PIN_NOT_MATCH - Client PIN does not match our records. 4) EQUIP_SERIAL_NOT_MATCH -	Serial number does not match our records. 5)BILLING_POSTAL_CODE_NOT_MATCH - Postal code does not match our records. 6)ACCOUNT_STATUS_INVALID  7) FIRST_LAST_NOT_MATCH</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="customerId" type="xs:string" minOccurs="0"/>
+					<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="billingMasterSourceId" type="xs:long" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>130 (wireless account) - 1001 (wireline	account)</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="roleCd" type="xs:string" minOccurs="0" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>Possible values: 1) For WLS, it's the subscription role, 2) For WLN, it's always AA</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="wirelineSystemNotAvailableInd" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="individualNameList" type="esc:IndividualName" minOccurs="0" maxOccurs="100">
+						<xs:annotation>
+							<xs:documentation>List containing account holder name, authorized name, and subscriber names to be used for manual verification process if required (see FR444847 for further details)..</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetSubscriberDetailType">
+		<xs:annotation>
+			<xs:documentation>must provide either billing account number plus pin or phone number plus serial no last 6.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="attributeOptionInclusionList" type="xs:string" minOccurs="0" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Attribute inclusion list for the operation. None Supported currently.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="attributeOptionExclusionList" type="xs:string" minOccurs="0" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>Attribute exclusion list for the operation. One of INCLUDED_ALLOWANCE, NONE (Default).</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Needed if required to retrieve Contract information and/or Reward and Penalty Information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Needed if required to retrieve Offer information</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipmentList" type="esc:EquipmentSerialNumberSet" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Needed if required to retrieve one or several Equipment information.  This may be the Current Equipment, or Equipments related to Eligible transactions for Exchange</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="retrieveDetailTypeList" type="xs:string" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>The scope of information to retrieve.  Values are: 1 = EQUIPMENT,	2 = REWARDACCOUNT, 3 = EDUF, 4 = CONTRACT, 5 = OFFER, 6 = REWARDCOMMITMENT, 7 = SUMMARY, 0 = NONE</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetSubscriberDetailResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="subscriber" type="esc:Subscriber" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CalculatePriceType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string"/>
+			<xs:element name="phoneNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+					Phone number of the subscriber.  This is same as the existingPhoneNumber in Order type.  In case of Price Gurantee scenario
+					with Exchange the Order Type is optional hence we need this element. 
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="order" type="esc:Order" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Optional for calculating Price Guarantee</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesOrderItemList" type="esc:SalesOrderItemType" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>One Order Item per object</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CalculatePriceResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="pricingDetailList" type="tns:PricingDetailType" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Equipment and Penalty Pricing, One for each VOIP, WLS device, WLS SIM.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="salesItemList" type="tns:SalesOrderItemPricingDetail" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Equipment and Penalty Pricing, One for each VOIP, WLS device, WLS SIM.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SubmitSalesOrderPaymentType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Phone number of the subscriber</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="hardwarePayment" type="esc:HardwarePricingDetailType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Hardware discount and pricing detail for the handset device</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="simPayment" type="esc:PriceAmountAndTax" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>SIM price and tax breakdowns</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipmentWarrantyPayment" type="esc:PriceAmountAndTax" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Warranty price (PUF payment option) and tax breakdowns</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="depositPaymentList" type="esc:DepositInformation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="penaltyPaymentList" type="esc:PenaltyChargeDetail" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Penalty pricing detail</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesOrderItemPaymentList" type="tns:SalesOrderItemPricingDetail" minOccurs="0" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>sales item payment information. One order item payment per object.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="paymentDetail" type="esc:PaymentDetailType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Payment details</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="paymentReceipt" type="tns:PaymentReceiptType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Payment receipt for email confirmation</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubmitSalesOrderPaymentResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="paymentChargeList" type="esc:PaymentInformation" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Individual change detail for:
+- charge on CC
+- charge on bill
+- charge by prepaid balance</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MessageListType">
+		<xs:annotation>
+			<xs:documentation>List of Messages returned by operation</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="messageList" type="esc:Message" minOccurs="0" maxOccurs="1000"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PricingAdjustmentType">
+		<xs:sequence>
+			<xs:element name="adjustmentAmount" type="xs:double">
+				<xs:annotation>
+					<xs:documentation>Adjustment amount for transaction based on Previous and New Pricing.  Applicable Hardware changes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="adjustmentTypeCode" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Adjustment type. POS - Applicable Hardware changes, INVOICE - Applicable for Non-Hardware changes</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PricingDetailType">
+		<xs:sequence>
+			<xs:element name="hardwarePricingDetail" type="esc:HardwarePricingDetailType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Equipment Pricing for the New Phone (new charge) or Returned Phone (credit)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="simPricingDetail" type="esc:PriceAmountAndTax" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Sim pricing for the New Sim and Tax breakdown</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="penaltyPricingDetailList" type="esc:PenaltyChargeDetail" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Penalty Pricing for the new Phone (new charge) or Returned Phone (credit, but only applicable if previous transaction is Renewal, Upgrade or Exchange)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="financingOptionList" type="esc:FinancingOptionsType" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Only for BC VOIP east pay options</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipmentWarrantyPricingDetail" type="esc:PriceAmountAndTax" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Warranty pricing for the New Warranty (PUF payment option) and Tax breakdown</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UsageDetailType">
+		<xs:sequence>
+			<xs:element name="usagePeriod" type="xs:long"/>
+			<xs:element name="localAirtimeUsageList" type="esc:Usage" minOccurs="0" maxOccurs="4">
+				<xs:annotation>
+					<xs:documentation>Categories: Total, Unlimited, Included, Overage</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="localAirtimeTimeBucketUsageList" type="esc:Usage" minOccurs="0" maxOccurs="4">
+				<xs:annotation>
+					<xs:documentation>Categories: SevenAMToFivePM, FivePMToSixPM, SixPMToNinePM, NinePMToSevenAMAndAllWeekends</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="longDistanceVoiceUsageList" type="esc:Usage" minOccurs="0" maxOccurs="9">
+				<xs:annotation>
+					<xs:documentation>Regions: Canadian, US, International
+Categories: Total</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="longDistanceRoamUsageList" type="esc:Usage" minOccurs="0" maxOccurs="6">
+				<xs:annotation>
+					<xs:documentation>Regions: US, International
+Categories: Total</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="smsUsageList" type="esc:Usage" minOccurs="0" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Categories: Total, Incoming, Outgoing</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dataUsageList" type="esc:Usage" minOccurs="0" maxOccurs="3">
+				<xs:annotation>
+					<xs:documentation>Regions: Canadian, US, International</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dataRoamingUsageList" type="esc:Usage" minOccurs="0" maxOccurs="2">
+				<xs:annotation>
+					<xs:documentation>Regions: US, International</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="topLocalAirtimeList" type="esc:TopUsage" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Categories: Total</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="topCanadianLongDistanceList" type="esc:TopUsage" minOccurs="0" maxOccurs="10">
+				<xs:annotation>
+					<xs:documentation>Categories: Total</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="planChangeIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Plan change for the usage period</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetConsolidatedAccountProfileType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="customerId" type="xs:string" minOccurs="0"/>
+			<xs:element name="billingAccountNumber" type="xs:string"/>
+			<xs:element name="brandId" type="xs:string"/>
+			<xs:element name="wirelessSubscriberIdList" type="xs:string" minOccurs="0" maxOccurs="1000">
+				<xs:annotation>
+					<xs:documentation>If subscriber ID list is provided, only these subscriber details will be returned. Otherwise, max number of subscribers will be limited to a default value.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="wirelessOnlyIndicator" type="xs:boolean" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetConsolidatedAccountProfileResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="personalCreditInformation" type="esc:PersonalCreditInformation" minOccurs="0"/>
+					<xs:element name="primaryAccountProfile" type="esc:AccountProfile"/>
+					<xs:element name="consolidatedAccountProfile" type="esc:AccountProfile" minOccurs="0"/>
+					<xs:element name="additionalWirelineAccountInd" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Set this flag to true if there is multiple wireline account being associated to this customer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="additionalWirelessAccountInd" type="xs:boolean" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Set this flag to true if there is multiple wireless account being associated to this customer.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="wirelineSystemNotAvailableInd" type="xs:boolean" minOccurs="0"/>
+					<xs:element name="creditEligibilityResult" type="esc:CreditEligibilityResult" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetUsageDetailType">
+		<xs:annotation>
+			<xs:documentation>must provide either billing account number plus pin or phone number plus serial no last 6.</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="subscriberId" type="xs:string" minOccurs="0"/>
+			<xs:element name="subscriptionId" type="xs:string" minOccurs="0"/>
+			<xs:element name="usagePeriodList" type="xs:long" maxOccurs="6"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetUsageDetailResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="usageDetailList" type="tns:UsageDetailType" minOccurs="0" maxOccurs="10"/>
+					<xs:element name="usageAllowanceOnCurrentPlanList" type="esc:Usage" minOccurs="0" maxOccurs="9">
+						<xs:annotation>
+							<xs:documentation>Regions: Canadian, US, International
+Categories: Airtime, SMS, Data</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetSalesOrderHistoryType">
+		<xs:annotation>
+			<xs:documentation>Either search by an known order id or search by subscriber phone</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="searchByOrderId" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used for retrieving specific order</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="salesId" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>This is sales id to identify original sales activity</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="eTransactionId" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>The e-transaction ID which is referred by internal/external system for this sales transaction. 
+DRL - NCCS ID
+RTL - TEA ID
+TRL - RMS ID</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="searchBySalesIdList" type="xs:string" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Return orders by sales Id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="searchBySubscriber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Return order list for a subscriber or a BAN</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+						<xs:element name="phoneNumber" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>This is mandatory if order ID is not defined but optional otherwise.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="serviceRequestStatusIdList" type="xs:string" minOccurs="0" maxOccurs="10">
+							<xs:annotation>
+								<xs:documentation>Status ID list:
+2 - Pending
+6 - Reserved
+10 - Completed (fully completed for both sales pretask and posttask)
+5 - Cancelled
+12 - Failed</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="dateRange" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>by default search for the last 30 days for BC (i.e. if Order ID is specified in the request but search range is empty).  The current 15 days - (DLR reserve/resume scenario) to be overridden with 30 days if Order ID is present.  If searchRange.startDate is NOT null and endDate is null then use the startDate and current date as endDate.  If searchRange.startDate is NULL and endDate is NOT null then use the endDate - 30 days for startDate.</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="startDate" type="xs:dateTime" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>order search start date.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="endDate" type="xs:dateTime" minOccurs="0">
+										<xs:annotation>
+											<xs:documentation>order search end date.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="orderFilter" type="tns:searchOrderFilterType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="searchByCriteriaList" minOccurs="0" maxOccurs="unbounded">
+				<xs:annotation>
+					<xs:documentation>Return order list which matches search criteria</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="tns:SearchOrderCriteriaType"/>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="bundleId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This is the bundle order ID for Business Connect clients. Maps to the actor type id in SRPDS.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetSalesOrderHistoryResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="salesOrder" type="esc:Order" minOccurs="0" maxOccurs="50"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetEstimatedProratedBillType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="contractStartDateForCalculation" type="xs:dateTime"/>
+			<xs:element name="salesOrder" type="esc:Order" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetEstimatedProratedBillResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="billEstimationForPricePlan">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="previousPartialMonth" type="tns:ProratedBillItemType" minOccurs="0"/>
+								<xs:element name="newPartialMonth" type="tns:ProratedBillItemType" minOccurs="0"/>
+								<xs:element name="oneMonthAdvance" type="tns:ProratedBillItemType" minOccurs="0"/>
+								<xs:element name="totalAmount" type="xs:string"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="billEstimationPerFeatureList" minOccurs="0" maxOccurs="100">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="previousPartialMonth" type="tns:ProratedBillItemType" minOccurs="0"/>
+								<xs:element name="newPartialMonth" type="tns:ProratedBillItemType" minOccurs="0"/>
+								<xs:element name="oneMonthAdvance" type="tns:ProratedBillItemType" minOccurs="0"/>
+								<xs:element name="totalAmount" type="xs:string"/>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProratedBillItemType">
+		<xs:sequence>
+			<xs:element name="serviceCode" type="xs:string"/>
+			<xs:element name="serviceDescriptionTextList" type="ec:MultilingualCodeDescTextList"/>
+			<xs:element name="totalAmount" type="xs:string" minOccurs="0"/>
+			<xs:element name="totalAirtime" type="esc:Usage" minOccurs="0"/>
+			<xs:element name="totalSms" type="esc:Usage" minOccurs="0"/>
+			<xs:element name="totalData" type="esc:Usage" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PayOutstandingAccountBalanceType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="creditCard" type="esc:CreditCard"/>
+			<xs:element name="paymentAmount" type="xs:double"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PayOutstandingAccountBalanceResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="creditCardTransactionId" type="xs:string"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateAccountType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="accountRequestInfo" type="tns:AccountDetail">
+				<xs:annotation>
+					<xs:documentation>Account-level details for which to create the account with.
+
+For POSTPAID account, required:
+accountTypeCode
+accountSubTypeCode
+address
+brand
+accountName
+billingDeliveryOption
+billingLanguageCode
+prepaidInd
+creditInfo
+phoneNumber
+emailAddress
+PIN
+
+For PREPAID account, required:
+accountTypeCode
+accountSubTypeCode
+address
+brand
+accountName
+billingLanguageCode
+prepaidInd
+phoneNumber
+emailAddress
+PIN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="noEmailAddressIndicator" type="ec:indicatorType">
+				<xs:annotation>
+					<xs:documentation>Explicit indication that the user does not have an email address.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="skipDuplicateAccountCheckIndicator" type="ec:indicatorType">
+				<xs:annotation>
+					<xs:documentation>If TRUE, user consents to skipping the duplicate account check.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subscriberCount" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>Number of subscribers to be activated on this account
+
+For PREPAID accounts, must be = 1</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="methodOfPayment" type="ec:codeType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Method of payment selection
+R = Standard
+C = Pre-Authorized Credit
+
+Required for POSTPAID accounts
+Not required for PREPAID accounts</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offerCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required if activating on a AOM offer.
+
+Applies to POSTPAID accounts only</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="preauthorizedCreditCard" type="esc:CreditCard" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Required for POSTPAID accounts if method of payment requires a pre-authorized credit card.
+
+Optional for PREPAID accounts depending on business process (i.e. pre-authorized payment for prepaid is required for CAMBIO accounts)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="prepaidAirtimeCardNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For PREPAID accounts</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="prepaidStarterKitNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For PREPAID accounts</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="prepaidEquipment" type="esc:EquipmentSerialNumberSet" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For PREPAID accounts</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="photoIDConsentIndicator" type="ec:indicatorType" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>i.e. "I have provided valid photo ID to prove my identity"
+
+Required for POSTPAID accounts
+Not required for PREPAID accounts</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creditCheckConsentIndicator" type="xs:boolean">
+				<xs:annotation>
+					<xs:documentation>true = preform credit check thru HCD/CreditProfileSvc</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="bundleQuoteReferenceNum" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For Business Anywhere - quote to be associated with the BAN</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateAccountResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="channelCarePhoneNumber" type="xs:string">
+						<xs:annotation>
+							<xs:documentation>Channel Care contact number.  May be required based on account credit information.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="account" type="esc:AccountSummary" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>The account will be returned upon successful creation.  If user has opted to check for duplicate accounts or validate address, the account may not be populated.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="creditCheckResult" type="credit:CreditCheckResult" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Credit profile retrieved from external credit bureau. Message refers to Credit decision message as defined in external Credit bureau for TELUS.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="duplicateAccountList" type="tns:Account" minOccurs="0" maxOccurs="50">
+						<xs:annotation>
+							<xs:documentation>If user has initiated a check for duplicate accounts and there are accounts found, they will be returned in this structure.</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="creditValueCd" type="xs:string" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>V - VIP
+E - ESTABLISHED
+U - UNESTABLISHED
+D - DEPOSIT
+R - RESTRICTED
+N - NO_CREDIT_INFORMATION
+G - GURANNTEED</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ReservePhoneNumberType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string"/>
+			<xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="phoneNumberTypeCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>One of WLS, VOIP-LOCAL, VOIP-TOLL-FREE.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="equipmentSerialNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="productType" type="xs:string" minOccurs="0"/>
+			<xs:element name="asianFriendlyInd" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>isAsian indicator. true/false(default). </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="offlineReservationInd" type="xs:boolean" default="false" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Reserve phone number for usage during Offline Activations. </xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="autoAssignPhoneNumber" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Auto assign any WLS, VoIP local/toll free numbers based on the province and Npa/Nxx.  This will be used either as a dummy phone number or real phone number.</xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="provinceCode" type="xs:string" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>optional for toll free phone number</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="Npa" type="xs:string"/>
+						<xs:element name="Nxx" type="xs:string" minOccurs="0"/>
+						<xs:element name="equipment" type="esc:EquipmentSerialNumberSet" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>equipment is required in order to retrieve the list of valid phone numbers.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="activationPortInInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true for port-in</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ReservePhoneNumberResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="phoneNumber" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UnreservePhoneNumberType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="phoneNumber" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UnreservePhoneNumberResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AccountDetail">
+		<xs:sequence>
+			<xs:element name="account" type="tns:Account"/>
+			<xs:element name="personalCreditInfo" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="creditCard" type="esc:CreditCard" minOccurs="0"/>
+						<xs:element name="birthDate" type="xs:date" minOccurs="0"/>
+						<xs:element name="sin" type="xs:string" minOccurs="0"/>
+						<xs:element name="driversLicense" type="xs:string" minOccurs="0"/>
+						<xs:element name="driversLicenseExpiry" type="xs:date" minOccurs="0"/>
+						<xs:element name="driversLicenseProvince" type="cust:provinceStateCodeType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="businessCreditInfo" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="businessEntityInfo" type="esc:BusinessEntityInformationType" minOccurs="0"/>
+						<xs:element name="incorporationNumber" type="xs:string"/>
+						<xs:element name="incorporationDate" type="xs:date"/>
+						<xs:element name="businessCreditIdentityList" minOccurs="0" maxOccurs="100">
+							<xs:annotation>
+								<xs:documentation>the full list from HCD service (sourced from Equifax) to be persisted in KB</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="companyName" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>Comma separated in the format as displayed to agent and stored in KB : best match sequence number, company name, primary address line, city, province</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="marketAccount" type="xs:double">
+										<xs:annotation>
+											<xs:documentation>External Credit Bureau Company ID.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+						<xs:element name="selectedBusinessCreditIdentity" minOccurs="0" maxOccurs="1">
+							<xs:annotation>
+								<xs:documentation>the selected one from the list to be used for credit check</xs:documentation>
+							</xs:annotation>
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="companyName" type="xs:string">
+										<xs:annotation>
+											<xs:documentation>Comma separated in the format as displayed to agent and stored in KB : best match sequence number, company name, primary address line, city, province</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+									<xs:element name="marketAccount" type="xs:double">
+										<xs:annotation>
+											<xs:documentation>External Credit Bureau Company ID.</xs:documentation>
+										</xs:annotation>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="homePhoneNumber" type="tns:TelecomContact" minOccurs="0"/>
+			<xs:element name="businessPhoneNumber" type="tns:TelecomContact" minOccurs="0"/>
+			<xs:element name="contactPhoneNumber" type="tns:TelecomContact" minOccurs="0"/>
+			<xs:element name="emailAddress" type="xs:string" minOccurs="0"/>
+			<xs:element name="pin" type="xs:string" minOccurs="0"/>
+			<xs:element name="customerId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>COMPASS customer id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="subsidiaryEntityId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>RCID for corp. account type</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Account">
+		<xs:sequence>
+			<xs:element name="billingAccountNumber" type="cust:billingAccountNumberType" minOccurs="0"/>
+			<xs:element name="accountTypeCode" type="xs:string"/>
+			<xs:element name="accountSubTypeCode" type="xs:string"/>
+			<xs:element name="billingDate" type="xs:date" minOccurs="0"/>
+			<xs:element name="address" type="esc:Address" minOccurs="0"/>
+			<xs:element name="brandName" type="xs:string"/>
+			<xs:element name="accountStatusCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="accountName" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="title" type="cust:salutationCodeType" minOccurs="0"/>
+						<xs:element name="firstName" type="cust:firstNameType" minOccurs="0"/>
+						<xs:element name="middleName" type="cust:middleNameType" minOccurs="0"/>
+						<xs:element name="lastName" type="cust:lastNameType" minOccurs="0"/>
+						<xs:element name="legalBusinessName" type="cust:organizationNameType" minOccurs="0"/>
+						<xs:element name="tradeName" type="cust:organizationNameType" minOccurs="0"/>
+						<xs:element name="attentionName" type="cust:organizationNameType" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="availableForAddOnInd" type="ec:indicatorType" minOccurs="0"/>
+			<xs:element name="prepaidInd" type="ec:indicatorType" minOccurs="0"/>
+			<xs:element name="billingDeliveryOptionCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used to determine how the client will have the invoice delivered</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billingLanguageCode" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Used to determine in which language the client will receive their invoice</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="portProtectionInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>true - disallow port out (This is mandatory input for Corp. Activation)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billCycleCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="billCycleCloseMonthDayNum" type="xs:int" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Month day: 1-31</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="suppressionLevelCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="waiveLatePaymentInd" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>True - waive late payment (eg. for Corp. Account)</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="taxExemptionIndicators" type="esc:TaxExemptionIndicatorsType" minOccurs="0"/>
+			<xs:element name="taxCertificationNumbers" type="esc:TaxCertificationNumberType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TelecomContact">
+		<xs:sequence>
+			<xs:element name="telephoneNumber" type="xs:string" minOccurs="0"/>
+			<xs:element name="telephoneExtensionNumber" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="searchClientNotesType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For big BAN, not subscriber level notes is returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="phoneNumberList" type="xs:string" minOccurs="0" maxOccurs="100">
+				<xs:annotation>
+					<xs:documentation>Only client notes with the same phone numbers defined in the list will be returned. If the phone number list is not defined, this additional filtering will NOT be performed.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="notesSearchCriteria">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="startDate" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>If start date is not specified during the search, default value will be applied.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="endDate" type="xs:date" minOccurs="0">
+							<xs:annotation>
+								<xs:documentation>If end date is not specified during the search, default value will be applied.</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="notesContentFilter" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="noteFilteringTypeList" type="xs:string" minOccurs="0" maxOccurs="30">
+							<xs:annotation>
+								<xs:documentation>Type of note filtering to be applied during retrieval (note types to be filtered out)
+						Possible values: TBD
+					</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="noteMaskingTypeList" type="xs:string" minOccurs="0" maxOccurs="50">
+							<xs:annotation>
+								<xs:documentation>Type of note masking to be applied during retrieval (note texts to be masked)
+						Possible values: TBD
+					</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="localeCode" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Language of the note information to be retrieved. Possible values:
+						EN - English
+						FR - French
+					</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="searchClientNotesResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="clientNoteList" type="tns:clientNoteType" minOccurs="0" maxOccurs="1000">
+						<xs:annotation>
+							<xs:documentation>List of client notes to be returned</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="clientNoteType">
+		<xs:sequence>
+			<xs:element name="phoneNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Phone number associated with the client note
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="noteType" type="ec:MultilingualCodeDescriptionList">
+				<xs:annotation>
+					<xs:documentation>
+						Descriptions of note type associated with the
+						client note
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="noteContent" type="ec:MultilingualDescriptionList"/>
+			<xs:element name="creationDateTime" type="xs:dateTime">
+				<xs:annotation>
+					<xs:documentation>
+						Client note creation timestamp
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="systemNoteIndicator" type="xs:boolean" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						true = system note false = user note
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="creatorId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+						This represents the ID of the creator who created the client note
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="createClientNoteType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string"/>
+			<xs:element name="phoneNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Phone number of the client note to be created.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="noteType" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>
+						Four-character-note-type of the client note to
+						be created.
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="noteContent" type="ec:MultilingualDescriptionList">
+				<xs:annotation>
+					<xs:documentation>Note contents.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="storeNumber" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Store number for the store from where the client note is being created</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesRepName" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>The name of sales rep who is creating the client note</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="createClientNoteResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InitializeSalesType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccountNumber" type="xs:string"/>
+			<xs:element name="phoneNumber" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="InitializeSalesResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="salesId" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>This is a unique ID that represents a sales stored in ESS DB</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="salesStatusCode" type="xs:string" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>This is the most current status associated to the sales.  Possible states: OPEN and CLOSED</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:element name="lastUpdatedTimeStamp" type="xs:dateTime" minOccurs="1" maxOccurs="1">
+						<xs:annotation>
+							<xs:documentation>This represents the most recent timestamp when the sales was updated</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetCorporateHierarchyType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="entityId" type="xs:string" minOccurs="0"/>
+			<xs:element name="entitySourceTypeCd" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Possible values:
+- CBUCID
+- RCID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetCorporateHierarchyResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="corporateHierarchy" type="esc:CorporateHierarchy" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>This is a unique ID that represents a sales stored in ESS DB</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetCorporateAccountSummaryListType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="subsidiaryEntityIdList" type="xs:string" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetCorporateAccountSummaryListResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="corporateAccountSummaryList" type="esc:CorporateAccountSummary" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>List of matching corporate account summary</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="searchOrderFilterType">
+		<xs:sequence>
+			<xs:element name="externalOrderReferenceId" type="xs:string" minOccurs="0"/>
+			<xs:element name="dealerCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="salesRepId" type="xs:string" minOccurs="0"/>
+			<xs:element name="orderTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="orderSubTypeCode" type="xs:string" minOccurs="0"/>
+			<xs:element name="serialNum" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Either device IMEI or sim ID</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SearchOrderCriteriaType">
+		<xs:sequence>
+			<xs:element name="searchCriteriaName" type="xs:string" minOccurs="0"/>
+			<xs:element name="searchCriteriaValueTxt" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PaymentReceiptType">
+		<xs:sequence>
+			<xs:element name="receiptEmailAddress" type="esc:ElectronicContact"/>
+			<xs:element name="equipment" type="esc:EquipmentSerialNumberSet" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>handset and sim</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractTermInMonths" type="xs:integer" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Activation, renewal, migration, and upgarde.  (renewal/upgrade) term -1/0 = no contract change.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="contractEffectiveDate" type="xs:date" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>activtion, renewal, migration date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesOrderItemReceiptDetailList" type="esc:SalesOrderItemReceiptDetail" minOccurs="0" maxOccurs="20">
+				<xs:annotation>
+					<xs:documentation>activtion, renewal, migration date</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SearchClientType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="searchByAdressCriteria" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>For 'Change' sales in WLN flow, both matching address and client's name are checked </xs:documentation>
+				</xs:annotation>
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="address" type="esc:Address">
+							<xs:annotation>
+								<xs:documentation>Possible addressTypeCode  values:
+- SERVICE</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="firstName" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>client first name</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="lastName" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>client last name</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="searchByPhoneCriteria" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="phoneNumberTypeCd" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Possible Values:
+- CONTACT</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="phoneNumber" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>- Client contact phone</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SearchClientResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="clientList" type="esc:AccountAndProductSummary" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>List of matching client which matches input address or contact phone</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="UpdateSalesReferenceType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="salesReferenceList" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="actionCd" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Possible value: UPDATE</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="salesReferenceTypeCd" type="xs:string">
+							<xs:annotation>
+								<xs:documentation>Possible value: PLAN</xs:documentation>
+							</xs:annotation>
+						</xs:element>
+						<xs:element name="salesReferenceKeyTxt" type="xs:string"/>
+						<xs:element name="salesReferenceValueTxt" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateSalesReferenceResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="GetSalesOrderContractType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="salesId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This is sales id to identify original sales activity</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="salesBatchId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>This is the order batch id for original sales batch activity. Eg. BC bundle order id</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GetSalesOrderContractResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="salesOrderContractList" type="esc:OrderContract" minOccurs="0" maxOccurs="unbounded"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SearchServiceAddressType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="serviceAddress" type="esc:Address"/>
+			<xs:element name="maxMatchingLikeAddressCount" type="xs:long" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>if there is no exact matching address found, address suggestions will be returned. This max count will determine how many matching record should be returned</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SearchServiceAddressResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="matchingServiceAddress" type="esc:MatchingServiceAddress" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>Exact match of the address or suggested addresses from FMS</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CreateWirelineAccountType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="customerId" type="xs:string" minOccurs="0"/>
+			<xs:element name="customerInfo" type="esc:NewCustomerInformation" minOccurs="0"/>
+			<xs:element name="accountInfo" type="esc:Account" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CreateWirelineAccountResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="customerId" type="xs:string" minOccurs="0"/>
+					<xs:element name="billingAccountNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="payChannelNumber" type="xs:string" minOccurs="0"/>
+					<xs:element name="billCycleCd" type="xs:string" minOccurs="0"/>
+					<xs:element name="matchingCustomerInfoList" type="tns:MatchingCustomerInfo" minOccurs="0" maxOccurs="unbounded">
+						<xs:annotation>
+							<xs:documentation>Return any existing client who matches input credit address or identity</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="MatchingCustomerInfo">
+		<xs:sequence>
+			<xs:element name="customerId" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					Customer ID
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="firstName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					Customer first name
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="lastName" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>
+					Customer last name
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="dateOfBirthDt" type="xs:date" minOccurs="0"/>
+			<xs:element name="totalBalanceAmt" type="xs:double" minOccurs="0"/>
+			<xs:element name="activeWirelineAccountList" type="esc:MatchingAccountInfo" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="closedWirelineAccountWithBalanceList" type="esc:MatchingAccountInfo" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="cancelledWirelineAccountList" type="esc:MatchingAccountInfo" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SalesOrderItemPricingDetail">
+		<xs:sequence>
+			<xs:element name="accessoryOrderItemPayment" type="esc:AccessoryOrderPricingType" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateAccountType">
+		<xs:sequence>
+			<xs:element name="operationHeader" type="esc:OperationHeader"/>
+			<xs:element name="billingAccount" type="esc:BillingAccountType"/>
+			<xs:element name="businessEntityInfo" type="esc:BusinessEntityInformationType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UpdateAccountResponseType">
+		<xs:complexContent>
+			<xs:extension base="esc:SalesResponseMessage">
+				<xs:sequence>
+					<xs:element name="sucessfulUpdateInd" type="xs:boolean"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+</xs:schema>

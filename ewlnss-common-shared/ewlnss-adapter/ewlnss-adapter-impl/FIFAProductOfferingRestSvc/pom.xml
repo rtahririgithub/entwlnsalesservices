@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+		<groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+		<artifactId>pom-ewlnss-common-shared-adapter-impl</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+
+    <artifactId>FIFAProductOffering-ws-adapter</artifactId>
+    <name>FIFAProductOffering-ws-adapter</name>
+
+	<dependencies>
+		<dependency>
+			<groupId>telus.csm.ewlnss-yaml</groupId>
+			<artifactId>ewlnss-fifaproductoffering-yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+
+</project>

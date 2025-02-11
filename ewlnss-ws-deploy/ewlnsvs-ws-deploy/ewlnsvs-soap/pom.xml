@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>telus.csm.ewlnsvs-ws-deploy</groupId>
+		<artifactId>pom-ewlnsvs-ws-deploy</artifactId>
+		<version>v1-SNAPSHOT</version>
+	</parent>
+	<artifactId>ewlnsvs-soap</artifactId>
+	<name>ewlnsvs-soap</name>
+	<packaging>war</packaging>
+	<build>
+		<finalName>EnterpriseWLNSalesValidationSvcSOAP_${target.version}</finalName>
+		
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<packagingExcludes>WEB-INF/lib/ojdbc*.jar, WEB-INF/lib/xml-apis-*.jar, WEB-INF/lib/ConsumerBillingAccountManagementSvc-ws-adapter-*.jar, WEB-INF/lib/ConsumerCustomerMgmtSvc-ws-adapter-*.jar, WEB-INF/lib/ConsumerDiarySvc-ws-adapter-*.jar, WEB-INF/lib/ConsumerIdentityProfileService-ws-adapter-*.jar, WEB-INF/lib/EnterpriseConsumerProfileRegistrationSvc-ws-adapter-*.jar, WEB-INF/lib/RestServiceAddressMgmtSvc-ws-adapter-*.jar, WEB-INF/lib/ServiceAddressMgmtSvc-ws-adapter-*.jar</packagingExcludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>telus.csm.ewlnss-common</groupId>
+			<artifactId>ewlnss-common-domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>	
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>ewlnsvs-core</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>telus.csm.ewlnss.common.soap</groupId>
+			<artifactId>ewlnss-common-soap</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>

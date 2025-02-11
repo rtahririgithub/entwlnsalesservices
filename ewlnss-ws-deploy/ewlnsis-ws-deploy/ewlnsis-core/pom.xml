@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- telus.archetype.version:20160823.Application.Complete -->
+
+    <parent>
+        <groupId>telus.csm.ewlnsis-ws-deploy</groupId>
+        <artifactId>pom-ewlnsis-ws-deploy</artifactId>
+        <version>v1-SNAPSHOT</version>
+    </parent>
+
+    <!--
+      - the version number should be inherited from the <parent> whenever possible.
+      - It is not recommended that the ws-client version match the WSDL version.
+        Doing this will lead to ws-client versions being built but not referenced if the provider WSDL changes during the development cycle.
+        Keeping the version coupled to the application version (and not the provider version) provides easier traceability
+        of the consumer to provider.  Also, the WSDL is packaged in the generated ws-client jar, which will have the WSDL provider version.
+      - The <finalName> is used to specify the deployment artifact name and version while
+        the <version> is used traceability of the development and should be inherited from the parent
+    -->
+
+    <artifactId>ewlnsis-core</artifactId>
+    <name>ewlnsis-core</name>
+
+    <build>
+        <!-- DO NOT USE "." on the version number as Configuration Framework and the JMX console will not work  -->
+        <finalName>ewlnsis-core-${target.version}</finalName>
+    </build>
+
+
+    <dependencies>
+		<dependency>
+            <groupId>telus.csm.ess-ws-deploy</groupId>
+		    <artifactId>ess-core</artifactId>
+		    <version>${project.version}</version>
+		</dependency>       
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>FeasibilityService-ws-adapter</artifactId>
+            <version>v1-SNAPSHOT</version>
+        </dependency>
+		<dependency>
+            <groupId>telus.csm.ewlnss-common</groupId>
+            <artifactId>ewlnss-common-manager</artifactId>
+            <version>${project.version}</version>
+        </dependency>     
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>WLNBookingRESTSvc-ws-adapter</artifactId>
+            <version>v1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.shared-adapter</groupId>
+            <artifactId>FieldWorkAppointmentSvc-ws-adapter</artifactId>
+            <version>v1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>telus.csm.ewlnss.common.soap</groupId>
+            <artifactId>ewlnss-common-soap</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+			<groupId>telus.csm.ewlnss-yaml</groupId>
+			<artifactId>ewlnsis-yaml</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>
